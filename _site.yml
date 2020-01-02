@@ -1,0 +1,33 @@
+name: "Cengiz Zopluoglu"
+title: "Cengiz Zopluoglu"
+description: |
+  This is personal blog for Cengiz Zopluoglu
+output_dir: "docs"
+navbar:
+  logo : images/Caricature-242x300.jpg
+  right:
+    - text: "Home"
+      href: index.html
+      
+    - text: "About Me"
+      href: about.html
+      
+    - text: "Publications"
+      href: publications.html
+      
+    - text: "R packages"
+      href: packages.html
+      
+    - text: "Courses"
+      href: courses.html
+      
+    - icon: fa fa-rss
+      href: index.xml
+      
+base_url: https://czopluoglu.github.io/
+google_analytics: ""
+favicon: images/Caricature-242x300.jpg
+collections:
+  posts:
+    share: [twitter]
+output: radix::radix_article

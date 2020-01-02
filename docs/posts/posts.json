@@ -1,0 +1,17 @@
+[
+  {
+    "path": "posts/2020-01-01-trial-post/",
+    "title": "trial post",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Unknown",
+        "url": {}
+      }
+    ],
+    "date": "2020-01-01",
+    "categories": [],
+    "preview": "posts/2020-01-01-trial-post/images/Caricature-242x300.jpg",
+    "last_modified": "2020-01-01T19:00:29-05:00"
+  }
+]
