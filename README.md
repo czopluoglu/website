@@ -2,4 +2,4 @@
 
 # Cengiz's Personal Site/ Blog
 
-[cengiz.me](https://cengiz.me/) based on RStudio's `distill` and `radix` theme
+[cengiz.me](https://cengiz.me/) based on RStudio's `distill` and `radix` theme.
