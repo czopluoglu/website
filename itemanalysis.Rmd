@@ -1,0 +1,13 @@
+---
+title: "itemanalysis"
+description: |
+  Classical Test Theory Item Analysis
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+[itemanalysis](https://cran.r-project.org/web/packages/itemanalysis/index.html) is an R package I specifically compiled for an intro measurement class I teach. It is customized based on the content and concepts I cover in that class about Classical Test Theory Item Analysis. It has two simple functions to run classical test theory item analysis for multiple-choice test items and polytomous items (e.g., rating scales). It also provides empirical item trace lines. The statistics reported in this package can be found in any classic measurement textbook,
+
+Please visit this page later as I plan to publish more documentation and tutorials about using this package.

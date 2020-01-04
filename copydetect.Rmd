@@ -1,0 +1,14 @@
+---
+title: "CopyDetect"
+description: |
+  Computing Response Similarity Indices
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+[CopyDetect](https://cran.r-project.org/web/packages/CopyDetect/index.html) is an R package to compute a number of of response similarity indices for multiple-choice tests. It is a compilation of functions I wrote when I was writing my master's thesis in 2009 and doing my internship in ACT in 2012. It contains functions for several IRT and non-IRT based response similarity indices proposed in the literature for multiple-choice examinations such as the [$\omega$ (Wollack, 1997)](https://doi.org/10.1177/01466216970214002), [generalized binomial test (van der Linden & Sotaridona, 2006)](https://doi.org/10.3102/10769986031003283), [K index and its variants (Sotaridona & Meijer,2002)](https://doi.org/10.1111/j.1745-3984.2002.tb01138.x), and [S1 and S2 indices (Sotaridona & Meijer, 2003)](https://doi.org/10.1111/j.1745-3984.2003.tb01096.x), and [M4 (Maynes, 2014)](https://dergipark.org.tr/en/download/article-file/649505)
+
+Please visit this page later as I plan to publish some detailed documentation about the implementation of these indices in the CopyDetect package.
+

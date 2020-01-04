@@ -1,0 +1,13 @@
+---
+title: "EstCRM"
+description: |
+  Calibrating Parameters for the Samejima's Continuous Response Model
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+[EstCRM](https://cran.r-project.org/web/packages/EstCRM/index.html) is an R package develope to calibrate the item and person parameters from the [Samejima's Continuous Response Model](https://link.springer.com/article/10.1007/BF02291114) for continous measurement outcomes. It estimates item and person parameters for the Samejima's Continuous Response Model, computes item fit residual statistics, draws empirical 3D item category response curves, draws theoretical 3D item category response curves, and generates data under the CRM for simulation studies.
+
+Please visit this page later for more documentation and tutorials about using this package.

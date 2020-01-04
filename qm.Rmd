@@ -1,7 +1,7 @@
 ---
-title: "About this blog"
+title: "Quantitative Methods"
 description: |
-  Some additional details about the blog
+  Course material for quantitative methods I and II
 ---
 
 ```{r setup, include=FALSE}

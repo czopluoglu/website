@@ -1,9 +1,103 @@
 ---
-title: "About this blog"
-description: |
-  Some additional details about the blog
+title: "Publications"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+## Working Papers
+
+- Zopluoglu, C., Kasli, M., & Toton, S. (under review). The Effect of Item Preknowledge on Response Time: Analysis of an Experimental Dataset Using the Multiple-Group Lognormal Response Time Model.
+
+## Published Papers
+
+- Zopluoglu, C. (in press). Computation of response similarity index M4 in R under the dichotomous and nominal item response models. International Journal of Assessment Tools in Education, 6 (5-special issue), 1-19. https://doi.org/10.21449/ijate.527299 <br>
+[**Download/Request**](https://dergipark.org.tr/en/download/article-file/649505)
+
+- Zopluoglu, C. (in press). A Finite Mixture Item Response Theory Model for Continuous Measurement Outcomes. Educational and Psychological Measurement. https://doi.org/10.1177/0013164419856663 <br>
+[**Download/Request**](https://www.researchgate.net/publication/317095748)
+
+- Zopluoglu, C. (2019). Detecting Examinees With Item Preknowledge in Large-Scale Testing Using Extreme Gradient Boosting (XGBoost). Educational and Psychological Measurement, 79(5), 931–961. https://doi.org/10.1177/0013164419839439 <br>
+[**Download/Request**](https://www.researchgate.net/publication/332158210) 
+
+- Kohli, N., Peralta, Y., Zopluoglu, C., & Davison, M. L. (2018). A note on estimating single-class piecewise mixed-effects models with unknown change points. International Journal of Behavioral Development, 42(5), 518–524. https://doi.org/10.1177/0165025418759237 <br>
+[**Download/Request**](https://www.researchgate.net/publication/322554638) 
+
+- Sideridis, G.D., & Zopluoglu, C. (2018). Validation of response similarity analysis for the detection of academic cheating: An experimental study. Journal of Applied Measurement, 19(1), 59-75. <br>
+[**Download/Request**](https://www.researchgate.net/publication/321342650)
+
+- Sari, H.I., Huggins-Manley, A.C., & Zopluoglu, C. (2017). Comparing item selection methods in multidimensional computerized adaptive testing under different types of multidimensional structures. International Journal of Recent Scientific Research, 8 (8), 19269-19276. <br>
+[**Download/Request**](http://recentscientific.com/sites/default/files/8247-A-2017.pdf)
+
+- de l’Etoile,, Behura, S., & Zopluoglu, C. (2017). Acoustic parameters of infant-directed singing in mothers of infants with Down syndrome. Infant Behavior and Development, 49, 151-160. https://doi.org/10.1016/j.infbeh.2017.09.001 <br>
+[**Download/Request**](https://www.researchgate.net/publication/334960784)
+
+- Zopluoglu, C., & Davenport, E.C. (2017). A note on using eigenvalues in dimensionality assessment. Practical Assessment, Research & Evaluation, 22 (7), 1-10. <br>
+[**Download/Request**](https://scholarworks.umass.edu/cgi/viewcontent.cgi?article=1358&context=pare)
+
+- Brogaard, B,Marlow, K., Overgaard, M., Schwartz, B., Zopluoglu, C., Tomson, S., Neufeld, J., Sinke, C., Owen, C., Eagleman, D. (2017). Deaf hearing: Implicit discrimination of auditory content in a patient with mixed hearing loss. Philosophical Psychology, 30(1-2), 21-43. https://doi.org/10.1080/09515089.2016.1268680 <br>
+[**Download/Request**](https://www.researchgate.net/publication/313483624)
+
+- Myers, N. D., Ahn, S., Lu, M., Celimli, S., & Zopluoglu, C. (2017). Reordering and reflecting factors for simulation studies with exploratory factor analysis. Structural Equation Modeling: A Multidisciplinary Journal, 24(1), 112-128. https://doi.org/10.1080/10705511.2016.1230721 <br>
+[**Download/Request**](https://www.researchgate.net/publication/308663171)
+
+- Zopluoglu, C. (2016). Classification performance of answer-copying indices under different types of IRT models. Applied Psychological Measurement, 40(8), 592-607. https://doi.org/10.1177%2F0146621616664724 <br>
+[**Download/Request**](https://www.researchgate.net/publication/307907874)
+
+- Kohli, N., Harring J.R., & Zopluoglu, C. (2016). A finite mixture of nonlinear random coefficient models for continuous repeated measures data. Psychometrika, 81(3), 851-880. https://doi.org/10.1007/s11336-015-9462-0 <br>
+[**Download/Request**](https://www.researchgate.net/publication/270958026)
+
+- Zopluoglu, C. (2015). Evaluating the sampling performance of exploratory and cross-validated DETECT procedure with imperfect models. Multivariate Behavioral Research, 50(6), 632-644. https://doi.org/10.1080/00273171.2015.1070708 <br>
+[**Download/Request**](https://www.researchgate.net/publication/281889397)
+
+- Kohli, N., Hughes, J., Wang, C., Zopluoglu, C., & Davison, M. (2015). Fitting a linear-linear piecewise growth mixture model with unknown knots: A comparison of two common approaches to inference. Psychological Methods, 20(2), 259-275. http://dx.doi.org/10.1037/met0000034 <br>
+[**Download/Request**](https://www.researchgate.net/publication/270286540)
+
+- Kohli, N., Sullivan, A., Sadeh, S., & Zopluoglu, C. (2015). Longitudinal mathematics development of students with learning disabilities and students without disabilities: A comparison of linear, quadratic, and piecewise linear mixed effects models. Journal of School Psychology, 53(2),105-120. https://doi.org/10.1016/j.jsp.2014.12.002 <br>
+[**Download/Request**](https://www.researchgate.net/publication/268149157)
+
+- Zopluoglu, C., Harring J.R., & Kohli, N. (2014). FitPMM: An R routine to fit finite miture of piecewise mixed-effect models with unknown random knots. Applied Psychological Measurement, 38(7), 583-584. [Computer software]. https://doi.org/10.1177/0146621614540482 <br>
+[**Download/Request**](https://www.researchgate.net/publication/262561927)
+
+- Myers, N.D., Jin, Y., Ahn, S., Celimli, S., & Zopluoglu, C. (2015). Rotation to a partially specified target matrix in exploratory factor analysis in practice. Behavior Research Methods, 47(2), 494-505. https://doi.org/10.3758/s13428-014-0486-7 <br>
+[**Download/Request**](https://www.researchgate.net/publication/262932403) <br>
+
+- Van Norman E., Christ, T. J., Zopluoglu, C. (2013). The effects of baseline estimation on the reliability, validity, and precision of CBM-R growth estimates. School Psychology Quarterly, 28(3), 239-255. http://dx.doi.org/10.1037/spq0000023 <br>
+[**Download/Request**](https://www.researchgate.net/publication/255787677)
+
+- Christ, T. J., Monaghen, B., Zopluoglu, C. & Van Norman, E. R. (2013). Curriculum-Based measurement of oral reading: Evaluation of growth estimates derived with pre-post assessment methods. Assessment for Effective Intervention, 38(3), 139-153. https://doi.org/10.1016/j.jsp.2012.11.001 <br>
+[**Download/Request**](https://www.researchgate.net/publication/235247019)
+
+
+- Zopluoglu, C. (2013). A comparison of two estimation algorithms for Samejima’s continuous IRT model. Behavior Research Methods, 45(1), 54-64. https://doi.org/10.3758/s13428-012-0229-6 <br>
+[**Download/Request**](https://www.researchgate.net/publication/228066472)
+
+- Christ, T.J., Zopluoglu, C., Monaghen, B., & Van Norman, E.R. (2013). Curriculum- Based measurement of oral reading: Multi-study evaluation of schedule, duration and dataset quality on progress monitoring outcomes. Journal of School Psychology, 51(1), 19-57. https://doi.org/10.1016/j.jsp.2012.11.001 <br>
+[**Download/Request**](https://www.researchgate.net/publication/235395434)
+
+- Zopluoglu, C. (2013). CopyDetect: An R package to compute statistical indices for detecting answer copying on multiple-choice tests. Applied Psychological Measurement, 37(1), 75-77. [Computer software]. https://doi.org/10.1177/0146621612463119 <br>
+[**Download/Request**](https://www.researchgate.net/publication/235247020)
+
+- Zopluoglu, C. & Davenport, E.C. (2012). The empirical power and type-I error rates of the GBT and Omega indices in detecting answer copying on multiple-choice tests. Educational and Psychological Measurement, 72(6), 975-1000. https://doi.org/10.1177/0013164412442941 <br>
+[**Download/Request**](https://www.researchgate.net/publication/235247021)
+
+- Christ, T. J., Zopluoglu, C., Long, D. J., & Monaghen, B.D. (2012). Curriculum-Based measurement of oral reading (CBM-R): Quality of progress monitoring outcomes. Exceptional Children, 78(3), 356-373. https://doi.org/10.1177/001440291207800306 <br>
+[**Download/Request**](https://www.researchgate.net/publication/235246998)
+
+- Zopluoglu, C. (2012). EstCRM: An R package for Samejima's continuous IRT model. Applied Psychological Measurement, 36(2), 149-150. [Computer software]. https://doi.org/10.1177/0146621612436599 <br>
+[**Download/Request**](https://www.researchgate.net/publication/235247025)
+
+- Zopluoglu, C. (2012). A cross-national comparison of intra-class correlation coefficient in educational achievement outcomes. Journal of Measurement and Evaluation in Education and Psychology, 3(1), 242-278. <br>
+[**Download/Request**](https://www.researchgate.net/publication/262297789)
+
+# Book/Book Chapters
+
+- Zopluoglu, C. (2017). Similarity, answer copying, and aberrance: Understanding the status quo. In G.J. Cizek & J.A. Wollack, Handbook of Detecting Cheating on Tests. Taylor & Francis. <br>
+[**Download/Request**](https://www.researchgate.net/publication/309351878)
+
+
+## Dead and Buried
+
+- Zopluoglu, C. (buried). A Note on MLE estimation of person parameters for mixture IRT models.
+[**Download/Request**](https://www.researchgate.net/publication/317095944)

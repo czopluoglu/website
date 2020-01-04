@@ -1,0 +1,101 @@
+---
+title: "Scraping Data for 2014 Gubernatorial Elections"
+description: |
+
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Miami
+    url: cengiz.me
+    
+base_url: cengiz.me
+        
+date: 11-06-2018
+
+categories:
+  - web scraping
+  - R
+  
+output:
+  distill::distill_article:
+    self_contained: true
+    
+preview: images/image.jpg
+---
+
+
+People are excited about elections, me too! I have decided to play with election data and I plan to create some plots meaningful to me to make comparisons with the previous years. I have found this [webpage](https://github.com/MEDSL) for the MIT Election Data and Science Lab that did a tremendous job of merging election data from 2012 and 2016 presidential elections and 2016 state elections (Senate, House, and Governor). I was thrilled when I found it because they saved a lot of time for me. However, I realized it was missing data from 2014 gubernatorial elections. Based on a quick search on the web, I found that 12 states with a gubernatorial election in 2016 included in their datasets while 36 states with a gubernatorial election in 2014 missing. For the sake of comparison between the 2014 and 2018 gubernatorial elections, I think it is important to have 2014 data.
+
+There may be official sources for the 2014 gubernatorial election, but I don't have time to dig deeper. So, the fastest source I could access was the [New York Times webpage for the 2014 elections](https://www.nytimes.com/elections/2014/results/governor). They have nice interactive plots at the county and state level, but the raw data is hidden somewhere. After some detective work in their source page, I found the page was pulling data from [the JSON file at this link.](https://int.nyt.com/applications/elections/2014/data/2014-11-04/supermap/governor.json)
+
+The rest was a little bit of R programming. I don't have much time to explain what it does, but I put the code below. For those interested, they can dig into the code deeper. For those who are not interested in the coding piece, here is [the CSV file](data/electiongov2014.csv) you can download for 2014 gubernatorial elections at the state and county level. I structured data exactly same as in the MIT Election Data and Science Lab page, so both can be merged into one file.
+
+```{r echo=TRUE, eval=TRUE}
+
+require(jsonlite)
+require(Hmisc)
+require(rmarkdown)
+require(knitr)
+
+# Read the JSON file from the New York Times link
+
+a = fromJSON("https://int.nyt.com/applications/elections/2014/data/2014-11-04/supermap/governor.json")
+
+# For all states except Alaska, restructure the data in a 5 column dataframe
+
+state.vote <- vector("list",35)
+
+for(i in 3:37) {
+
+	info = a[[i]][[3]]
+	rep.name = info[which(info$party_id=="REP"),]$slug
+	dem.name = info[which(info$party_id=="DEM"),]$slug
+
+  if(nrow(info) > 3) { 
+
+		others   = info$slug[! info$slug %in% c(rep.name,dem.name)]
+		state = a[[i]][[2]][,c("name",rep.name,dem.name,others)]
+		state$othergov14 <- rowSums(state[,4:ncol(state)])
+		state <- state[,c(1,2,3,ncol(state))]
+		state <- cbind(capitalize(a[[i]]$state$state_slug),state)
+		colnames(state) <- c("state","county","repgov14","demgov14","othergov14")
+
+	} 
+
+  if(nrow(info) == 3 ) { 
+
+		others   = info$slug[! info$slug %in% c(rep.name,dem.name)]
+		state = a[[i]][[2]][,c("name",rep.name,dem.name,others)]
+		state <- cbind(capitalize(a[[i]]$state$state_slug),state)
+		colnames(state) <- c("state","county","repgov14","demgov14","othergov14")
+
+	} 
+
+	if(nrow(info) == 2) {
+
+		state = a[[i]][[2]][,c("name",rep.name,dem.name)]
+		state$othergov14 <- 0
+		state <- state[,c(1,2,3,ncol(state))]
+		state <- cbind(capitalize(a[[i]]$state$state_slug),state)
+		colnames(state) <- c("state","county","repgov14","demgov14","othergov14")
+
+
+	}
+
+      state.vote[[i-2]] = state
+}
+
+# Combine all in one data frame
+
+electiongov2014 <- state.vote[[1]]
+
+for(i in 2:35) {
+ electiongov2014 <- rbind(electiongov2014,state.vote[[i]])
+}
+
+
+#######################
+
+dim(electiongov2014)
+str(electiongov2014)
+```
+

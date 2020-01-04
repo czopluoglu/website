@@ -1,27 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
-    <loc>https://czopluoglu.github.io/about.html</loc>
-    <lastmod>2020-01-04T00:54:41-05:00</lastmod>
+    <loc>cengiz.me/about.html</loc>
+    <lastmod>2020-01-04T00:29:05-05:00</lastmod>
   </url>
   <url>
-    <loc>https://czopluoglu.github.io/courses.html</loc>
-    <lastmod>2020-01-04T00:54:42-05:00</lastmod>
+    <loc>cengiz.me/categorical.html</loc>
+    <lastmod>2020-01-03T18:53:11-05:00</lastmod>
   </url>
   <url>
-    <loc>https://czopluoglu.github.io/</loc>
-    <lastmod>2020-01-04T00:54:54-05:00</lastmod>
+    <loc>cengiz.me/copydetect.html</loc>
+    <lastmod>2020-01-03T12:44:57-05:00</lastmod>
   </url>
   <url>
-    <loc>https://czopluoglu.github.io/packages.html</loc>
-    <lastmod>2020-01-04T00:54:54-05:00</lastmod>
+    <loc>cengiz.me/estcrm.html</loc>
+    <lastmod>2020-01-03T12:52:09-05:00</lastmod>
   </url>
   <url>
-    <loc>https://czopluoglu.github.io/publications.html</loc>
-    <lastmod>2020-01-04T00:54:54-05:00</lastmod>
+    <loc>cengiz.me/fitpmm.html</loc>
+    <lastmod>2020-01-03T13:53:48-05:00</lastmod>
   </url>
   <url>
-    <loc>https://czopluoglu.github.io/posts/2020-01-01-trial-post/</loc>
-    <lastmod>2020-01-04T00:56:01-05:00</lastmod>
+    <loc>cengiz.me/</loc>
+    <lastmod>2020-01-04T02:12:54-05:00</lastmod>
+  </url>
+  <url>
+    <loc>cengiz.me/intror.html</loc>
+    <lastmod>2020-01-03T19:10:38-05:00</lastmod>
+  </url>
+  <url>
+    <loc>cengiz.me/irt.html</loc>
+    <lastmod>2020-01-03T19:10:42-05:00</lastmod>
+  </url>
+  <url>
+    <loc>cengiz.me/itemanalysis.html</loc>
+    <lastmod>2020-01-03T12:58:42-05:00</lastmod>
+  </url>
+  <url>
+    <loc>cengiz.me/links.html</loc>
+    <lastmod>2020-01-04T01:49:37-05:00</lastmod>
+  </url>
+  <url>
+    <loc>cengiz.me/measurement.html</loc>
+    <lastmod>2020-01-03T18:53:06-05:00</lastmod>
+  </url>
+  <url>
+    <loc>cengiz.me/publications.html</loc>
+    <lastmod>2020-01-04T00:30:09-05:00</lastmod>
+  </url>
+  <url>
+    <loc>cengiz.me/qm.html</loc>
+    <lastmod>2020-01-04T01:19:14-05:00</lastmod>
+  </url>
+  <url>
+    <loc>cengiz.me/posts/scraping-data-for-2014-gubernatorial-elections/</loc>
+    <lastmod>2020-01-04T02:15:24-05:00</lastmod>
   </url>
 </urlset>

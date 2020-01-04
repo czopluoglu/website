@@ -1,0 +1,7 @@
+<!-- Add icon library --> <link rel="stylesheet"
+href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css">
+
+<!-- Add font awesome icons --> <p style="text-align: center;">
+    <a href="https://scholar.google.com/citations?user=zC3ieCYAAAAJ" target="_blank" class="ai ai-google-scholar-square" style="font-size:60px;"></a>
+    <a href="https://www.researchgate.net/profile/Cengiz_Zopluoglu" target="_blank" class="ai ai-researchgate"  style="font-size:60px;"></a>
+</p>

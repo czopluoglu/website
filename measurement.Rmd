@@ -1,0 +1,11 @@
+---
+title: "Measurement and Psychometric Theory"
+description: |
+  Course material for an intro to measurement course
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+This page is under development.

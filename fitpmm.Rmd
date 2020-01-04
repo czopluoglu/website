@@ -1,0 +1,13 @@
+---
+title: "fitPMM"
+description: |
+  An R Routine to Fit Finite Mixture of Piecewise Mixed-Effect Models With Unknown Random Knots
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+[fitPMM](https://www.dropbox.com/sh/isn1gc7xx19wa5h/AABloSP7wiJKTC0dDVrnBze7a?dl=0) is a routine I wrote when I was working with [Dr. Nidhi Kohli](https://www.cehd.umn.edu/edpsych/people/nkohli/) and [Dr. Jeff Harring](https://education.umd.edu/directory/jeffrey-r-harring) for [the paper](https://doi.org/10.1007/s11336-015-9462-0) we subsequently published. 
+
+Please visit this page later as I plan to publish more documentation and demo analysis using this package.

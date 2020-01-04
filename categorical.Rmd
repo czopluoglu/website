@@ -1,0 +1,11 @@
+---
+title: "Categorical Data Analysis"
+description: |
+  Course material for an introduction to categorical data analysis class
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+This page is under development.

@@ -1,9 +1,11 @@
 ---
-title: "About this blog"
+title: "Links"
 description: |
-  Some additional details about the blog
+  ##
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)
 ```
+
+This page is under development.

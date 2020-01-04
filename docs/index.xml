@@ -2,25 +2,25 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
   <channel>
     <title>Cengiz Zopluoglu</title>
-    <link>https://czopluoglu.github.io/</link>
-    <atom:link href="https://czopluoglu.github.io/index.xml" rel="self" type="application/rss+xml"/>
-    <description>This is personal blog for Cengiz Zopluoglu
+    <link>cengiz.me</link>
+    <atom:link href="cengiz.me/index.xml" rel="self" type="application/rss+xml"/>
+    <description>This is personal website for Cengiz Zopluoglu
 </description>
     <image>
       <title>Cengiz Zopluoglu</title>
-      <url>https://czopluoglu.github.io/images/Caricature-242x300.jpg</url>
-      <link>https://czopluoglu.github.io/</link>
+      <url>cengiz.me/images/unnamed.jpg</url>
+      <link>cengiz.me</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Wed, 01 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Nov 2018 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>trial post</title>
-      <dc:creator>Unknown</dc:creator>
-      <link>https://czopluoglu.github.io/posts/2020-01-01-trial-post</link>
-      <description>A short description of the post.</description>
-      <guid>https://czopluoglu.github.io/posts/2020-01-01-trial-post</guid>
-      <pubDate>Wed, 01 Jan 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://czopluoglu.github.io/posts/2020-01-01-trial-post/images/Caricature-242x300.jpg" medium="image" type="image/jpeg"/>
+      <title>Scraping Data for 2014 Gubernatorial Elections</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>cengiz.me/posts/scraping-data-for-2014-gubernatorial-elections</link>
+      <description>Scraping Data for 2014 Gubernatorial Elections</description>
+      <guid>cengiz.me/posts/scraping-data-for-2014-gubernatorial-elections</guid>
+      <pubDate>Tue, 06 Nov 2018 00:00:00 +0000</pubDate>
+      <media:content url="cengiz.me/posts/scraping-data-for-2014-gubernatorial-elections/images/image.jpg" medium="image" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

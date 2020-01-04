@@ -1,17 +1,20 @@
 [
   {
-    "path": "posts/2020-01-01-trial-post/",
-    "title": "trial post",
-    "description": "A short description of the post.",
+    "path": "posts/scraping-data-for-2014-gubernatorial-elections/",
+    "title": "Scraping Data for 2014 Gubernatorial Elections",
+    "description": {},
     "author": [
       {
-        "name": "Unknown",
-        "url": {}
+        "name": "Cengiz Zopluoglu",
+        "url": "cengiz.me"
       }
     ],
-    "date": "2020-01-01",
-    "categories": [],
-    "preview": "posts/2020-01-01-trial-post/images/Caricature-242x300.jpg",
-    "last_modified": "2020-01-04T00:56:01-05:00"
+    "date": "2018-11-06",
+    "categories": [
+      "web scraping",
+      "R"
+    ],
+    "preview": "posts/scraping-data-for-2014-gubernatorial-elections/images/image.jpg",
+    "last_modified": "2020-01-04T02:15:24-05:00"
   }
 ]
