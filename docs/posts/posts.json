@@ -1,5 +1,26 @@
 [
   {
+    "path": "posts/extreme-gradient-boosting/",
+    "title": "How Does Extreme Gradient Boosting (XGBoost) Work?",
+    "description": "In one of the working papers under review, I am using the Extreme Gradient Boosting (XGBoost) to identify examinees with potential item preknowledge in a certification exam. In the original paper, one of the reviewers asked more description of the XGBoost to help readers get a conceptual understanding of how XGBoost works. After spending a few weeks on the original paper, I finally felt that I had a good grasp of it. In this post, I provide an informal introduction of XGboost using an illustration with accompanying R code.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2019-01-15",
+    "categories": [
+      "XGBoost",
+      "R",
+      "2019"
+    ],
+    "preview": "posts/extreme-gradient-boosting/images/tree.png",
+    "last_modified": "2020-01-04T14:16:50-05:00",
+    "preview_width": 737,
+    "preview_height": 786
+  },
+  {
     "path": "posts/creating-maps-with-2018-election-data/",
     "title": "Learning how to create maps in R",
     "description": "Using the elections 2018 data, I practiced how to create a map for an outcome variable,",

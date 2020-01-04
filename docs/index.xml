@@ -12,7 +12,16 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 16 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 15 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>How Does Extreme Gradient Boosting (XGBoost) Work?</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting</link>
+      <description>In one of the working papers under review, I am using the Extreme Gradient Boosting (XGBoost) to identify examinees with potential item preknowledge in a certification exam. In the original paper, one of the reviewers asked more description of the XGBoost to help readers get a conceptual understanding of how XGBoost works. After spending a few weeks on the original paper, I finally felt that I had a good grasp of it. In this post, I provide an informal introduction of XGboost using an illustration with accompanying R code.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting</guid>
+      <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting/images/tree.png" medium="image" type="image/png" width="737" height="786"/>
+    </item>
     <item>
       <title>Learning how to create maps in R</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>
