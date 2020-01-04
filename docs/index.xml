@@ -12,7 +12,16 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 31 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Measuring Oral Reading Fluency: A Case for Samejima's Continuous Response Model</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan</link>
+      <description>I pitched the idea of using Samejima's Continuous Response Model (CRM) to measure the Oral Reading Fluency (ORF) a while ago when I published a paper in 2012. In that paper, I used an ORF dataset from the Minneapolis Public Schools Disctrict (MPS) as a real data example. Since then, I don't think anybody has bought the idea of using CRM to measure ORF, so here I am trying one more time with some accessible R code.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan</guid>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan/images/image.png" medium="image" type="image/png" width="811" height="461"/>
+    </item>
     <item>
       <title>Fitting Hyperbolic Cosine Model (HCM) For Unfolding Dichotomous Responses using Stan</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>

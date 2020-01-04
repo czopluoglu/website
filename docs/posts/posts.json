@@ -1,5 +1,28 @@
 [
   {
+    "path": "posts/crm-stan/",
+    "title": "Measuring Oral Reading Fluency: A Case for Samejima's Continuous Response Model",
+    "description": "I pitched the idea of using Samejima's Continuous Response Model (CRM) to measure the Oral Reading Fluency (ORF) a while ago when I published a paper in 2012. In that paper, I used an ORF dataset from the Minneapolis Public Schools Disctrict (MPS) as a real data example. Since then, I don't think anybody has bought the idea of using CRM to measure ORF, so here I am trying one more time with some accessible R code.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2019-12-31",
+    "categories": [
+      "item response theory",
+      "continuous response model",
+      "Stan",
+      "R",
+      "2019"
+    ],
+    "preview": "posts/crm-stan/images/image.png",
+    "last_modified": "2020-01-04T17:42:06-05:00",
+    "preview_width": 811,
+    "preview_height": 461
+  },
+  {
     "path": "posts/hcm-stan/",
     "title": "Fitting Hyperbolic Cosine Model (HCM) For Unfolding Dichotomous Responses using Stan",
     "description": "In this post, I do a quick exercise on fitting the hyperbolic cosine model using Stan. The information about this model can be found in Andrich & Luo (1993). The most interesting part is an \"Aha!\" moment when I discover the bimodality of posterior distribution due to lack of directional constrain.",
