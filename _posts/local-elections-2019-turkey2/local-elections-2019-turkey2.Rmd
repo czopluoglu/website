@@ -1,0 +1,94 @@
+---
+title: "2019 Turkish Mayoral Elections – Scraping Ballot Box Level Data"
+
+description: |
+ A while ago, I compiled the election data for the 2019 mayoral elections in Turkey, which took place on March 31, 2019, through the Anadolu Agency website, only accessible information back then because the website for the Turkey's Higher Electoral Commission (YSK) was down and they did not make the official election data available until recently. This data was also limited as the Anadolu Agency only provided overall numbers (not for each ballot box). Now, it seems that YSK's website is alive back again and provides a nice-user friendly dashboard for the election data at the ballot box level. However, their dashboard is not very data-analyst friendly for those who has been starving for a more deeper analysis. Here, I provide the data and the R code I used to scrap this data from YSK's website.
+
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Miami
+    
+date: 05-24-2019
+
+categories:
+  - web scraping
+  - R
+  - elections
+  - Turkish elections
+  - "2019"
+  
+output:
+  distill::distill_article:
+    self_contained: true
+    
+preview: images/image.jpg
+---
+
+A while ago, I compiled the election data for the 2019 mayoral elections in Turkey, which took place on March 31, 2019, through the [Anadolu Agency](https://www.aa.com.tr/en) website, only accessible information back then because the website for the Turkey's Higher Electoral Commission (YSK) was down and they did not make the election data available until recently. The blog post about that attempt is [here](https://sites.education.miami.edu/zopluoglu/2019/04/04/turkish-2019-local-elections-data/). This data was limited as the agency only provided overall numbers (not for each ballot box).
+
+
+Now, it seems that [YSK's website](https://sonuc.ysk.gov.tr/sorgu) is alive back again and provides a nice-user friendly dashboard for the election data at the ballot box level. However, their dashboard is not very data-analyst friendly for those who has been starving for a more deeper analysis to look at the electrol irregularities (aka [\@abdaydgn](https://twitter.com/abdaydgn), see [his recent piece at the Washington Post](https://www.washingtonpost.com/politics/2019/05/10/electoral-irregularities-benefited-turkeys-ruling-party-not-opposition/?noredirect=on&utm_term=.cfe05aebd7c0)).
+
+As Turkey's democracy is at stake for the last couple years, here is my share to support it. I provide the downloadable datasets below for metropolitan mayoral elections, district municipal mayoral elections, municipal council elections, and provincial council elections. For comparison purposes, I also compiled the exact same data from 2014 corresponding elections. 
+
+As a reference, I also added the links for the R code I used to compile each dataset below from YSK's API. They are all very similar with a few tweaks required because of the different nature of each dataset.
+
+Below are a list of variables common in these datasets:
+
+- il_ID                            : city code
+- il_ADI                           : city name
+- ilce_ID                          : district code
+- ilce_ADI                         : district name
+- muhtarlik_ID                     : neighborhood ID
+- muhtarlik_ADI                    : neighborhood name
+- sandik_NO                        : ballot box number
+- secmen_SAYISI_                   : the number of voters assigned to the ballot box
+- oy_KULLANAN_SECMEN_SAYISI_       : the number of voters came to vote
+- gecerli_OY_TOPLAMI_              : the number of validated votes
+- gecersiz_OY_TOPLAMI_             : the number of invalidated votes
+- itirazsiz_GECERLI_OY_SAYISI_     : the number of validated votes with no objection  
+- itirazli_GECERLI_OY_SAYISI_      : the number of validated votes with objection  
+- BAGIMSIZ.TOPLAM.OY_              : the number of votes for all independent candidates
+- son_ISLEM_TARIHI_                : the last date and time when there is an update for the ballot box
+
+The rest of the columns are acronyms for the political parties participated in each election.
+
+Please be mindful about the time spent to compile these datasets and give acknowledgement if you use these datasets for any publication (research papers, blogs, articles, etc.). A sample reference is provided at the bottom.
+
+**2019 Mayoral Elections Ballot Box Level Data**
+
+- [Metropolitan Mayoral Elections (Buyuksehir Belediye Baskanligi Secimleri)](data/BBL2019.csv)
+   
+  [R code](rcode/ysk_BBL2019.r)
+
+- [District Municipial Mayoral Elections (Belediye Baskanligi Secimleri)](data/IlceBLB2019.csv)
+
+  [R code](rcode/ysk_IlceBLB2019.R)
+
+
+- [Municipial Council Elections (Belediye Meclis Uyeligi Secimleri)](data/IlceBLMeclis2019.csv)
+
+  [R code](rcode/ysk_IlceBLMeclis2019.R)
+
+- [Provincial Council Elections (Il Genel Meclis Uyeligi Secimleri)](data/ILBLMeclis2019.csv)
+
+  [R code](rcode/ysk_ILBLMeclis2019.R)
+
+**2014 Mayoral Elections Ballot Box Level Data**
+
+- [Metropolitan Mayoral Elections (Buyuksehir Belediye Baskanligi Secimleri)](data/BBL2014.csv)
+   
+  [R code](rcode/ysk_BBL2014.R)
+
+- [District Municipial Mayoral Elections (Belediye Baskanligi Secimleri)](data/IlceBLB2014.csv)
+
+  [R code](rcode/ysk_IlceBLB2014.R)
+
+
+- [Municipial Council Elections (Belediye Meclis Uyeligi Secimleri)](data/IlceBLMeclis2014.csv)
+
+  [R code](rcode/ysk_IlceBLMeclis2014.R)
+
+- [Provincial Council Elections (Il Genel Meclis Uyeligi Secimleri)](data/ILBLMeclis2014.csv)
+
+  [R code](rcode/ysk_ILBLMeclis2014.R)

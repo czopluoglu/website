@@ -1,5 +1,26 @@
 [
   {
+    "path": "posts/local-elections-2019-turkey2/",
+    "title": "2019 Turkish Mayoral Elections – Scraping Ballot Box Level Data",
+    "description": "A while ago, I compiled the election data for the 2019 mayoral elections in Turkey, which took place on March 31, 2019, through the Anadolu Agency website, only accessible information back then because the website for the Turkey's Higher Electoral Commission (YSK) was down and they did not make the official election data available until recently. This data was also limited as the Anadolu Agency only provided overall numbers (not for each ballot box). Now, it seems that YSK's website is alive back again and provides a nice-user friendly dashboard for the election data at the ballot box level. However, their dashboard is not very data-analyst friendly for those who has been starving for a more deeper analysis. Here, I provide the data and the R code I used to scrap this data from YSK's website.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2019-05-24",
+    "categories": [
+      "web scraping",
+      "R",
+      "elections",
+      "Turkish elections",
+      "2019"
+    ],
+    "preview": "posts/local-elections-2019-turkey2/images/image.jpg",
+    "last_modified": "2020-01-04T16:52:51-05:00"
+  },
+  {
     "path": "posts/xgboost/",
     "title": "XGBoost Analysis of Real Dataset to Predict Item Preknowledge",
     "description": "This post includes supplemental material to reproduce the real data analysis presented in the recently published EPM paper.",

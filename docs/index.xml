@@ -12,7 +12,16 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 18 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 24 May 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>2019 Turkish Mayoral Elections – Scraping Ballot Box Level Data</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2</link>
+      <description>A while ago, I compiled the election data for the 2019 mayoral elections in Turkey, which took place on March 31, 2019, through the Anadolu Agency website, only accessible information back then because the website for the Turkey's Higher Electoral Commission (YSK) was down and they did not make the official election data available until recently. This data was also limited as the Anadolu Agency only provided overall numbers (not for each ballot box). Now, it seems that YSK's website is alive back again and provides a nice-user friendly dashboard for the election data at the ballot box level. However, their dashboard is not very data-analyst friendly for those who has been starving for a more deeper analysis. Here, I provide the data and the R code I used to scrap this data from YSK's website.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2</guid>
+      <pubDate>Fri, 24 May 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2/images/image.jpg" medium="image" type="image/jpeg"/>
+    </item>
     <item>
       <title>XGBoost Analysis of Real Dataset to Predict Item Preknowledge</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>
