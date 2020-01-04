@@ -12,7 +12,16 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 01 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 05 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Scraping Data for 2019 Local Elections in Turkey</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey</link>
+      <description>A friend of mine, Dr. Abdullah Aydogan (https://twitter.com/abdaydgn), has asked me this morning if it is possible to pull the data for the 2019 local elections in Turkey. The only accessible information is through the Anadolu Agency (https://www.aa.com.tr/en) because the official election organization's website (http://www.ysk.gov.tr/) has not been working for a while. Here, I provide the code I used to scrap data from the Anadolu Agency, only available source for election results.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey</guid>
+      <pubDate>Fri, 05 Apr 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey/images/image.jpg" medium="image" type="image/jpeg"/>
+    </item>
     <item>
       <title>Compiling Keywords from the Published Articles in Educational and Pscyhological Measurement</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>
