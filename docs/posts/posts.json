@@ -1,5 +1,27 @@
 [
   {
+    "path": "posts/xgboost/",
+    "title": "XGBoost Analysis of Real Dataset to Predict Item Preknowledge",
+    "description": "This post includes supplemental material to reproduce the real data analysis presented in the recently published EPM paper.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2019-04-18",
+    "categories": [
+      "XGBoost",
+      "R",
+      "item preknowledge",
+      "2019"
+    ],
+    "preview": "posts/xgboost/images/image.png",
+    "last_modified": "2020-01-04T16:04:18-05:00",
+    "preview_width": 706,
+    "preview_height": 546
+  },
+  {
     "path": "posts/local-elections-2019-turkey/",
     "title": "Scraping Data for 2019 Local Elections in Turkey",
     "description": "A friend of mine, Dr. Abdullah Aydogan (https://twitter.com/abdaydgn), has asked me this morning if it is possible to pull the data for the 2019 local elections in Turkey. The only accessible information is through the Anadolu Agency (https://www.aa.com.tr/en) because the official election organization's website (http://www.ysk.gov.tr/) has not been working for a while. Here, I provide the code I used to scrap data from the Anadolu Agency, only available source for election results.",
