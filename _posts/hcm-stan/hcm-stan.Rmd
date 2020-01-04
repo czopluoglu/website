@@ -1,0 +1,386 @@
+---
+title: "Fitting Hyperbolic Cosine Model (HCM) For Unfolding Dichotomous Responses using Stan"
+description: |
+ In this post, I do a quick exercise on fitting the hyperbolic cosine model using Stan. The information about this model can be found in Andrich & Luo (1993). The most interesting part is an "Aha!" moment when I discover the bimodality of posterior distribution due to lack of directional constrain.
+
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Miami
+    
+date: 01-15-2019
+
+categories:
+  - item response theory
+  - hyperbolic cosine model
+  - Stan
+  - R
+  - "2019"
+  
+output:
+  distill::distill_article:
+    self_contained: true
+
+preview: images/image.png
+---
+
+```{r echo = FALSE, eval=TRUE}
+
+library(knitr)
+# the default output hook
+hook_output = knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+    if (!is.null(n <- options$out.lines)) {
+        x = knitr:::split_lines(x)
+        if (length(x) > n) {
+            # truncate the output
+            x = c(head(x, n), "....\n")
+        }
+        x = paste(x, collapse = "\n")  # paste first n lines together
+    }
+    hook_output(x, options)
+})
+
+opts_chunk$set(out.lines = 40)
+
+```
+
+In this post, I do a quick exercise on fitting the hyperbolic cosine model using Stan. The information about this model can be found in [Andrich & Luo (1993)](https://doi.org/10.1177/014662169301700307). The paper by [Johnson and Junker (2003)](https://doi.org/10.3102/10769986028003195) also provide a detailed treatment of estimating this particular model.
+
+The hyperbolic cosine model (HCM) is described as
+
+$$P(X_{ij}=1)=\frac{exp(\gamma_j)}{exp(\gamma_j)+2cosh(\theta_i-\beta_j)}.$$
+In this model,
+
+- $\theta_i$ is the latent variable for the person $i$,
+- $\beta_j$  is the location of item $j$ on the latent continuum, and
+- $\gamma_j$ is the unit parameter for the item $j$.
+
+While $\gamma_j$ is an item specific parameter in the equation above, it can be fixed to the same value across items (Simplified HCM). The model was primarily developed to measure attitudes, and $P(X_{ij}=1)$ is used as the probability of endorsing an item (endorsing=1, not endorsing = 0).
+
+In order to understand the model, let's check how the probability of endorsement changes as a function of the latent variable and how this is different than dichotomous IRT models for correct/incorrect scoring. Below are the item characteristic curve for three hypothetical items with $\beta= -1$ and different unit parameter ($\gamma={1,2,3}$).
+
+
+```{r echo = TRUE, eval=TRUE}
+
+ gamma <- c(1,2,3)
+ beta  <- -1
+ theta <- seq(-4,4,.01)
+ 
+ p1 <- exp(gamma[1])/(exp(gamma[1])+2*cosh(theta-beta))
+ p2 <- exp(gamma[2])/(exp(gamma[2])+2*cosh(theta-beta))
+ p3 <- exp(gamma[3])/(exp(gamma[3])+2*cosh(theta-beta))
+ 
+ plot(theta,p1,xlab="Theta",ylab="Probability of Agreement",type="l",ylim=c(0,1))
+ points(theta,p2,xlab="Theta",ylab="Probability of Agreement",type="l",lty=2)
+ points(theta,p3,xlab="Theta",ylab="Probability of Agreement",type="l",lty=3)
+ 
+
+```
+
+The most important distinction of HCM is that the probability of endorsement does not monotonically increase as the latent variable increases. The probability reaches to its maximum when $\theta$ is equal to $\beta$, and the maximum probability of endorsement is as a function of the unit parameter, $$P_{max}(X_{ij}=1)=\frac{1}{1 +2exp(-\gamma_j)}$$. The more the difference between person location ($\theta$) and item location ($\beta$) is, the lower $P(X_{ij}=1)$ is. Also, note that $\gamma$ behaves like a discrimination parameter. The higher the value of the $\gamma$ parameter is, the more flat the item response function becomes. Higher values of $\gamma$ indicate less discrimination along the scale.
+
+## Simulated Dataset
+
+### Data Generation
+
+First, I simulate a dataset based on HCM. I assume
+
+- the sample size is 500,
+- the number of items is 8,
+- $\beta$ parameters are {-2,-1.5,-1,-.5,.5,1,1.5,2},
+- $\gamma$ is equal to 0.7 for all items, and
+- $\theta$ parameters are drawn from the standard normal distribution.
+
+
+```{r echo = TRUE, eval=TRUE}
+
+require(purrr)
+
+set.seed(123456)
+
+  N = 500
+  k = 8
+
+  beta  <- c(-2,-1.5,-1,-.5,.5,1,1.5,2)
+  
+  gamma <- rep(0.7,k)
+
+  theta <- rnorm(N,0,1)                              
+
+  d <- matrix(NA,nrow=N,ncol=k)
+
+  for(i in 1:nrow(d)){
+    for(j in 1:ncol(d)){
+    
+      prob   = exp(gamma[j])/(exp(gamma[j])+2*cosh(theta[i] - beta[j]))
+      d[i,j] = (rbernoulli(1, p = prob))*1
+    
+    }
+  }
+  
+  head(d)
+```
+
+### Fitting HCM using Stan
+
+When I first tried to fit the model, I started with the following model syntax. Following the conventional approach in other dichotomous and polytomous IRT models, I set the mean and variance of the latent scale to 0 and 1, respectively. I tried to estimate a separate $\beta$ and $\gamma$ for each item without any additional constraints.  
+
+```{r echo = TRUE, eval=TRUE}
+
+hcm <-'
+
+	data{
+	 int I;                   //  number of individuals
+	 int J;                   //  number of items
+	 int <lower=0> Y[I,J];    //  data matrix  
+	}
+
+  parameters {
+	  vector[J] beta;         
+    real mu_beta;
+    real<lower=0> sigma_beta;
+
+	  vector[J] gamma;      
+     real mu_gamma;
+     real<lower=0> sigma_gamma;
+
+    vector[I] theta;      
+  }
+
+	model{
+
+     beta    ~ normal(mu_beta,sigma_beta);
+      mu_beta ~ normal(0,5);
+      sigma_beta ~ cauchy(0,2.5);
+
+     gamma   ~ normal(mu_gamma,sigma_gamma);
+      mu_gamma ~ normal(0,5);
+      sigma_gamma ~ cauchy(0,2.5);
+
+	   theta   ~ normal(0,1);
+
+	  for(i in 1:I) {
+	   for(j in 1:J) {
+   
+	    real p  = exp(gamma[j])/(exp(gamma[j])+2*cosh(theta[i] - beta[j]));
+
+	    Y[i,j] ~ bernoulli(p);
+
+	   }}
+	}
+'
+
+```
+
+I fitted the model using four chains with the following settings.
+
+```{r echo = TRUE, eval=FALSE}
+
+require(rstan)
+
+data <- list(Y=d,
+             I=nrow(d),
+             J=ncol(d))
+
+
+fit_hcm <- stan(model_code = hcm, 
+                 data       = data, 
+                 iter       = 2000,
+                 chains     = 4,
+                 control    = list(max_treedepth = 15,adapt_delta=0.9))
+
+
+```
+
+
+```{r echo = FALSE, eval=TRUE}
+load("C:/Users/Dr Zopluoglu/Box/Blogs/hcm_noconstraint.RData")
+
+require(rstan)
+```
+
+Let's check the solution for item parameters.
+
+```{r echo = TRUE, eval=TRUE}
+print(fit_hcm, 
+      pars = c("beta","mu_beta","sigma_beta",
+               "gamma","mu_gamma","sigma_gamma"), 
+      probs = c(0.025,0.975), 
+      digits = 3)
+
+```
+
+This was very strange. The parameter estimates were absolutely bizarre, particularly the $\beta$ parameters. Let's check the posterior distribution for the item parameters.
+
+
+```{r echo = TRUE, eval=TRUE}
+
+plot(fit_hcm, 
+     plotfun = "hist", 
+     pars = c("beta[1]","beta[2]","beta[3]","beta[4]",
+              "beta[5]","beta[6]","beta[7]","beta[8]"), 
+     inc_warmup = FALSE)
+
+plot(fit_hcm, 
+     plotfun = "trace", 
+     pars = c("beta[1]"), 
+     inc_warmup = FALSE)
+
+
+```
+
+
+This clearly signaled a problem. It took me a whole day to figure out the issue, until I read the paper by [Johnson and Junker (2003, page 209-211)](https://doi.org/10.3102/10769986028003195). Without any constraint on the sign of the beta parameters, the direction of the scale is arbitrary. Chains hang out on opposite side of the continuum, leading a bimodal posterior. One needs to add a directional constrain for the beta parameters. Johnson & Junker (2003) says "Constraining the sign of a single item’s location is one method for ensuring identifiability (e.g., β1 < 0)." 
+
+I tried to do constrain the sign for one of the $\beta$ parameters but I realized this was also not enough. It sometimes works but most of the time the $\beta$ parameters with no constraint still suffer from the same issue. So, I think one has to put a constrain on each $\beta$ parameter. That means you have to guess the sign of the $\beta$ parameters before fitting the model. It is easy in this case since this is the simulated data and I know the sign of the $\beta$ parameter. However, in real data, this is an issue to deal with. I've come to a solution by first fitting the model with only one chain to have an idea about the sign of the $\beta$ parameters (there might be other and better ways of doing this). Once I have an idea about the sign of the parameters, then you modify the model syntax accordingly to fit the model with more chains. Let's refit the model with only one chain and fewer iterations as all I want to see is the sign of the $\beta$ parameter.
+
+```{r echo = TRUE, eval=FALSE}
+
+fit_hcm_onechain <- stan(model_code = hcm, 
+                 data       = data, 
+                 iter       = 200,
+                 chains     = 1,
+                 control    = list(max_treedepth = 15,adapt_delta=0.9))
+
+
+```
+
+```{r echo = TRUE, eval=TRUE}
+print(fit_hcm_onechain, 
+      pars = c("beta","mu_beta","sigma_beta"), 
+      probs = c(0.025,0.975), 
+      digits = 3)
+
+```
+
+So, this solution suggests that the $\beta$ parameters from Item 1 to Item 4 are positive and the parameters from Item 5 to Item 8 are negative. Note that this is exact opposite of the true signs I used when generating data. Again, the direction of the scale is totally arbitrary. So, all I need to know is that the Item 1 - Item 4 should have the same sign while Item 5 - Item 8 should have the opposite sign. It is up to me which sign I assign to which set of items. After having this information, I modified the syntax below accordingly and constrained the sign of each $\beta$ parameter.
+
+```{r echo = TRUE, eval=FALSE}
+
+hcm2 <-'
+
+	data{
+	 int I;                   //  number of individuals
+	 int J;                   //  number of items
+	 int <lower=0> Y[I,J];    //  data matrix  
+	}
+  parameters {
+	  vector<upper=0>[4] beta1;
+	  vector<lower=0>[4] beta2;
+	   real mu_beta;
+     real<lower=0> sigma_beta;
+     
+	  vector[J] gamma;      
+     real mu_gamma;
+     real<lower=0> sigma_gamma;
+     
+    vector[I] theta;    
+  }
+  
+	model{
+
+      mu_gamma ~ normal(0,5);
+      sigma_gamma ~ cauchy(0,2.5);
+       gamma   ~ normal(mu_gamma,sigma_gamma);
+
+      mu_beta ~ normal(0,5);
+      sigma_beta ~ cauchy(0,2.5);
+       beta1    ~ normal(mu_beta,sigma_beta);
+       beta2    ~ normal(mu_beta,sigma_beta);
+       
+     theta    ~ normal(0,1);
+      
+	  for(i in 1:I) {
+	   for(j in 1:4) {
+	    real p1  = exp(gamma[j])/(exp(gamma[j])+2*cosh(theta[i] - beta1[j]));
+	    Y[i,j] ~ bernoulli(p1);
+	   }}
+	    
+	  for(i in 1:I) {
+	   for(j in 5:8) {
+	    real p2  = exp(gamma[j])/(exp(gamma[j])+2*cosh(theta[i] - beta2[j-4]));
+	    Y[i,j] ~ bernoulli(p2);
+	   }}
+	   
+	}
+'
+
+```
+
+```{r echo = TRUE, eval=FALSE}
+
+fit_hcm2 <- stan(model_code = hcm2, 
+                 data       = data, 
+                 iter       = 2000,
+                 chains     = 4,
+                 control    = list(max_treedepth = 15,adapt_delta=0.9))
+```
+
+```{r echo = TRUE, eval=TRUE}
+
+print(fit_hcm2, 
+      pars = c("beta1","beta2","mu_beta","sigma_beta","gamma"), 
+      probs = c(0.025,0.975), 
+      digits = 3)
+
+```
+
+
+```{r echo = TRUE, eval=TRUE}
+
+plot(fit_hcm2, 
+     plotfun = "hist", 
+     pars = c("beta1[1]","beta1[2]","beta1[3]","beta1[4]",
+              "beta2[1]","beta2[2]","beta2[3]","beta2[4]"), 
+     inc_warmup = FALSE)
+
+```
+
+```{r echo = TRUE, eval=TRUE}
+
+plot(fit_hcm2, 
+     plotfun = "hist", 
+     pars = c("gamma[1]","gamma[2]","gamma[3]","gamma[4]",
+              "gamma[5]","gamma[6]","gamma[7]","gamma[8]"), 
+     inc_warmup = FALSE)
+
+```
+
+
+Now, this looks very reasonable and much better. Rhat values are within the acceptable range and the posterior distributions look better. If we take the mean of posterior distributions as parameter estimates, they are all within a reasonable range compared to the true values used to generate data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
