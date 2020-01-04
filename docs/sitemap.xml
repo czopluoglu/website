@@ -1,63 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
-    <loc>cengiz.me/about.html</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/about.html</loc>
     <lastmod>2020-01-04T00:29:05-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/categorical.html</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/categorical.html</loc>
     <lastmod>2020-01-03T18:53:11-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/copydetect.html</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/copydetect.html</loc>
     <lastmod>2020-01-03T12:44:57-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/estcrm.html</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/estcrm.html</loc>
     <lastmod>2020-01-03T12:52:09-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/fitpmm.html</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/fitpmm.html</loc>
     <lastmod>2020-01-03T13:53:48-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/</loc>
     <lastmod>2020-01-04T02:12:54-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/intror.html</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/intror.html</loc>
     <lastmod>2020-01-03T19:10:38-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/irt.html</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/irt.html</loc>
     <lastmod>2020-01-03T19:10:42-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/itemanalysis.html</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/itemanalysis.html</loc>
     <lastmod>2020-01-03T12:58:42-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/links.html</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/links.html</loc>
     <lastmod>2020-01-04T01:49:37-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/measurement.html</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/measurement.html</loc>
     <lastmod>2020-01-03T18:53:06-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/publications.html</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/publications.html</loc>
     <lastmod>2020-01-04T00:30:09-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/qm.html</loc>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/qm.html</loc>
     <lastmod>2020-01-04T01:19:14-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/posts/scraping-2018-election-data/</loc>
-    <lastmod>2020-01-04T03:03:45-05:00</lastmod>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/a-quick-look-at-the-elections-2018/</loc>
+    <lastmod>2020-01-04T13:12:16-05:00</lastmod>
   </url>
   <url>
-    <loc>cengiz.me/posts/scraping-data-for-2014-gubernatorial-elections/</loc>
-    <lastmod>2020-01-04T02:51:50-05:00</lastmod>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-2018-election-data/</loc>
+    <lastmod>2020-01-04T13:00:33-05:00</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-data-for-2014-gubernatorial-elections/</loc>
+    <lastmod>2020-01-04T12:59:00-05:00</lastmod>
   </url>
 </urlset>

@@ -1,0 +1,531 @@
+---
+title: "A Quick Look at the Election 2018"
+description: |
+ Some quick insights about 2018 elections
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Miami
+    
+date: 11-12-2018
+
+categories:
+  - elections
+  - US elections
+  - R
+  - "2018"
+  
+output:
+  distill::distill_article:
+    self_contained: true
+
+preview: images/image.png
+---
+
+
+**Disclaimer: I am not a political analyst and have no intention to be one. The things I look are not necessarily great insights to elections. My goal in these posts is just to show how to use R for some data analytics.** 
+
+According to the news, midterm voter turnout hit 50-year high. I was curious about whether or not this increase in the number of votes favored any particular party. So, I decided to have a a first look at the election data. In order to reproduce the plots and numbers on this post, you have to download the following two datasets. I provide the R code for reproducing the numbers and plots at the end of each section.
+
+- https://github.com/MEDSL/2018-elections-unoffical/blob/master/election-context-2018.csv
+
+## Governor Race - 2014 vs. 2018
+
+First, I compared gubernatorial election results in 2014 and 2018 using the 36 states that had a governor race. In this comparison, I defined two variables: 
+
+ - The percent change in the # of votes from 2014 to 2018
+ - The change in percent difference between democratic and republican party.
+ 
+In the below picture, there are four zones created by a vertical line (x=0) and horizontal line (y=0). The states at the upper right are the ones with an increase in the number of votes in 2018 compared to 2014 while there is a net shift in favor of the Democratic party. The states at the bottom right are the ones with an increase in the number of votes in 2018 compared to 2014 while there is a net shift in favor of the Republican Party. The states at the upper left are the ones with a decrease in the number of votes in 2018 compared to 2014 while there is a net shift in favor of the Democratic Party. I labeled some states that is most interesting (to me).
+
+```{r echo=FALSE, eval=TRUE,layout="l-page", preview=TRUE}
+
+require(ggrepel)
+require(ggplot2)
+require(scales)
+require(knitr)
+options(scipen=999)
+
+#########################
+past    <- read.csv("data/election-context-2018.csv")
+present <- read.csv("data/election2018.csv")
+d       <- merge(past,present,by=c("state","county"),all=TRUE)
+#########################
+
+states <- aggregate(cbind(repsen18,demsen18,othersen18,
+                          trump16,clinton16,otherpres16,
+                          demgov14,repgov14,othergov14,
+                          demgov18,repgov18,othergov18) ~ state,
+                          data = d, sum,na.action=NULL,na.rm=TRUE)
+
+states$total.vote2016pres   <- states$trump16 + states$clinton16 + states$otherpres16
+states$total.vote2014gov    <- states$demgov14 + states$repgov14 + states$othergov14
+states$total.vote2018gov    <- states$demgov18 + states$repgov18 + states$othergov18
+states$total.vote2018sen   <- states$repsen18 + states$demsen18 + states$othersen18
+
+
+states$p.trump16   <- states$trump16/states$total.vote2016pres
+states$p.clinton16 <- states$clinton16/states$total.vote2016pres
+states$p.demgov14   <- states$demgov14/states$total.vote2014gov
+states$p.repgov14   <- states$repgov14/states$total.vote2014gov
+states$p.demgov18   <- states$demgov18/states$total.vote2018gov
+states$p.repgov18   <- states$repgov18/states$total.vote2018gov
+
+states$p.diffgov14 <- states$p.demgov14 - states$p.repgov14 
+states$p.diffgov18 <- states$p.demgov18 - states$p.repgov18 
+
+states$p.diffgov   <- (states$p.diffgov18 - states$p.diffgov14 )*100
+states$p.increase.vote.gov <- (states$total.vote2018gov/states$total.vote2014gov)*100-100
+
+labels = as.character(states[,1])
+labels[-c(4,5,9,10,13,19,20,21,28,32,35,41,42,43)] = ""
+
+ggplot(states,aes(p.increase.vote.gov,p.diffgov)) +
+  geom_point(aes(size=total.vote2018gov,color=total.vote2014gov)) +
+  theme_bw() + 
+  theme(plot.title   = element_text(size=10),
+        axis.title.y = element_text(size=rel(0.7)),
+        axis.title.x = element_text(size=rel(0.7)),
+        axis.text.y  = element_text(size=rel(0.7)),
+        axis.text.x  = element_text(size=rel(0.7)),
+        legend.text  = element_text(size=rel(0.5)),
+        legend.title = element_text(size=rel(0.5)))+
+  xlab("% Change in the Number of Total Votes")+
+  ylab("% Change in Difference between Democratic and Republican Party")+
+  xlim(c(-10,90))+
+  geom_hline(yintercept=0, linetype=2, color="black", size=.5)+
+  geom_vline(xintercept=0, linetype=2, color="black", size=.5)+
+  labs(title="Gubernatorial Elections (2014 vs. 2018)",
+       size ="Total Votes in 2018",
+       color="Total Votes in 2014")+
+  geom_label_repel(aes(label=labels),hjust=0.5,vjust=-0.5,size=2)
+
+```
+
+- The most striking shift appears in Nevada. Nevada is the state that most increased the number votes in 2018 compared to 2014 (76.4%). The increase clearly favored the Democratic party. While the difference was 46.7% with the Republican party leading in 2014, it was 4.1% with the Democratic Party leading, indicating a net 50.8% shift in favor of Democrats.
+ 
+- A similar big shift occurs in South Dakota(42.5%), Ohio (26.8%), Tennessee (26.8%), and Illinois (19.6%) in favor of the Democratic party with a considerable amount of increase in the number of votes in South Dakota(23.5%), Ohio (43.4%), Tennessee (61.6%), and Illinois (24.5%).
+
+- There is a big increase in the number of votes in Texas (76.0%), New York (59.6%), and Georgia (54.2%). However, the shift in favor of the Democratic party was in smaller degree, Texas (7.0%), New York (8.9%), and Georgia (6.3%).
+
+- In California and Florida, there is almost 0% shift indicating the difference in % votes remain same between the two parties although there is an increase in the number of votes, Florida by 37.1% and California by 7.8%.
+
+- Massachusetts is another interesting one. That is the one with the most shift in favor of Republican party (31.7%) while increasing the number of votes by 20.4%.
+
+You can look at the rest and dig deeper by yourself.
+
+```{r echo=FALSE, eval=TRUE}
+tab.states <- na.omit(states[,c(1,26,27)])
+tab.states <- tab.states[order(tab.states[,2],decreasing=TRUE),]
+colnames(tab.states) <- c("State","Shift (%)","Change in Votes (%)")
+kable(tab.states,digits=1,row.names=FALSE) 
+```
+
+```{r echo=TRUE, eval=FALSE,layout="l-page"}
+
+require(ggrepel)
+require(ggplot2)
+require(scales)
+require(knitr)
+options(scipen=999)
+
+#########################
+past    <- read.csv("data/election-context-2018.csv")
+present <- read.csv("data/election2018.csv")
+d       <- merge(past,present,by=c("state","county"),all=TRUE)
+#########################
+
+states <- aggregate(cbind(repsen18,demsen18,othersen18,
+                          trump16,clinton16,otherpres16,
+                          demgov14,repgov14,othergov14,
+                          demgov18,repgov18,othergov18) ~ state,
+                          data = d, sum,na.action=NULL,na.rm=TRUE)
+
+states$total.vote2016pres   <- states$trump16 + states$clinton16 + states$otherpres16
+states$total.vote2014gov    <- states$demgov14 + states$repgov14 + states$othergov14
+states$total.vote2018gov    <- states$demgov18 + states$repgov18 + states$othergov18
+states$total.vote2018sen   <- states$repsen18 + states$demsen18 + states$othersen18
+
+
+states$p.trump16   <- states$trump16/states$total.vote2016pres
+states$p.clinton16 <- states$clinton16/states$total.vote2016pres
+states$p.demgov14   <- states$demgov14/states$total.vote2014gov
+states$p.repgov14   <- states$repgov14/states$total.vote2014gov
+states$p.demgov18   <- states$demgov18/states$total.vote2018gov
+states$p.repgov18   <- states$repgov18/states$total.vote2018gov
+
+states$p.diffgov14 <- states$p.demgov14 - states$p.repgov14 
+states$p.diffgov18 <- states$p.demgov18 - states$p.repgov18 
+
+states$p.diffgov   <- (states$p.diffgov18 - states$p.diffgov14 )*100
+states$p.increase.vote.gov <- (states$total.vote2018gov/states$total.vote2014gov)*100-100
+
+labels = as.character(states[,1])
+labels[-c(4,5,9,10,13,19,20,21,28,32,35,41,42,43)] = ""
+
+ggplot(states,aes(p.increase.vote.gov,p.diffgov)) +
+  geom_point(aes(size=total.vote2018gov,color=total.vote2014gov)) +
+  theme_bw() + 
+  theme(plot.title   = element_text(size=10),
+        axis.title.y = element_text(size=rel(0.7)),
+        axis.title.x = element_text(size=rel(0.7)),
+        axis.text.y  = element_text(size=rel(0.7)),
+        axis.text.x  = element_text(size=rel(0.7)),
+        legend.text  = element_text(size=rel(0.5)),
+        legend.title = element_text(size=rel(0.5)))+
+  xlab("% Change in the Number of Total Votes")+
+  ylab("% Change in Difference between Democratic and Republican Party")+
+  xlim(c(-10,90))+
+  geom_hline(yintercept=0, linetype=2, color="black", size=.5)+
+  geom_vline(xintercept=0, linetype=2, color="black", size=.5)+
+  labs(title="Gubernatorial Elections (2014 vs. 2018)",
+       size ="Total Votes in 2018",
+       color="Total Votes in 2014")+
+  geom_label_repel(aes(label=labels),hjust=0.5,vjust=-0.5,size=2)
+
+
+tab.states <- na.omit(states[,c(1,26,27)])
+tab.states <- tab.states[order(tab.states[,2],decreasing=TRUE),]
+colnames(tab.states) <- c("State","Shift (%)","Change in Votes (%)")
+kable(tab.states,digits=1,row.names=FALSE) 
+
+```
+
+## Governor Race 2018 vs. Presidential Race 2016
+
+Some may argue this would be a better comparison to understand the dynamics after President #45. This will be also limited to 36 states that had a governor race. I looked at the same two variables.
+
+- South Dakota seems one of the least loss in the number of votes (-8.4%) while the net shift of 26.4% in favor of the Democratic Party. Simlar level of shift in favor of Democratic Party also occurred in Kansas (25.1%) and Oklahoma (24.3%) with larger amount of reduction in the number of votes, Kansas (-13.5%) and Oklahoma (-18.4%).
+
+- In Florida and New York, there is not a noticable shift in favor of neither party.
+
+- In Massachusetts, there is a net shift of 61.2% in favor of Republican Party while the reduction in the number of votes is 20.9%. Maryland, Vermont, Arizona, Connecticut, and California are other states with a net shift in favor of Republican party more than 10%.
+
+```{r echo=FALSE, eval=TRUE,layout="l-page"}
+
+states$p.diffpres16 <- states$p.clinton16 - states$p.trump16
+states$p.diffgov18  <- states$p.demgov18 - states$p.repgov18 
+
+states$p.diffpresgov       <- (states$p.diffgov18 - states$p.diffpres16)*100
+states$p.increase.vote.gov <- (states$total.vote2018gov/states$total.vote2016pres)*100-100
+
+labels = as.character(states[,1])
+labels[-c(2,4,6,9,16,20,21,23,32,36,38,41,45)] = ""
+
+ggplot(states,aes(p.increase.vote.gov,p.diffpresgov)) +
+  geom_point(aes(size=total.vote2018gov,color=total.vote2016pres)) +
+  theme_bw() + 
+  theme(plot.title   = element_text(size=10),
+        axis.title.y = element_text(size=rel(0.7)),
+        axis.title.x = element_text(size=rel(0.7)),
+        axis.text.y  = element_text(size=rel(0.7)),
+        axis.text.x  = element_text(size=rel(0.7)),
+        legend.text  = element_text(size=rel(0.5)),
+        legend.title = element_text(size=rel(0.5)))+
+  xlab("% Change in the Number of Total Votes")+
+  ylab("% Change in Difference between Democratic and Republican Party")+
+  xlim(c(-55,0))+
+  geom_hline(yintercept=0, linetype=2, color="black", size=.5)+
+  geom_vline(xintercept=0, linetype=2, color="black", size=.5)+
+  labs(title="Gubernatorial Election 2018 vs. Presidential Election in 2016",
+       size ="Total Votes in 2018",
+       color="Total Votes in 2016")+
+  geom_label_repel(aes(label=labels),hjust=0.5,vjust=-0.5,size=2)
+
+```
+
+
+```{r echo=FALSE, eval=TRUE}
+tab.states2 <- na.omit(states[,c(1,29,27)])
+tab.states2 <- tab.states2[order(tab.states2[,2],decreasing=TRUE),]
+colnames(tab.states2) <- c("State","Shift (%)","Change in Votes (%)")
+kable(tab.states2,digits=1,row.names=FALSE)
+```
+
+
+
+```{r echo=TRUE, eval=FALSE}
+
+states$p.diffpres16 <- states$p.clinton16 - states$p.trump16
+states$p.diffgov18  <- states$p.demgov18 - states$p.repgov18 
+
+states$p.diffpresgov       <- (states$p.diffgov18 - states$p.diffpres16)*100
+states$p.increase.vote.gov <- (states$total.vote2018gov/states$total.vote2016pres)*100-100
+
+labels = as.character(states[,1])
+labels[-c(2,4,6,9,16,20,21,23,32,36,38,41,45)] = ""
+
+ggplot(states,aes(p.increase.vote.gov,p.diffpresgov)) +
+  geom_point(aes(size=total.vote2018gov,color=total.vote2016pres)) +
+  theme_bw() + 
+  theme(plot.title   = element_text(size=10),
+        axis.title.y = element_text(size=rel(0.7)),
+        axis.title.x = element_text(size=rel(0.7)),
+        axis.text.y  = element_text(size=rel(0.7)),
+        axis.text.x  = element_text(size=rel(0.7)),
+        legend.text  = element_text(size=rel(0.5)),
+        legend.title = element_text(size=rel(0.5)))+
+  xlab("% Change in the Number of Total Votes")+
+  ylab("% Change in Difference between Democratic and Republican Party")+
+  xlim(c(-55,0))+
+  geom_hline(yintercept=0, linetype=2, color="black", size=.5)+
+  geom_vline(xintercept=0, linetype=2, color="black", size=.5)+
+  labs(title="Gubernatorial Election 2018 vs. Presidential Election in 2016",
+       size ="Total Votes in 2018",
+       color="Total Votes in 2016")+
+  geom_label_repel(aes(label=labels),hjust=0.5,vjust=-0.5,size=2)
+
+tab.states2 <- na.omit(states[,c(1,29,27)])
+tab.states2 <- tab.states2[order(tab.states2[,2],decreasing=TRUE),]
+colnames(tab.states2) <- c("State","Shift (%)","Change in Votes (%)")
+kable(tab.states2,digits=1,row.names=FALSE)
+```
+
+
+## Focusing FL Counties - Gubernatorial Race 2014 vs. 2018
+
+I looked at the same comparison between 2014 and 2018 gubernatorial elections at the county level in Fl.
+
+- There is a net shift in favor of Republican party for the majority of counties, particularly small ones.
+
+- In three relatively large counties, Duval, Orange, and Osceola are the ones with the most net shift in favor of Democratic party with a significant amount of increase in the number of votes.
+
+- In Hillsborough, there is also a net shift in favor of Democratic party at a smaller level with a significant amount of increase in the number of votes.
+
+- In Miami-Dade, the net shift of 1.8% in favor of Democratic party is not noticeable, though there is a 53% increase in the number of votes.
+
+- In other three large counties, there is a net shift in favor of Republican Party: Palm Beach (3.9%), Broward (1.8), and Pinellas (8.3%).
+
+```{r echo=FALSE, eval=TRUE,layout="l-page"}
+
+#########################
+past    <- read.csv("data/election-context-2018.csv")
+present <- read.csv("data/election2018.csv")
+d       <- merge(past,present,by=c("state","county"),all=TRUE)
+fl      <- d[which(d$state=="Florida"),]
+##########################
+fl$total.vote2016pres  <- fl$trump16 + fl$clinton16 + fl$otherpres16
+fl$total.vote2014gov   <- fl$demgov14 + fl$repgov14 + fl$othergov14
+fl$total.vote2018gov   <- fl$demgov18 + fl$repgov18 + fl$othergov18
+fl$total.vote2018sen   <- fl$repsen18 + fl$demsen18 + fl$othersen18
+
+
+fl$p.trump16   <- fl$trump16/fl$total.vote2016pres
+fl$p.clinton16 <- fl$clinton16/fl$total.vote2016pres
+fl$p.demgov14  <- fl$demgov14/fl$total.vote2014gov
+fl$p.repgov14  <- fl$repgov14/fl$total.vote2014gov
+fl$p.demgov18  <- fl$demgov18/fl$total.vote2018gov
+fl$p.repgov18  <- fl$repgov18/fl$total.vote2018gov
+
+fl$p.diffgov14 <- fl$p.demgov14 - fl$p.repgov14 
+fl$p.diffgov18 <- fl$p.demgov18 - fl$p.repgov18 
+
+fl$p.diffgov   <- (fl$p.diffgov18 - fl$p.diffgov14 )*100
+fl$p.increase.vote.gov <- (fl$total.vote2018gov/fl$total.vote2014gov)*100-100
+
+labels = as.character(fl[,2])
+labels[-c(6,13,15,16,29,34,39,44,49,50,51,53,64,66)] = ""
+
+ggplot(fl,aes(p.increase.vote.gov,p.diffgov)) +
+  geom_point(aes(size=total.vote2018gov,color=total.vote2014gov)) +
+  theme_bw() + 
+  theme(plot.title   = element_text(size=10),
+        axis.title.y = element_text(size=rel(0.7)),
+        axis.title.x = element_text(size=rel(0.7)),
+        axis.text.y  = element_text(size=rel(0.7)),
+        axis.text.x  = element_text(size=rel(0.7)),
+        legend.text  = element_text(size=rel(0.5)),
+        legend.title = element_text(size=rel(0.5)))+
+  xlab("% Change in the Number of Total Votes")+
+  ylab("% Change in Difference between Democratic and Republican Party")+
+  xlim(c(-10,75))+
+  geom_hline(yintercept=0, linetype=2, color="black", size=.5)+
+  geom_vline(xintercept=0, linetype=2, color="black", size=.5)+
+  labs(title="FL Gubernatorial Elections (2014 vs. 2018)",
+       size ="Total Votes in 2018",
+       color="Total Votes in 2014")+
+  geom_label_repel(aes(label=labels),hjust=0.5,vjust=-0.5,size=2)
+
+```
+
+```{r echo=FALSE, eval=TRUE}
+tab.fl <- na.omit(fl[,c("county","p.diffgov","p.increase.vote.gov")])
+tab.fl <- tab.fl[order(tab.fl[,2],decreasing=TRUE),]
+colnames(tab.fl) <- c("County","Shift (%)","Change in Votes (%)")
+kable(tab.fl,digits=1,row.names=FALSE) 
+```
+
+```{r echo=TRUE, eval=FALSE}
+
+#########################
+past    <- read.csv("data/election-context-2018.csv")
+present <- read.csv("data/election2018.csv")
+d       <- merge(past,present,by=c("state","county"),all=TRUE)
+fl      <- d[which(d$state=="Florida"),]
+##########################
+fl$total.vote2016pres  <- fl$trump16 + fl$clinton16 + fl$otherpres16
+fl$total.vote2014gov   <- fl$demgov14 + fl$repgov14 + fl$othergov14
+fl$total.vote2018gov   <- fl$demgov18 + fl$repgov18 + fl$othergov18
+fl$total.vote2018sen   <- fl$repsen18 + fl$demsen18 + fl$othersen18
+
+
+fl$p.trump16   <- fl$trump16/fl$total.vote2016pres
+fl$p.clinton16 <- fl$clinton16/fl$total.vote2016pres
+fl$p.demgov14  <- fl$demgov14/fl$total.vote2014gov
+fl$p.repgov14  <- fl$repgov14/fl$total.vote2014gov
+fl$p.demgov18  <- fl$demgov18/fl$total.vote2018gov
+fl$p.repgov18  <- fl$repgov18/fl$total.vote2018gov
+
+fl$p.diffgov14 <- fl$p.demgov14 - fl$p.repgov14 
+fl$p.diffgov18 <- fl$p.demgov18 - fl$p.repgov18 
+
+fl$p.diffgov   <- (fl$p.diffgov18 - fl$p.diffgov14 )*100
+fl$p.increase.vote.gov <- (fl$total.vote2018gov/fl$total.vote2014gov)*100-100
+
+labels = as.character(fl[,2])
+labels[-c(6,13,15,16,29,34,39,44,49,50,51,53,64,66)] = ""
+
+ggplot(fl,aes(p.increase.vote.gov,p.diffgov)) +
+  geom_point(aes(size=total.vote2018gov,color=total.vote2014gov)) +
+  theme_bw() + 
+  theme(plot.title   = element_text(size=10),
+        axis.title.y = element_text(size=rel(0.7)),
+        axis.title.x = element_text(size=rel(0.7)),
+        axis.text.y  = element_text(size=rel(0.7)),
+        axis.text.x  = element_text(size=rel(0.7)),
+        legend.text  = element_text(size=rel(0.5)),
+        legend.title = element_text(size=rel(0.5)))+
+  xlab("% Change in the Number of Total Votes")+
+  ylab("% Change in Difference between Democratic and Republican Party")+
+  xlim(c(-10,75))+
+  geom_hline(yintercept=0, linetype=2, color="black", size=.5)+
+  geom_vline(xintercept=0, linetype=2, color="black", size=.5)+
+  labs(title="FL Gubernatorial Elections (2014 vs. 2018)",
+       size ="Total Votes in 2018",
+       color="Total Votes in 2014")+
+  geom_label_repel(aes(label=labels),hjust=0.5,vjust=-0.5,size=2)
+
+
+tab.fl <- na.omit(fl[,c("county","p.diffgov","p.increase.vote.gov")])
+tab.fl <- tab.fl[order(tab.fl[,2],decreasing=TRUE),]
+colnames(tab.fl) <- c("County","Shift (%)","Change in Votes (%)")
+kable(tab.fl,digits=1,row.names=FALSE) 
+```
+
+## Focusing FL Counties - Gubernatorial Race 2018 vs. Presidential Race 2016
+
+
+```{r echo=FALSE, eval=TRUE,layout="l-page"}
+
+#########################
+past    <- read.csv("data/election-context-2018.csv")
+present <- read.csv("data/election2018.csv")
+d       <- merge(past,present,by=c("state","county"),all=TRUE)
+fl      <- d[which(d$state=="Florida"),]
+##########################
+fl$total.vote2016pres  <- fl$trump16 + fl$clinton16 + fl$otherpres16
+fl$total.vote2014gov   <- fl$demgov14 + fl$repgov14 + fl$othergov14
+fl$total.vote2018gov   <- fl$demgov18 + fl$repgov18 + fl$othergov18
+fl$total.vote2018sen   <- fl$repsen18 + fl$demsen18 + fl$othersen18
+
+
+fl$p.trump16   <- fl$trump16/fl$total.vote2016pres
+fl$p.clinton16 <- fl$clinton16/fl$total.vote2016pres
+fl$p.demgov14  <- fl$demgov14/fl$total.vote2014gov
+fl$p.repgov14  <- fl$repgov14/fl$total.vote2014gov
+fl$p.demgov18  <- fl$demgov18/fl$total.vote2018gov
+fl$p.repgov18  <- fl$repgov18/fl$total.vote2018gov
+
+fl$p.diffpres16 <- fl$p.clinton16 - fl$p.trump16 
+fl$p.diffgov18  <- fl$p.demgov18 - fl$p.repgov18 
+
+fl$p.diffgovpress      <- (fl$p.diffgov18 - fl$p.diffpres16)*100
+fl$p.increase.vote.gov <- (fl$total.vote2018gov/fl$total.vote2016pres)*100-100
+
+labels = as.character(fl[,2])
+labels[-c(6,10,11,16,19,26,28,44,50,51,52,53,60)] = ""
+
+ggplot(fl,aes(p.increase.vote.gov,fl$p.diffgovpress)) +
+  geom_point(aes(size=total.vote2018gov,color=total.vote2016pres)) +
+  theme_bw() + 
+  theme(plot.title   = element_text(size=10),
+        axis.title.y = element_text(size=rel(0.7)),
+        axis.title.x = element_text(size=rel(0.7)),
+        axis.text.y  = element_text(size=rel(0.7)),
+        axis.text.x  = element_text(size=rel(0.7)),
+        legend.text  = element_text(size=rel(0.5)),
+        legend.title = element_text(size=rel(0.5)))+
+  xlab("% Change in the Number of Total Votes")+
+  ylab("% Change in Difference between Democratic and Republican Party")+
+  xlim(c(-30,0))+
+  geom_hline(yintercept=0, linetype=2, color="black", size=.5)+
+  geom_vline(xintercept=0, linetype=2, color="black", size=.5)+
+  labs(title="FL - Gubernatorial Elections 2018 vs. Presidential Election 2016)",
+       size ="Total Votes in 2018",
+       color="Total Votes in 2016")+
+  geom_label_repel(aes(label=labels),hjust=0.5,vjust=-0.5,size=2)
+
+```
+
+```{r echo=FALSE, eval=TRUE}
+tab.fl <- na.omit(fl[,c("county","p.diffgovpress","p.increase.vote.gov")])
+tab.fl <- tab.fl[order(tab.fl[,2],decreasing=TRUE),]
+colnames(tab.fl) <- c("County","Shift (%)","Change in Votes (%)")
+kable(tab.fl,digits=1,row.names=FALSE) 
+```
+
+
+```{r echo=TRUE, eval=FALSE,layout="l-page"}
+
+#########################
+past    <- read.csv("data/election-context-2018.csv")
+present <- read.csv("data/election2018.csv")
+d       <- merge(past,present,by=c("state","county"),all=TRUE)
+fl      <- d[which(d$state=="Florida"),]
+##########################
+fl$total.vote2016pres  <- fl$trump16 + fl$clinton16 + fl$otherpres16
+fl$total.vote2014gov   <- fl$demgov14 + fl$repgov14 + fl$othergov14
+fl$total.vote2018gov   <- fl$demgov18 + fl$repgov18 + fl$othergov18
+fl$total.vote2018sen   <- fl$repsen18 + fl$demsen18 + fl$othersen18
+
+
+fl$p.trump16   <- fl$trump16/fl$total.vote2016pres
+fl$p.clinton16 <- fl$clinton16/fl$total.vote2016pres
+fl$p.demgov14  <- fl$demgov14/fl$total.vote2014gov
+fl$p.repgov14  <- fl$repgov14/fl$total.vote2014gov
+fl$p.demgov18  <- fl$demgov18/fl$total.vote2018gov
+fl$p.repgov18  <- fl$repgov18/fl$total.vote2018gov
+
+fl$p.diffpres16 <- fl$p.clinton16 - fl$p.trump16 
+fl$p.diffgov18  <- fl$p.demgov18 - fl$p.repgov18 
+
+fl$p.diffgovpress      <- (fl$p.diffgov18 - fl$p.diffpres16)*100
+fl$p.increase.vote.gov <- (fl$total.vote2018gov/fl$total.vote2016pres)*100-100
+
+labels = as.character(fl[,2])
+labels[-c(6,10,11,16,19,26,28,44,50,51,52,53,60)] = ""
+
+ggplot(fl,aes(p.increase.vote.gov,fl$p.diffgovpress)) +
+  geom_point(aes(size=total.vote2018gov,color=total.vote2016pres)) +
+  theme_bw() + 
+  theme(plot.title   = element_text(size=10),
+        axis.title.y = element_text(size=rel(0.7)),
+        axis.title.x = element_text(size=rel(0.7)),
+        axis.text.y  = element_text(size=rel(0.7)),
+        axis.text.x  = element_text(size=rel(0.7)),
+        legend.text  = element_text(size=rel(0.5)),
+        legend.title = element_text(size=rel(0.5)))+
+  xlab("% Change in the Number of Total Votes")+
+  ylab("% Change in Difference between Democratic and Republican Party")+
+  xlim(c(-30,0))+
+  geom_hline(yintercept=0, linetype=2, color="black", size=.5)+
+  geom_vline(xintercept=0, linetype=2, color="black", size=.5)+
+  labs(title="FL - Gubernatorial Elections 2018 vs. Presidential Election 2016)",
+       size ="Total Votes in 2018",
+       color="Total Votes in 2016")+
+  geom_label_repel(aes(label=labels),hjust=0.5,vjust=-0.5,size=2)
+
+tab.fl <- na.omit(fl[,c("county","p.diffgovpress","p.increase.vote.gov")])
+tab.fl <- tab.fl[order(tab.fl[,2],decreasing=TRUE),]
+colnames(tab.fl) <- c("County","Shift (%)","Change in Votes (%)")
+kable(tab.fl,digits=1,row.names=FALSE) 
+```

@@ -59,7 +59,7 @@ navbar:
     - icon: fa fa-rss
       href: index.xml
       
-base_url: cengiz.me
+base_url: https://github.com/czopluoglu/website/tree/master/docs
 
 google_analytics: "UA-155223202-1"
 

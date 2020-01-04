@@ -1,21 +1,46 @@
 [
   {
+    "path": "posts/a-quick-look-at-the-elections-2018/",
+    "title": "A Quick Look at the Election 2018",
+    "description": "Some quick insights about 2018 elections",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2018-11-12",
+    "categories": [
+      "elections",
+      "US elections",
+      "R",
+      "2018"
+    ],
+    "preview": "posts/a-quick-look-at-the-elections-2018/images/image.png",
+    "last_modified": "2020-01-04T13:12:16-05:00",
+    "preview_width": 692,
+    "preview_height": 500
+  },
+  {
     "path": "posts/scraping-2018-election-data/",
     "title": "Scraping Election 2018 Data",
     "description": "This post includes some follow-up R code to scrap 2018 election data from New York Times webpage.",
     "author": [
       {
         "name": "Cengiz Zopluoglu",
-        "url": "cengiz.me"
+        "url": {}
       }
     ],
     "date": "2018-11-07",
     "categories": [
       "web scraping",
-      "R"
+      "R",
+      "elections",
+      "US elections",
+      "2018"
     ],
     "preview": "posts/scraping-2018-election-data/images/vote2.jpg",
-    "last_modified": "2020-01-04T03:03:45-05:00"
+    "last_modified": "2020-01-04T13:00:33-05:00"
   },
   {
     "path": "posts/scraping-data-for-2014-gubernatorial-elections/",
@@ -24,15 +49,18 @@
     "author": [
       {
         "name": "Cengiz Zopluoglu",
-        "url": "cengiz.me"
+        "url": {}
       }
     ],
     "date": "2018-11-06",
     "categories": [
       "web scraping",
-      "R"
+      "R",
+      "elections",
+      "US elections",
+      "2018"
     ],
     "preview": "posts/scraping-data-for-2014-gubernatorial-elections/images/image.jpg",
-    "last_modified": "2020-01-04T02:51:50-05:00"
+    "last_modified": "2020-01-04T12:59:00-05:00"
   }
 ]

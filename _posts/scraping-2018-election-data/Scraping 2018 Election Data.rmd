@@ -5,15 +5,15 @@ description: |
 author:
   - name: Cengiz Zopluoglu
     affiliation: University of Miami
-    url: cengiz.me
     
-base_url: cengiz.me
-        
 date: 11-07-2018
 
 categories:
   - web scraping
   - R
+  - elections
+  - US elections
+  - "2018"
   
 output:
   distill::distill_article:
