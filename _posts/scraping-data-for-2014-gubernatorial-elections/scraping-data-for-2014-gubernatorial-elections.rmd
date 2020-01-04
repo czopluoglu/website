@@ -1,7 +1,7 @@
 ---
 title: "Scraping Data for 2014 Gubernatorial Elections"
 description: |
-
+ This post includes some R code to scrap 2014 election data from New York Times webpage.
 author:
   - name: Cengiz Zopluoglu
     affiliation: University of Miami
