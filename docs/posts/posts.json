@@ -1,5 +1,26 @@
 [
   {
+    "path": "posts/local-elections-2019-turkey/",
+    "title": "Scraping Data for 2019 Local Elections in Turkey",
+    "description": "A friend of mine, Dr. Abdullah Aydogan (https://twitter.com/abdaydgn), has asked me this morning if it is possible to pull the data for the 2019 local elections in Turkey. The only accessible information is through the Anadolu Agency (https://www.aa.com.tr/en) because the official election organization's website (http://www.ysk.gov.tr/) has not been working for a while. Here, I provide the code I used to scrap data from the Anadolu Agency, only available source for election results.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2019-04-05",
+    "categories": [
+      "web scraping",
+      "R",
+      "elections",
+      "Turkish elections",
+      "2019"
+    ],
+    "preview": {},
+    "last_modified": "2020-01-04T15:19:24-05:00"
+  },
+  {
     "path": "posts/epm-keywords/",
     "title": "Compiling Keywords from the Published Articles in Educational and Pscyhological Measurement",
     "description": "What are the most commonly used keywords in published articles in educational measurement journals? Is there any trending topic in educational measurement journals? I decided to do a sample analysis in the context of Educational and Psychological Measurement (EPM). However, I had figure out first how to compile a dataset of keywords used in EPM. It turned out to be another web scraping story.",

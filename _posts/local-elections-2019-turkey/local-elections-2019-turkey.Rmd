@@ -1,0 +1,270 @@
+---
+title: "Scraping Data for 2019 Local Elections in Turkey"
+
+description: |
+ A friend of mine, Dr. Abdullah Aydogan (https://twitter.com/abdaydgn), has asked me this morning if it is possible to pull the data for the 2019 local elections in Turkey. The only accessible information is through the Anadolu Agency (https://www.aa.com.tr/en) because the official election organization's website (http://www.ysk.gov.tr/) has not been working for a while. Here, I provide the code I used to scrap data from the Anadolu Agency, only available source for election results.
+
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Miami
+    
+date: 04-05-2019
+
+categories:
+  - web scraping
+  - R
+  - elections
+  - Turkish elections
+  - "2019"
+  
+output:
+  distill::distill_article:
+    self_contained: true
+    
+preview: images/image.jpeg
+---
+
+A friend of mine, [\@abdaydgn](https://twitter.com/abdaydgn), has asked me this morning if it is possible to pull the data for the 2019 local elections in Turkey. The only accessible information is through the [Anadolu Agency](https://www.aa.com.tr/en) because the official election organization's website ([YSK](http://www.ysk.gov.tr/)) has not been working for a while.
+
+After doing some detective work about where the data is stored, I fount the the link [http://secim.aa.com.tr/Handlers/IlBelediyeBaskanligi.ashx](http://secim.aa.com.tr/Handlers/IlBelediyeBaskanligi.ashx) for the city results. 
+
+For the districts within each city, the link is http://secim.aa.com.tr/Handlers/IlceBelediye.ashx?il=**citycode**, where you have to replace a number in place of **citycode** for each city. For instance, city code for Istanbul is 34. So, the link http://secim.aa.com.tr/Handlers/IlceBelediye.ashx?il=34 will return the results for all districts of Istanbul.
+
+Once the data source is found, the rest is a little bit JSON data processing. I don't have time now to explain the code, but I will post the data files and the code below. Maybe, I can come back and update this post later to put more explanation about the code.
+
+**Long Format**
+
+- [Download 2019 Turkish Local Elections Data - Cities](data/Secim2019IlBelediyeSonuc.csv)
+
+- [Download 2019 Turkish Local Elections Data - Districts](data/Secim2019IlceBelediyeSonuc.csv)
+
+
+**Wide Format**
+
+- [Download 2019 Turkish Local Elections Data - Cities](data/Secim2019IlBelediyeSonuc_wide.csv)
+
+- [Download 2019 Turkish Local Elections Data - Districts](data/Secim2019IlceBelediyeSonuc_wide.csv)
+
+
+
+```{r echo = TRUE, eval=FALSE}
+
+# Install the following packages
+
+ install.packages("jsonlite")
+ install.packages("mefa")
+ install.packages("car")
+ install.packages("plyr")
+ 
+ require(jsonlite)
+ require(mefa)
+ require(car)
+ require(plyr)
+
+##########################################################################
+#
+#    Pulling Data for District Results
+#
+##########################################################################
+
+city.code <- read.csv("il kod.csv")
+ 
+ # This is a 2-column data for each city and corresponding code
+ # can be downloaded from the following link.
+ # https://miami.box.com/s/gkwihhqgule7moxoabohwfgh6u74yhkl
+ 
+
+secim2019 <- vector("list",81)
+
+  for(city in 1:81){
+
+	  a <- jsonlite::fromJSON(paste0("http://secim.aa.com.tr/Handlers/IlceBelediye.ashx?il=",city))
+	  info <- cbind(a$Ilce$Ad,a$Ilce$Sandik)
+	  sonuc <- vector("list",nrow(info))
+
+	  	for(i in 1:nrow(info)){
+	      n = nrow(a$Ilce$PartiSonuclari$Parti[[i]])
+	      sonuc[[i]] <- cbind(rep(info[i,],n),a$Ilce$PartiSonuclari$Parti[[i]])
+	    }
+
+	  il <- sonuc[[1]]
+	
+	    for(i in 2:nrow(info)){
+		    il <- rbind(il,sonuc[[i]])
+	    }
+	
+	  il$Il <- as.character(city.code[city,1])
+
+	  secim2019[[city]] <- il
+  }
+
+secim2019.all <- secim2019[[1]]
+
+	for(i in 2:81){
+		secim2019.all <- rbind(secim2019.all,secim2019[[i]])
+	}
+
+
+secim2019.all$parti.kod <- recode(secim2019.all$Kod,
+       recodes="1 ='SP';
+                2 ='BTP';
+                3 ='TKP';
+                4 ='VP';
+                5 ='BBP';
+                6 ='HudaPar';
+                7 ='CHP';
+                8 ='AKP';
+                9 ='DP';
+               10 ='MHP';
+               11 ='IYI';
+               12 ='HDP';
+               13 ='DSP';
+             else ='Bagimsiz'")
+
+  secim2019.all$ToplamSandik <- as.numeric(as.character(secim2019.all$ToplamSandik))
+  secim2019.all$ToplamSecmen <- as.numeric(as.character(secim2019.all$ToplamSecmen))
+  secim2019.all$AcilanSandikSecmenSayisi <- as.numeric(as.character(secim2019.all$AcilanSandikSecmenSayisi))
+  secim2019.all$AcilanSandik <- as.numeric(as.character(secim2019.all$AcilanSandik))
+
+  secim2019.all$KullanilanOy <- as.numeric(as.character(secim2019.all$KullanilanOy))
+  secim2019.all$GecerliOy <- as.numeric(as.character(secim2019.all$GecerliOy))
+  secim2019.all$Kod <- as.numeric(as.character(secim2019.all$Kod))
+  secim2019.all$Oy <- as.numeric(as.character(secim2019.all$Oy))
+  
+  secim2019.all$Turnout         <- secim2019.all$KullanilanOy/secim2019.all$ToplamSecmen
+  secim2019.all$GecerliOy.Orani <- secim2019.all$GecerliOy/secim2019.all$KullanilanOy
+  secim2019.all$Parti.Oran      <- secim2019.all$Oy/secim2019.all$GecerliOy
+
+
+  secim2019.all <- secim2019.all[,c("Il","a.Ilce.Ad","ToplamSandik","ToplamSecmen","KullanilanOy",
+                                    "GecerliOy","parti.kod","Oy","Turnout","GecerliOy.Orani",
+                                    "Parti.Oran")]
+
+  colnames(secim2019.all)[2] <- "Ilce"
+  colnames(secim2019.all)[7] <- "Parti"
+
+  write.table(secim2019.all,"Secim2019IlceBelediyeSonuc.csv",row.names=FALSE,sep=",")
+
+
+  
+  # Wide Format
+  
+    # Aggregate the vote for "Bagimsiz" category for districts with more than
+    # "Bagimsiz" candidates
+  
+  
+    secim2019.all.wide <- ddply(secim2019.all,
+                                .(Il, Ilce,ToplamSandik,ToplamSecmen,KullanilanOy,
+                                  GecerliOy,Parti,Turnout,GecerliOy.Orani),
+                                summarise,Oy = sum(Oy))
+
+
+    secim2019.all.wide$Parti.Oran <- secim2019.all.wide$Oy/secim2019.all.wide$GecerliOy 
+
+
+    secim2019.all.wide <- reshape(secim2019.all.wide,
+                                  timevar =c("Parti"),
+                                  idvar   =c("Il","Ilce","ToplamSandik",
+                                             "ToplamSecmen","KullanilanOy",
+                                             "GecerliOy","Turnout","GecerliOy.Orani"),
+                                  direction="wide")
+    
+    secim2019.all.wide[is.na(secim2019.all.wide)] <- 0
+  
+    write.table(secim2019.all.wide,"Secim2019IlceBelediyeSonuc_wide.csv",row.names=FALSE,sep=",")
+
+##########################################################################
+#
+#    Pulling Data for City Results
+#
+##########################################################################
+
+
+a <- jsonlite::fromJSON("http://secim.aa.com.tr/Handlers/IlBelediyeBaskanligi.ashx")
+
+info <- cbind(a[[1]][[3]]$Il$Ad,a[[1]][[3]]$Il$Sandik)
+
+sonuc <- vector("list",nrow(info))
+
+	for(i in 1:nrow(info)){
+	 n = nrow(a[[1]][[3]]$Il$PartiSonuclari$Parti[[i]])
+	 sonuc[[i]] <- cbind(rep(info[i,],n),a[[1]][[3]]$Il$PartiSonuclari$Parti[[i]])
+	}
+
+il <- sonuc[[1]]
+	for(i in 2:nrow(info)){
+		il <- rbind(il,sonuc[[i]])
+	}
+
+
+il$parti.kod <- recode(il$Kod,
+       recodes="1 ='SP';
+                2 ='BTP';
+                3 ='TKP';
+                4 ='VP';
+                5 ='BBP';
+                6 ='HudaPar';
+                7 ='CHP';
+                8 ='AKP';
+                9 ='DP';
+               10 ='MHP';
+               11 ='IYI';
+               12 ='HDP';
+               13 ='DSP';
+             else ='Bagimsiz'")
+
+
+il$ToplamSandik <- as.numeric(as.character(il$ToplamSandik))
+il$ToplamSecmen <- as.numeric(as.character(il$ToplamSecmen))
+il$AcilanSandikSecmenSayisi <- as.numeric(as.character(il$AcilanSandikSecmenSayisi))
+il$AcilanSandik <- as.numeric(as.character(il$AcilanSandik))
+
+il$KullanilanOy <- as.numeric(as.character(il$KullanilanOy))
+il$GecerliOy <- as.numeric(as.character(il$GecerliOy))
+il$Kod <- as.numeric(as.character(il$Kod))
+il$Oy <- as.numeric(as.character(il$Oy))
+
+il$Turnout         <- il$KullanilanOy/il$ToplamSecmen
+il$GecerliOy.Orani <- il$GecerliOy/il$KullanilanOy
+il$Parti.Oran      <- il$Oy/il$GecerliOy
+
+colnames(il)[1] <- "IL"
+colnames(il)[11] <- "Parti"
+
+il <- il[,c("IL","ToplamSandik","ToplamSecmen","KullanilanOy","GecerliOy","Parti",
+            "Oy","Turnout","GecerliOy.Orani","Parti.Oran")]
+
+write.table(il,"Secim2019IlBelediyeSonuc.csv",row.names=FALSE,sep=",")
+
+ # Wide Format
+  
+    # Aggregate the vote for "Bagimsiz" category for districts with more than
+    # "Bagimsiz" candidates
+  
+  
+    il.wide <- ddply(il,
+                     .(IL,ToplamSandik,ToplamSecmen,KullanilanOy,
+                       GecerliOy,Parti,Turnout,GecerliOy.Orani),
+                     summarise,Oy = sum(Oy))
+
+
+    il.wide$Parti.Oran <- il.wide$Oy/il.wide$GecerliOy 
+
+
+    il.wide <- reshape(il.wide,
+                       timevar =c("Parti"),
+                       idvar   =c("IL","ToplamSandik",
+                                  "ToplamSecmen","KullanilanOy",
+                                  "GecerliOy","Turnout","GecerliOy.Orani"),
+                                  direction="wide")
+    
+    il.wide[is.na(il.wide)] <- 0
+  
+    write.table(il.wide,"Secim2019IlBelediyeSonuc_wide.csv",row.names=FALSE,sep=",")
+```
+
+
+
+
+
+
