@@ -7,7 +7,7 @@ author:
   - name: Cengiz Zopluoglu
     affiliation: University of Miami
     
-date: 01-15-2019
+date: 12-15-2019
 
 categories:
   - item response theory

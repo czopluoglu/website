@@ -1,5 +1,28 @@
 [
   {
+    "path": "posts/hcm-stan/",
+    "title": "Fitting Hyperbolic Cosine Model (HCM) For Unfolding Dichotomous Responses using Stan",
+    "description": "In this post, I do a quick exercise on fitting the hyperbolic cosine model using Stan. The information about this model can be found in Andrich & Luo (1993). The most interesting part is an \"Aha!\" moment when I discover the bimodality of posterior distribution due to lack of directional constrain.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2019-12-15",
+    "categories": [
+      "item response theory",
+      "hyperbolic cosine model",
+      "Stan",
+      "R",
+      "2019"
+    ],
+    "preview": "posts/hcm-stan/images/image.png",
+    "last_modified": "2020-01-04T17:18:11-05:00",
+    "preview_width": 645,
+    "preview_height": 389
+  },
+  {
     "path": "posts/local-elections-2019-turkey2/",
     "title": "2019 Turkish Mayoral Elections – Scraping Ballot Box Level Data",
     "description": "A while ago, I compiled the election data for the 2019 mayoral elections in Turkey, which took place on March 31, 2019, through the Anadolu Agency website, only accessible information back then because the website for the Turkey's Higher Electoral Commission (YSK) was down and they did not make the official election data available until recently. This data was also limited as the Anadolu Agency only provided overall numbers (not for each ballot box). Now, it seems that YSK's website is alive back again and provides a nice-user friendly dashboard for the election data at the ballot box level. However, their dashboard is not very data-analyst friendly for those who has been starving for a more deeper analysis. Here, I provide the data and the R code I used to scrap this data from YSK's website.",
@@ -104,29 +127,6 @@
     "last_modified": "2020-01-04T14:16:50-05:00",
     "preview_width": 737,
     "preview_height": 786
-  },
-  {
-    "path": "posts/hcm-stan/",
-    "title": "Fitting Hyperbolic Cosine Model (HCM) For Unfolding Dichotomous Responses using Stan",
-    "description": "In this post, I do a quick exercise on fitting the hyperbolic cosine model using Stan. The information about this model can be found in Andrich & Luo (1993). The most interesting part is an \"Aha!\" moment when I discover the bimodality of posterior distribution due to lack of directional constrain.",
-    "author": [
-      {
-        "name": "Cengiz Zopluoglu",
-        "url": {}
-      }
-    ],
-    "date": "2019-01-15",
-    "categories": [
-      "item response theory",
-      "hyperbolic cosine model",
-      "Stan",
-      "R",
-      "2019"
-    ],
-    "preview": "posts/hcm-stan/images/image.png",
-    "last_modified": "2020-01-04T17:13:32-05:00",
-    "preview_width": 645,
-    "preview_height": 389
   },
   {
     "path": "posts/creating-maps-with-2018-election-data/",

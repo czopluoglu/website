@@ -12,7 +12,16 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Fri, 24 May 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 15 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Fitting Hyperbolic Cosine Model (HCM) For Unfolding Dichotomous Responses using Stan</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan</link>
+      <description>In this post, I do a quick exercise on fitting the hyperbolic cosine model using Stan. The information about this model can be found in Andrich &amp; Luo (1993). The most interesting part is an "Aha!" moment when I discover the bimodality of posterior distribution due to lack of directional constrain.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan</guid>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan/images/image.png" medium="image" type="image/png" width="645" height="389"/>
+    </item>
     <item>
       <title>2019 Turkish Mayoral Elections – Scraping Ballot Box Level Data</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>
@@ -57,15 +66,6 @@
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting</guid>
       <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting/images/tree.png" medium="image" type="image/png" width="737" height="786"/>
-    </item>
-    <item>
-      <title>Fitting Hyperbolic Cosine Model (HCM) For Unfolding Dichotomous Responses using Stan</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
-      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan</link>
-      <description>In this post, I do a quick exercise on fitting the hyperbolic cosine model using Stan. The information about this model can be found in Andrich &amp; Luo (1993). The most interesting part is an "Aha!" moment when I discover the bimodality of posterior distribution due to lack of directional constrain.</description>
-      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan</guid>
-      <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan/images/image.png" medium="image" type="image/png" width="645" height="389"/>
     </item>
     <item>
       <title>Learning how to create maps in R</title>
