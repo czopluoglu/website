@@ -1,5 +1,26 @@
 [
   {
+    "path": "posts/epm-keywords/",
+    "title": "Compiling Keywords from the Published Articles in Educational and Pscyhological Measurement",
+    "description": "What are the most commonly used keywords in published articles in educational measurement journals? Is there any trending topic in educational measurement journals? I decided to do a sample analysis in the context of Educational and Psychological Measurement (EPM). However, I had figure out first how to compile a dataset of keywords used in EPM. It turned out to be another web scraping story.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2019-04-01",
+    "categories": [
+      "web scraping",
+      "R",
+      "2019"
+    ],
+    "preview": "posts/epm-keywords/images/EPM2.png",
+    "last_modified": "2020-01-04T14:42:18-05:00",
+    "preview_width": 1221,
+    "preview_height": 920
+  },
+  {
     "path": "posts/extreme-gradient-boosting/",
     "title": "How Does Extreme Gradient Boosting (XGBoost) Work?",
     "description": "In one of the working papers under review, I am using the Extreme Gradient Boosting (XGBoost) to identify examinees with potential item preknowledge in a certification exam. In the original paper, one of the reviewers asked more description of the XGBoost to help readers get a conceptual understanding of how XGBoost works. After spending a few weeks on the original paper, I finally felt that I had a good grasp of it. In this post, I provide an informal introduction of XGboost using an illustration with accompanying R code.",
