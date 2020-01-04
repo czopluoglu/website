@@ -1,5 +1,27 @@
 [
   {
+    "path": "posts/creating-maps-with-2018-election-data/",
+    "title": "Learning how to create maps in R",
+    "description": "Using the elections 2018 data, I practiced how to create a map for an outcome variable,",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2018-11-16",
+    "categories": [
+      "elections",
+      "US elections",
+      "R",
+      "2018"
+    ],
+    "preview": "posts/creating-maps-with-2018-election-data/images/image.png",
+    "last_modified": "2020-01-04T13:32:29-05:00",
+    "preview_width": 973,
+    "preview_height": 599
+  },
+  {
     "path": "posts/a-quick-look-at-the-elections-2018/",
     "title": "A Quick Look at the Election 2018",
     "description": "Some quick insights about 2018 elections",
@@ -17,7 +39,7 @@
       "2018"
     ],
     "preview": "posts/a-quick-look-at-the-elections-2018/images/image.png",
-    "last_modified": "2020-01-04T13:12:16-05:00",
+    "last_modified": "2020-01-04T13:35:24-05:00",
     "preview_width": 692,
     "preview_height": 500
   },

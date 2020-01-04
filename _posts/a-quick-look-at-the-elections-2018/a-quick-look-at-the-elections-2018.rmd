@@ -26,7 +26,8 @@ preview: images/image.png
 
 According to the news, midterm voter turnout hit 50-year high. I was curious about whether or not this increase in the number of votes favored any particular party. So, I decided to have a a first look at the election data. In order to reproduce the plots and numbers on this post, you have to download the following two datasets. I provide the R code for reproducing the numbers and plots at the end of each section.
 
-- https://github.com/MEDSL/2018-elections-unoffical/blob/master/election-context-2018.csv
+- [election-context-2018.csv](https://github.com/MEDSL/2018-elections-unoffical/blob/master/election-context-2018.csv)
+- [election2018.csv](https://github.com/czopluoglu/website/tree/master/_posts/a-quick-look-at-the-elections-2018/data)
 
 ## Governor Race - 2014 vs. 2018
 
@@ -37,7 +38,7 @@ First, I compared gubernatorial election results in 2014 and 2018 using the 36 s
  
 In the below picture, there are four zones created by a vertical line (x=0) and horizontal line (y=0). The states at the upper right are the ones with an increase in the number of votes in 2018 compared to 2014 while there is a net shift in favor of the Democratic party. The states at the bottom right are the ones with an increase in the number of votes in 2018 compared to 2014 while there is a net shift in favor of the Republican Party. The states at the upper left are the ones with a decrease in the number of votes in 2018 compared to 2014 while there is a net shift in favor of the Democratic Party. I labeled some states that is most interesting (to me).
 
-```{r echo=FALSE, eval=TRUE,layout="l-page", preview=TRUE}
+```{r echo=FALSE, eval=TRUE,layout="l-page"}
 
 require(ggrepel)
 require(ggplot2)

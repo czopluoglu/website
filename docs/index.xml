@@ -12,7 +12,16 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Mon, 12 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 16 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Learning how to create maps in R</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data</link>
+      <description>Using the elections 2018 data, I practiced how to create a map for an outcome variable,</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data</guid>
+      <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data/images/image.png" medium="image" type="image/png" width="973" height="599"/>
+    </item>
     <item>
       <title>A Quick Look at the Election 2018</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>

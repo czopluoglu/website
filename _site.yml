@@ -67,6 +67,6 @@ favicon: images/unnamed.jpg
 
 collections:
   posts:
-    share: [twitter]
+    share: [twitter, linkedin, pinterest, facebook]
     
 output: radix::radix_article
