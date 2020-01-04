@@ -12,12 +12,20 @@
       <link>cengiz.me</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Tue, 06 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 07 Nov 2018 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Scraping Election 2018 Data</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>cengiz.me/posts/scraping-2018-election-data</link>
+      <description>This post includes some follow-up R code to scrap 2018 election data from New York Times webpage.</description>
+      <guid>cengiz.me/posts/scraping-2018-election-data</guid>
+      <pubDate>Wed, 07 Nov 2018 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Scraping Data for 2014 Gubernatorial Elections</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>
       <link>cengiz.me/posts/scraping-data-for-2014-gubernatorial-elections</link>
-      <description>Scraping Data for 2014 Gubernatorial Elections</description>
+      <description>This post includes some R code to scrap 2014 election data from New York Times webpage.</description>
       <guid>cengiz.me/posts/scraping-data-for-2014-gubernatorial-elections</guid>
       <pubDate>Tue, 06 Nov 2018 00:00:00 +0000</pubDate>
       <media:content url="cengiz.me/posts/scraping-data-for-2014-gubernatorial-elections/images/image.jpg" medium="image" type="image/jpeg"/>

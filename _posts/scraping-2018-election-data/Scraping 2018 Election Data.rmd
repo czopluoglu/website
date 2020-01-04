@@ -1,0 +1,222 @@
+---
+title: "Scraping Election 2018 Data"
+description: |
+ This post includes some follow-up R code to scrap 2018 election data from New York Times webpage.
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Miami
+    url: cengiz.me
+    
+base_url: cengiz.me
+        
+date: 11-07-2018
+
+categories:
+  - web scraping
+  - R
+  
+output:
+  distill::distill_article:
+    self_contained: true
+    
+preview: images/image.jpg
+---
+
+
+Yesterday, I scrapped data for the 2014 gubernatorial election from [New York Times webpage](https://www.nytimes.com/elections/2014/results/governor). Since the reporting is almost complete in many locations, I also scrapped the 2018 election data from this year's [New York Times election webpage](https://www.nytimes.com/interactive/2018/11/06/us/elections/results-dashboard-live.html), which is pulling the data from [the JSON file at this link.](https://int.nyt.com/applications/elections/2018/api/1/races/2018-11-06.json). 
+
+The whole dataset for house, senate, and governor elections can be downloaded [from this link as a CSV file](data/election2018.csv) Once this file is merged with the dataset from [the MIT Election Data and Science Lab](https://github.com/MEDSL), you are all good to go to dive in. I will post some R code in the following days for some basic analysis and graphs using the FL dataset.
+
+For those interested, below is the source code for scrapping the 2018 elections data.
+
+```{r echo=TRUE, eval=FALSE}
+
+require(jsonlite)
+require(Hmisc)
+
+
+a = fromJSON("https://int.nyt.com/applications/elections/2018/api/1/races/2018-11-06.json")
+
+
+races      = a[[6]]
+candidates = a[[6]]$candidates
+counties   = a[[6]]$counties
+
+
+# Pulling Results for Governors
+
+  gov <- which(races$race_type=="governor")
+  governor.race <- vector("list",length(gov))
+
+  for(i in 1:length(gov)) {
+
+	  name    = races[gov[i],]$state_slug
+	  info    = candidates[[gov[i]]]
+	  rep.key = info[which(info$party_id=="republican"),]$candidate_key
+	  dem.key = info[which(info$party_id=="democrat"),]$candidate_key
+	  others   = info$candidate_key[! info$candidate_key %in% c(rep.key,dem.key)]
+
+	  if(nrow(info)>1){
+
+	    state    = cbind(counties[[gov[i]]]$name,counties[[gov[i]]]$results)
+	    colnames(state)[1] <- "county"
+	    
+        if(length(rep.key)>=1) { 
+          repu   = rowSums(as.matrix(state[,rep.key])) 
+        } else {
+            repu   = as.matrix(rep(0,nrow(state)))
+        }
+	    
+        if(length(dem.key)>=1) { 
+          dem    = rowSums(as.matrix(state[,dem.key])) 
+        } else {
+            dem    = as.matrix(rep(0,nrow(state)))
+        }
+	    
+        if(length(others)>=1) { 
+          other  = rowSums(as.matrix(state[,others]))  
+        } else {
+            other  = as.matrix(rep(0,nrow(state)))
+        }
+	    
+	      state <- cbind(state$county,as.data.frame(cbind(repu,dem,other)))
+	      state <- cbind(capitalize(name),state)
+	      colnames(state) <- c("state","county","repgov18","demgov18","othergov18")
+
+	      governor.race[[i]] = state
+	      
+	   } 
+  }
+
+
+  electiongov2018 <- governor.race[[1]]
+
+  for(i in 2:length(gov)) {
+    electiongov2018 <- rbind(electiongov2018,governor.race[[i]])
+    }
+
+# Pulling Results for Senate
+
+  sen <- which(races$race_type=="senate")
+
+  senate.race <- vector("list",length(sen))
+
+  for(i in 1:length(sen)) {
+
+	  name    = races[sen[i],]$state_slug
+	  info    = candidates[[sen[i]]]
+	  rep.key = info[which(info$party_id=="republican"),]$candidate_key
+	  dem.key = info[which(info$party_id=="democrat"),]$candidate_key
+	  others   = info$candidate_key[! info$candidate_key %in% c(rep.key,dem.key)]
+
+	  if(nrow(info)>1){
+	    
+	    state    = cbind(counties[[sen[i]]]$name,counties[[sen[i]]]$results)
+	    colnames(state)[1] <- "county"
+      
+	    if(length(rep.key)>=1) { 
+	      repu   = rowSums(as.matrix(state[,rep.key])) 
+	    } else {
+	        repu   = as.matrix(rep(0,nrow(state)))
+	    }
+	    
+      if(length(dem.key)>=1) { 
+        dem    = rowSums(as.matrix(state[,dem.key])) 
+      } else {
+          dem    = as.matrix(rep(0,nrow(state)))
+      }
+	    
+      if(length(others)>=1)  { 
+        other  = rowSums(as.matrix(state[,others]))  
+      } else {
+          other  = as.matrix(rep(0,nrow(state)))
+      }
+	    
+	   state <- cbind(state$county,as.data.frame(cbind(repu,dem,other)))
+	   state <- cbind(capitalize(name),state)
+	   colnames(state) <- c("state","county","repsen18","demsen18","othersen18")
+
+	   senate.race[[i]] = state
+
+    } 
+}
+
+  
+  electionsen2018 <- senate.race[[1]]
+
+  for(i in 2:length(sen)) {
+    electionsen2018 <- rbind(electionsen2018,senate.race[[i]])
+  }
+
+
+# Pulling Results for House
+
+  house <- which(races$race_type=="house")
+
+  house.race <- vector("list",length(house))
+
+  for(i in 1:length(house)) {
+
+	  name    = races[house[i],]$state_slug
+	  info    = candidates[[house[i]]]
+	  rep.key = info[which(info$party_id=="republican"),]$candidate_key
+	  dem.key = info[which(info$party_id=="democrat"),]$candidate_key
+	  others   = info$candidate_key[! info$candidate_key %in% c(rep.key,dem.key)]
+
+	  if(nrow(info)>1){
+
+	    state    = cbind(counties[[house[i]]]$name,counties[[house[i]]]$results)
+	    colnames(state)[1] <- "county"
+      
+	    if(length(rep.key)>=1) { 
+	      repu   = rowSums(as.matrix(state[,rep.key])) 
+	    } else {
+	        repu   = as.matrix(rep(0,nrow(state)))
+	    }
+	    
+      if(length(dem.key)>=1) { 
+        dem    = rowSums(as.matrix(state[,dem.key])) 
+      } else {
+          dem    = as.matrix(rep(0,nrow(state)))
+      }
+	    
+      if(length(others)>=1) { 
+        other  = rowSums(as.matrix(state[,others]))  
+      } else {
+        other  = as.matrix(rep(0,nrow(state)))
+      }
+	    
+	    state <- cbind(state$county,as.data.frame(cbind(repu,dem,other)))
+	    state <- cbind(capitalize(name),state)
+	    colnames(state) <- c("state","county","rephouse18","demhouse18","otherhouse18")
+
+	    house.race [[i]] = state
+
+  } 
+}
+
+
+electionhouse2018 <- house.race[[1]]
+
+for(i in 2:length(house)) {
+ if(is.null(house.race[[i]])==FALSE){
+  electionhouse2018 <- rbind(electionhouse2018,house.race[[i]])
+ }
+}
+
+
+electionhouse2018 <- aggregate(cbind(rephouse18,demhouse18,otherhouse18) ~ state + county,
+                               data = electionhouse2018, sum)
+
+electionhouse2018 <- electionhouse2018[order(electionhouse2018[,1]),]
+
+
+##########################################################################################
+
+# Merge Senate, House, and Governor Data
+
+election2018 <- merge(electiongov2018,electionsen2018,by=c("state","county"),all=TRUE)
+election2018 <- merge(election2018,electionhouse2018,by=c("state","county"),all=TRUE)
+
+```
+
