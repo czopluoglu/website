@@ -216,7 +216,7 @@ head(wpm)
 dim(wpm)
 
 
-# ad an arbitrary individual id variable
+# add an arbitrary individual id variable
 
 wpm$id <- 1:nrow(wpm)
 
@@ -369,7 +369,7 @@ sum(get_elapsed_time(fit_crm))/3600    # how many hours it took to run the model
                                        # above settings
 ```
 
-It took about 4 hours to fit the model with the above settings with processor "Intel(R) Core(TM) i7-3840QM CPU @2.80GHz". I used only one core although this processor has 4 cores. Note that I could use all four cores and the estimation time would be reduced to 1 hour, However, my R kept crushing when I tried to do it for some reason I don't know, That might be related to my computer settings.
+It took about 4 hours to fit the model with the above settings with processor "Intel(R) Core(TM) i7-3840QM CPU @2.80GHz". I used only one core although this processor has 4 cores. Note that I could use all four cores and the estimation time would be reduced to 1 hour. However, my R kept crushing when I tried to do it for some reason I don't know, That might be related to my computer settings.
 
 ## Model Convergence
 
