@@ -1,7 +1,7 @@
 ---
 title: "Measuring Oral Reading Fluency: A Case for Samejima's Continuous Response Model"
 description: |
-  I pitched the idea of using Samejima's Continuous Response Model (CRM) to measure the Oral Reading Fluency (ORF) a while ago when I published a paper in 2012. In that paper, I used an ORF dataset from the Minneapolis Public Schools Disctrict (MPS) as a real data example. Since then, I don't think anybody has bought the idea of using CRM to measure ORF, so here I am trying one more time with some accessible R code.
+  I pitched the idea of using Samejima's Continuous Response Model (CRM) to measure the Oral Reading Fluency (ORF) a while ago when I published a paper in 2012. In that paper, I used an ORF dataset from the Minneapolis Public Schools District (MPS) as a real data example. Since then, I don't think anybody has bought the idea of using CRM to measure ORF, so here I am trying one more time with some accessible R code.
 
 author:
   - name: Cengiz Zopluoglu
@@ -54,7 +54,7 @@ opts_chunk$set(width = 40)
 
 I pitched the idea of using Samejima's [Continuous Response Model (CRM)](https://link.springer.com/article/10.1007/BF02291114) to measure the [Oral Reading Fluency (ORF)](https://council-for-learning-disabilities.org/what-is-oral-reading-fluency-verbal-reading-proficiency) a while ago when I published [a paper](https://link.springer.com/article/10.3758/s13428-012-0229-6) as a graduate student. In that paper, I used an ORF dataset from the Minneapolis Public Schools Disctrict (MPS) as a real data example. Since then, I don't think anybody has bought the idea for using CRM to measure ORF, so here I am trying one more time with some accessible R code.
 
-The ORF dataset from MPS was the only reason I was interested in CRM at all. During my second year in the graduate school, I had a chance to complete a semester-long internship in MPS. The task I was assigned was to use IRT for scaling an ORF dataset they had. The dataset had  three variables representing the number of words read correctly per minute for three different reading passages. There were 2594 students. Below is a little information about the dataset.  
+The ORF dataset from MPS was the only reason I was interested in CRM at all. During my second year in graduate school, I had a chance to complete a semester-long internship in MPS. The task I was assigned was to use IRT for scaling an ORF dataset they had. The dataset had  three variables representing the number of words read correctly per minute for three different reading passages. There were 2594 students. Below is a little information about the dataset.  
 
 ```{r echo = FALSE, eval=TRUE}
 
@@ -86,7 +86,7 @@ cor(wpm)
 ```
 
 
-At the time, I had taken an IRT course and knew a little bit about dichotomous and polytomous IRT models. It was a challenge as the measurement outcomes were kind of continuous (they are simply count data). As I didn't know much about CRM at that time and how to deal with this, I created discrete categories for each variable such that Level 1 (0-50 words), Level 2(51-100 words), Level 3 (101-150 words), Level 4 (151-200 words), and Level 5 (201-250 words). Then, I fit polytomous IRT models and did usual IRT modeling based on the best fitting model. It was fine to complete the internship, but I was not satisfied as there was so much information thrown away by discretizing. That's how I ended up exploring and discovering CRM and started working on it. I first briefly introduce the model before demonstrating how to use it for ORF data.
+At the time, I had taken an IRT course and knew a little bit about dichotomous and polytomous IRT models. It was a challenge because the measurement outcomes were kind of continuous. As I didn't know much about CRM at that time and how to deal with this, I created discrete categories for each variable such that Level 1 (0-50 words), Level 2(51-100 words), Level 3 (101-150 words), Level 4 (151-200 words), and Level 5 (201-250 words). Then, I fit polytomous IRT models and did usual IRT modeling based on the best fitting model. I completed the internship but I was not satisfied as there was so much information thrown away by discretizing. That's how I ended up exploring and discovering CRM and started working on it. I first briefly introduce the model before demonstrating how to use it for ORF data.
 
 ## Continuous Response Model
 
@@ -95,9 +95,9 @@ Below is the reparameterized version of the model by [Wang and Zeng (1998)](http
 $$P_{ij}(X\geq x|\theta_{i},a_j,b_j,\alpha_j)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{v}{e^{-\frac{t^2}{2}}dt}$$
 
 $$v=a_j\times (\theta_i-b_j-\frac{1}{\alpha_j}ln\frac{x}{k-x})$$, 
-where $k_j$ is the maximum possible score for the item. The parameter $a$ and $b$ have a very similar interpretation as in the 2PL IRT model. The $a$ parameter controls the steepness and the $b$ parameter controls the location of the operating characteristic curves. There is an extra $\alpha$ parameter which is called "scaling parameter", and it controls the distance among the curves. 
+where $k_j$ is the maximum possible score for the item. The parameter $a$ and $b$ have a very similar interpretation as in the 2PL IRT model. The $a$ parameter controls the steepness, and the $b$ parameter controls the location of the operating characteristic curves. There is an extra $\alpha$ parameter called "scaling parameter," and it controls the distance among the curves. 
 
-Let's create some plots to see it better. Suppose there is an item with 10 categories and this item has the following parameters: $a=1$, $b=0$, and $\alpha=1$.This is how the operating characteristic curves look like. Note that there are 9 lines in the plot indicating $P(X\geq 1)$, $P(X\geq 2)$, $P(X\geq 3)$, ..., $P(X\geq 9)$.
+Let's create some plots to see it better. Suppose there is an item with ten categories, and this item has the following parameters: $a=1$, $b=0$, and $\alpha=1$.The figure below displays how the operating characteristic curves look like for this item. Note that there are nine lines in the plot indicating $P(X\geq 1)$, $P(X\geq 2)$, $P(X\geq 3)$, ..., $P(X\geq 9)$.
 
 
 ```{r echo = TRUE, eval=TRUE}
@@ -122,7 +122,7 @@ Let's create some plots to see it better. Suppose there is an item with 10 categ
 
 ```
 
-Now, let's keep everything same but increase the value of the a parameter to 3, and we will see how steepness changes.
+Now, let's keep everything the same but increase the value of the parameter $a$ to 3, and we see how steepness changes.
 
 ```{r echo = TRUE, eval=TRUE}
 
@@ -147,7 +147,7 @@ Now, let's keep everything same but increase the value of the a parameter to 3, 
 ```
 
 
-Or, we can keep everything same but change the value of the $b$ parameter to -2 and we will see the curves shift to left.
+Or, we can keep everything the same but change the value of the parameter $b$ to -2, and we see the curves shift to left.
 
 ```{r echo = TRUE, eval=TRUE}
 
@@ -172,7 +172,7 @@ Or, we can keep everything same but change the value of the $b$ parameter to -2 
 ```
 
 
-Lastly, let's change the value of the $\alpha$ parameter to 4 and we will see how the distance among curves changes.
+Lastly, let's change the value of the parameter $\alpha$ to 4, and we see the distance among curves gets smaller.
 
 
 ```{r echo = TRUE, eval=TRUE}
@@ -197,7 +197,7 @@ Lastly, let's change the value of the $\alpha$ parameter to 4 and we will see ho
 
 ```
 
-For those who are familiar with the Graded Response Model (GRM) may see the difference. In GRM, we estimate a step parameter for each response category, and these step parameters control the location of the operating characteristic curves and hence the distance among the curves at the same time. So, if there is an item with 10 categories, GRM estimates 9 step parameters. Instead, CRM estimates only two parameters ($b$ and $\alpha$) per item to control the location and distance among the curves regardless of the number of categories. So, CRM is a restricted version of GRM where we control the distance among the curves with only one parameter. If we think the $b$ parameter a kind of common difficulty parameter for an item, the term $$\frac{1}{\alpha_j}ln\frac{x}{k-x})$$ decides how much each response category is away from that common difficulty after accounting for the distance of the response category from the number of maximum possible response. 
+For those who are familiar with the Graded Response Model (GRM) may see the difference. In GRM, we estimate a step parameter for each response category, and these step parameters control the location of the operating characteristic curves and hence the distance among the curves at the same time. So, if there is an item with ten categories, GRM estimates nine step parameters. Instead, CRM estimates only two parameters ($b$ and $\alpha$) per item to control the location and distance among the curves regardless of the number of categories. So, CRM is a restricted version of GRM where we control the distance among the curves with only one parameter. If we think the $b$ parameter a kind of common difficulty parameter for an item, the term $$\frac{1}{\alpha_j}ln\frac{x}{k-x})$$ decides how much each score is away from that common difficulty after accounting for the distance between the score and the maximum possible score. 
 
 Wang & Zeng (1998) also simplifies the equation by transforming the observed response (this is like a logit transformation for the observed responses), $$Z=ln\frac{X}{k-X}$$ and provides the conditional PDF of Z as
 
@@ -205,7 +205,7 @@ $$f(z|\theta_i,a_j,b_j,\alpha_j)=\frac{a}{\alpha\sqrt{2\pi}}e^\frac{-(a_j(\theta
 
 ## Formatting Data for Stan
 
-There are a number of ways we can fit CRM. I will focus here fitting the model using Stan, but I also provide other two ways at the very end as supplemental material. Before providing the Stan model syntax, I should first reformat data as this is the only way to run Stan with missing data. Although I don't have missing data in the ORF dataset used for this blog post, I force myself to use this procedure to get used to it.
+There are other tools we can use to fit CRM. I will focus here fitting the model using Stan, but I also provide two other tools at the very end as supplemental material. Before introducing the Stan model syntax, I should first reformat data as this is the only way to run Stan with missing data. Although I don't have missing data in the ORF dataset used for this blog post, I force myself to use this procedure to get used to it.
 
 ```{r echo = TRUE, eval=TRUE}
 
@@ -270,7 +270,7 @@ n_obs         <- length(wpm.long)
 ## Stan Model Syntax
 
 
-Below is the Stan model syntax for fitting CRM. This follows the guidelines in the Stan manual and imposes weakly-informative
+Below is the Stan model syntax for fitting CRM. I follow the guidelines in the Stan manual and imposes weakly-informative
 prior on model parameters.
 
 
@@ -332,7 +332,7 @@ crm <-'
 
 ## Fitting the Model
 
-Below code fits the model with 4 chains and 50,000 iterations for each chain. By default, first 50% of the iterations are used as burn-in and the remaining 50% of the iterations used for inference.
+The code below fits the model with four chains and 50,000 iterations for each chain. By default, the first 50% of the iterations are used as warm-up and the remaining 50% of the iterations used for inference.
 
 ```{r echo = TRUE, eval=FALSE}
 
@@ -369,7 +369,7 @@ sum(get_elapsed_time(fit_crm))/3600    # how many hours it took to run the model
                                        # above settings
 ```
 
-It took about 4 hours to fit the model with the above settings with processor "Intel(R) Core(TM) i7-3840QM CPU @2.80GHz". I used only one core although this processor has 4 cores. Note that I could use all four cores and the estimation time would be reduced to 1 hour. However, my R kept crushing when I tried to do it for some reason I don't know, That might be related to my computer settings.
+It took about 4 hours to fit the model with the above settings with processor "Intel(R) Core(TM) i7-3840QM CPU @2.80GHz". I used only one core, although this processor has four cores. Note that I could use all four cores, and the estimation time would be down to about an hour. However, my R kept crashing when I tried to do it for some reason I don't know. That might be related to my computer settings.
 
 ## Model Convergence
 
@@ -385,7 +385,7 @@ print(fit_crm,
 
 ```
 
-It seems that we have convergence and all chains yield consistant results as all $\hat{R}$ values are less than 1.01, Here is the posterior distributions for all these parameters. They all look fine.
+It seems that we have convergence, and all chains yield consistent results as all $\hat{R}$ values are less than 1.01, The figures below are the posterior distributions for all these parameters. They all look fine.
 
 ```{r echo = TRUE, eval=TRUE}
 
@@ -400,7 +400,7 @@ plot(fit_crm,
 ```
 
 
-I also used the recommendations provided [at this link](https://mc-stan.org/users/documentation/case-studies/rstan_workflow.html) to check some other things (seemed important), None of them indicated any red flag about the model convergence.
+I also used the recommendations provided [at this link](https://mc-stan.org/users/documentation/case-studies/rstan_workflow.html) to check some other things (seemed important). None of them indicated any red flag about the model convergence.
 
 
 ```{r echo = TRUE, eval=TRUE}
@@ -435,9 +435,9 @@ thetas = summary(fit_crm)$summary[16:2609,1]
 
 ```
 
-The $b$ parameters for three reading passages in this dataset were 1.52, 1.13, 1.27, I think it is fair to call them "reading passage difficulty" in this context. Given that we fix the mean and variance of the latent person parameter ($\theta$) to 0 and 1, we can compare the passage difficulty relative to the levels of individuals. Note that $\theta$ represents here a latent variable indicating oral reading fluency. So, these three reading passages seem very difficult compared to the levels of oral reading fluency of these individuals.
+The $b$ parameters for three reading passages in this dataset were 1.52, 1.13, 1.27. I think it is fair to call them "reading passage difficulty" in this context. Given that we fix the mean and variance of the latent person parameter ($\theta$) to 0 and 1, we can compare the passage difficulty relative to the levels of individuals. Note that $\theta$ represents here a latent variable indicating oral reading fluency. So, these three reading passages seem very difficult compared to the ORF levels of these individuals.
 
-The $a$ parameters were 3,20, 5.16, and 4.60. We can call them "reading passage discrimination" parameters. So, these reading passages are highly informative about the latent construct being measured. These very high discrimination parameters are not very surprising given that the correlations among the three variables were 0.94, 0.94, and 0.96.
+The $a$ parameters were 3,20, 5.16, and 4.60. We can call them "reading passage discrimination" parameters. So, these reading passages are highly informative about the latent construct being measured. These very high discrimination parameters are not very surprising, given that the correlations among the three variables were 0.94, 0.94, and 0.96.
 
 The $\alpha$ parameters were 0.83, 1.01, and 1.00. I think it would be wise to go back and fix all the $\alpha$ parameters to 1 in the model and then re-fit, but I will not do it. Note that the $\alpha$ scales the distance between the response categories.
 
@@ -486,9 +486,9 @@ hist(thetas)
 
 ```
 
-As expected, the estimates have a mean of 0 and standard deviation of .99. 
+As expected, the estimates have a mean of 0 and a standard deviation of .99. 
 
-Lower estimates indicate lower levels of oral reading fluency and higher estimates indicate higher levels of oral reading fluency.
+Lower estimates indicate lower levels of oral reading fluency, and higher estimates indicate higher levels of oral reading fluency.
 
 We can have a better understanding if we check a few individuals.
 
@@ -509,7 +509,7 @@ cbind(wpm[low,],thetas[low])
 
 ```
 
-For instance, the model provides an estimate of 3.11 for a student who had read 181 words, 224 words, and 220 words and an estimate of -2.28 for a student who had read 12 words, 6 words, and 8 words in the three reading passages, respectively. We can check how the estimated theta is related to the scores from each reading passage for all examinees.
+For instance, the model provides an estimate of 3.11 for a student who had read 181 words, 224 words, and 220 words and an estimate of -2.28 for a student who had read 12 words, six words, and eight words in the three reading passages, respectively. We can check how the estimated theta is related to the scores from each reading passage for all examinees.
 
 
 ```{r echo = TRUE, eval=TRUE}
@@ -526,9 +526,7 @@ It is not surprising to see that there is a strong relationship because of the h
 
 # Model Fit Assessment
 
-I don't think there has been any work that seriously consider how to assess model fit for CRM. So, this certainly needs more work to be published in peer-review journal. However, we can try to borrow some ideas from other well-known IRT models.
-
-The first thing I would like to look is a very simple idea of comparing model predictions to observed outcomes. Treating the item and person parameter estimates as known, we can calculate a predicted score on each item for each individual as well as a standardized residual.
+The first thing I would like to look at is how well the model predicts the observed ORF scores. Treating the item and person parameter estimates as known, we can calculate a predicted score on each item for each individual as well as a standardized residual.
 
 Note that I mentioned before that the conditional PDF of Z is a normal density function with a mean of $\alpha_j(\theta_i - b_j)$ and standard deviation of $\alpha_j/a_j$, where Z is defined as $$ln\frac{X}{k-X}$$.
 
@@ -576,7 +574,6 @@ It looks like the model predicts the observed outcomes pretty well.
 
 We can also check if there is any systematic relationship between residuals and the latent variable. 
 
-
 ```{r echo = TRUE, eval=TRUE}
 
 plot(thetas,wpm.long[wpm.long$Item==1,c("sres")])
@@ -587,7 +584,7 @@ plot(thetas,wpm.long[wpm.long$Item==3,c("sres")])
 
 ```
 
-There are some individuals with extreme residuals for each item; however, there doesn't seem to be any systematic pattern between residuals and latent variable.
+There are some individuals with extreme residuals for each item; however, there doesn't seem to be any systematic pattern between residuals and the latent variable.
 
 We can also check the distribution of standardized residuals within each item.
 
@@ -625,9 +622,9 @@ wpm[outlier.ids,]
 
 ```
 
-Here, we can see there are 12 individuals with observations yielding extreme outliers. A quick examination of their score pattern reveals that these are typically individuals that scored really low for one or two reading passages while scoring relatively much higher in other reading passage. So, for instance, individual 919 read 20 and 18 words for Reading Passage 1 and 3 while reading 221 words for Reading Passage 2. This is extremely unusual. This may be due to data coding error, scoring error, low effor or motivation for some reason, etc. It might be a good idea to flag these individuals with inconsistent (or unreliable) scores, remove them from the dataset, and re-fit the model without these individuals.
+Here, we can see there are 12 individuals with observations yielding extreme outliers. A quick examination of their score pattern reveals that these are typically individuals that scored low for one or two reading passages while scoring relatively much higher in other reading passage. So, for instance, individual 919 read 20 and 18 words for Reading Passage 1 and 3 while reading 221 words for Reading Passage 2. This is extremely unusual and may be due to data coding error, scoring error, low effort, or low motivation for some reason. It might be a good idea to flag these individuals with inconsistent (or unreliable) scores, remove them from the dataset, and re-fit the model without these individuals.
 
-After removing the outliers, the standardized residuals follow an approximately normal distributions.
+After removing the outliers, the standardized residuals follow an approximately normal distribution.
 
 ```{r echo = TRUE, eval=TRUE}
 
@@ -648,13 +645,13 @@ cor(wpm.long[wpm.long$Item==2,c("sres")],wpm.long[wpm.long$Item==3,c("sres")])
 
 ```
 
-This was the only thing I was not quite happy about this model. I don't know why the correlations among the residuals are unusually high. This suggests that there is still some variation left unexplained after accounting for one latent variable. This might suggest a second (latent) variable but I don't think there is much I can do here to improve the model with only three items. I think I'll just live with this.
+The high residual correlations were the only thing I was not happy about this model. I don't know why the correlations among the residuals are unusually high. This suggests that there is still some variation left unexplained after accounting for one latent variable. This might suggest a second (latent) variable, but I don't think there is much I can do here to improve the model with only three items. I guess I'll just live with this.
 
 ## APPENDIX A: Alternative Ways of Fitting the Continuous Response Model
 
 ### 1. Heuristic Estimation through Linear Factor Model
 
-This is a method used by [Bejar (1977)](https://journals.sagepub.com/doi/abs/10.1177/014662167700100407), and also discussed in detail by [Ferrando(2002)](https://www.tandfonline.com/doi/abs/10.1207/S15327906MBR3704_05). It is very convenient as you can fit this model with any SEM software, so it is also easy to extend the model to multiple-group, multidimensional, or mixture cases, [see this paper I worked on for mixture extension of CRM](https://journals.sagepub.com/doi/full/10.1177/0013164419856663). 
+The heuristic estimation is a method used by [Bejar (1977)](https://journals.sagepub.com/doi/abs/10.1177/014662167700100407) and also discussed in detail by [Ferrando(2002)](https://www.tandfonline.com/doi/abs/10.1207/S15327906MBR3704_05). It is very convenient as you can fit this model with any SEM software, so it is also easy to extend the model to multiple-group, multidimensional, or mixture cases, [see this paper I worked on for mixture extension of CRM](https://journals.sagepub.com/doi/full/10.1177/0013164419856663). 
 
 In this approach, you can first transform the observed scores ($X$) using the equation $ln\frac{X}{k-X}$. Then, you can fit a simple linear factor model to the transformed scores. Finally, you put the model parameter estimates back to IRT metric. Below is a quick implementation in the lavaan package.
 
@@ -686,9 +683,9 @@ intercepts
 
 ```
 
-Once you estimate the parameters from linear factor model, then you can transform them back to the IRT metric. 
+Once you estimate the parameters from the linear factor model, then you can transform them back to the IRT metric. 
 
-The unstandardized factor loadings (0.824, 1.008, and 0.996) correspond the $\alpha$ parameters in CRM. You can check back the estimates from Stan, and you will see that they are identical. 
+The unstandardized factor loadings (0.824, 1.008, and 0.996) correspond to the $\alpha$ parameters in CRM. You can check back the estimates from Stan, and you will see that they are identical. 
 
 If you divide the unstandardized factor loadings by residual standard deviation, you will get the discrimination parameters ($a$) of CRM. 
 
@@ -698,7 +695,7 @@ $$\frac{0.996}{\sqrt{0.047}} = 4.59$$
 
 Again, if you check the estimates for $a$ parameters we obtained from Stan, they are almost identical. 
 
-Finally, if you divide the intercepts by the the unstandardized factor loadings and then multiply the result by -1, that should give you the difficulty parameters of CRM ($b$).
+Finally, if you divide the intercepts by the unstandardized factor loadings and then multiply the result by -1, that should give you the difficulty parameters of CRM ($b$).
 
 
 $$-\frac{-1.253}{0.824} = 1.52$$
@@ -725,7 +722,7 @@ plot(thetas,fscores)
 
 ### 2, Full-information Marginal Maximum Likelihood Estimation
 
-This approach is fully described in two papers, [Wang and Zeng (1998)](https://journals.sagepub.com/doi/abs/10.1177/014662169802200402) and [Shojima(2005)](https://www.jstage.jst.go.jp/article/etr/28/1-2/28_KJ00003899231/_pdf/-char/ja). Wang and Zeng (1998) is a classical implementation of EM algorithm. However, Shojima(2005) is a really interesting paper as he actually derives the closed form equation for the marginal likelihood, so there is no integration needed for the E-step. When I was first interested in this model, I created an R package, [EstCRM](https://cran.r-project.org/web/packages/EstCRM/index.html), that implements both approaches. Below is a code using this package to fit the model.
+This approach is fully described in two papers, [Wang and Zeng (1998)](https://journals.sagepub.com/doi/abs/10.1177/014662169802200402) and [Shojima(2005)](https://www.jstage.jst.go.jp/article/etr/28/1-2/28_KJ00003899231/_pdf/-char/ja). Wang and Zeng (1998) is a classical implementation of EM algorithm. However, Shojima(2005) is a really interesting paper as he derives the closed-form equation for the marginal likelihood, so there is no integration needed for the E-step. When I was first interested in this model, I created an R package, [EstCRM](https://cran.r-project.org/web/packages/EstCRM/index.html), that implements both approaches. Below is a code using this package to fit the model.
 
 ```{r echo = TRUE, eval=TRUE}
 

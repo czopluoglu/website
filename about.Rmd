@@ -2,13 +2,6 @@
 title: "Cengiz Zopluoglu"
 description: |
   A short description of who I am
-  
-author:
-  - name: Cengiz Zopluoglu
-
-base_url: cengiz.me
-        
-date: 01-03-2020
 
 output:
   distill::distill_article:
@@ -45,7 +38,6 @@ knitr::include_graphics("images/Caricature.jpg")
 - any fancy implementation of R programming such as web scraping,
 - and anything else that excites me about using R and my research.
 </p>
-
 
 
 ```{r, child="data/favicons_cz.Rmd"}
