@@ -8,4 +8,20 @@ description: |
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-This page is under development.
+- [Data Tools for College Professors and Students](https://nces.ed.gov/blogs/nces/post/data-tools-for-college-professors-and-students1)
+- [Open Psychometrics](https://openpsychometrics.org/)
+- [PISA](http://www.oecd.org/pisa/)
+- [TIMSS and PIRLS](https://timssandpirls.bc.edu/)
+- [Judea Pearl, UCLA](http://bayes.cs.ucla.edu/WHY/)
+- [Paul Meehl](http://meehl.umn.edu/talks/philosophical-psychology-1989)
+- [Notes on Meehl](http://psychbrief.com/meehl-videos-papers/)
+- [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course/ml-intro)
+- [Course Handouts for Bayesian Data Analysis](https://psyc-bayes-notes.netlify.com/)
+- [Data Science in Education Using R](https://www.datascienceineducation.com/index.html)
+- [Doing Bayesian Data Analysis in brms and the tidyverse](https://bookdown.org/ajkurz/DBDA_recoded/)
+- [Quantitative Developmental Systems Methodology Core](https://quantdev.ssri.psu.edu/tutorials)
+- [UCLA IDRE Data Analysis Examples](https://stats.idre.ucla.edu/other/dae/)
+- [Harvard Data Science Review](https://hdsr.mitpress.mit.edu/)
+- [Advanced R by Hadley Wickham](https://adv-r.hadley.nz/index.html)
+- [R for Data Science](https://r4ds.had.co.nz/)
+- [Mastering Shiny](https://mastering-shiny.org/)
