@@ -70,4 +70,4 @@ collections:
   posts:
     share: [twitter, linkedin, pinterest, facebook]
     
-output: radix::radix_article
+output: distill::distill_article
