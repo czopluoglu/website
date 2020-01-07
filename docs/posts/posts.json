@@ -152,6 +152,25 @@
     "preview_height": 786
   },
   {
+    "path": "posts/shinyapp/",
+    "title": "This is a test post with a Shiny embedded",
+    "description": "Shiny app",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2019-01-07",
+    "categories": [
+      "2019"
+    ],
+    "preview": "posts/shinyapp/images/image.png",
+    "last_modified": "2020-01-07T11:44:42-05:00",
+    "preview_width": 1920,
+    "preview_height": 978
+  },
+  {
     "path": "posts/creating-maps-with-2018-election-data/",
     "title": "Learning how to create maps in R",
     "description": "Using the elections 2018 data, I practiced how to create a map for an outcome variable,",

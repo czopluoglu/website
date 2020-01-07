@@ -1,0 +1,42 @@
+---
+title: "This is a test post with a Shiny embedded"
+description: |
+ Shiny app
+ 
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Miami
+    
+date: 1-7-2019
+
+categories:
+  
+  - "2019"
+  
+output:
+  distill::distill_article:
+    self_contained: true
+
+preview: images/image.png
+---
+
+```{css, echo=FALSE}
+    div.main-container {
+      max-width: 1800px !important;
+      margin-left: auto;
+      margin-right: auto;
+    }
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is a post to test how to embed external Shiny apps in html posts, and whether or not it works.
+
+Below is a shiny app I developed long time ago. Enter names (with the first letter capitalized) and it will create a trend plot at the bottom based on Social Security Data.
+
+
+<iframe src="https://cengiz-zopluoglu.shinyapps.io/names/" width="1200px !important" height="2000px"></iframe>
+
+
