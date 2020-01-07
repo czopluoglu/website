@@ -12,7 +12,16 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Tue, 31 Dec 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 07 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>This is a test post with a Shiny embedded</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp</link>
+      <description>Shiny app</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp</guid>
+      <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp/images/image.png" medium="image" type="image/png" width="1920" height="978"/>
+    </item>
     <item>
       <title>Measuring Oral Reading Fluency: A Case for Samejima's Continuous Response Model</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>
@@ -75,15 +84,6 @@
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting</guid>
       <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting/images/tree.png" medium="image" type="image/png" width="737" height="786"/>
-    </item>
-    <item>
-      <title>This is a test post with a Shiny embedded</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
-      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp</link>
-      <description>Shiny app</description>
-      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp</guid>
-      <pubDate>Mon, 07 Jan 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp/images/image.png" medium="image" type="image/png" width="1920" height="978"/>
     </item>
     <item>
       <title>Learning how to create maps in R</title>

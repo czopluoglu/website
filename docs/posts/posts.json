@@ -1,5 +1,24 @@
 [
   {
+    "path": "posts/shinyapp/",
+    "title": "This is a test post with a Shiny embedded",
+    "description": "Shiny app",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2020-01-07",
+    "categories": [
+      "2019"
+    ],
+    "preview": "posts/shinyapp/images/image.png",
+    "last_modified": "2020-01-07T11:51:59-05:00",
+    "preview_width": 1920,
+    "preview_height": 978
+  },
+  {
     "path": "posts/crm-stan/",
     "title": "Measuring Oral Reading Fluency: A Case for Samejima's Continuous Response Model",
     "description": "I pitched the idea of using Samejima's Continuous Response Model (CRM) to measure the Oral Reading Fluency (ORF) a while ago when I published a paper in 2012. In that paper, I used an ORF dataset from the Minneapolis Public Schools District (MPS) as a real data example. Since then, I don't think anybody has bought the idea of using CRM to measure ORF, so here I am trying one more time with some accessible R code.",
@@ -150,25 +169,6 @@
     "last_modified": "2020-01-04T14:16:50-05:00",
     "preview_width": 737,
     "preview_height": 786
-  },
-  {
-    "path": "posts/shinyapp/",
-    "title": "This is a test post with a Shiny embedded",
-    "description": "Shiny app",
-    "author": [
-      {
-        "name": "Cengiz Zopluoglu",
-        "url": {}
-      }
-    ],
-    "date": "2019-01-07",
-    "categories": [
-      "2019"
-    ],
-    "preview": "posts/shinyapp/images/image.png",
-    "last_modified": "2020-01-07T11:44:42-05:00",
-    "preview_width": 1920,
-    "preview_height": 978
   },
   {
     "path": "posts/creating-maps-with-2018-election-data/",
