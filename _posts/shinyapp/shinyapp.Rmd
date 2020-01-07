@@ -26,7 +26,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This is a post to test how to embed external Shiny apps in html posts, and whether or not it works.
 
-Below is a shiny app I developed long time ago. Enter names (with the first letter capitalized) and it will create a trend plot at the bottom based on Social Security Data.
+Below is a shiny app I developed long time ago. Enter names (with the first letter capitalized) and it will create a trend plot based on National Data on Given Names in the Population of U.S. Births from Social Security Administration Data You can change the y-axis maximum to zoom for rare names.
 
 
 <iframe src="https://cengiz-zopluoglu.shinyapps.io/names/" class="l-screen-inset shaded" height="1000px"></iframe>
