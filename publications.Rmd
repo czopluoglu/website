@@ -1,5 +1,11 @@
 ---
 title: "Publications"
+description: |
+  Publications
+  
+output:
+  distill::distill_article:
+    self_contained: true
 ---
 
 ```{r setup, include=FALSE}
