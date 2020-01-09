@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Cengiz Zopluoglu</title>
+    <link>https://github.com/czopluoglu/website/tree/master/docs</link>
+    <atom:link href="https://github.com/czopluoglu/website/tree/master/docs/index.xml" rel="self" type="application/rss+xml"/>
+    <description>This is personal website for Cengiz Zopluoglu
+</description>
+    <image>
+      <title>Cengiz Zopluoglu</title>
+      <url>https://github.com/czopluoglu/website/tree/master/docs/images/unnamed.jpg</url>
+      <link>https://github.com/czopluoglu/website/tree/master/docs</link>
+    </image>
+    <generator>Distill</generator>
+    <lastBuildDate>Tue, 07 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>This is a test post with a Shiny App</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp</link>
+      <description>Shiny app</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp</guid>
+      <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp/images/image.png" medium="image" type="image/png" width="1920" height="978"/>
+    </item>
+    <item>
+      <title>Measuring Oral Reading Fluency: A Case for Samejima's Continuous Response Model</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan</link>
+      <description>I pitched the idea of using Samejima's Continuous Response Model (CRM) to measure the Oral Reading Fluency (ORF) a while ago when I published a paper in 2012. In that paper, I used an ORF dataset from the Minneapolis Public Schools District (MPS) as a real data example. Since then, I don't think anybody has bought the idea of using CRM to measure ORF, so here I am trying one more time with some accessible R code.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan</guid>
+      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan/images/image.png" medium="image" type="image/png" width="811" height="461"/>
+    </item>
+    <item>
+      <title>Fitting Hyperbolic Cosine Model (HCM) For Unfolding Dichotomous Responses using Stan</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan</link>
+      <description>In this post, I do a quick exercise on fitting the hyperbolic cosine model using Stan. The information about this model can be found in Andrich &amp; Luo (1993). The most interesting part is an "Aha!" moment when I discover the bimodality of posterior distribution due to lack of directional constrain.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan</guid>
+      <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan/images/image.png" medium="image" type="image/png" width="645" height="389"/>
+    </item>
+    <item>
+      <title>2019 Turkish Mayoral Elections – Scraping Ballot Box Level Data</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2</link>
+      <description>A while ago, I compiled the election data for the 2019 mayoral elections in Turkey, which took place on March 31, 2019, through the Anadolu Agency website, only accessible information back then because the website for the Turkey's Higher Electoral Commission (YSK) was down and they did not make the official election data available until recently. This data was also limited as the Anadolu Agency only provided overall numbers (not for each ballot box). Now, it seems that YSK's website is alive back again and provides a nice-user friendly dashboard for the election data at the ballot box level. However, their dashboard is not very data-analyst friendly for those who has been starving for a more deeper analysis. Here, I provide the data and the R code I used to scrap this data from YSK's website.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2</guid>
+      <pubDate>Fri, 24 May 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2/images/image.jpg" medium="image" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>XGBoost Analysis of Real Dataset to Predict Item Preknowledge</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/xgboost</link>
+      <description>This post includes supplemental material to reproduce the real data analysis presented in the recently published EPM paper.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/xgboost</guid>
+      <pubDate>Thu, 18 Apr 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/xgboost/images/image.png" medium="image" type="image/png" width="706" height="546"/>
+    </item>
+    <item>
+      <title>Scraping Data for 2019 Local Elections in Turkey</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey</link>
+      <description>A friend of mine, Dr. Abdullah Aydogan (https://twitter.com/abdaydgn), has asked me this morning if it is possible to pull the data for the 2019 local elections in Turkey. The only accessible information is through the Anadolu Agency (https://www.aa.com.tr/en) because the official election organization's website (http://www.ysk.gov.tr/) has not been working for a while. Here, I provide the code I used to scrap data from the Anadolu Agency, only available source for election results.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey</guid>
+      <pubDate>Fri, 05 Apr 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey/images/image.jpg" medium="image" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>Compiling Keywords from the Published Articles in Educational and Pscyhological Measurement</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/epm-keywords</link>
+      <description>What are the most commonly used keywords in published articles in educational measurement journals? Is there any trending topic in educational measurement journals? I decided to do a sample analysis in the context of Educational and Psychological Measurement (EPM). However, I had figure out first how to compile a dataset of keywords used in EPM. It turned out to be another web scraping story.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/epm-keywords</guid>
+      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/epm-keywords/images/EPM2.png" medium="image" type="image/png" width="1221" height="920"/>
+    </item>
+    <item>
+      <title>How Does Extreme Gradient Boosting (XGBoost) Work?</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting</link>
+      <description>In one of the working papers under review, I am using the Extreme Gradient Boosting (XGBoost) to identify examinees with potential item preknowledge in a certification exam. In the original paper, one of the reviewers asked more description of the XGBoost to help readers get a conceptual understanding of how XGBoost works. After spending a few weeks on the original paper, I finally felt that I had a good grasp of it. In this post, I provide an informal introduction of XGboost using an illustration with accompanying R code.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting</guid>
+      <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting/images/tree.png" medium="image" type="image/png" width="737" height="786"/>
+    </item>
+    <item>
+      <title>Learning how to create maps in R</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data</link>
+      <description>Using the elections 2018 data, I practiced how to create a map for an outcome variable,</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data</guid>
+      <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data/images/image.png" medium="image" type="image/png" width="973" height="599"/>
+    </item>
+    <item>
+      <title>A Quick Look at the Election 2018</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/a-quick-look-at-the-elections-2018</link>
+      <description>Some quick insights about 2018 elections</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/a-quick-look-at-the-elections-2018</guid>
+      <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/a-quick-look-at-the-elections-2018/images/image.png" medium="image" type="image/png" width="692" height="500"/>
+    </item>
+    <item>
+      <title>Scraping Election 2018 Data</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-2018-election-data</link>
+      <description>This post includes some follow-up R code to scrap 2018 election data from New York Times webpage.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-2018-election-data</guid>
+      <pubDate>Wed, 07 Nov 2018 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-2018-election-data/images/vote2.jpg" medium="image" type="image/jpeg"/>
+    </item>
+    <item>
+      <title>Scraping Data for 2014 Gubernatorial Elections</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-data-for-2014-gubernatorial-elections</link>
+      <description>This post includes some R code to scrap 2014 election data from New York Times webpage.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-data-for-2014-gubernatorial-elections</guid>
+      <pubDate>Tue, 06 Nov 2018 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-data-for-2014-gubernatorial-elections/images/image.jpg" medium="image" type="image/jpeg"/>
+    </item>
+  </channel>
+</rss>
