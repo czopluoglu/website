@@ -14,7 +14,7 @@
     <generator>Distill</generator>
     <lastBuildDate>Tue, 07 Jan 2020 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>This is a test post with a Shiny embedded</title>
+      <title>This is a test post with a Shiny App</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp</link>
       <description>Shiny app</description>

@@ -194,7 +194,7 @@ fit_hcm <- stan(model_code = hcm,
 
 
 ```{r echo = FALSE, eval=TRUE}
-load("C:/Users/Dr Zopluoglu/Box/Blogs/hcm_noconstraint.RData")
+load("C:/Users/c.zopluoglu1/Box/Blogs/hcm_noconstraint.RData")
 
 require(rstan)
 ```

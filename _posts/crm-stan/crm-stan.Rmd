@@ -60,7 +60,7 @@ The ORF dataset from MPS was the only reason I was interested in CRM at all. Dur
 
 require(foreign)
 
-d <- read.spss("C:/Users/Dr Zopluoglu/Box/Completed_Research/Internship/data/old data/original data/ORA.spring.2008.without ID.sav",
+d <- read.spss("C:/Users/c.zopluoglu1/Documents/ORA.spring.2008.without ID.sav",
           to.data.frame=TRUE)
 
 
@@ -356,7 +356,7 @@ fit_crm <- stan(model_code = crm,
 
 ```{r echo = FALSE, eval=TRUE}
 
-load("C:/Users/Dr Zopluoglu/Box/Blogs/crm.Rdata")
+load("C:/Users/c.zopluoglu1/Documents/crm.Rdata")
 require(rstan)
 require(psych)
 ```

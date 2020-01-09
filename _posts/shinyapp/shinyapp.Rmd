@@ -1,5 +1,5 @@
 ---
-title: "This is a test post with a Shiny embedded"
+title: "This is a test post with a Shiny App"
 description: |
  Shiny app
  
@@ -26,9 +26,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 This is a post to test how to embed external Shiny apps in html posts, and whether or not it works.
 
-Below is a shiny app I developed long time ago. Enter names (with the first letter capitalized) and it will create a trend plot based on National Data on Given Names in the Population of U.S. Births from Social Security Administration Data You can change the y-axis maximum to zoom for rare names.
+Below is a shiny app I developed long time ago. I deployed it in a Shiny Server on cloud. If this works, I plan to develop interactive shiny apps for the concepts I am teaching and then prepare my course notes as interactive web pages with these apps embedded. A big dream I have no idea how long it would take me to complete.
+
+If you want to test whether or not the app is working, enter your name and up to two more names (with the first letter capitalized) and it should create a trend plot based on a [database from Social Security Administration](https://catalog.data.gov/dataset/baby-names-from-social-security-card-applications-national-level-data). You should change the y-axis from the side bar to zoom for the trend of rare names.
 
 
-<iframe src="https://cengiz-zopluoglu.shinyapps.io/names/" class="l-screen-inset shaded" height="1000px"></iframe>
+<iframe src="http://157.245.80.187:3838/names/" class="l-screen-inset shaded" height="1000px"></iframe>
 
 

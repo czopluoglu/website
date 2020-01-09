@@ -19,7 +19,7 @@
  <!--/radix_placeholder_import_source-->
 
   <!--radix_placeholder_meta_tags-->
-  <title>This is a test post with a Shiny embedded</title>
+  <title>This is a test post with a Shiny App</title>
   
   <meta property="description" itemprop="description" content="Shiny app" />
   
@@ -30,21 +30,21 @@
   <meta name="article:author" content="Cengiz Zopluoglu" />
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="This is a test post with a Shiny embedded" />
+  <meta property="og:title" content="This is a test post with a Shiny App" />
   <meta property="og:type" content="article" />
   <meta property="og:description" content="Shiny app" />
   <meta property="og:locale" content="en_US" />
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary" />
-  <meta property="twitter:title" content="This is a test post with a Shiny embedded" />
+  <meta property="twitter:title" content="This is a test post with a Shiny App" />
   <meta property="twitter:description" content="Shiny app" />
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","categories","output","preview"]}},"value":[{"type":"character","attributes":{},"value":["This is a test post with a Shiny embedded"]},{"type":"character","attributes":{},"value":["Shiny app\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Cengiz Zopluoglu"]},{"type":"character","attributes":{},"value":["University of Miami"]}]}]},{"type":"character","attributes":{},"value":["1-7-2020"]},{"type":"character","attributes":{},"value":["2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["images/image.png"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","categories","output","preview"]}},"value":[{"type":"character","attributes":{},"value":["This is a test post with a Shiny App"]},{"type":"character","attributes":{},"value":["Shiny app\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Cengiz Zopluoglu"]},{"type":"character","attributes":{},"value":["University of Miami"]}]}]},{"type":"character","attributes":{},"value":["1-7-2020"]},{"type":"character","attributes":{},"value":["2019"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["images/image.png"]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1932,7 +1932,7 @@ distill-header .nav a {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"This is a test post with a Shiny embedded","description":"Shiny app","authors":[{"author":"Cengiz Zopluoglu","authorURL":"#","affiliation":"University of Miami","affiliationURL":"#"}],"publishedDate":"2020-01-07T00:00:00.000-05:00","citationText":"Zopluoglu, 2020"}
+{"title":"This is a test post with a Shiny App","description":"Shiny app","authors":[{"author":"Cengiz Zopluoglu","authorURL":"#","affiliation":"University of Miami","affiliationURL":"#"}],"publishedDate":"2020-01-07T00:00:00.000-05:00","citationText":"Zopluoglu, 2020"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1942,7 +1942,7 @@ distill-header .nav a {
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>This is a test post with a Shiny embedded</h1>
+<h1>This is a test post with a Shiny App</h1>
 <p><p>Shiny app</p></p>
 </div>
 
@@ -1954,8 +1954,9 @@ distill-header .nav a {
 
 <div class="d-article">
 <p>This is a post to test how to embed external Shiny apps in html posts, and whether or not it works.</p>
-<p>Below is a shiny app I developed long time ago. Enter names (with the first letter capitalized) and it will create a trend plot based on National Data on Given Names in the Population of U.S. Births from Social Security Administration Data You can change the y-axis maximum to zoom for rare names.</p>
-<iframe src="https://cengiz-zopluoglu.shinyapps.io/names/" class="l-screen-inset shaded" height="1000px">
+<p>Below is a shiny app I developed long time ago. I deployed it in a Shiny Server on cloud. If this works, I plan to develop interactive shiny apps for the concepts I am teaching and then prepare my course notes as interactive web pages with these apps embedded. A big dream I have no idea how long it would take me to complete.</p>
+<p>If you want to test whether or not the app is working, enter your name and up to two more names (with the first letter capitalized) and it should create a trend plot based on a <a href="https://catalog.data.gov/dataset/baby-names-from-social-security-card-applications-national-level-data">database from Social Security Administration</a>. You should change the y-axis from the side bar to zoom for the trend of rare names.</p>
+<iframe src="http://157.245.80.187:3838/names/" class="l-screen-inset shaded" height="1000px">
 </iframe>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
