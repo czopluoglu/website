@@ -31,6 +31,6 @@ Below is a shiny app I developed long time ago. I deployed it in a Shiny Server 
 If you want to test whether or not the app is working, enter your name and up to two more names (with the first letter capitalized) and it should create a trend plot based on a [database from Social Security Administration](https://catalog.data.gov/dataset/baby-names-from-social-security-card-applications-national-level-data). You should change the y-axis from the side bar to zoom for the trend of rare names.
 
 
-<iframe src="http://157.245.80.187:3838/names/" class="l-screen-inset shaded" height="1000px"></iframe>
+<iframe src="https://cengiz-shiny.app/shiny/names/" class="l-screen-inset shaded" height="1000px"></iframe>
 
 

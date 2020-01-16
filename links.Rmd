@@ -8,13 +8,18 @@ description: |
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## Database
+
 - [Data Tools for College Professors and Students](https://nces.ed.gov/blogs/nces/post/data-tools-for-college-professors-and-students1)
 - [Open Psychometrics](https://openpsychometrics.org/)
 - [PISA](http://www.oecd.org/pisa/)
 - [TIMSS and PIRLS](https://timssandpirls.bc.edu/)
-- [Judea Pearl, UCLA](http://bayes.cs.ucla.edu/WHY/)
-- [Paul Meehl](http://meehl.umn.edu/talks/philosophical-psychology-1989)
-- [Notes on Meehl](http://psychbrief.com/meehl-videos-papers/)
+- [The Educational Opportunity Project](https://edopportunity.org/)
+- [Miscellaneous Datasets](http://users.stat.ufl.edu/~winner/datasets.html)
+- [Google Dataset Search](https://toolbox.google.com/datasetsearch)
+
+## Statistics/Data Science
+
 - [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course/ml-intro)
 - [Course Handouts for Bayesian Data Analysis](https://psyc-bayes-notes.netlify.com/)
 - [Data Science in Education Using R](https://www.datascienceineducation.com/index.html)
@@ -22,8 +27,26 @@ knitr::opts_chunk$set(echo = FALSE)
 - [Quantitative Developmental Systems Methodology Core](https://quantdev.ssri.psu.edu/tutorials)
 - [UCLA IDRE Data Analysis Examples](https://stats.idre.ucla.edu/other/dae/)
 - [Harvard Data Science Review](https://hdsr.mitpress.mit.edu/)
-- [Advanced R by Hadley Wickham](https://adv-r.hadley.nz/index.html)
 - [R for Data Science](https://r4ds.had.co.nz/)
+- [Fast.ai](https://www.fast.ai/)
+- [Reading in Applied Data Science](https://github.com/hadley/stats337/blob/master/README.md)
+
+## R/Shiny
+
+- [Advanced R by Hadley Wickham](https://adv-r.hadley.nz/index.html)
 - [Mastering Shiny](https://mastering-shiny.org/)
 - [How to create R Tutorial Interface](https://github.com/datacamp/tutorial)
 - [Setting up Shiny Server on Cloud](https://www.marinedatascience.co/blog/2019/04/28/run-shiny-server-on-your-own-digitalocean-droplet-part-1/)
+
+## Conferences
+
+- [Conference on Test Security](https://conferenceontestsecurity.org/)
+- [NCME](https://www.ncme.org/meetings)
+
+## People
+
+- [Judea Pearl, UCLA](http://bayes.cs.ucla.edu/WHY/)
+- [Paul Meehl](http://meehl.umn.edu/talks/philosophical-psychology-1989)
+- [Notes on Meehl](http://psychbrief.com/meehl-videos-papers/)
+
+
