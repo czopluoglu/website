@@ -30,6 +30,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - [R for Data Science](https://r4ds.had.co.nz/)
 - [Fast.ai](https://www.fast.ai/)
 - [Reading in Applied Data Science](https://github.com/hadley/stats337/blob/master/README.md)
+- [Machine Learning Course by Yaser Abu-Mostafa](https://www.youtube.com/playlist?list=PLD63A284B7615313A)
 
 ## R/Shiny
 
