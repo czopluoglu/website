@@ -1,5 +1,24 @@
 [
   {
+    "path": "posts/grmint/",
+    "title": "Intersections Between Two Adjacent Categories in the Graded Response Model",
+    "description": "The interpretation of step parameters in the Graded Response Model is different than the RSM/PCM/GPCM family due to a different functional form. While the step parameters in the RSM/PCM/GPCM family represent the point on the latent trait continuum where one category becomes more likely than the previous category, it is not same in the Graded Response Model. So, one curious student wondered at what point on the latent trait continuum the intersections occur between two adjacent categories for the Graded Response Model.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2020-02-26",
+    "categories": [
+      "2020",
+      "item response theory",
+      "graded response model"
+    ],
+    "preview": "posts/grmint/files/grm.jpeg",
+    "last_modified": "2020-02-26T17:32:23-05:00"
+  },
+  {
     "path": "posts/shinyapp/",
     "title": "This is a test post with a Shiny App",
     "description": "Shiny app",

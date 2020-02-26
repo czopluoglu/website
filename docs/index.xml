@@ -12,7 +12,16 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Tue, 07 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 26 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Intersections Between Two Adjacent Categories in the Graded Response Model</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/grmint</link>
+      <description>The interpretation of step parameters in the Graded Response Model is different than the RSM/PCM/GPCM family due to a different functional form. While the step parameters in the RSM/PCM/GPCM family represent the point on the latent trait continuum where one category becomes more likely than the previous category, it is not same in the Graded Response Model. So, one curious student wondered at what point on the latent trait continuum the intersections occur between two adjacent categories for the Graded Response Model.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/grmint</guid>
+      <pubDate>Wed, 26 Feb 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/grmint/files/grm.jpeg" medium="image" type="image/jpeg"/>
+    </item>
     <item>
       <title>This is a test post with a Shiny App</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>
