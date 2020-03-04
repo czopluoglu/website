@@ -364,7 +364,7 @@ $$I_{j,j+1}=\frac{ln(
 {a}$$
 
 
-I checked them numerically, and they seem to be holding together. I tried but couldn't simplify them further. I wish I could put them in a nice-looking neat equation. For those who are interested, [this file](files/grm intersection.pdf) has some algebra starting from the equations above and solving them for $\theta$.
+I checked them numerically, and they seem to be holding together. I tried but couldn't simplify them further. I wish I could put them in a nice-looking equation. For those who are interested, [this file](files/grm intersection.pdf) has some algebra starting from the equations above and solving them for $\theta$.
 
 
 ## Appendix
