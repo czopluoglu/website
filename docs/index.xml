@@ -14,10 +14,10 @@
     <generator>Distill</generator>
     <lastBuildDate>Wed, 26 Feb 2020 00:00:00 +0000</lastBuildDate>
     <item>
-      <title>Intersections Between Two Adjacent Categories in the Graded Response Model</title>
+      <title>Intersection Points Between Two Adjacent Categories in the Graded Response Model</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/grmint</link>
-      <description>The interpretation of step parameters in the Graded Response Model is different than the RSM/PCM/GPCM family due to a different functional form. While the step parameters in the RSM/PCM/GPCM family represent the point on the latent trait continuum where one category becomes more likely than the previous category, it is not same in the Graded Response Model. So, one curious student wondered at what point on the latent trait continuum the intersections occur between two adjacent categories for the Graded Response Model.</description>
+      <description>The interpretation of between-category thresholds in the Graded Response Model is different than the step difficulty parameters in the RSM/PCM/GPCM family due to a different functional form. While the step parameters in the RSM/PCM/GPCM family represent the point on the latent trait continuum where one category becomes more likely than the previous category, it is not the same for between-category thresholds in the Graded Response Model. So, this post is my response to a curious student who wondered at what point on the latent trait continuum the intersections occur between two adjacent categories for the Graded Response Model.</description>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/grmint</guid>
       <pubDate>Wed, 26 Feb 2020 00:00:00 +0000</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/grmint/files/grm.jpeg" medium="image" type="image/jpeg"/>
