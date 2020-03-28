@@ -12,7 +12,16 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Wed, 26 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 28 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Tracking the Number of Deceased People by Scraping Data from www.turkiye.gov.tr</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-turkey.gov.tr</link>
+      <description>A Shiny app is designed to track the number of deceased individuals from 11 major cities in Turkey by scraping data from www.turkiye.gov.tr. By using this Shiny app, you can compare the number of deceased individuals for any given day or date range in 2020 to the number of deceased individuals in the past 10 years on the same day or same date range.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-turkey.gov.tr</guid>
+      <pubDate>Sat, 28 Mar 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-turkey.gov.tr/files/plot.jpg" medium="image" type="image/jpeg"/>
+    </item>
     <item>
       <title>Intersection Points Between Two Adjacent Categories in the Graded Response Model</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>

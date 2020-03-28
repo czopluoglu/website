@@ -1,5 +1,24 @@
 [
   {
+    "path": "posts/scraping-turkey.gov.tr/",
+    "title": "Tracking the Number of Deceased People by Scraping Data from www.turkiye.gov.tr",
+    "description": "A Shiny app is designed to track the number of deceased individuals from 11 major cities in Turkey by scraping data from www.turkiye.gov.tr. By using this Shiny app, you can compare the number of deceased individuals for any given day or date range in 2020 to the number of deceased individuals in the past 10 years on the same day or same date range.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2020-03-28",
+    "categories": [
+      "2020",
+      "web scraping",
+      "covid19"
+    ],
+    "preview": "posts/scraping-turkey.gov.tr/files/plot.jpg",
+    "last_modified": "2020-03-28T06:10:58-04:00"
+  },
+  {
     "path": "posts/grmint/",
     "title": "Intersection Points Between Two Adjacent Categories in the Graded Response Model",
     "description": "The interpretation of between-category thresholds in the Graded Response Model is different than the step difficulty parameters in the RSM/PCM/GPCM family due to a different functional form. While the step parameters in the RSM/PCM/GPCM family represent the point on the latent trait continuum where one category becomes more likely than the previous category, it is not the same for between-category thresholds in the Graded Response Model. So, this post is my response to a curious student who wondered at what point on the latent trait continuum the intersections occur between two adjacent categories for the Graded Response Model.",
