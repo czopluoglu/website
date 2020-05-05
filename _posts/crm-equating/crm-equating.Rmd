@@ -141,9 +141,9 @@ $$\hat\theta_i = b_j + \frac{x_{ij}^*}{\alpha_j}.$$
 Alternatively, you can think about it as the following. For a given $x_{ij}^*$, we know its expected value is $\alpha_j(\theta_i - b_j)$. So, we can get the same equation if we solve the following equation for $\theta$,
 
 $$x_{ij}^* = \alpha_j(\theta_i - b_j).$$
-Either way, we can get the estimate of $theta$ based on the Form 4 score.
+Either way, we can get the estimate of $\theta$ based on the Form 4 score.
 
-  $$\hat\theta = -0.729 + \frac{-0.08}{1.108}= -0.801 $$
+  $$\hat\theta_i = -0.729 + \frac{-0.08}{1.108}= -0.801 $$
     
 **Step 3**: Given the theta estimate in Step 2 and item parameters for Form 11, compute the expected transformed score (mean of the conditional distribution) in Form 11.
 
