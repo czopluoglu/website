@@ -1,5 +1,28 @@
 [
   {
+    "path": "posts/crm-equating/",
+    "title": "Equating Oral Reading Fluency Scores from Reading Passages",
+    "description": "A non-peer reviewed opinion about how one can equate oral reading fluency scores from two reading passages with different difficulty levels using Samejima's Continuous Response Model.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2020-05-05",
+    "categories": [
+      "item response theory",
+      "continuous response model",
+      "equating",
+      "R",
+      "2020"
+    ],
+    "preview": "posts/crm-equating/image.png",
+    "last_modified": "2020-05-05T13:46:37-04:00",
+    "preview_width": 1108,
+    "preview_height": 825
+  },
+  {
     "path": "posts/scraping-turkey.gov.tr/",
     "title": "Tracking the Number of Deceased People by Scraping Data from www.turkiye.gov.tr",
     "description": "A Shiny app is designed to track the number of deceased individuals from 11 major cities in Turkey by scraping data from www.turkiye.gov.tr. By using this Shiny app, you can compare the number of deceased individuals for any given day or date range in 2020 to the number of deceased individuals in the past 10 years on the same day or same date range.",

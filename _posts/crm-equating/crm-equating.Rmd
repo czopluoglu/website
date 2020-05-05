@@ -1,0 +1,211 @@
+---
+title: "Equating Oral Reading Fluency Scores from Reading Passages"
+description: |
+
+  A non-peer reviewed opinion about how one can equate oral reading fluency scores from two reading passages with different difficulty levels using Samejima's Continuous Response Model.
+
+draft: false
+
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Miami
+    
+date: 05-05-2020
+
+categories:
+  - item response theory
+  - continuous response model
+  - equating
+  - R
+  - "2020"
+  
+output:
+  distill::distill_article:
+    self_contained: true
+
+preview: image.png
+
+header-includes:
+  - \usepackage{amsmath} 
+---
+
+<style>
+
+body {
+text-align: justify}
+
+</style>
+
+```{r echo = FALSE, eval=TRUE}
+
+library(knitr)
+# the default output hook
+hook_output = knit_hooks$get("output")
+knit_hooks$set(output = function(x, options) {
+    if (!is.null(n <- options$out.lines)) {
+        x = knitr:::split_lines(x)
+        if (length(x) > n) {
+            # truncate the output
+            x = c(head(x, n), "....\n")
+        }
+        x = paste(x, collapse = "\n")  # paste first n lines together
+    }
+    hook_output(x, options)
+})
+
+opts_chunk$set(out.lines = 40)
+opts_chunk$set(width = 40)
+
+
+require(kableExtra)
+
+```
+
+
+Suppose you fit Samejima's Continous Response Model (CRM) to several reading passages (or MAZE forms) and estimated item parameters for all passages/forms in a way that they are all on the same scale. There are a couple of ways you can do this (concurrent calibration, chain equating, or more traditional methods, as explained in [this paper by Shojima](https://link.springer.com/article/10.2333/bhmk.30.155)). You can read [this post](https://cengiz.me/posts/crm-stan/) to learn more about this model, how to estimate its parameters, and what these parameters mean.
+
+So, let's assume that the parameters for all reading passages are on the same scale, and you have 20 of these reading passages (Form 1, Form 2, ..., Form 20).
+
+```{r, eval=TRUE, echo=FALSE}
+
+set.seed(123)
+
+a     <- rlnorm(20,.5,.5)
+b     <- rnorm(20,0,1)
+alpha <- rnorm(20,1,.05)
+
+ipar <- cbind(a,b,alpha)
+
+colnames(ipar) = NULL
+rownames(ipar) <- paste0("Form ",1:20)
+
+
+kable(round(ipar,3),col.names = c("$a$", "$b$","$\\alpha$")) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed", "responsive"))
+
+```
+
+Let's say that Form 4 is administered in the Fall semester, and Form 11 semester is administered in the Spring Semester. The scores from these two reading passages may not be directly comparable because they may differ in their difficulty ($b$ parameter), and also in other characteristics ($a$ parameter and $\alpha$). The difference in the $b$ parameter is probably most critical here. It wouldn't make much sense to compare the ORF scores from Fall and Spring without any equating between the two forms, and practitioners would probably appreciate an easy to understand score conversion table between two reading passages. I don't know much about CBM-Reading literature. I am aware that there are already methods used and published to create such a table using traditional equating methods (e.g., [Albano and Rodriguez, 2012](https://www.sciencedirect.com/science/article/pii/S0022440511000549)). There may also be other works published. Here, I would like to accomplish the same thing using an IRT approach when Samejima's CRM is used to scale many reading passages. 
+
+Form 4 and Form 11 has the following item parameters:
+
+ $$(a_4,b_4,\alpha_4)=(1.708,-0.729,1.108)$$
+ $$(a_{11},b_{11},\alpha_{11})=(3.041,0.426,1.013)$$
+
+Also, let's assume that the maximum possible ORF score is 250 for both forms. 
+
+We need to remember a few formulas for CRM. In this model, the probability of an individual with a latent parameter $\theta_i$ obtaining a score of $x$ or higher on an item with three parameters ($a$, $b$, and $\alpha$) is specified as,
+
+\begin{equation} 
+  P_{ij}(X\geq x|\theta_{i},a_j,b_j,\alpha_j)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{v}{e^{-\frac{t^2}{2}}dt}
+  (\#eq:1)
+\end{equation} 
+
+\begin{equation} 
+  v=a_j\times (\theta_i-b_j-\frac{1}{\alpha_j}ln\frac{x_{ij}}{k_j-x_{ij}})
+  (\#eq:2)
+\end{equation} 
+
+where $k_j$ is the maximum possible score for the item. 
+
+$x_{ij}^*$ is a nonlinear transformation of the observed continous score, 
+
+\begin{equation} 
+  x_{ij}^* = ln(\frac{x_{ij}}{k_j-x_{ij}}),
+  (\#eq:3)
+\end{equation} 
+
+and its conditional PDF is a normal distribution with a mean of $\alpha_j(\theta_i - b_j)$ and standard deviation of $\alpha_j/a_j$.
+
+\begin{equation} 
+  x^* \sim N(\alpha_j(\theta_i - b_j),\alpha_j/a_j).
+  (\#eq:4)
+\end{equation} 
+  
+Let's also remember that the maximum likelihood estimate of $\theta$ in CRM has a closed formula and can easily be computed based on the item parameters.
+  
+\begin{equation} 
+  \hat\theta_i = \frac{\sum_{j=1}^{n}a_j^2(b_j+\frac{x_{ij}^*}{\alpha_j})}{\sum_{j=1}^{n}a_j^2}
+  (\#eq:5)
+\end{equation} 
+ 
+Now, given that what we know, let's do a quick exercise. Let's say a student got a score of 120 from Form 4. What would be the expected score if we administered Form 11 to the same student?
+    
+**Step 1**: Transform the observed score from Form 4 (Eq. 3). 
+
+  $$x_{ij}^* = ln(\frac{120}{250-120})=-0.080$$
+    
+**Step 2**: Given the item parameters for Form 4 and the transformed score, obtain an estimate of latent ability,  $\hat\theta_i$ (Eg. 5). I know it will sound absurd for those who are familiar with other IRT models to estimate latent trait using a single item. We can do it in CRM. Note that when there is only one item, the ML estimate simplifies. So, if you write Eq.5 for a single item, the estimate is equal to 
+$$\hat\theta_i = b_j + \frac{x_{ij}^*}{\alpha_j}.$$ 
+
+Alternatively, you can think about it as the following. For a given $x_{ij}^*$, we know its expected value is $\alpha_j(\theta_i - b_j)$. So, we can get the same equation if we solve the following equation for $\theta$,
+
+$$x_{ij}^* = \alpha_j(\theta_i - b_j).$$
+Either way, we can get the estimate of $theta$ based on the Form 4 score.
+
+  $$\hat\theta = -0.729 + \frac{-0.08}{1.108}= -0.801 $$
+    
+**Step 3**: Given the theta estimate in Step 2 and item parameters for Form 11, compute the expected transformed score (mean of the conditional distribution) in Form 11.
+
+$$x_{ij}^* = \alpha_j(\theta_i - b_j) = 1.013*(-0.801-0.426) = -1.243$$
+  
+**Step 4**: Transform the expected score in Form 11 back to its original scale.
+
+$$ x_{ij} = \frac{e^{x_{ij}^*}*k_j}{e^{x_{ij}^*}+1}$$
+
+$$ x_{ij} = \frac{e^{-1.243}*250}{e^{-1.243}+1}=55.98$$
+
+This indicates that a student who received a score of 120 from Form 4 is expected to receive a score of 55.98 (~ 56) from Form 11. This is not surprising as Form 11 is more difficult than Form 4.
+
+Below is an R code to produce some sort of conversion table for all possible scores from 1 to 249. You can change the item parameters and maximum score to get the conversion table for any hypothetical two forms.
+
+```{r,echo=TRUE,eval=TRUE}
+
+# Generate CRM item parameters
+
+set.seed(123)
+
+a     <- rlnorm(20,.5,.5)
+b     <- rnorm(20,0,1)
+alpha <- rnorm(20,1,.05)
+
+ipar <- cbind(a,b,alpha)
+
+colnames(ipar) = NULL
+rownames(ipar) <- paste0("Form ",1:20)
+
+#################################
+
+# two forms to be equated
+
+  form1 = 4
+  form2 = 11
+
+ipar1 <- ipar[form1,]
+ipar2 <- ipar[form2,]
+max.score = 250
+
+raw <- as.data.frame(as.matrix(1:249))
+raw$Form2 = NA
+raw$Theta = NA
+colnames(raw)[1] <- "Form1"
+
+for(i in 1:nrow(raw)){
+  z1 = log(raw[i,1]/(max.score-raw[i,1]))
+  theta = (z1/ipar1[3])+ipar1[2]
+  z2 = ipar2[3]*(theta-ipar2[2])
+  raw[i,2]=(exp(z2)*max.score)/(exp(z2)+1)
+  raw[i,3]= theta
+}
+
+round(raw,2)
+```  
+
+We can also plot the expected score for both forms as a function of theta.
+
+```{r}
+plot(raw[,3],raw[,1],type="l",xlab="Theta",ylab="Expected Score")
+points(raw[,3],raw[,2],type='l',lty=2)
+legend("bottomright",c("Form 1","Form 2"),lty=c(1,2))
+```
+

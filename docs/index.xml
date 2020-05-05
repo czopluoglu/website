@@ -12,7 +12,16 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Sat, 28 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 05 May 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Equating Oral Reading Fluency Scores from Reading Passages</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-equating</link>
+      <description>A non-peer reviewed opinion about how one can equate oral reading fluency scores from two reading passages with different difficulty levels using Samejima's Continuous Response Model.</description>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-equating</guid>
+      <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/crm-equating/image.png" medium="image" type="image/png" width="1108" height="825"/>
+    </item>
     <item>
       <title>Tracking the Number of Deceased People by Scraping Data from www.turkiye.gov.tr</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>
