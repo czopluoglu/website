@@ -14,15 +14,20 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Working Papers
 
-- Zopluoglu, C., Kasli, M., & Toton, S. (under review). The Effect of Item Preknowledge on Response Time: Analysis of an Experimental Dataset Using the Multiple-Group Lognormal Response Time Model.
+- Kasli, M., Zopluoglu, C., & Toton, S. (under review). A Deterministic Gated Lognormal Response Time Model to Identify Examinees with Item Preknowledge. <br>[**Download Preprint**](https://psyarxiv.com/bqa3t)
+
+- Zopluoglu, C., Kasli, M., & Toton, S. (under review). The Effect of Item Preknowledge on Response Time: Analysis of an Experimental Dataset Using the Multiple-Group Lognormal Response Time Model with a Gating Mechanism. <br>[**Download Preprint**](https://psyarxiv.com/snkuy)
 
 ## Published Papers
 
-- Zopluoglu, C. (in press). Computation of response similarity index M4 in R under the dichotomous and nominal item response models. International Journal of Assessment Tools in Education, 6 (5-special issue), 1-19. https://doi.org/10.21449/ijate.527299 <br>
-[**Download/Request**](https://dergipark.org.tr/en/download/article-file/649505)
+- Prilleltensky, I., Dietz, S., Zopluoglu, C., Clarke, A., Lipsky, M., & Hartnett, C. (2020). Assessing a culture of mattering in a higher education context. Journal for the Study of Postsecondary and Tertiary Education, 5, 58-104. https://doi.org/10.28945/4539 <br>
+[**Download/Request**](http://www.jspte.org/Volume5/JSPTEv5p085-104Prilleltensky6169.pdf)
 
-- Zopluoglu, C. (in press). A Finite Mixture Item Response Theory Model for Continuous Measurement Outcomes. Educational and Psychological Measurement. https://doi.org/10.1177/0013164419856663 <br>
+- Zopluoglu, C. (2020). A Finite Mixture Item Response Theory Model for Continuous Measurement Outcomes. Educational and Psychological Measurement, 80(2), 346–364. https://doi.org/10.1177/0013164419856663 https://doi.org/10.1177/0013164419856663 <br>
 [**Download/Request**](https://www.researchgate.net/publication/317095748)
+
+- Zopluoglu, C. (2019). Computation of the Response Similarity Index M4 in R under the Dichotomous and Nominal Item Response Models. International Journal of Assessment Tools in Education , 6 (5) , 1-19 . DOI: 10.21449/ijate.527299 <br>
+[**Download/Request**](https://dergipark.org.tr/en/pub/ijate/issue/43543/527299)
 
 - Zopluoglu, C. (2019). Detecting Examinees With Item Preknowledge in Large-Scale Testing Using Extreme Gradient Boosting (XGBoost). Educational and Psychological Measurement, 79(5), 931–961. https://doi.org/10.1177/0013164419839439 <br>
 [**Download/Request**](https://www.researchgate.net/publication/332158210) 
