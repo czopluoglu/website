@@ -20,6 +20,9 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Published Papers
 
+- de l’Etoile, S. K., Bennett, C., & Zopluoglu, C. (in press). Infant Movement Response to Auditory Rhythm. Perceptual and Motor Skills. https://doi.org/10.1177/0031512520922642 <br>
+[**Download/Request**](mailto:cengiz@uoregon.edu)
+
 - Prilleltensky, I., Dietz, S., Zopluoglu, C., Clarke, A., Lipsky, M., & Hartnett, C. (2020). Assessing a culture of mattering in a higher education context. Journal for the Study of Postsecondary and Tertiary Education, 5, 58-104. https://doi.org/10.28945/4539 <br>
 [**Download/Request**](http://www.jspte.org/Volume5/JSPTEv5p085-104Prilleltensky6169.pdf)
 
