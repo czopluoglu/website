@@ -51,7 +51,6 @@ knitr::opts_chunk$set(echo = FALSE)
 ## People
 
 - [David Thissen](http://dthissen.web.unc.edu/courses/)
-- [Judea Pearl, UCLA](http://bayes.cs.ucla.edu/WHY/)
 - [Paul Meehl](http://meehl.umn.edu/talks/philosophical-psychology-1989)
 - [Notes on Meehl](http://psychbrief.com/meehl-videos-papers/)
 - [Andrew Gelman](http://www.stat.columbia.edu/~gelman/)
