@@ -35,6 +35,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - [Bayesian model evaluation](https://avehtari.github.io/modelselection/CV-FAQ.html)
 - [Data Science in Education Using R](https://datascienceineducation.com/)
 - [Open Stats Lab](http://sites.trinity.edu/osl/)
+- [Applied Machine Learning](http://www.cs.columbia.edu/~amueller/comsw4995s20/schedule/)
 
 ## R/Shiny
 
@@ -42,6 +43,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - [Mastering Shiny](https://mastering-shiny.org/)
 - [How to create R Tutorial Interface](https://github.com/datacamp/tutorial)
 - [Setting up Shiny Server on Cloud](https://www.marinedatascience.co/blog/2019/04/28/run-shiny-server-on-your-own-digitalocean-droplet-part-1/)
+- [Learning R - Youtube: Compiled by Flavio Azevedo](http://flavioazevedo.com/stats-and-r-blog/2016/9/13/learning-r-on-youtube)
 
 ## Conferences
 
