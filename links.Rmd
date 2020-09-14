@@ -37,6 +37,7 @@ knitr::opts_chunk$set(echo = FALSE)
 - [Open Stats Lab](http://sites.trinity.edu/osl/)
 - [Applied Machine Learning](http://www.cs.columbia.edu/~amueller/comsw4995s20/schedule/)
 - [Machine Learning from Scratch](https://dafriedman97.github.io/mlbook/content/introduction.html)
+- [Introduction to Casual Inference](https://www.bradyneal.com/causal-inference-course)
 
 
 ## R/Shiny
