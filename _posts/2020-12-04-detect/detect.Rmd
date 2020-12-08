@@ -66,7 +66,7 @@ options(knitr.kable.NA = '')
 
 ```
 
-If you ever study the multidimensional item response model, you will likely read
+If you ever study the multidimensional item response models, you will likely read
 about DETECT [(Zhang & Stout, 1999)](https://doi.org/10.1007/BF02294536) at some point as an alternative procedure for dimensionality assessment. DETECT, Dimensionality Evaluation to Enumerate Contributing Traits, is a conditional covariance-based nonparametric method to assess multidimensionality. The procedure was available as part of a commercial software package, and then it has been made public a while ago [(DIMPACK software)](https://psychometrics.onlinehelp.measuredprogress.org/tools/dim/). The original software has user-friendly point-and-click interface, as shown below.
 
 ```{r, echo=FALSE,fig.cap='A screenshot of user interface from DIMPACK',fig.align='center'}
@@ -87,7 +87,7 @@ $$
 
 in which $\theta_1$ and $\theta_2$ are the person parameters for the two latent dimensions, $a_1$ and $a_2$ are the item discrimination parameters, $g$ is the item guessing parameter (lower bound), $u$ is the slipping parameter (upper bound), and $d$ is the intercept parameter. 
 
-Below, I adopted a table of item parameters from Reckase(2009) to generate data (Table 6.1). 
+Below, I adopted and slightly modified a table of item parameters from Reckase(2009) to generate data (Table 6.1). 
 
 ```{r echo=TRUE, eval=TRUE}
 ipar <- read.csv('data/ipar.csv')
@@ -311,7 +311,7 @@ The inputs in this file are:
 
 Once this input file is created, we also need the data file to exist in the same directory. For DETECT analysis, I always prepare my datasets in fixed-width format such that each character corresponds to an item. You can use the following code to write the sample data file in fixed-width format.
 
-```{r echo=FALSE, eval=TRUE}
+```{r echo=TRUE, eval=FALSE}
 
   require(gdata)
 
@@ -348,10 +348,10 @@ Finally, we can invoke a system command to execute the analysis using the `detec
 knitr::include_graphics('data/Capture.png')
 ```
 
-When the Fortran code is examined, it appears that `detect4.exe` specifically searches for a file labeled as `detect.in` in the same folder when it is invoked and always runs that file. Therefore, the input file in the folder must always be labeled as detect.in. This information is important for the next section when you analyze many datasets. You have to update the file information in the `detect.in` file every time you analyze a different dataset. Once the analysis is done, the DETECT output file (resp.out) should be written in the same folder after the analysis.
+When the Fortran code is examined, it appears that `detect4.exe` specifically searches for a file labeled as `detect.in` in the same folder when it is invoked and always runs that file. Therefore, the input file in the folder must always be labeled as detect.in. This information is important for the next section when you analyze many datasets. You have to update the information in the `detect.in` file every time you analyze a different dataset. Once the analysis is done, the DETECT output file (resp.out) should be written in the same folder after the analysis.
 
 
-```{r echo=FALSE, eval=TRUE,class.output = c('foo', 'bar')}
+```{r echo=FALSE, eval=TRUE}
 cat(readLines(here('_posts/2020-12-04-detect/test/resp.out')), sep = '\n')
 ```
 
@@ -683,7 +683,7 @@ table(ndim)/1000
 Finally, we can check the distribution of cluster assignment accuracy. On average, DETECT assigned 84% of all item pairs to the correct clusters.
 
 
-```{r echo=TRUE, eval=TRUE, message=FALSE,warning=FALSE, fig.width=6,fig.height=6,fig.align='center',fig.cap='Sampling distribution of DETECT estimate (N=250) for a particular set of multidimensional item parameters'}
+```{r echo=TRUE, eval=TRUE, message=FALSE,warning=FALSE, fig.width=6,fig.height=6,fig.align='center',fig.cap='Sampling distribution of cluster assignment accuracy for a particular set of multidimensional item parameters'}
 
 hist(accuracy,prob=TRUE,col='white')
 lines(density(accuracy))
