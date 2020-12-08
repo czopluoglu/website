@@ -76,8 +76,8 @@
       "title": "Links",
       "description": "##",
       "author": [],
-      "contents": "\r\nDatabase\r\nData Tools for College Professors and Students\r\nOpen Psychometrics\r\nPISA\r\nTIMSS and PIRLS\r\nThe Educational Opportunity Project\r\nMiscellaneous Datasets\r\nGoogle Dataset Search\r\nDiscover Mendeley Data\r\nStatistics/Data Science\r\nMachine Learning Crash Course\r\nCourse Handouts for Bayesian Data Analysis\r\nData Science in Education Using R\r\nDoing Bayesian Data Analysis in brms and the tidyverse\r\nQuantitative Developmental Systems Methodology Core\r\nUCLA IDRE Data Analysis Examples\r\nHarvard Data Science Review\r\nR for Data Science\r\nFast.ai\r\nReading in Applied Data Science\r\nMachine Learning Course by Yaser Abu-Mostafa\r\nBayesian model evaluation\r\nData Science in Education Using R\r\nOpen Stats Lab\r\nApplied Machine Learning\r\nMachine Learning from Scratch\r\nIntroduction to Casual Inference\r\nAI Expert Roadmap\r\nR/Shiny\r\nAdvanced R by Hadley Wickham\r\nMastering Shiny\r\nHow to create R Tutorial Interface\r\nSetting up Shiny Server on Cloud\r\nLearning R - Youtube: Compiled by Flavio Azevedo\r\nLearn R for Free: Compiled by Mine Dogucu\r\nConferences\r\nConference on Test Security\r\nNCME\r\nPeople\r\nDavid Thissen\r\nPaul Meehl\r\nNotes on Meehl\r\nAndrew Gelman\r\n\r\n\r\n\r\n",
-      "last_modified": "2020-12-04T16:43:31-08:00"
+      "contents": "\r\nDatabase\r\nData Tools for College Professors and Students\r\nOpen Psychometrics\r\nPISA\r\nTIMSS and PIRLS\r\nThe Educational Opportunity Project\r\nMiscellaneous Datasets\r\nGoogle Dataset Search\r\nDiscover Mendeley Data\r\nStatistics/Data Science\r\nMachine Learning Crash Course\r\nCourse Handouts for Bayesian Data Analysis\r\nData Science in Education Using R\r\nDoing Bayesian Data Analysis in brms and the tidyverse\r\nQuantitative Developmental Systems Methodology Core\r\nUCLA IDRE Data Analysis Examples\r\nHarvard Data Science Review\r\nR for Data Science\r\nFast.ai\r\nReading in Applied Data Science\r\nMachine Learning Course by Yaser Abu-Mostafa\r\nBayesian model evaluation\r\nData Science in Education Using R\r\nOpen Stats Lab\r\nApplied Machine Learning\r\nMachine Learning from Scratch\r\nIntroduction to Casual Inference\r\nAI Expert Roadmap\r\nR/Shiny\r\nAdvanced R by Hadley Wickham\r\nMastering Shiny\r\nHow to create R Tutorial Interface\r\nSetting up Shiny Server on Cloud\r\nLearning R - Youtube: Compiled by Flavio Azevedo\r\nLearn R for Free: Compiled by Mine Dogucu\r\nR Bloggers\r\nConferences\r\nConference on Test Security\r\nNCME\r\nPeople\r\nDavid Thissen\r\nPaul Meehl\r\nNotes on Meehl\r\nAndrew Gelman\r\n\r\n\r\n\r\n",
+      "last_modified": "2020-12-08T13:42:04-08:00"
     },
     {
       "path": "measurement.html",
@@ -107,7 +107,7 @@
       "path": "README.html",
       "author": [],
       "contents": "\r\n\r\nCengiz Zopluoglu’s Personal Site/ Blog\r\ncengiz.me based on RStudio’s distill and distill_website theme.\r\n\r\n\r\n",
-      "last_modified": "2020-12-08T13:10:35-08:00"
+      "last_modified": "2020-12-08T13:42:04-08:00"
     }
   ],
   "collections": ["posts/posts.json"]

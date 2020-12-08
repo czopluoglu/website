@@ -1,7 +1,6 @@
 ---
 title: 'Calculating Expected Values given the Multidimensional Item Response Model Parameters'
 description: |
-ABC
 draft: true
 author:
   - name: Cengiz Zopluoglu
