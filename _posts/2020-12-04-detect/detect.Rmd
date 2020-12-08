@@ -89,11 +89,7 @@ in which $\theta_1$ and $\theta_2$ are the person parameters for the two latent 
 
 Below, I adopted a table of item parameters from Reckase(2009) to generate data (Table 6.1). 
 
-[Download the item parameter file](/data/ipar.csv)
-
-```{r echo=FALSE}
-xfun::embed_file(here('_posts/2020-12-04-detect/data/ipar.csv'))
-```
+[Download the item parameter file](/_posts/2020-12-04-detect/data/ipar.csv)
 
 ```{r echo=TRUE, eval=TRUE}
 ipar <- read.csv('data/ipar.csv')
@@ -280,15 +276,11 @@ The total number of partitions for an n-item test is equal to a [Bell number](ht
 
 I wish I could have the skills to demonstrate how this algorithm works by walking you through some R code, but unfortunately, I don't (maybe one day, there is always hope!). The original Fortran code for the software is available if you download the [DIMPACK software](https://psychometrics.onlinehelp.measuredprogress.org/tools/dim/). `detect4.exe` is a compiled Fortran code that requires a text file as an input to run the analysis for a given dataset.
 
-```{r echo=FALSE}
-xfun::embed_file(here('_posts/2020-12-04-detect/test/detect4.exe'))
-```
+[Download the detect4.exe file](/_posts/2020-12-04-detect/test/detect4.exe)
 
 &nbsp;
 
-```{r echo=FALSE}
-xfun::embed_file(here('_posts/2020-12-04-detect/test/detect4.for'))
-```
+[Download the Fortran source file for the detect4.exe file](/_posts/2020-12-04-detect/test/detect4.for)
 
 &nbsp;
 
@@ -298,10 +290,7 @@ The input text file for the `detect4.exe` program should look like this, and the
 include_url('data/detect.in', height = "500px")
 ```
 
-
-```{r echo=FALSE}
-xfun::embed_file(here('_posts/2020-12-04-detect/data/detect.in'))
-```
+[Download the DETECT input file](/_posts/2020-12-04-detect/data/detect.in)
 
 &nbsp;
 
@@ -345,9 +334,7 @@ Our data in fixed-width format should look like this.
 knitr::include_graphics('data/data.png')
 ```
 
-```{r echo=FALSE}
-xfun::embed_file(here('_posts/2020-12-04-detect/test/resp.dat'))
-```
+[Download the simulated dataset](/_posts/2020-12-04-detect/test/resp.dat)
 
 &nbsp;
 
@@ -375,9 +362,7 @@ When the Fortran code is examined, it appears that `detect4.exe` specifically se
 include_url('test/resp.out', height = "500px")
 ```
 
-```{r echo=FALSE}
-xfun::embed_file(here('_posts/2020-12-04-detect/test/resp.out'))
-```
+[Download the DETECT output file](/_posts/2020-12-04-detect/test/resp.out)
 
 &nbsp;
 
