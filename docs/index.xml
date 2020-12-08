@@ -12,7 +12,22 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Tue, 05 May 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 08 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Automated DETECT analysis using R</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/2020-12-04-detect</link>
+      <description>The post is organized as follows. First, we simulate a dataset using a multidimensional IRT model and compute the actual DETECT value using the correct item partitioning. Second, a brief description of the DETECT index is provided, and the DETECT value is calculated based on this definition based on the true item clustering for the simulated dataset. Then, we compute the same value using the original DETECT program by executing it through R. Finally, we conduct a simple simulation to demonstrate how to automate running DETECT to analyze many datasets and processing the DETECT output files in R.</description>
+      <category>dimensionality</category>
+      <category>DETECT</category>
+      <category>multidimensional IRT</category>
+      <category>item response theory</category>
+      <category>R</category>
+      <category>2020</category>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/2020-12-04-detect</guid>
+      <pubDate>Tue, 08 Dec 2020 00:00:00 +0000</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/2020-12-04-detect/download.png" medium="image" type="image/png" width="1152" height="1152"/>
+    </item>
     <item>
       <title>Equating Oral Reading Fluency Scores from Reading Passages</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>

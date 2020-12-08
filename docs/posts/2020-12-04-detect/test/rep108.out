@@ -1,0 +1,87 @@
+-------------------------------------------------------
+                  DETECT SUMMARY OUTPUT
+-------------------------------------------------------
+ 
+                    Data File Name: C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/test/rep108.dat                                         
+
+              Number of Items used:       20
+
+           Number of Items dropped:        0
+
+               Number of Examinees:      250
+
+                 Minimum Number of 
+                Examinees per Cell:        2
+
+         Number of Vectors Mutated:        4
+
+      Maximum Number of Dimensions:       12
+
+                Randomization Seed:    99991
+
+   Minimum percentage of examinees
+         used after deleting cells
+     having less than  2 examinees:    98.40
+
+   Average percentage of examinees
+         used after deleting cells
+     having less than  2 examinees:    99.48
+ 
+-------------------------------------------------------
+
+ NUMBER OF DIMENSIONS THAT MAXIMIZE DETECT:  4
+ 
+  Exploratory DETECT Statistics:
+
+              Maximum DETECT value:   0.6844
+                   IDN index value:   0.6842
+                           Ratio r:   0.5774
+
+ PARTITION WITH MAXIMUM DETECT VALUE:
+
+    1    2    3    2    1    1    1    2    1    1
+    4    3    2    3    3    4    4    4    4    4
+
+ CLUSTER MEMBERSHIPS:
+
+   -----------CLUSTER  1-------------
+
+    1    5    6    7    9   10
+
+   -----------CLUSTER  2-------------
+
+    2    4    8   13
+
+   -----------CLUSTER  3-------------
+
+    3   12   14   15
+
+   -----------CLUSTER  4-------------
+
+   11   16   17   18   19   20
+ 
+   ----------------------------------
+ 
+  Covariance Sign Pattern Matrix:
+   d--+++-------++-+-+-
+   -d-++++-+---+-+---++
+   --d+++-+--+---------
+   +++d+-----+----++---
+   ++++d++++-++-++-----
+   +++-+d-+++---+----+-
+   -+--+-d++++--+---+--
+   --+-+++d++----+-----
+   -+--++++d--++-+-----
+   -----+++-d--+--+-+++
+   --+++-+---d++--+--++
+   ----+---+-+d++-+-+++
+   -+------++++d+--++--
+   +---+++----++d+++--+
+   ++--+--++----+d+-+++
+   ---+-----+++-++d+-++
+   +--+--------++-+d+++
+   ------+--+-++-+-+d++
+   ++---+---+++--++++d+
+   -+-------+++-++++++d
+ 
+ No cross validation for this DETECT run

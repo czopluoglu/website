@@ -1,0 +1,32 @@
+name of data file
+C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/test/rep1.dat
+no.of items
+20
+no.of examinees
+250
+mincell
+2
+mutations
+4
+max dimensions
+12
+dropflag
+0
+no.of items to drop from the analysis
+0
+items to be dropped
+0
+confimatory flag
+0
+crosflag
+0
+no.of examinees to set aside for cross validation
+0
+seed
+99991
+name of detect summary output file
+C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/test/rep1.out
+cluster output flag
+0
+covariance output flag
+0

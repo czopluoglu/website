@@ -2,114 +2,122 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" version="1.0">
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/about.html</loc>
-    <lastmod>2020-08-24T13:51:40-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:49-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/categorical.html</loc>
-    <lastmod>2020-08-24T13:51:40-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:49-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/copydetect.html</loc>
-    <lastmod>2020-08-24T13:51:40-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:49-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/estcrm.html</loc>
-    <lastmod>2020-08-24T13:51:45-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:50-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/fitpmm.html</loc>
-    <lastmod>2020-08-24T13:51:45-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:50-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/</loc>
-    <lastmod>2020-08-24T13:51:45-07:00</lastmod>
+    <lastmod>2020-12-04T16:30:19-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/intror.html</loc>
-    <lastmod>2020-08-24T13:51:45-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:50-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/irt.html</loc>
-    <lastmod>2020-08-24T13:51:45-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:50-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/itemanalysis.html</loc>
-    <lastmod>2020-08-24T13:51:45-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:50-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/links.html</loc>
-    <lastmod>2020-09-14T12:25:47-07:00</lastmod>
+    <lastmod>2020-12-04T16:43:30-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/measurement.html</loc>
-    <lastmod>2020-08-24T13:51:45-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:50-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/publications.html</loc>
-    <lastmod>2020-08-24T13:51:45-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:50-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/qm.html</loc>
-    <lastmod>2020-08-24T13:51:45-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:50-08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/README.html</loc>
+    <lastmod>2020-12-04T16:35:09-08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/2020-12-04-detect/</loc>
+    <lastmod>2020-12-08T00:43:33-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-equating/</loc>
-    <lastmod>2020-08-24T13:51:36-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:48-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-turkey.gov.tr/</loc>
-    <lastmod>2020-08-24T13:51:40-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:49-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/grmint/</loc>
-    <lastmod>2020-08-24T13:51:36-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:48-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp/</loc>
-    <lastmod>2020-08-24T13:51:40-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:49-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan/</loc>
-    <lastmod>2020-08-24T13:51:36-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:48-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan/</loc>
-    <lastmod>2020-08-24T13:51:36-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:48-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2/</loc>
-    <lastmod>2020-08-24T13:51:40-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:49-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/xgboost/</loc>
-    <lastmod>2020-08-24T13:51:40-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:49-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey/</loc>
-    <lastmod>2020-08-24T13:51:36-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:48-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/epm-keywords/</loc>
-    <lastmod>2020-08-24T13:51:36-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:48-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting/</loc>
-    <lastmod>2020-08-24T13:51:36-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:48-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data/</loc>
-    <lastmod>2020-08-24T13:51:36-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:48-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/a-quick-look-at-the-elections-2018/</loc>
-    <lastmod>2020-08-24T13:51:36-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:48-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-2018-election-data/</loc>
-    <lastmod>2020-08-24T13:51:40-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:49-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-data-for-2014-gubernatorial-elections/</loc>
-    <lastmod>2020-08-24T13:51:40-07:00</lastmod>
+    <lastmod>2020-12-04T16:11:49-08:00</lastmod>
   </url>
 </urlset>
