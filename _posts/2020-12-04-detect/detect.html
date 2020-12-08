@@ -2738,6 +2738,7 @@ P(Y=1 | \theta_1,\theta_2,a_1,a_2,d,g,u) = g + (u-g)\frac{1}{1 + e^{-(a_1\theta_
 19 0.00 0.73  1.13 0.25 0.97
 20 0.00 0.64  0.02 0.10 0.99</code></pre>
 </div>
+<p><a href="https://github.com/czopluoglu/website/blob/master/docs/posts/2020-12-04-detect/data/ipar.csv">Download the item parameter file</a></p>
 <p> </p>
 <p>The below code generates dichotomous response data for 1000 hypothetical test-takers using the following steps:</p>
 <ol type="1">
@@ -5107,6 +5108,8 @@ X20
 </ul>
 <p>The total number of partitions for an n-item test is equal to a <a href="https://en.wikipedia.org/wiki/Bell_number">Bell number</a> in mathematics and increases incredibly as the number of elements increases. For instance, the number of possible partitions reaches 115,975 for ten items. Thus, dimensionality analysis becomes an optimization problem through an exhaustive search for the optimal partitioning of items that give the maximum DETECT value. <a href="http://hdl.handle.net/2142/19110">Kim (1994)</a> originally proposed using some prior judgments with cluster analysis to begin. Then, <a href="https://doi.org/10.1007/BF02294536">(Zhang &amp; Stout, 1999)</a> developed a more sound solution by using a genetic algorithm to optimize the maximum DETECT value among all possible partitions of a set of items. In this optimization process, an informed choice of a partition is specified by the user (e.g., based on cluster analysis) to start. Then the genetic algorithm is used to find the optimum partitioning.</p>
 <p>I wish I could have the skills to demonstrate how this algorithm works by walking you through some R code, but unfortunately, I don’t (maybe one day, there is always hope!). The original Fortran code for the software is available if you download the <a href="https://psychometrics.onlinehelp.measuredprogress.org/tools/dim/">DIMPACK software</a>. <code>detect4.exe</code> is a compiled Fortran code that requires a text file as an input to run the analysis for a given dataset.</p>
+<p><a href="https://github.com/czopluoglu/website/blob/master/docs/posts/2020-12-04-detect/test/detect4.exe">Download the detect4.exe file</a></p>
+<p><a href="https://github.com/czopluoglu/website/blob/master/docs/posts/2020-12-04-detect/test/detect4.for">Download the Fortran source code for the detect4.exe file</a></p>
 <p>The input text file for the <code>detect4.exe</code> program should look like this, and the extension of the file should be <code>.in</code>. In the next section, we will automate the creation of this input text file.</p>
 <div class="layout-chunk" data-layout="l-body">
 <pre><code>name of data file
@@ -5142,7 +5145,7 @@ cluster output flag
 covariance output flag
 0</code></pre>
 </div>
-<p><a href="/data/ipar.csv">Download the item parameter file</a></p>
+<p><a href="https://github.com/czopluoglu/website/blob/master/docs/posts/2020-12-04-detect/data/detect.in">Download the DETECT input file</a></p>
 <p>The inputs in this file are:</p>
 <ul>
 <li><p><code>name of data file</code> –&gt; a path to the sample dataset to be analyzed</p></li>
@@ -5196,9 +5199,49 @@ Figure 4: Necessary files to run detect4.exe file
 </div>
 <p>When the Fortran code is examined, it appears that <code>detect4.exe</code> specifically searches for a file labeled as <code>detect.in</code> in the same folder when it is invoked and always runs that file. Therefore, the input file in the folder must always be labeled as detect.in. This information is important for the next section when you analyze many datasets. You have to update the file information in the <code>detect.in</code> file every time you analyze a different dataset. Once the analysis is done, the DETECT output file (resp.out) should be written in the same folder after the analysis.</p>
 <div class="layout-chunk" data-layout="l-body">
-<iframe src="/test/resp.out" width="624" height="500px">
-</iframe>
+<pre><code>-------------------------------------------------------
+                  DETECT SUMMARY OUTPUT
+-------------------------------------------------------
+ 
+                    Data File Name: C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/test/resp.dat                                           
+
+              Number of Items used:       20
+
+           Number of Items dropped:        0
+
+               Number of Examinees:     1000
+
+                 Minimum Number of 
+                Examinees per Cell:        2
+
+         Number of Vectors Mutated:        4
+
+      Maximum Number of Dimensions:       12
+
+                Randomization Seed:    99991
+
+   Minimum percentage of examinees
+         used after deleting cells
+     having less than  2 examinees:    99.70
+
+   Average percentage of examinees
+         used after deleting cells
+     having less than  2 examinees:    99.97
+ 
+-------------------------------------------------------
+
+ NUMBER OF DIMENSIONS THAT MAXIMIZE DETECT:  3
+ 
+  Exploratory DETECT Statistics:
+
+              Maximum DETECT value:   0.9344
+                   IDN index value:   0.9158
+                           Ratio r:   0.9205
+
+ PARTITION WITH MAXIMUM DETECT VALUE:
+....</code></pre>
 </div>
+<p><a href="https://github.com/czopluoglu/website/blob/master/docs/posts/2020-12-04-detect/test/resp.out">Download the DETECT output file</a></p>
 <p>For this particular simulated dataset, DETECT analysis found three dimensions. It got pretty close to the true structure. The only issue is that the analysis isolated Item 6 on its own from the other two clusters and incorrectly didn’t assign it to where it belongs. That is OK as there is no guarantee that the DETECT procedure will do a perfect job in revealing the underlying structure, and we can speculate that this is probably a sampling error in this case. The maximum DETECT value is reported as 0.9344. This number is slightly different than the maximum DETECT value of 0.9428 we calculated above for the correct partitioning. So, DETECT reports the value for what it thinks the optimal partitioning. Since DETECT couldn’t recover the true partitioning 100%, there is a slight deviation from the DETECT value we calculated for the true partitioning of items.</p>
 <h1 id="d.-automating-detect-runs-for-a-simulation-study">D. Automating DETECT Runs for a Simulation Study</h1>
 <p>We have now a basic sense of what a DETECT input file and input dataset should look like and how we run it using the R system() command. This is all we need to automate many DETECT runs. In this post, I will consider studying the small sample performance of DETECT. For instance, how does the DETECT estimate’s sampling distribution look like when you have a small sample size (e.g., 250)? Is the DETECT estimate biased? How large is the standard error? The study by <a href="https://doi.org/10.1111/j.1745-3984.2006.00014.x">Roussos and Ozbek (2006)</a> looked at this but for a sample size of 120,000. So, we will just replicate a small piece of it, but for the sample size of 250. Note that I am not aware of any large-sample theory developed for the DETECT statistic. We don’t have equations to calculate its standard error for given sample size, or we don’t necessarily know its distribution. A simulation-based approach seems to be the only way to do it.</p>
@@ -5322,8 +5365,38 @@ Figure 4: Necessary files to run detect4.exe file
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<iframe src="/test/detect.in" width="624" height="500px">
-</iframe>
+<pre><code>name of data file
+C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/test/rep1.dat
+no.of items
+20
+no.of examinees
+250
+mincell
+2
+mutations
+4
+max dimensions
+12
+dropflag
+0
+no.of items to drop from the analysis
+0
+items to be dropped
+0
+confimatory flag
+0
+crosflag
+0
+no.of examinees to set aside for cross validation
+0
+seed
+99991
+name of detect summary output file
+C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/test/rep1.out
+cluster output flag
+0
+covariance output flag
+0</code></pre>
 </div>
 <p>We can now invoke a system command again to execute the analysis using <code>detect4.exe</code> for the dataset we just generated with a sample size of 250 using the same item parameters.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -5333,8 +5406,47 @@ Figure 4: Necessary files to run detect4.exe file
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<iframe src="/test/rep1.out" width="624" height="500px">
-</iframe>
+<pre><code>-------------------------------------------------------
+                  DETECT SUMMARY OUTPUT
+-------------------------------------------------------
+ 
+                    Data File Name: C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/test/rep1.dat                                           
+
+              Number of Items used:       20
+
+           Number of Items dropped:        0
+
+               Number of Examinees:      250
+
+                 Minimum Number of 
+                Examinees per Cell:        2
+
+         Number of Vectors Mutated:        4
+
+      Maximum Number of Dimensions:       12
+
+                Randomization Seed:    99991
+
+   Minimum percentage of examinees
+         used after deleting cells
+     having less than  2 examinees:    98.80
+
+   Average percentage of examinees
+         used after deleting cells
+     having less than  2 examinees:    99.50
+ 
+-------------------------------------------------------
+
+ NUMBER OF DIMENSIONS THAT MAXIMIZE DETECT:  4
+ 
+  Exploratory DETECT Statistics:
+
+              Maximum DETECT value:   0.7276
+                   IDN index value:   0.6842
+                           Ratio r:   0.5866
+
+ PARTITION WITH MAXIMUM DETECT VALUE:
+....</code></pre>
 </div>
 <p>This outcome is only for one replication. What would happen if we repeated the same process 1000 times? We can now generate 1000 datasets, update the <code>detect.in</code> for each one of them, and then invoke a system command again to execute the analysis. With all the machinery we described above, it is straightforward through a <code>for</code> loop. Note that this may take a long time depending on your computer configurations. So, you have to be patient. Alternatively, we may parallelize this process to take advantage of multiple cores in most computers. Suppose your computer has 16 cores. We can utilize 10 of those cores and divide this <code>for</code> loop such that it runs 100 replications in each core simultaneously. Parallelizing would significantly reduce the computational time but requires some more coding experience. So, I will leave it to another post.</p>
 <div class="layout-chunk" data-layout="l-body">
@@ -7922,7 +8034,7 @@ Figure 7: Sampling distribution of DETECT estimate (N=250) for a particular set 
 <pre><code>[1] 0.1059856</code></pre>
 </div>
 <p>I can’t believe you have read the whole thing! I hope it was worth your time. Thank you.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
