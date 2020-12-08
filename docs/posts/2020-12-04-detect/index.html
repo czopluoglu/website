@@ -5787,9 +5787,40 @@ X20
 <p>I wish I could have the skills to demonstrate how this algorithm works by walking you through some R code, but unfortunately, I don’t (maybe one day, there is always hope!). The original Fortran code for the software is available if you download the <a href="https://psychometrics.onlinehelp.measuredprogress.org/tools/dim/">DIMPACK software</a>. <code>detect4.exe</code> is a compiled Fortran code that requires a text file as an input to run the analysis for a given dataset.</p>
 <p>The input text file for the <code>detect4.exe</code> program should look like this, and the extension of the file should be <code>.in</code>. In the next section, we will automate the creation of this input text file.</p>
 <div class="layout-chunk" data-layout="l-body">
-<iframe src="https://raw.githubusercontent.com/czopluoglu/website/master/_posts/2020-12-04-detect/data/detect.in" width="624" height="500px">
-</iframe>
+<pre><code>name of data file
+C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/test/resp.dat
+no.of items
+20
+no.of examinees
+1000
+mincell
+2
+mutations
+4
+max dimensions
+12
+dropflag
+0
+no.of items to drop from the analysis
+0
+items to be dropped
+0
+confimatory flag
+0
+crosflag
+0
+no.of examinees to set aside for cross validation
+0
+seed
+99991
+name of detect summary output file
+C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/test/resp.out
+cluster output flag
+0
+covariance output flag
+0</code></pre>
 </div>
+<p><a href="/data/ipar.csv">Download the item parameter file</a></p>
 <p>The inputs in this file are:</p>
 <ul>
 <li><p><code>name of data file</code> –&gt; a path to the sample dataset to be analyzed</p></li>
@@ -5843,7 +5874,7 @@ Figure 4: Necessary files to run detect4.exe file
 </div>
 <p>When the Fortran code is examined, it appears that <code>detect4.exe</code> specifically searches for a file labeled as <code>detect.in</code> in the same folder when it is invoked and always runs that file. Therefore, the input file in the folder must always be labeled as detect.in. This information is important for the next section when you analyze many datasets. You have to update the file information in the <code>detect.in</code> file every time you analyze a different dataset. Once the analysis is done, the DETECT output file (resp.out) should be written in the same folder after the analysis.</p>
 <div class="layout-chunk" data-layout="l-body">
-<iframe src="https://raw.githubusercontent.com/czopluoglu/website/master/_posts/2020-12-04-detect/test/resp.out" width="624" height="500px">
+<iframe src="/test/resp.out" width="624" height="500px">
 </iframe>
 </div>
 <p>For this particular simulated dataset, DETECT analysis found three dimensions. It got pretty close to the true structure. The only issue is that the analysis isolated Item 6 on its own from the other two clusters and incorrectly didn’t assign it to where it belongs. That is OK as there is no guarantee that the DETECT procedure will do a perfect job in revealing the underlying structure, and we can speculate that this is probably a sampling error in this case. The maximum DETECT value is reported as 0.9344. This number is slightly different than the maximum DETECT value of 0.9428 we calculated above for the correct partitioning. So, DETECT reports the value for what it thinks the optimal partitioning. Since DETECT couldn’t recover the true partitioning 100%, there is a slight deviation from the DETECT value we calculated for the true partitioning of items.</p>
@@ -5969,7 +6000,7 @@ Figure 4: Necessary files to run detect4.exe file
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<iframe src="https://raw.githubusercontent.com/czopluoglu/website/master/_posts/2020-12-04-detect/test/detect.in" width="624" height="500px">
+<iframe src="/test/detect.in" width="624" height="500px">
 </iframe>
 </div>
 <p>We can now invoke a system command again to execute the analysis using <code>detect4.exe</code> for the dataset we just generated with a sample size of 250 using the same item parameters.</p>
@@ -5980,7 +6011,7 @@ Figure 4: Necessary files to run detect4.exe file
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<iframe src="https://raw.githubusercontent.com/czopluoglu/website/master/_posts/2020-12-04-detect/test/rep1.out" width="624" height="500px">
+<iframe src="/test/rep1.out" width="624" height="500px">
 </iframe>
 </div>
 <p>This outcome is only for one replication. What would happen if we repeated the same process 1000 times? We can now generate 1000 datasets, update the <code>detect.in</code> for each one of them, and then invoke a system command again to execute the analysis. With all the machinery we described above, it is straightforward through a <code>for</code> loop. Note that this may take a long time depending on your computer configurations. So, you have to be patient. Alternatively, we may parallelize this process to take advantage of multiple cores in most computers. Suppose your computer has 16 cores. We can utilize 10 of those cores and divide this <code>for</code> loop such that it runs 100 replications in each core simultaneously. Parallelizing would significantly reduce the computational time but requires some more coding experience. So, I will leave it to another post.</p>
@@ -8569,7 +8600,7 @@ Figure 7: Sampling distribution of DETECT estimate (N=250) for a particular set 
 <pre><code>[1] 0.1059856</code></pre>
 </div>
 <p>I can’t believe you have read the whole thing! I hope it was worth your time. Thank you.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <section class="footnotes" role="doc-endnotes">
 <hr />
 <ol>
