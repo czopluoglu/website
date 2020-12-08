@@ -350,7 +350,8 @@ knitr::include_graphics('data/Capture.png')
 
 When the Fortran code is examined, it appears that `detect4.exe` specifically searches for a file labeled as `detect.in` in the same folder when it is invoked and always runs that file. Therefore, the input file in the folder must always be labeled as detect.in. This information is important for the next section when you analyze many datasets. You have to update the file information in the `detect.in` file every time you analyze a different dataset. Once the analysis is done, the DETECT output file (resp.out) should be written in the same folder after the analysis.
 
-```{r echo=FALSE, eval=TRUE}
+
+```{r echo=FALSE, eval=TRUE,class.output = c('foo', 'bar')}
 cat(readLines(here('_posts/2020-12-04-detect/test/resp.out')), sep = '\n')
 ```
 
