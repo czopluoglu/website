@@ -89,6 +89,8 @@ in which $\theta_1$ and $\theta_2$ are the person parameters for the two latent 
 
 Below, I adopted a table of item parameters from Reckase(2009) to generate data (Table 6.1). 
 
+[Download the item parameter file](/data/ipar.csv)
+
 ```{r echo=FALSE}
 xfun::embed_file(here('_posts/2020-12-04-detect/data/ipar.csv'))
 ```
