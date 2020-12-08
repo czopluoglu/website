@@ -89,8 +89,6 @@ in which $\theta_1$ and $\theta_2$ are the person parameters for the two latent 
 
 Below, I adopted a table of item parameters from Reckase(2009) to generate data (Table 6.1). 
 
-[Download the item parameter file](/posts/2020-12-04-detect/data/ipar.csv)
-
 ```{r echo=TRUE, eval=TRUE}
 ipar <- read.csv('data/ipar.csv')
 ipar
@@ -276,23 +274,11 @@ The total number of partitions for an n-item test is equal to a [Bell number](ht
 
 I wish I could have the skills to demonstrate how this algorithm works by walking you through some R code, but unfortunately, I don't (maybe one day, there is always hope!). The original Fortran code for the software is available if you download the [DIMPACK software](https://psychometrics.onlinehelp.measuredprogress.org/tools/dim/). `detect4.exe` is a compiled Fortran code that requires a text file as an input to run the analysis for a given dataset.
 
-[Download the detect4.exe file](/posts/2020-12-04-detect/test/detect4.exe)
-
-&nbsp;
-
-[Download the Fortran source file for the detect4.exe file](/posts/2020-12-04-detect/test/detect4.for)
-
-&nbsp;
-
 The input text file for the `detect4.exe` program should look like this, and the extension of the file should be `.in`. In the next section, we will automate the creation of this input text file.
 
 ```{r echo=FALSE, eval=TRUE}
 include_url('data/detect.in', height = "500px")
 ```
-
-[Download the DETECT input file](/posts/2020-12-04-detect/data/detect.in)
-
-&nbsp;
 
 The inputs in this file are:
 
@@ -334,10 +320,6 @@ Our data in fixed-width format should look like this.
 knitr::include_graphics('data/data.png')
 ```
 
-[Download the simulated dataset](/posts/2020-12-04-detect/test/resp.dat)
-
-&nbsp;
-
 To run `detect4.exe` from R, you need to have these three files in the same folder.
 
 1. The dataset as a text file in a fixed-width format (e.g., resp.dat)
@@ -361,10 +343,6 @@ When the Fortran code is examined, it appears that `detect4.exe` specifically se
 ```{r echo=FALSE, eval=TRUE}
 include_url('test/resp.out', height = "500px")
 ```
-
-[Download the DETECT output file](/posts/2020-12-04-detect/test/resp.out)
-
-&nbsp;
 
 For this particular simulated dataset, DETECT analysis found three dimensions. It got pretty close to the true structure. The only issue is that the analysis isolated Item 6 on its own from the other two clusters and incorrectly didn't assign it to where it belongs. That is OK as there is no guarantee that the DETECT procedure will do a perfect job in revealing the underlying structure, and we can speculate that this is probably a sampling error in this case. The maximum DETECT value is reported as 0.9344. This number is slightly different than the maximum DETECT value of 0.9428 we calculated above for the correct partitioning. So, DETECT reports the value for what it thinks the optimal partitioning. Since DETECT couldn't recover the true partitioning 100%, there is a slight deviation from the DETECT value we calculated for the true partitioning of items.
 

@@ -3388,7 +3388,6 @@ P(Y=1 | \theta_1,\theta_2,a_1,a_2,d,g,u) = g + (u-g)\frac{1}{1 + e^{-(a_1\theta_
 \]</span></p>
 <p>in which <span class="math inline">\(\theta_1\)</span> and <span class="math inline">\(\theta_2\)</span> are the person parameters for the two latent dimensions, <span class="math inline">\(a_1\)</span> and <span class="math inline">\(a_2\)</span> are the item discrimination parameters, <span class="math inline">\(g\)</span> is the item guessing parameter (lower bound), <span class="math inline">\(u\)</span> is the slipping parameter (upper bound), and <span class="math inline">\(d\)</span> is the intercept parameter.</p>
 <p>Below, I adopted a table of item parameters from Reckase(2009) to generate data (Table 6.1).</p>
-<p><a href="/posts/2020-12-04-detect/data/ipar.csv">Download the item parameter file</a></p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre><code><span class="va">ipar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">&#39;data/ipar.csv&#39;</span><span class="op">)</span>
@@ -5786,17 +5785,11 @@ X20
 </ul>
 <p>The total number of partitions for an n-item test is equal to a <a href="https://en.wikipedia.org/wiki/Bell_number">Bell number</a> in mathematics and increases incredibly as the number of elements increases. For instance, the number of possible partitions reaches 115,975 for ten items. Thus, dimensionality analysis becomes an optimization problem through an exhaustive search for the optimal partitioning of items that give the maximum DETECT value. <a href="http://hdl.handle.net/2142/19110">Kim (1994)</a> originally proposed using some prior judgments with cluster analysis to begin. Then, <a href="https://doi.org/10.1007/BF02294536">(Zhang &amp; Stout, 1999)</a> developed a more sound solution by using a genetic algorithm to optimize the maximum DETECT value among all possible partitions of a set of items. In this optimization process, an informed choice of a partition is specified by the user (e.g., based on cluster analysis) to start. Then the genetic algorithm is used to find the optimum partitioning.</p>
 <p>I wish I could have the skills to demonstrate how this algorithm works by walking you through some R code, but unfortunately, I don’t (maybe one day, there is always hope!). The original Fortran code for the software is available if you download the <a href="https://psychometrics.onlinehelp.measuredprogress.org/tools/dim/">DIMPACK software</a>. <code>detect4.exe</code> is a compiled Fortran code that requires a text file as an input to run the analysis for a given dataset.</p>
-<p><a href="/posts/2020-12-04-detect/test/detect4.exe">Download the detect4.exe file</a></p>
-<p> </p>
-<p><a href="/posts/2020-12-04-detect/test/detect4.for">Download the Fortran source file for the detect4.exe file</a></p>
-<p> </p>
 <p>The input text file for the <code>detect4.exe</code> program should look like this, and the extension of the file should be <code>.in</code>. In the next section, we will automate the creation of this input text file.</p>
 <div class="layout-chunk" data-layout="l-body">
 <iframe src="data/detect.in" width="624" height="500px">
 </iframe>
 </div>
-<p><a href="/posts/2020-12-04-detect/data/detect.in">Download the DETECT input file</a></p>
-<p> </p>
 <p>The inputs in this file are:</p>
 <ul>
 <li><p><code>name of data file</code> –&gt; a path to the sample dataset to be analyzed</p></li>
@@ -5827,8 +5820,6 @@ Figure 3: A screenshot of fixed-width format data file
 </p>
 </div>
 </div>
-<p><a href="/posts/2020-12-04-detect/test/resp.dat">Download the simulated dataset</a></p>
-<p> </p>
 <p>To run <code>detect4.exe</code> from R, you need to have these three files in the same folder.</p>
 <ol type="1">
 <li>The dataset as a text file in a fixed-width format (e.g., resp.dat)</li>
@@ -5855,8 +5846,6 @@ Figure 4: Necessary files to run detect4.exe file
 <iframe src="test/resp.out" width="624" height="500px">
 </iframe>
 </div>
-<p><a href="/posts/2020-12-04-detect/test/resp.out">Download the DETECT output file</a></p>
-<p> </p>
 <p>For this particular simulated dataset, DETECT analysis found three dimensions. It got pretty close to the true structure. The only issue is that the analysis isolated Item 6 on its own from the other two clusters and incorrectly didn’t assign it to where it belongs. That is OK as there is no guarantee that the DETECT procedure will do a perfect job in revealing the underlying structure, and we can speculate that this is probably a sampling error in this case. The maximum DETECT value is reported as 0.9344. This number is slightly different than the maximum DETECT value of 0.9428 we calculated above for the correct partitioning. So, DETECT reports the value for what it thinks the optimal partitioning. Since DETECT couldn’t recover the true partitioning 100%, there is a slight deviation from the DETECT value we calculated for the true partitioning of items.</p>
 <h1 id="d.-automating-detect-runs-for-a-simulation-study">D. Automating DETECT Runs for a Simulation Study</h1>
 <p>We have now a basic sense of what a DETECT input file and input dataset should look like and how we run it using the R system() command. This is all we need to automate many DETECT runs. In this post, I will consider studying the small sample performance of DETECT. For instance, how does the DETECT estimate’s sampling distribution look like when you have a small sample size (e.g., 250)? Is the DETECT estimate biased? How large is the standard error? The study by <a href="https://doi.org/10.1111/j.1745-3984.2006.00014.x">Roussos and Ozbek (2006)</a> looked at this but for a sample size of 120,000. So, we will just replicate a small piece of it, but for the sample size of 250. Note that I am not aware of any large-sample theory developed for the DETECT statistic. We don’t have equations to calculate its standard error for given sample size, or we don’t necessarily know its distribution. A simulation-based approach seems to be the only way to do it.</p>
