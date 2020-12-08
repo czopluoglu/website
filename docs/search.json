@@ -45,7 +45,7 @@
       "title": "Cengiz Zopluoglu",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2020-12-08T00:39:41-08:00"
+      "last_modified": "2020-12-08T13:10:35-08:00"
     },
     {
       "path": "intror.html",
@@ -107,7 +107,7 @@
       "path": "README.html",
       "author": [],
       "contents": "\r\n\r\nCengiz Zopluoglu’s Personal Site/ Blog\r\ncengiz.me based on RStudio’s distill and distill_website theme.\r\n\r\n\r\n",
-      "last_modified": "2020-12-08T00:39:42-08:00"
+      "last_modified": "2020-12-08T13:10:35-08:00"
     }
   ],
   "collections": ["posts/posts.json"]

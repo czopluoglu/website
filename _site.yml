@@ -69,5 +69,8 @@ favicon: images/unnamed.jpg
 collections:
   posts:
     share: [twitter, linkedin, pinterest, facebook]
-    
+
+rss:
+  full_content: true
+  
 output: distill::distill_article
