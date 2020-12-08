@@ -5798,7 +5798,7 @@ X20
 <p> </p>
 <p>The input text file for the <code>detect4.exe</code> program should look like this, and the extension of the file should be <code>.in</code>. In the next section, we will automate the creation of this input text file.</p>
 <div class="layout-chunk" data-layout="l-body">
-<iframe src="C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/data/detect.in" width="624" height="500px">
+<iframe src="data/detect.in" width="624" height="500px">
 </iframe>
 </div>
 <div class="layout-chunk" data-layout="l-body">
@@ -5862,7 +5862,7 @@ Figure 4: Necessary files to run detect4.exe file
 </div>
 <p>When the Fortran code is examined, it appears that <code>detect4.exe</code> specifically searches for a file labeled as <code>detect.in</code> in the same folder when it is invoked and always runs that file. Therefore, the input file in the folder must always be labeled as detect.in. This information is important for the next section when you analyze many datasets. You have to update the file information in the <code>detect.in</code> file every time you analyze a different dataset. Once the analysis is done, the DETECT output file (resp.out) should be written in the same folder after the analysis.</p>
 <div class="layout-chunk" data-layout="l-body">
-<iframe src="C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/test/resp.out" width="624" height="500px">
+<iframe src="test/resp.out" width="624" height="500px">
 </iframe>
 </div>
 <div class="layout-chunk" data-layout="l-body">
@@ -5992,7 +5992,7 @@ Figure 4: Necessary files to run detect4.exe file
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<iframe src="C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/test/detect.in" width="624" height="500px">
+<iframe src="test/detect.in" width="624" height="500px">
 </iframe>
 </div>
 <p>We can now invoke a system command again to execute the analysis using <code>detect4.exe</code> for the dataset we just generated with a sample size of 250 using the same item parameters.</p>
@@ -6003,7 +6003,7 @@ Figure 4: Necessary files to run detect4.exe file
 </div>
 </div>
 <div class="layout-chunk" data-layout="l-body">
-<iframe src="C:/Users/cengiz/Desktop/Github/website/_posts/2020-12-04-detect/test/rep1.out" width="624" height="500px">
+<iframe src="test/rep1.out" width="624" height="500px">
 </iframe>
 </div>
 <p>This outcome is only for one replication. What would happen if we repeated the same process 1000 times? We can now generate 1000 datasets, update the <code>detect.in</code> for each one of them, and then invoke a system command again to execute the analysis. With all the machinery we described above, it is straightforward through a <code>for</code> loop. Note that this may take a long time depending on your computer configurations. So, you have to be patient. Alternatively, we may parallelize this process to take advantage of multiple cores in most computers. Suppose your computer has 16 cores. We can utilize 10 of those cores and divide this <code>for</code> loop such that it runs 100 replications in each core simultaneously. Parallelizing would significantly reduce the computational time but requires some more coding experience. So, I will leave it to another post.</p>
