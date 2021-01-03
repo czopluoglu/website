@@ -1,0 +1,669 @@
+---
+title: 'A Fascinating Behind-the-Scenes Look at the Population Covariance Matrix for Multidimensional Items'
+description: |
+  
+  This post provides R code to use numerical integration for calculating population-level mean and covariances between item scores generated based on the compensatory and partially compensatory multidimensional models. 
+  
+draft: false
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Oregon
+date: 1-3-2021
+categories:
+  - multidimensional IRT
+  - item response theory
+  - R
+  - numerical integration
+  - '2021'
+output:
+  distill::distill_article:
+    self_contained: true
+    toc: true
+    toc_float: true
+preview: image.png
+header-includes:
+  - \usepackage{amsmath} 
+  - \usepackage{upgreek}
+  - \usepackage{bm}
+  - \usepackage{unicode-math}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+<style>
+
+body {
+text-align: justify}
+
+</style>
+
+```{r echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+require(knitr)
+require(kableExtra)
+require(here)
+require(htmltools)
+require(mime)
+
+# the default output hook
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+    if (!is.null(n <- options$out.lines)) {
+        x = knitr:::split_lines(x)
+        if (length(x) > n) {
+            # truncate the output
+            x = c(head(x, n), '....\n')
+        }
+        x = paste(x, collapse = '\n')  # paste first n lines together
+    }
+    hook_output(x, options)
+})
+
+opts_chunk$set(out.lines = 40)
+opts_chunk$set(width = 40)
+options(max.print=1000000)
+options(knitr.table.format = 'html') 
+options(knitr.kable.NA = '')
+options(scipen=99)
+options(digits = 4)
+```
+
+*Note. The title comes from a click-bait headline generator, and I apologize for that. It was just an experiment.*
+
+
+Recently, I had to compute the population level mean and covariances for a set of items given the item parameters when the underlying response process is based on a multidimensional item response model. One can always approximate these values by simulating a dataset with a considerable sample size (e.g., 100,000) using the response model and then calculate the descriptive statistics. Given the large sample size, these numbers will be very close to population values. Instead, I was trying to calculate them directly from the model by integrating out the latent variables. The nice thing about this approach is that you can compute population-level parameters (e.g., SEM fit indices) if you are doing a simulation, or you can examine the plausibility of your soon-to-be generated datasets. Below, I will present the approach for compensatory and partially compensatory multidimensional IRT models.
+
+## Compensatory Models
+
+Suppose you are working with a three-dimensional 4-PL compensatory item response model. In this model, the probability of a correct response can be written as,
+
+$$
+\begin{equation}
+P(Y=1 | \theta_1,\theta_2,\theta_3,a_1,a_2,a_3,d,g,u) = g + (u-g)\frac{1}{1 + e^{-(a_1\theta_1 + a_2 \theta_2+a_3\theta_3+d)}}(\#eq:1),
+\end{equation}
+$$
+
+in which $\theta_1$, $\theta_2$, and $\theta_3$ are the coordinates for an individual on three latent dimensions; $a_1$, $a_2$, and $a_3$ are the item discrimination parameters, $g$ is the item guessing parameter (lower bound), $u$ is the slipping parameter (upper bound), and $d$ is the intercept parameter. 
+
+Below is a slightly modified table of item parameters from Reckase(2009) to generate data (Table 6.1). 
+
+```{r echo=TRUE, eval=TRUE}
+ipar <- read.csv('data/ipar.csv')
+ipar
+```
+
+[Download the item parameter file]('data/ipar.csv')
+
+### Population-Level Means
+
+We can compute the expected value (mean) for any single item by integrating the probability function over the joint distribution of $\theta_1$, $\theta_2$, and $\theta_3$.
+
+$$\begin{equation}
+E[Y]=\int_{\theta_1}\int_{\theta_2}\int_{\theta_3}P(Y=1)f(\theta_1,\theta_2,\theta_3)d_{\theta_1}d_{\theta_2}d_{\theta_3}(\#eq:2)
+\end{equation}$$
+
+where $f(\theta_1,\theta_2,\theta_3)$ is the joint density function for $\theta_1$, $\theta_2$, and $\theta_3$ and $P(Y=1)$ is given in Eq\@ref(eq:1). In this post, it is assumed that $\theta_1$, $\theta_2$, and $\theta_3$ follow a multivariate normal distribution with 
+
+&nbsp;
+
+<center>**&mu;** $=(0,0,0)$ </center>
+
+&nbsp;
+
+<center>
+**&Sigma;**= $\begin{pmatrix} \sigma_{1}^{2} & \sigma_{12} & \sigma_{13}\\ \sigma_{12} & \sigma_{2}^{2}  & \sigma_{23} \\ \sigma_{13} & \sigma_{23} & \sigma_{3}^{2} \end{pmatrix}$.
+</center>
+
+&nbsp;
+
+I was recently experimenting with R packages for numerical integration, and I found the `mvQuad` package very easy to use and super fast. To do this integration using the `mvQuad` function, we first write a function that takes  item parameters, person parameters, and **&mu;** and **&Sigma;** for the multivariate normal distribution as arguments and returns the value of the following product. 
+$$P(Y=1)f(\theta_1,\theta_2,\theta_3).$$
+
+```{r echo=TRUE, eval=TRUE}
+
+require(mvtnorm)
+
+p.m4pl <- function(theta,a1,a2,a3,d,g,u,M,S){ 
+  
+  z  = a1*theta[,1] + a2*theta[,2] + a3*theta[,3] + d
+  
+  p = g + (u-g)*1/(1+exp(-z))
+
+  f = dmvnorm(theta,mean=M,sigma=S)
+	
+  p*f
+}
+
+
+```
+
+In this function:
+
+- `theta` is a 3-column matrix with columns representing $\theta_1$, $\theta_2$, $\theta_3$, respectively.
+- $a_1$, $a_2$, and $a_3$ are the discrimination parameters
+- $d$ is the intercept parameter
+- $g$ is the lower bound parameter
+- $u$ is the upper bound parameter 
+- **M** is the mean vector with a length of 3 for $\theta_1$, $\theta_2$, $\theta_3$, respectively 
+- **S** is the 3 x 3 covariance matrix for $\theta_1$, $\theta_2$, $\theta_3$
+
+**M** and **S** are internally passed to the `dmvrnorm()` function from the `mvtnorm` package to compute the joint density for $\theta_1$, $\theta_2$, $\theta_3$.
+
+Next, we generate a multivariate grid of Gauss-Hermite quadratures using the `createNIGrid()` function from the `mvQuad` package. This multivariate grid will be used for argument `theta` in the `p.m4pl` function. As we have three dimensions in our model and calculating a triple integration, the `dim` argument should be set to three. The `type` argument is set to `GHe` for the Gauss-Hermite rule. The `level` argument is the number of grid points you want to approximate the latent continuum. For instance, if we choose 3, three points on the continuum will be selected to represent the whole $\theta$ scale. When the number of grid points increases, the precision of approximation to integration also increases at the expense of increased computational time. However, I found this package super fast, although I use 40 grid points, as you will see later. For now, I set it to three to demonstrate the structure. Also, even though it sounds few, three grid points do a fine job of approximation.
+
+```{r echo=TRUE, eval=TRUE}
+require(mvQuad)
+
+nw <- createNIGrid(dim=3, 
+                   type="GHe", 
+                   level=3)
+
+round(getNodes(nw),3)
+```
+
+When we set the `level` argument to three, it picked three points representing each latent dimension: -1.732, 0, and 1.732. `nw` is a 27 x 3 matrix. Each column represents a dimension, and 27 ($3^3$) is the number of all possible combinations for these three grid points. If we set the `level` argument to 40, `nw` would be a $40^3$ x 3 matrix. 
+ 
+You can also get the assigned weights for each combination of grid points.
+
+```{r echo=TRUE, eval=TRUE}
+round(getWeights(nw),3)
+````
+
+After we create the function object (`p.m4pl`) to integrate over and an object for multivariate grid points (`nw`), we can now use the `quadrature()` function to compute the expected value. The first argument for the `quadrature()` function is the name of the function object. The second argument for the `quadrature()` function is the object for the multivariate grid which is passed to the function to be integrated as the first argument (`theta`). Then, all arguments expected by the function to be integrated are given to the `quadrature()` function. Below, I assume the latent dimensions do not correlate to each other, but we can simply modify the `Sigma` if we want to assume the latent dimensions are correlated.
+
+```{r echo=TRUE, eval=TRUE}
+
+mu <- c(0,0,0)
+Sigma <-  diag(3)
+
+quadrature(p.m4pl, 
+           grid = nw,
+           a1=1.01,
+           a2=0.01,
+           a3=0.05,
+           d=0.01,
+           g=0.09,
+           u=0.99,
+           M=mu,
+           S=Sigma)
+```
+
+This indicates that the expected value for an item with parameters of $(a_1,a_2,a_3,d,g,u) = (1.01, 0.01, 0.05, 0.01, 0.09, 0.99)$ would be 0.5419 assuming that three latent dimensions follow a multivariate normal distribution with zero means, unit variances, and zero correlations.
+
+To make this easier, we wrap everything in a single function, and call this function `e.m4pl`.
+
+```{r echo=TRUE, eval=TRUE}
+
+e.m4pl <- function(a1,a2,a3,d,g,u,M,S,nquad){
+
+    p.m4pl <- function(theta,a1,a2,a3,d,g,u,M,S){ 
+      
+      z  = a1*theta[,1] + a2*theta[,2] + a3*theta[,3] + d
+      
+      p = g + (u-g)*(1/(1+exp(-z)))
+    
+      f = dmvnorm(theta,mean=M,sigma=S)
+    	
+      p*f
+    }
+    
+    
+    nw <- createNIGrid(dim=3, type="GHe", level=nquad)
+    
+      
+  quadrature(p.m4pl, 
+             grid = nw,
+             a1=a1,
+             a2=a2,
+             a3=a3,
+             d=d,
+             g=g,
+             u=u,
+             M=M,
+             S=S)
+}
+```
+
+Now, we can compute the expected value for any given set of item parameters when the responses are generated based on a multidimensional 4PL model as shown in Eq\@ref(eq:1)
+
+```{r echo=TRUE, eval=TRUE}
+
+mu    <- c(0,0,0)
+Sigma <-  diag(3)
+
+i = 2 # item number
+
+  e.m4pl(a1 = ipar[i,]$a1,
+         a2 = ipar[i,]$a2,
+         a3 = ipar[i,]$a3,
+         d  = ipar[i,]$d,
+         g  = ipar[i,]$g,
+         u  = ipar[i,]$u,
+         M  = mu,
+         S  = Sigma,
+      nquad = 40)
+
+# Compute the population level means for all 9 items
+  
+exp.means <- c()
+
+for(i in 1:9){
+
+  exp.means[i]= e.m4pl(a1 = ipar[i,]$a1,
+                       a2 = ipar[i,]$a2,
+                       a3 = ipar[i,]$a3,
+                       d  = ipar[i,]$d,
+                       g  = ipar[i,]$g,
+                       u  = ipar[i,]$u,
+                       M  = mu,
+                       S  = Sigma,
+                       nquad = 40)
+}
+
+exp.means
+  
+```
+
+
+### Population-Level Variances and Covariances
+
+We can compute the population level variance for any item using 
+
+$$\begin{equation}
+\sigma_{Y}^{2}=E[Y]-E[Y]^2.(\#eq:3)
+\end{equation}$$
+
+This equation holds as $Y$ is binary and can take only two values (0, 1). This is straightforward since we know how to compute $E[Y]$. For instance, the population variance for Item 1 would be 0.2482.
+
+```{r echo=TRUE, eval=TRUE}
+mu    <- c(0,0,0)
+Sigma <-  diag(3)
+
+i = 1 # item number
+
+  e  <- e.m4pl(a1 = ipar[i,]$a1,
+               a2 = ipar[i,]$a2,
+               a3 = ipar[i,]$a3,
+               d  = ipar[i,]$d,
+               g  = ipar[i,]$g,
+               u  = ipar[i,]$u,
+               M  = mu, S  = Sigma, nquad = 40)
+  e - e^2
+```
+
+To compute the covariance for an item pair given the set of item parameters, we first need to write a new function for the joint probability to integrate over. 
+
+$$\begin{equation}
+E[Y_iY_j]=\int_{\theta_1}\int_{\theta_2}\int_{\theta_3}P(Y_i=1)P(Y_j=1)f(\theta_1,\theta_2,\theta_3)d_{\theta_1}d_{\theta_2}d_{\theta_3}(\#eq:4)
+\end{equation}$$
+
+Below is what we get after tweaking a little bit of the above code written for $E[Y]$.
+
+```{r echo=TRUE, eval=TRUE}
+
+e12.m4pl <- function(a11,a12,a13,d1,g1,u1,a21,a22,a23,d2,g2,u2,M,S,nquad){
+
+    p12.m4pl <- function(theta,a11,a12,a13,d1,g1,u1,a21,a22,a23,d2,g2,u2,M,S){ 
+      
+      z1  = a11*theta[,1] + a12*theta[,2] + a13*theta[,3] + d1
+      z2  = a21*theta[,1] + a22*theta[,2] + a23*theta[,3] + d2
+
+      p1 = g1 + (u1-g1)*(1/(1+exp(-z1)))
+      p2 = g2 + (u2-g2)*(1/(1+exp(-z2)))
+      
+      f = dmvnorm(theta,mean=M,sigma=S)
+    	
+      p1*p2*f
+    }
+    
+    
+    nw <- createNIGrid(dim=3, type="GHe", level=nquad)
+    
+      
+  quadrature(p12.m4pl, 
+             grid = nw,
+             a11 = a11,
+             a12 = a12,
+             a13 = a13,
+             d1  = d1,
+             g1  = g1,
+             u1  = u1,
+             a21 = a21,
+             a22 = a22,
+             a23 = a23,
+             d2  = d2,
+             g2  = g2,
+             u2  = u2,
+             M   = M,
+             S   = S)
+}
+```
+
+
+Now, we can compute the expected covariance for any item pair using 
+
+$$\begin{equation}
+\sigma_{Y_1Y_2}=E[Y_1Y_2]-E[Y_1]E[Y_2].(\#eq:5)
+\end{equation}$$
+
+For instance, the population covariance between Item 1 and Item 2 would be 0.0414.
+
+```{r echo=TRUE, eval=TRUE}
+mu    <- c(0,0,0)
+Sigma <-  diag(3)
+
+i = 1 # item number for the first item
+j = 2 # item number for the second item
+
+  e1  <- e.m4pl(a1 = ipar[i,]$a1,
+                a2 = ipar[i,]$a2,
+                a3 = ipar[i,]$a3,
+                d  = ipar[i,]$d,
+                g  = ipar[i,]$g,
+                u  = ipar[i,]$u,
+                M  = mu, S  = Sigma, nquad = 40)
+
+  e2  <- e.m4pl(a1 = ipar[j,]$a1,
+                a2 = ipar[j,]$a2,
+                a3 = ipar[j,]$a3,
+                d  = ipar[j,]$d,
+                g  = ipar[j,]$g,
+                u  = ipar[j,]$u,
+                M  = mu, S  = Sigma, nquad = 40)
+
+  e12 <- e12.m4pl(a11 = ipar[i,]$a1,
+                  a12 = ipar[i,]$a2,
+                  a13 = ipar[i,]$a3,
+                  d1  = ipar[i,]$d,
+                  g1  = ipar[i,]$g,
+                  u1  = ipar[i,]$u,
+                  a21 = ipar[j,]$a1,
+                  a22 = ipar[j,]$a2,
+                  a23 = ipar[j,]$a3,
+                  d2  = ipar[j,]$d,
+                  g2  = ipar[j,]$g,
+                  u2  = ipar[j,]$u,
+                  M  = mu,
+                  S  = Sigma,
+                  nquad = 40)
+
+  e12 - e1*e2
+```
+
+
+Let's create a wrapper function using these smaller functions to return a population variance-covariance matrix for a given set of item parameters.
+
+```{r echo=TRUE, eval=TRUE}
+
+pop.vcov <- function(ip, M, S, nq){
+  
+  VCOV <- matrix(nrow=nrow(ip),ncol=nrow(ip))
+  
+  for(i in 1:nrow(ip)){
+    
+      e  <- e.m4pl(a1 = ip[i,]$a1,
+                   a2 = ip[i,]$a2,
+                   a3 = ip[i,]$a3,
+                   d  = ip[i,]$d,
+                   g  = ip[i,]$g,
+                   u  = ip[i,]$u,
+                   M  = M, S  = S, nquad = nq)
+
+      VCOV[i,i] <-  e - e^2
+  }
+  
+  for(i in 1:(nrow(ip)-1)){
+    for(j in (i+1):nrow(ip)){
+      
+      e1  <- e.m4pl(a1 = ip[i,]$a1,
+                    a2 = ip[i,]$a2,
+                    a3 = ip[i,]$a3,
+                    d  = ip[i,]$d,
+                    g  = ip[i,]$g,
+                    u  = ip[i,]$u,
+                    M  = M, S  = S, nquad = nq)
+      
+      e2  <- e.m4pl(a1 = ip[j,]$a1,
+                    a2 = ip[j,]$a2,
+                    a3 = ip[j,]$a3,
+                    d  = ip[j,]$d,
+                    g  = ip[j,]$g,
+                    u  = ip[j,]$u,
+                    M  = M, S  = S, nquad = nq)
+      
+      e12 <- e12.m4pl(a11 = ip[i,]$a1,
+                      a12 = ip[i,]$a2,
+                      a13 = ip[i,]$a3,
+                      d1  = ip[i,]$d,
+                      g1  = ip[i,]$g,
+                      u1  = ip[i,]$u,
+                      a21 = ip[j,]$a1,
+                      a22 = ip[j,]$a2,
+                      a23 = ip[j,]$a3,
+                      d2  = ip[j,]$d,
+                      g2  = ip[j,]$g,
+                      u2  = ip[j,]$u,
+                      M  = M,
+                      S  = S,
+                      nquad = nq)
+      
+      VCOV[i,j] <- VCOV[j,i] <- e12 - e1*e2
+    }
+  }
+  
+  return(VCOV=VCOV)
+}
+
+```
+
+We can now compute the population variance-covariance matrix for all these 9 items, and then convert it to a correlation matrix using the `cov2cor()` function.
+
+```{r echo=TRUE, eval=TRUE}
+mu    <- c(0,0,0)
+Sigma <-  diag(3)
+
+VCOV <- pop.vcov(ip = ipar, M = mu, S = Sigma,nq=40)
+
+round(VCOV,3)
+
+round(cov2cor(VCOV),3)
+
+corr <- cov2cor(VCOV)
+
+eigens <- eigen(corr)$values
+
+eigens
+
+plot(eigens)
+```
+
+
+## Partially Compensatory Models
+
+The process above can be applied to any probability model for item responses. The only thing that needs to be adjusted is how we define the probability of correct response given the item and person parameters. Suppose you are working with a two-dimensional 4-PL partially compensatory item response model. In this model, the probability of a correct response can be written as,
+
+$$
+\begin{equation}
+P(Y=1 | \theta_1,\theta_2,a_1,a_2,b_1,b_2,g,u) = g + (u-g) \left(\prod_{l=1}^{2}\frac{1}{1+e^{-a_l(\theta_l-b_l)}}\right)(\#eq:6),
+\end{equation}
+$$
+
+in which $\theta_l$, $a_l$, and $b_l$ are the person parameter, item discrimination parameter, and item difficulty parameters on the $l^{th}$ latent dimension, respectively; $g$ is the item guessing parameter (lower bound), and $u$ is the slipping parameter (upper bound). Below is a table of item parameters for some hypothetical items.
+
+```{r echo=TRUE, eval=TRUE}
+ipar <- read.csv('data/ipar2.csv')
+ipar
+```
+
+[Download the item parameter file]('data/ipar2.csv')
+
+Below are the auxiliary and wrapper functions for this model to compute the population variance-covariance matrix and correlations.
+
+
+```{r echo=TRUE, eval=TRUE}
+
+# Function to compute the marginal expectation
+
+e.pcm4pl <- function(a1,a2,b1,b2,g,u,M,S,nquad){
+
+    p.pcm4pl <- function(theta,a1,a2,b1,b2,d,g,u,M,S){ 
+      
+      z1  = a1*(theta[,1]-b1) 
+      z2  = a2*(theta[,2]-b2) 
+      p = g + (u-g)*(1/(1+exp(-z1)))*(1/(1+exp(-z2)))
+    
+      f = dmvnorm(theta,mean=M,sigma=S)
+    	
+      p*f
+    }
+    
+    
+    nw <- createNIGrid(dim=2, type="GHe", level=nquad)
+    
+      
+  quadrature(p.pcm4pl, 
+             grid = nw,
+             a1=a1,
+             a2=a2,
+             b1=b1,
+             b2=b2,
+             g=g,
+             u=u,
+             M=M,
+             S=S)
+}
+
+
+# Function to compute the expectation for joint probability
+
+e12.pcm4pl <- function(a11,a12,b11,b12,g1,u1,a21,a22,b21,b22,g2,u2,M,S,nquad){
+
+    p12.pcm4pl <- function(theta,a11,a12,b11,b12,g1,u1,a21,a22,b21,b22,g2,u2,M,S){ 
+      
+      z11  = a11*(theta[,1]-b11)
+      z12  = a12*(theta[,2]-b12)
+      
+      z21  = a21*(theta[,1]-b21)
+      z22  = a22*(theta[,2]-b22)
+      
+      p1 = g1 + (u1-g1)*(1/(1+exp(-z11)))*(1/(1+exp(-z12)))
+      p2 = g2 + (u2-g2)*(1/(1+exp(-z21)))*(1/(1+exp(-z22)))
+    
+      f = dmvnorm(theta,mean=M,sigma=S)
+    	
+      p1*p2*f
+    }
+    
+    
+    nw <- createNIGrid(dim=2, type="GHe", level=nquad)
+    
+      
+  quadrature(p12.pcm4pl, 
+             grid = nw,
+             a11  = a11,
+             a12  = a12,
+             b11  = b11,
+             b12  = b12,
+             g1   = g1,
+             u1   = u1,
+             a21  = a21,
+             a22  = a22,
+             b21  = b21,
+             b22  = b22,
+             g2   = g2,
+             u2   = u2,
+             M    = M,
+             S    = S)
+} 
+  
+# Wrapper function
+  
+pop.vcov <- function(ip, M, S, nq){
+  
+  VCOV <- matrix(nrow=nrow(ip),ncol=nrow(ip))
+  
+  for(i in 1:nrow(ip)){
+    
+      e  <- e.pcm4pl(a1 = ip[i,]$a1,
+                     a2 = ip[i,]$a2,
+                     b1 = ip[i,]$b1,
+                     b2 = ip[i,]$b2,
+                     g  = ip[i,]$g,
+                     u  = ip[i,]$u,
+                     M  = M, S  = S, nquad = nq)
+
+      VCOV[i,i] <-  e - e^2
+  }
+  
+  for(i in 1:(nrow(ip)-1)){
+    for(j in (i+1):nrow(ip)){
+      
+      e1  <- e.pcm4pl(a1 = ip[i,]$a1,
+                     a2 = ip[i,]$a2,
+                     b1 = ip[i,]$b1,
+                     b2 = ip[i,]$b2,
+                     g  = ip[i,]$g,
+                     u  = ip[i,]$u,
+                     M  = M, S  = S, nquad = nq)
+      
+      e2 <- e.pcm4pl(a1 = ip[j,]$a1,
+                     a2 = ip[j,]$a2,
+                     b1 = ip[j,]$b1,
+                     b2 = ip[j,]$b2,
+                     g  = ip[j,]$g,
+                     u  = ip[j,]$u,
+                     M  = M, S  = S, nquad = nq)
+
+      e12 <- e12.pcm4pl(a11=ipar[i,1],
+                        a12=ipar[i,2],
+                        b11=ipar[i,3],
+                        b12=ipar[i,4],
+                        g1=ipar[i,5],
+                        u1=ipar[i,6],
+                        a21=ipar[j,1],
+                        a22=ipar[j,2],
+                        b21=ipar[j,3],
+                        b22=ipar[j,4],
+                        g2=ipar[j,5],
+                        u2=ipar[j,6],
+                        M=mu,S=Sigma,nquad=10)
+
+       VCOV[i,j] <- VCOV[j,i] <- e12 - e1*e2
+    }
+  }
+  
+  return(VCOV=VCOV)
+}  
+
+```
+
+We can now compute the population level variance-covariance and correlations for these 5 items using the wrapper function.
+
+```{r echo=TRUE, eval=TRUE}
+mu    <- c(0,0)
+Sigma <-  diag(2)
+
+VCOV <- pop.vcov(ip = ipar, M = mu, S = Sigma, nq=40)
+
+round(VCOV,3)
+
+round(cov2cor(VCOV),3)
+
+corr <- cov2cor(VCOV)
+
+eigens <- eigen(corr)$values
+
+eigens
+
+plot(eigens)
+ 
+```
+
+
+
+
+
+
+
+
+

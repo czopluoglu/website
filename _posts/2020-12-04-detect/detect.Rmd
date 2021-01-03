@@ -1,7 +1,9 @@
 ---
 title: 'Automated DETECT analysis using R'
 description: |
+
   The post is organized as follows. First, we simulate a dataset using a multidimensional IRT model and compute the actual DETECT value using the correct item partitioning. Second, a brief description of the DETECT index is provided, and the DETECT value is calculated based on this definition based on the true item clustering for the simulated dataset. Then, we compute the same value using the original DETECT program by executing it through R. Finally, we conduct a simple simulation to demonstrate how to automate running DETECT to analyze many datasets and processing the DETECT output files in R.
+
 draft: false
 author:
     

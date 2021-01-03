@@ -86,32 +86,32 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </style>
 
   <!--radix_placeholder_meta_tags-->
-  <title>Equating Oral Reading Fluency Scores from Reading Passages</title>
+  <title>A Fascinating Behind-the-Scenes Look at the Population Covariance Matrix for Multidimensional Items</title>
   
-  <meta property="description" itemprop="description" content="A non-peer reviewed opinion about how one can equate oral reading fluency scores from two reading passages with different difficulty levels using Samejima&#39;s Continuous Response Model." />
+  <meta property="description" itemprop="description" content="This post provides R code to use numerical integration for calculating population-level mean and covariances between item scores generated based on the compensatory and partially compensatory multidimensional models." />
   
   
   <!--  https://schema.org/Article -->
-  <meta property="article:published" itemprop="datePublished" content="2020-05-05" />
-  <meta property="article:created" itemprop="dateCreated" content="2020-05-05" />
+  <meta property="article:published" itemprop="datePublished" content="2021-01-03" />
+  <meta property="article:created" itemprop="dateCreated" content="2021-01-03" />
   <meta name="article:author" content="Cengiz Zopluoglu" />
   
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
-  <meta property="og:title" content="Equating Oral Reading Fluency Scores from Reading Passages" />
+  <meta property="og:title" content="A Fascinating Behind-the-Scenes Look at the Population Covariance Matrix for Multidimensional Items" />
   <meta property="og:type" content="article" />
-  <meta property="og:description" content="A non-peer reviewed opinion about how one can equate oral reading fluency scores from two reading passages with different difficulty levels using Samejima&#39;s Continuous Response Model." />
+  <meta property="og:description" content="This post provides R code to use numerical integration for calculating population-level mean and covariances between item scores generated based on the compensatory and partially compensatory multidimensional models." />
   <meta property="og:locale" content="en_US" />
   
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary" />
-  <meta property="twitter:title" content="Equating Oral Reading Fluency Scores from Reading Passages" />
-  <meta property="twitter:description" content="A non-peer reviewed opinion about how one can equate oral reading fluency scores from two reading passages with different difficulty levels using Samejima&#39;s Continuous Response Model." />
+  <meta property="twitter:title" content="A Fascinating Behind-the-Scenes Look at the Population Covariance Matrix for Multidimensional Items" />
+  <meta property="twitter:description" content="This post provides R code to use numerical integration for calculating population-level mean and covariances between item scores generated based on the compensatory and partially compensatory multidimensional models." />
   
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
   
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","draft","author","date","categories","output","preview","header-includes"]}},"value":[{"type":"character","attributes":{},"value":["Equating Oral Reading Fluency Scores from Reading Passages"]},{"type":"character","attributes":{},"value":["\nA non-peer reviewed opinion about how one can equate oral reading fluency scores from two reading passages with different difficulty levels using Samejima's Continuous Response Model.\n"]},{"type":"logical","attributes":{},"value":[false]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Cengiz Zopluoglu"]},{"type":"character","attributes":{},"value":["University of Miami"]}]}]},{"type":"character","attributes":{},"value":["05-05-2020"]},{"type":"character","attributes":{},"value":["item response theory","continuous response model","equating","R","2020"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["image.png"]},{"type":"character","attributes":{},"value":["\\usepackage{amsmath}"]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","draft","author","date","categories","output","preview","header-includes","editor_options"]}},"value":[{"type":"character","attributes":{},"value":["A Fascinating Behind-the-Scenes Look at the Population Covariance Matrix for Multidimensional Items"]},{"type":"character","attributes":{},"value":["\nThis post provides R code to use numerical integration for calculating population-level mean and covariances between item scores generated based on the compensatory and partially compensatory multidimensional models. \n"]},{"type":"logical","attributes":{},"value":[false]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","affiliation"]}},"value":[{"type":"character","attributes":{},"value":["Cengiz Zopluoglu"]},{"type":"character","attributes":{},"value":["University of Oregon"]}]}]},{"type":"character","attributes":{},"value":["1-3-2021"]},{"type":"character","attributes":{},"value":["multidimensional IRT","item response theory","R","numerical integration","2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained","toc","toc_float"]}},"value":[{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]},{"type":"logical","attributes":{},"value":[true]}]}]},{"type":"character","attributes":{},"value":["image.png"]},{"type":"character","attributes":{},"value":["\\usepackage{amsmath}","\\usepackage{upgreek}","\\usepackage{bm}","\\usepackage{unicode-math}"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["chunk_output_type"]}},"value":[{"type":"character","attributes":{},"value":["console"]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1404,230 +1404,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
   
   <!--/radix_placeholder_distill-->
-  <script>$(document).ready(function(){
-    if (typeof $('[data-toggle="tooltip"]').tooltip === 'function') {
-        $('[data-toggle="tooltip"]').tooltip();
-    }
-    if ($('[data-toggle="popover"]').popover === 'function') {
-        $('[data-toggle="popover"]').popover();
-    }
-});
-</script>
-  <style type="text/css">
-.lightable-minimal {
-border-collapse: separate;
-border-spacing: 16px 1px;
-width: 100%;
-margin-bottom: 10px;
-}
-.lightable-minimal td {
-margin-left: 5px;
-margin-right: 5px;
-}
-.lightable-minimal th {
-margin-left: 5px;
-margin-right: 5px;
-}
-.lightable-minimal thead tr:last-child th {
-border-bottom: 2px solid #00000050;
-empty-cells: hide;
-}
-.lightable-minimal tbody tr:first-child td {
-padding-top: 0.5em;
-}
-.lightable-minimal.lightable-hover tbody tr:hover {
-background-color: #f5f5f5;
-}
-.lightable-minimal.lightable-striped tbody tr:nth-child(even) {
-background-color: #f5f5f5;
-}
-.lightable-classic {
-border-top: 0.16em solid #111111;
-border-bottom: 0.16em solid #111111;
-width: 100%;
-margin-bottom: 10px;
-margin: 10px 5px;
-}
-.lightable-classic tfoot tr td {
-border: 0;
-}
-.lightable-classic tfoot tr:first-child td {
-border-top: 0.14em solid #111111;
-}
-.lightable-classic caption {
-color: #222222;
-}
-.lightable-classic td {
-padding-left: 5px;
-padding-right: 5px;
-color: #222222;
-}
-.lightable-classic th {
-padding-left: 5px;
-padding-right: 5px;
-font-weight: normal;
-color: #222222;
-}
-.lightable-classic thead tr:last-child th {
-border-bottom: 0.10em solid #111111;
-}
-.lightable-classic.lightable-hover tbody tr:hover {
-background-color: #F9EEC1;
-}
-.lightable-classic.lightable-striped tbody tr:nth-child(even) {
-background-color: #f5f5f5;
-}
-.lightable-classic-2 {
-border-top: 3px double #111111;
-border-bottom: 3px double #111111;
-width: 100%;
-margin-bottom: 10px;
-}
-.lightable-classic-2 tfoot tr td {
-border: 0;
-}
-.lightable-classic-2 tfoot tr:first-child td {
-border-top: 3px double #111111;
-}
-.lightable-classic-2 caption {
-color: #222222;
-}
-.lightable-classic-2 td {
-padding-left: 5px;
-padding-right: 5px;
-color: #222222;
-}
-.lightable-classic-2 th {
-padding-left: 5px;
-padding-right: 5px;
-font-weight: normal;
-color: #222222;
-}
-.lightable-classic-2 tbody tr:last-child td {
-border-bottom: 3px double #111111;
-}
-.lightable-classic-2 thead tr:last-child th {
-border-bottom: 1px solid #111111;
-}
-.lightable-classic-2.lightable-hover tbody tr:hover {
-background-color: #F9EEC1;
-}
-.lightable-classic-2.lightable-striped tbody tr:nth-child(even) {
-background-color: #f5f5f5;
-}
-.lightable-material {
-min-width: 100%;
-white-space: nowrap;
-table-layout: fixed;
-font-family: Roboto, sans-serif;
-border: 1px solid #EEE;
-border-collapse: collapse;
-margin-bottom: 10px;
-}
-.lightable-material tfoot tr td {
-border: 0;
-}
-.lightable-material tfoot tr:first-child td {
-border-top: 1px solid #EEE;
-}
-.lightable-material th {
-height: 56px;
-padding-left: 16px;
-padding-right: 16px;
-}
-.lightable-material td {
-height: 52px;
-padding-left: 16px;
-padding-right: 16px;
-border-top: 1px solid #eeeeee;
-}
-.lightable-material.lightable-hover tbody tr:hover {
-background-color: #f5f5f5;
-}
-.lightable-material.lightable-striped tbody tr:nth-child(even) {
-background-color: #f5f5f5;
-}
-.lightable-material.lightable-striped tbody td {
-border: 0;
-}
-.lightable-material.lightable-striped thead tr:last-child th {
-border-bottom: 1px solid #ddd;
-}
-.lightable-material-dark {
-min-width: 100%;
-white-space: nowrap;
-table-layout: fixed;
-font-family: Roboto, sans-serif;
-border: 1px solid #FFFFFF12;
-border-collapse: collapse;
-margin-bottom: 10px;
-background-color: #363640;
-}
-.lightable-material-dark tfoot tr td {
-border: 0;
-}
-.lightable-material-dark tfoot tr:first-child td {
-border-top: 1px solid #FFFFFF12;
-}
-.lightable-material-dark th {
-height: 56px;
-padding-left: 16px;
-padding-right: 16px;
-color: #FFFFFF60;
-}
-.lightable-material-dark td {
-height: 52px;
-padding-left: 16px;
-padding-right: 16px;
-color: #FFFFFF;
-border-top: 1px solid #FFFFFF12;
-}
-.lightable-material-dark.lightable-hover tbody tr:hover {
-background-color: #FFFFFF12;
-}
-.lightable-material-dark.lightable-striped tbody tr:nth-child(even) {
-background-color: #FFFFFF12;
-}
-.lightable-material-dark.lightable-striped tbody td {
-border: 0;
-}
-.lightable-material-dark.lightable-striped thead tr:last-child th {
-border-bottom: 1px solid #FFFFFF12;
-}
-.lightable-paper {
-width: 100%;
-margin-bottom: 10px;
-color: #444;
-}
-.lightable-paper tfoot tr td {
-border: 0;
-}
-.lightable-paper tfoot tr:first-child td {
-border-top: 1px solid #00000020;
-}
-.lightable-paper thead tr:last-child th {
-color: #666;
-vertical-align: bottom;
-border-bottom: 1px solid #00000020;
-line-height: 1.15em;
-padding: 10px 5px;
-}
-.lightable-paper td {
-vertical-align: middle;
-border-bottom: 1px solid #00000010;
-line-height: 1.15em;
-padding: 7px 5px;
-}
-.lightable-paper.lightable-hover tbody tr:hover {
-background-color: #F9EEC1;
-}
-.lightable-paper.lightable-striped tbody tr:nth-child(even) {
-background-color: #00000008;
-}
-.lightable-paper.lightable-striped tbody td {
-border: 0;
-}
-</style>
   <script>/*! jQuery v1.11.3 | (c) 2005, 2015 jQuery Foundation, Inc. | jquery.org/license */
 !function(a,b){"object"==typeof module&&"object"==typeof module.exports?module.exports=a.document?b(a,!0):function(a){if(!a.document)throw new Error("jQuery requires a window with a document");return b(a)}:b(a)}("undefined"!=typeof window?window:this,function(a,b){var c=[],d=c.slice,e=c.concat,f=c.push,g=c.indexOf,h={},i=h.toString,j=h.hasOwnProperty,k={},l="1.11.3",m=function(a,b){return new m.fn.init(a,b)},n=/^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g,o=/^-ms-/,p=/-([\da-z])/gi,q=function(a,b){return b.toUpperCase()};m.fn=m.prototype={jquery:l,constructor:m,selector:"",length:0,toArray:function(){return d.call(this)},get:function(a){return null!=a?0>a?this[a+this.length]:this[a]:d.call(this)},pushStack:function(a){var b=m.merge(this.constructor(),a);return b.prevObject=this,b.context=this.context,b},each:function(a,b){return m.each(this,a,b)},map:function(a){return this.pushStack(m.map(this,function(b,c){return a.call(b,c,b)}))},slice:function(){return this.pushStack(d.apply(this,arguments))},first:function(){return this.eq(0)},last:function(){return this.eq(-1)},eq:function(a){var b=this.length,c=+a+(0>a?b:0);return this.pushStack(c>=0&&b>c?[this[c]]:[])},end:function(){return this.prevObject||this.constructor(null)},push:f,sort:c.sort,splice:c.splice},m.extend=m.fn.extend=function(){var a,b,c,d,e,f,g=arguments[0]||{},h=1,i=arguments.length,j=!1;for("boolean"==typeof g&&(j=g,g=arguments[h]||{},h++),"object"==typeof g||m.isFunction(g)||(g={}),h===i&&(g=this,h--);i>h;h++)if(null!=(e=arguments[h]))for(d in e)a=g[d],c=e[d],g!==c&&(j&&c&&(m.isPlainObject(c)||(b=m.isArray(c)))?(b?(b=!1,f=a&&m.isArray(a)?a:[]):f=a&&m.isPlainObject(a)?a:{},g[d]=m.extend(j,f,c)):void 0!==c&&(g[d]=c));return g},m.extend({expando:"jQuery"+(l+Math.random()).replace(/\D/g,""),isReady:!0,error:function(a){throw new Error(a)},noop:function(){},isFunction:function(a){return"function"===m.type(a)},isArray:Array.isArray||function(a){return"array"===m.type(a)},isWindow:function(a){return null!=a&&a==a.window},isNumeric:function(a){return!m.isArray(a)&&a-parseFloat(a)+1>=0},isEmptyObject:function(a){var b;for(b in a)return!1;return!0},isPlainObject:function(a){var b;if(!a||"object"!==m.type(a)||a.nodeType||m.isWindow(a))return!1;try{if(a.constructor&&!j.call(a,"constructor")&&!j.call(a.constructor.prototype,"isPrototypeOf"))return!1}catch(c){return!1}if(k.ownLast)for(b in a)return j.call(a,b);for(b in a);return void 0===b||j.call(a,b)},type:function(a){return null==a?a+"":"object"==typeof a||"function"==typeof a?h[i.call(a)]||"object":typeof a},globalEval:function(b){b&&m.trim(b)&&(a.execScript||function(b){a.eval.call(a,b)})(b)},camelCase:function(a){return a.replace(o,"ms-").replace(p,q)},nodeName:function(a,b){return a.nodeName&&a.nodeName.toLowerCase()===b.toLowerCase()},each:function(a,b,c){var d,e=0,f=a.length,g=r(a);if(c){if(g){for(;f>e;e++)if(d=b.apply(a[e],c),d===!1)break}else for(e in a)if(d=b.apply(a[e],c),d===!1)break}else if(g){for(;f>e;e++)if(d=b.call(a[e],e,a[e]),d===!1)break}else for(e in a)if(d=b.call(a[e],e,a[e]),d===!1)break;return a},trim:function(a){return null==a?"":(a+"").replace(n,"")},makeArray:function(a,b){var c=b||[];return null!=a&&(r(Object(a))?m.merge(c,"string"==typeof a?[a]:a):f.call(c,a)),c},inArray:function(a,b,c){var d;if(b){if(g)return g.call(b,a,c);for(d=b.length,c=c?0>c?Math.max(0,d+c):c:0;d>c;c++)if(c in b&&b[c]===a)return c}return-1},merge:function(a,b){var c=+b.length,d=0,e=a.length;while(c>d)a[e++]=b[d++];if(c!==c)while(void 0!==b[d])a[e++]=b[d++];return a.length=e,a},grep:function(a,b,c){for(var d,e=[],f=0,g=a.length,h=!c;g>f;f++)d=!b(a[f],f),d!==h&&e.push(a[f]);return e},map:function(a,b,c){var d,f=0,g=a.length,h=r(a),i=[];if(h)for(;g>f;f++)d=b(a[f],f,c),null!=d&&i.push(d);else for(f in a)d=b(a[f],f,c),null!=d&&i.push(d);return e.apply([],i)},guid:1,proxy:function(a,b){var c,e,f;return"string"==typeof b&&(f=a[b],b=a,a=f),m.isFunction(a)?(c=d.call(arguments,2),e=function(){return a.apply(b||this,c.concat(d.call(arguments)))},e.guid=a.guid=a.guid||m.guid++,e):void 0},now:function(){return+new Date},support:k}),m.each("Boolean Number String Function Array Date RegExp Object Error".split(" "),function(a,b){h["[object "+b+"]"]=b.toLowerCase()});function r(a){var b="length"in a&&a.length,c=m.type(a);return"function"===c||m.isWindow(a)?!1:1===a.nodeType&&b?!0:"array"===c||0===b||"number"==typeof b&&b>0&&b-1 in a}var s=function(a){var b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u="sizzle"+1*new Date,v=a.document,w=0,x=0,y=ha(),z=ha(),A=ha(),B=function(a,b){return a===b&&(l=!0),0},C=1<<31,D={}.hasOwnProperty,E=[],F=E.pop,G=E.push,H=E.push,I=E.slice,J=function(a,b){for(var c=0,d=a.length;d>c;c++)if(a[c]===b)return c;return-1},K="checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",L="[\\x20\\t\\r\\n\\f]",M="(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+",N=M.replace("w","w#"),O="\\["+L+"*("+M+")(?:"+L+"*([*^$|!~]?=)"+L+"*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|("+N+"))|)"+L+"*\\]",P=":("+M+")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|"+O+")*)|.*)\\)|)",Q=new RegExp(L+"+","g"),R=new RegExp("^"+L+"+|((?:^|[^\\\\])(?:\\\\.)*)"+L+"+$","g"),S=new RegExp("^"+L+"*,"+L+"*"),T=new RegExp("^"+L+"*([>+~]|"+L+")"+L+"*"),U=new RegExp("="+L+"*([^\\]'\"]*?)"+L+"*\\]","g"),V=new RegExp(P),W=new RegExp("^"+N+"$"),X={ID:new RegExp("^#("+M+")"),CLASS:new RegExp("^\\.("+M+")"),TAG:new RegExp("^("+M.replace("w","w*")+")"),ATTR:new RegExp("^"+O),PSEUDO:new RegExp("^"+P),CHILD:new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\("+L+"*(even|odd|(([+-]|)(\\d*)n|)"+L+"*(?:([+-]|)"+L+"*(\\d+)|))"+L+"*\\)|)","i"),bool:new RegExp("^(?:"+K+")$","i"),needsContext:new RegExp("^"+L+"*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\("+L+"*((?:-\\d)?\\d*)"+L+"*\\)|)(?=[^-]|$)","i")},Y=/^(?:input|select|textarea|button)$/i,Z=/^h\d$/i,$=/^[^{]+\{\s*\[native \w/,_=/^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/,aa=/[+~]/,ba=/'|\\/g,ca=new RegExp("\\\\([\\da-f]{1,6}"+L+"?|("+L+")|.)","ig"),da=function(a,b,c){var d="0x"+b-65536;return d!==d||c?b:0>d?String.fromCharCode(d+65536):String.fromCharCode(d>>10|55296,1023&d|56320)},ea=function(){m()};try{H.apply(E=I.call(v.childNodes),v.childNodes),E[v.childNodes.length].nodeType}catch(fa){H={apply:E.length?function(a,b){G.apply(a,I.call(b))}:function(a,b){var c=a.length,d=0;while(a[c++]=b[d++]);a.length=c-1}}}function ga(a,b,d,e){var f,h,j,k,l,o,r,s,w,x;if((b?b.ownerDocument||b:v)!==n&&m(b),b=b||n,d=d||[],k=b.nodeType,"string"!=typeof a||!a||1!==k&&9!==k&&11!==k)return d;if(!e&&p){if(11!==k&&(f=_.exec(a)))if(j=f[1]){if(9===k){if(h=b.getElementById(j),!h||!h.parentNode)return d;if(h.id===j)return d.push(h),d}else if(b.ownerDocument&&(h=b.ownerDocument.getElementById(j))&&t(b,h)&&h.id===j)return d.push(h),d}else{if(f[2])return H.apply(d,b.getElementsByTagName(a)),d;if((j=f[3])&&c.getElementsByClassName)return H.apply(d,b.getElementsByClassName(j)),d}if(c.qsa&&(!q||!q.test(a))){if(s=r=u,w=b,x=1!==k&&a,1===k&&"object"!==b.nodeName.toLowerCase()){o=g(a),(r=b.getAttribute("id"))?s=r.replace(ba,"\\$&"):b.setAttribute("id",s),s="[id='"+s+"'] ",l=o.length;while(l--)o[l]=s+ra(o[l]);w=aa.test(a)&&pa(b.parentNode)||b,x=o.join(",")}if(x)try{return H.apply(d,w.querySelectorAll(x)),d}catch(y){}finally{r||b.removeAttribute("id")}}}return i(a.replace(R,"$1"),b,d,e)}function ha(){var a=[];function b(c,e){return a.push(c+" ")>d.cacheLength&&delete b[a.shift()],b[c+" "]=e}return b}function ia(a){return a[u]=!0,a}function ja(a){var b=n.createElement("div");try{return!!a(b)}catch(c){return!1}finally{b.parentNode&&b.parentNode.removeChild(b),b=null}}function ka(a,b){var c=a.split("|"),e=a.length;while(e--)d.attrHandle[c[e]]=b}function la(a,b){var c=b&&a,d=c&&1===a.nodeType&&1===b.nodeType&&(~b.sourceIndex||C)-(~a.sourceIndex||C);if(d)return d;if(c)while(c=c.nextSibling)if(c===b)return-1;return a?1:-1}function ma(a){return function(b){var c=b.nodeName.toLowerCase();return"input"===c&&b.type===a}}function na(a){return function(b){var c=b.nodeName.toLowerCase();return("input"===c||"button"===c)&&b.type===a}}function oa(a){return ia(function(b){return b=+b,ia(function(c,d){var e,f=a([],c.length,b),g=f.length;while(g--)c[e=f[g]]&&(c[e]=!(d[e]=c[e]))})})}function pa(a){return a&&"undefined"!=typeof a.getElementsByTagName&&a}c=ga.support={},f=ga.isXML=function(a){var b=a&&(a.ownerDocument||a).documentElement;return b?"HTML"!==b.nodeName:!1},m=ga.setDocument=function(a){var b,e,g=a?a.ownerDocument||a:v;return g!==n&&9===g.nodeType&&g.documentElement?(n=g,o=g.documentElement,e=g.defaultView,e&&e!==e.top&&(e.addEventListener?e.addEventListener("unload",ea,!1):e.attachEvent&&e.attachEvent("onunload",ea)),p=!f(g),c.attributes=ja(function(a){return a.className="i",!a.getAttribute("className")}),c.getElementsByTagName=ja(function(a){return a.appendChild(g.createComment("")),!a.getElementsByTagName("*").length}),c.getElementsByClassName=$.test(g.getElementsByClassName),c.getById=ja(function(a){return o.appendChild(a).id=u,!g.getElementsByName||!g.getElementsByName(u).length}),c.getById?(d.find.ID=function(a,b){if("undefined"!=typeof b.getElementById&&p){var c=b.getElementById(a);return c&&c.parentNode?[c]:[]}},d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){return a.getAttribute("id")===b}}):(delete d.find.ID,d.filter.ID=function(a){var b=a.replace(ca,da);return function(a){var c="undefined"!=typeof a.getAttributeNode&&a.getAttributeNode("id");return c&&c.value===b}}),d.find.TAG=c.getElementsByTagName?function(a,b){return"undefined"!=typeof b.getElementsByTagName?b.getElementsByTagName(a):c.qsa?b.querySelectorAll(a):void 0}:function(a,b){var c,d=[],e=0,f=b.getElementsByTagName(a);if("*"===a){while(c=f[e++])1===c.nodeType&&d.push(c);return d}return f},d.find.CLASS=c.getElementsByClassName&&function(a,b){return p?b.getElementsByClassName(a):void 0},r=[],q=[],(c.qsa=$.test(g.querySelectorAll))&&(ja(function(a){o.appendChild(a).innerHTML="<a id='"+u+"'></a><select id='"+u+"-\f]' msallowcapture=''><option selected=''></option></select>",a.querySelectorAll("[msallowcapture^='']").length&&q.push("[*^$]="+L+"*(?:''|\"\")"),a.querySelectorAll("[selected]").length||q.push("\\["+L+"*(?:value|"+K+")"),a.querySelectorAll("[id~="+u+"-]").length||q.push("~="),a.querySelectorAll(":checked").length||q.push(":checked"),a.querySelectorAll("a#"+u+"+*").length||q.push(".#.+[+~]")}),ja(function(a){var b=g.createElement("input");b.setAttribute("type","hidden"),a.appendChild(b).setAttribute("name","D"),a.querySelectorAll("[name=d]").length&&q.push("name"+L+"*[*^$|!~]?="),a.querySelectorAll(":enabled").length||q.push(":enabled",":disabled"),a.querySelectorAll("*,:x"),q.push(",.*:")})),(c.matchesSelector=$.test(s=o.matches||o.webkitMatchesSelector||o.mozMatchesSelector||o.oMatchesSelector||o.msMatchesSelector))&&ja(function(a){c.disconnectedMatch=s.call(a,"div"),s.call(a,"[s!='']:x"),r.push("!=",P)}),q=q.length&&new RegExp(q.join("|")),r=r.length&&new RegExp(r.join("|")),b=$.test(o.compareDocumentPosition),t=b||$.test(o.contains)?function(a,b){var c=9===a.nodeType?a.documentElement:a,d=b&&b.parentNode;return a===d||!(!d||1!==d.nodeType||!(c.contains?c.contains(d):a.compareDocumentPosition&&16&a.compareDocumentPosition(d)))}:function(a,b){if(b)while(b=b.parentNode)if(b===a)return!0;return!1},B=b?function(a,b){if(a===b)return l=!0,0;var d=!a.compareDocumentPosition-!b.compareDocumentPosition;return d?d:(d=(a.ownerDocument||a)===(b.ownerDocument||b)?a.compareDocumentPosition(b):1,1&d||!c.sortDetached&&b.compareDocumentPosition(a)===d?a===g||a.ownerDocument===v&&t(v,a)?-1:b===g||b.ownerDocument===v&&t(v,b)?1:k?J(k,a)-J(k,b):0:4&d?-1:1)}:function(a,b){if(a===b)return l=!0,0;var c,d=0,e=a.parentNode,f=b.parentNode,h=[a],i=[b];if(!e||!f)return a===g?-1:b===g?1:e?-1:f?1:k?J(k,a)-J(k,b):0;if(e===f)return la(a,b);c=a;while(c=c.parentNode)h.unshift(c);c=b;while(c=c.parentNode)i.unshift(c);while(h[d]===i[d])d++;return d?la(h[d],i[d]):h[d]===v?-1:i[d]===v?1:0},g):n},ga.matches=function(a,b){return ga(a,null,null,b)},ga.matchesSelector=function(a,b){if((a.ownerDocument||a)!==n&&m(a),b=b.replace(U,"='$1']"),!(!c.matchesSelector||!p||r&&r.test(b)||q&&q.test(b)))try{var d=s.call(a,b);if(d||c.disconnectedMatch||a.document&&11!==a.document.nodeType)return d}catch(e){}return ga(b,n,null,[a]).length>0},ga.contains=function(a,b){return(a.ownerDocument||a)!==n&&m(a),t(a,b)},ga.attr=function(a,b){(a.ownerDocument||a)!==n&&m(a);var e=d.attrHandle[b.toLowerCase()],f=e&&D.call(d.attrHandle,b.toLowerCase())?e(a,b,!p):void 0;return void 0!==f?f:c.attributes||!p?a.getAttribute(b):(f=a.getAttributeNode(b))&&f.specified?f.value:null},ga.error=function(a){throw new Error("Syntax error, unrecognized expression: "+a)},ga.uniqueSort=function(a){var b,d=[],e=0,f=0;if(l=!c.detectDuplicates,k=!c.sortStable&&a.slice(0),a.sort(B),l){while(b=a[f++])b===a[f]&&(e=d.push(f));while(e--)a.splice(d[e],1)}return k=null,a},e=ga.getText=function(a){var b,c="",d=0,f=a.nodeType;if(f){if(1===f||9===f||11===f){if("string"==typeof a.textContent)return a.textContent;for(a=a.firstChild;a;a=a.nextSibling)c+=e(a)}else if(3===f||4===f)return a.nodeValue}else while(b=a[d++])c+=e(b);return c},d=ga.selectors={cacheLength:50,createPseudo:ia,match:X,attrHandle:{},find:{},relative:{">":{dir:"parentNode",first:!0}," ":{dir:"parentNode"},"+":{dir:"previousSibling",first:!0},"~":{dir:"previousSibling"}},preFilter:{ATTR:function(a){return a[1]=a[1].replace(ca,da),a[3]=(a[3]||a[4]||a[5]||"").replace(ca,da),"~="===a[2]&&(a[3]=" "+a[3]+" "),a.slice(0,4)},CHILD:function(a){return a[1]=a[1].toLowerCase(),"nth"===a[1].slice(0,3)?(a[3]||ga.error(a[0]),a[4]=+(a[4]?a[5]+(a[6]||1):2*("even"===a[3]||"odd"===a[3])),a[5]=+(a[7]+a[8]||"odd"===a[3])):a[3]&&ga.error(a[0]),a},PSEUDO:function(a){var b,c=!a[6]&&a[2];return X.CHILD.test(a[0])?null:(a[3]?a[2]=a[4]||a[5]||"":c&&V.test(c)&&(b=g(c,!0))&&(b=c.indexOf(")",c.length-b)-c.length)&&(a[0]=a[0].slice(0,b),a[2]=c.slice(0,b)),a.slice(0,3))}},filter:{TAG:function(a){var b=a.replace(ca,da).toLowerCase();return"*"===a?function(){return!0}:function(a){return a.nodeName&&a.nodeName.toLowerCase()===b}},CLASS:function(a){var b=y[a+" "];return b||(b=new RegExp("(^|"+L+")"+a+"("+L+"|$)"))&&y(a,function(a){return b.test("string"==typeof a.className&&a.className||"undefined"!=typeof a.getAttribute&&a.getAttribute("class")||"")})},ATTR:function(a,b,c){return function(d){var e=ga.attr(d,a);return null==e?"!="===b:b?(e+="","="===b?e===c:"!="===b?e!==c:"^="===b?c&&0===e.indexOf(c):"*="===b?c&&e.indexOf(c)>-1:"$="===b?c&&e.slice(-c.length)===c:"~="===b?(" "+e.replace(Q," ")+" ").indexOf(c)>-1:"|="===b?e===c||e.slice(0,c.length+1)===c+"-":!1):!0}},CHILD:function(a,b,c,d,e){var f="nth"!==a.slice(0,3),g="last"!==a.slice(-4),h="of-type"===b;return 1===d&&0===e?function(a){return!!a.parentNode}:function(b,c,i){var j,k,l,m,n,o,p=f!==g?"nextSibling":"previousSibling",q=b.parentNode,r=h&&b.nodeName.toLowerCase(),s=!i&&!h;if(q){if(f){while(p){l=b;while(l=l[p])if(h?l.nodeName.toLowerCase()===r:1===l.nodeType)return!1;o=p="only"===a&&!o&&"nextSibling"}return!0}if(o=[g?q.firstChild:q.lastChild],g&&s){k=q[u]||(q[u]={}),j=k[a]||[],n=j[0]===w&&j[1],m=j[0]===w&&j[2],l=n&&q.childNodes[n];while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if(1===l.nodeType&&++m&&l===b){k[a]=[w,n,m];break}}else if(s&&(j=(b[u]||(b[u]={}))[a])&&j[0]===w)m=j[1];else while(l=++n&&l&&l[p]||(m=n=0)||o.pop())if((h?l.nodeName.toLowerCase()===r:1===l.nodeType)&&++m&&(s&&((l[u]||(l[u]={}))[a]=[w,m]),l===b))break;return m-=e,m===d||m%d===0&&m/d>=0}}},PSEUDO:function(a,b){var c,e=d.pseudos[a]||d.setFilters[a.toLowerCase()]||ga.error("unsupported pseudo: "+a);return e[u]?e(b):e.length>1?(c=[a,a,"",b],d.setFilters.hasOwnProperty(a.toLowerCase())?ia(function(a,c){var d,f=e(a,b),g=f.length;while(g--)d=J(a,f[g]),a[d]=!(c[d]=f[g])}):function(a){return e(a,0,c)}):e}},pseudos:{not:ia(function(a){var b=[],c=[],d=h(a.replace(R,"$1"));return d[u]?ia(function(a,b,c,e){var f,g=d(a,null,e,[]),h=a.length;while(h--)(f=g[h])&&(a[h]=!(b[h]=f))}):function(a,e,f){return b[0]=a,d(b,null,f,c),b[0]=null,!c.pop()}}),has:ia(function(a){return function(b){return ga(a,b).length>0}}),contains:ia(function(a){return a=a.replace(ca,da),function(b){return(b.textContent||b.innerText||e(b)).indexOf(a)>-1}}),lang:ia(function(a){return W.test(a||"")||ga.error("unsupported lang: "+a),a=a.replace(ca,da).toLowerCase(),function(b){var c;do if(c=p?b.lang:b.getAttribute("xml:lang")||b.getAttribute("lang"))return c=c.toLowerCase(),c===a||0===c.indexOf(a+"-");while((b=b.parentNode)&&1===b.nodeType);return!1}}),target:function(b){var c=a.location&&a.location.hash;return c&&c.slice(1)===b.id},root:function(a){return a===o},focus:function(a){return a===n.activeElement&&(!n.hasFocus||n.hasFocus())&&!!(a.type||a.href||~a.tabIndex)},enabled:function(a){return a.disabled===!1},disabled:function(a){return a.disabled===!0},checked:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&!!a.checked||"option"===b&&!!a.selected},selected:function(a){return a.parentNode&&a.parentNode.selectedIndex,a.selected===!0},empty:function(a){for(a=a.firstChild;a;a=a.nextSibling)if(a.nodeType<6)return!1;return!0},parent:function(a){return!d.pseudos.empty(a)},header:function(a){return Z.test(a.nodeName)},input:function(a){return Y.test(a.nodeName)},button:function(a){var b=a.nodeName.toLowerCase();return"input"===b&&"button"===a.type||"button"===b},text:function(a){var b;return"input"===a.nodeName.toLowerCase()&&"text"===a.type&&(null==(b=a.getAttribute("type"))||"text"===b.toLowerCase())},first:oa(function(){return[0]}),last:oa(function(a,b){return[b-1]}),eq:oa(function(a,b,c){return[0>c?c+b:c]}),even:oa(function(a,b){for(var c=0;b>c;c+=2)a.push(c);return a}),odd:oa(function(a,b){for(var c=1;b>c;c+=2)a.push(c);return a}),lt:oa(function(a,b,c){for(var d=0>c?c+b:c;--d>=0;)a.push(d);return a}),gt:oa(function(a,b,c){for(var d=0>c?c+b:c;++d<b;)a.push(d);return a})}},d.pseudos.nth=d.pseudos.eq;for(b in{radio:!0,checkbox:!0,file:!0,password:!0,image:!0})d.pseudos[b]=ma(b);for(b in{submit:!0,reset:!0})d.pseudos[b]=na(b);function qa(){}qa.prototype=d.filters=d.pseudos,d.setFilters=new qa,g=ga.tokenize=function(a,b){var c,e,f,g,h,i,j,k=z[a+" "];if(k)return b?0:k.slice(0);h=a,i=[],j=d.preFilter;while(h){(!c||(e=S.exec(h)))&&(e&&(h=h.slice(e[0].length)||h),i.push(f=[])),c=!1,(e=T.exec(h))&&(c=e.shift(),f.push({value:c,type:e[0].replace(R," ")}),h=h.slice(c.length));for(g in d.filter)!(e=X[g].exec(h))||j[g]&&!(e=j[g](e))||(c=e.shift(),f.push({value:c,type:g,matches:e}),h=h.slice(c.length));if(!c)break}return b?h.length:h?ga.error(a):z(a,i).slice(0)};function ra(a){for(var b=0,c=a.length,d="";c>b;b++)d+=a[b].value;return d}function sa(a,b,c){var d=b.dir,e=c&&"parentNode"===d,f=x++;return b.first?function(b,c,f){while(b=b[d])if(1===b.nodeType||e)return a(b,c,f)}:function(b,c,g){var h,i,j=[w,f];if(g){while(b=b[d])if((1===b.nodeType||e)&&a(b,c,g))return!0}else while(b=b[d])if(1===b.nodeType||e){if(i=b[u]||(b[u]={}),(h=i[d])&&h[0]===w&&h[1]===f)return j[2]=h[2];if(i[d]=j,j[2]=a(b,c,g))return!0}}}function ta(a){return a.length>1?function(b,c,d){var e=a.length;while(e--)if(!a[e](b,c,d))return!1;return!0}:a[0]}function ua(a,b,c){for(var d=0,e=b.length;e>d;d++)ga(a,b[d],c);return c}function va(a,b,c,d,e){for(var f,g=[],h=0,i=a.length,j=null!=b;i>h;h++)(f=a[h])&&(!c||c(f,d,e))&&(g.push(f),j&&b.push(h));return g}function wa(a,b,c,d,e,f){return d&&!d[u]&&(d=wa(d)),e&&!e[u]&&(e=wa(e,f)),ia(function(f,g,h,i){var j,k,l,m=[],n=[],o=g.length,p=f||ua(b||"*",h.nodeType?[h]:h,[]),q=!a||!f&&b?p:va(p,m,a,h,i),r=c?e||(f?a:o||d)?[]:g:q;if(c&&c(q,r,h,i),d){j=va(r,n),d(j,[],h,i),k=j.length;while(k--)(l=j[k])&&(r[n[k]]=!(q[n[k]]=l))}if(f){if(e||a){if(e){j=[],k=r.length;while(k--)(l=r[k])&&j.push(q[k]=l);e(null,r=[],j,i)}k=r.length;while(k--)(l=r[k])&&(j=e?J(f,l):m[k])>-1&&(f[j]=!(g[j]=l))}}else r=va(r===g?r.splice(o,r.length):r),e?e(null,g,r,i):H.apply(g,r)})}function xa(a){for(var b,c,e,f=a.length,g=d.relative[a[0].type],h=g||d.relative[" "],i=g?1:0,k=sa(function(a){return a===b},h,!0),l=sa(function(a){return J(b,a)>-1},h,!0),m=[function(a,c,d){var e=!g&&(d||c!==j)||((b=c).nodeType?k(a,c,d):l(a,c,d));return b=null,e}];f>i;i++)if(c=d.relative[a[i].type])m=[sa(ta(m),c)];else{if(c=d.filter[a[i].type].apply(null,a[i].matches),c[u]){for(e=++i;f>e;e++)if(d.relative[a[e].type])break;return wa(i>1&&ta(m),i>1&&ra(a.slice(0,i-1).concat({value:" "===a[i-2].type?"*":""})).replace(R,"$1"),c,e>i&&xa(a.slice(i,e)),f>e&&xa(a=a.slice(e)),f>e&&ra(a))}m.push(c)}return ta(m)}function ya(a,b){var c=b.length>0,e=a.length>0,f=function(f,g,h,i,k){var l,m,o,p=0,q="0",r=f&&[],s=[],t=j,u=f||e&&d.find.TAG("*",k),v=w+=null==t?1:Math.random()||.1,x=u.length;for(k&&(j=g!==n&&g);q!==x&&null!=(l=u[q]);q++){if(e&&l){m=0;while(o=a[m++])if(o(l,g,h)){i.push(l);break}k&&(w=v)}c&&((l=!o&&l)&&p--,f&&r.push(l))}if(p+=q,c&&q!==p){m=0;while(o=b[m++])o(r,s,g,h);if(f){if(p>0)while(q--)r[q]||s[q]||(s[q]=F.call(i));s=va(s)}H.apply(i,s),k&&!f&&s.length>0&&p+b.length>1&&ga.uniqueSort(i)}return k&&(w=v,j=t),r};return c?ia(f):f}return h=ga.compile=function(a,b){var c,d=[],e=[],f=A[a+" "];if(!f){b||(b=g(a)),c=b.length;while(c--)f=xa(b[c]),f[u]?d.push(f):e.push(f);f=A(a,ya(e,d)),f.selector=a}return f},i=ga.select=function(a,b,e,f){var i,j,k,l,m,n="function"==typeof a&&a,o=!f&&g(a=n.selector||a);if(e=e||[],1===o.length){if(j=o[0]=o[0].slice(0),j.length>2&&"ID"===(k=j[0]).type&&c.getById&&9===b.nodeType&&p&&d.relative[j[1].type]){if(b=(d.find.ID(k.matches[0].replace(ca,da),b)||[])[0],!b)return e;n&&(b=b.parentNode),a=a.slice(j.shift().value.length)}i=X.needsContext.test(a)?0:j.length;while(i--){if(k=j[i],d.relative[l=k.type])break;if((m=d.find[l])&&(f=m(k.matches[0].replace(ca,da),aa.test(j[0].type)&&pa(b.parentNode)||b))){if(j.splice(i,1),a=f.length&&ra(j),!a)return H.apply(e,f),e;break}}}return(n||h(a,o))(f,b,!p,e,aa.test(a)&&pa(b.parentNode)||b),e},c.sortStable=u.split("").sort(B).join("")===u,c.detectDuplicates=!!l,m(),c.sortDetached=ja(function(a){return 1&a.compareDocumentPosition(n.createElement("div"))}),ja(function(a){return a.innerHTML="<a href='#'></a>","#"===a.firstChild.getAttribute("href")})||ka("type|href|height|width",function(a,b,c){return c?void 0:a.getAttribute(b,"type"===b.toLowerCase()?1:2)}),c.attributes&&ja(function(a){return a.innerHTML="<input/>",a.firstChild.setAttribute("value",""),""===a.firstChild.getAttribute("value")})||ka("value",function(a,b,c){return c||"input"!==a.nodeName.toLowerCase()?void 0:a.defaultValue}),ja(function(a){return null==a.getAttribute("disabled")})||ka(K,function(a,b,c){var d;return c?void 0:a[b]===!0?b.toLowerCase():(d=a.getAttributeNode(b))&&d.specified?d.value:null}),ga}(a);m.find=s,m.expr=s.selectors,m.expr[":"]=m.expr.pseudos,m.unique=s.uniqueSort,m.text=s.getText,m.isXMLDoc=s.isXML,m.contains=s.contains;var t=m.expr.match.needsContext,u=/^<(\w+)\s*\/?>(?:<\/\1>|)$/,v=/^.[^:#\[\.,]*$/;function w(a,b,c){if(m.isFunction(b))return m.grep(a,function(a,d){return!!b.call(a,d,a)!==c});if(b.nodeType)return m.grep(a,function(a){return a===b!==c});if("string"==typeof b){if(v.test(b))return m.filter(b,a,c);b=m.filter(b,a)}return m.grep(a,function(a){return m.inArray(a,b)>=0!==c})}m.filter=function(a,b,c){var d=b[0];return c&&(a=":not("+a+")"),1===b.length&&1===d.nodeType?m.find.matchesSelector(d,a)?[d]:[]:m.find.matches(a,m.grep(b,function(a){return 1===a.nodeType}))},m.fn.extend({find:function(a){var b,c=[],d=this,e=d.length;if("string"!=typeof a)return this.pushStack(m(a).filter(function(){for(b=0;e>b;b++)if(m.contains(d[b],this))return!0}));for(b=0;e>b;b++)m.find(a,d[b],c);return c=this.pushStack(e>1?m.unique(c):c),c.selector=this.selector?this.selector+" "+a:a,c},filter:function(a){return this.pushStack(w(this,a||[],!1))},not:function(a){return this.pushStack(w(this,a||[],!0))},is:function(a){return!!w(this,"string"==typeof a&&t.test(a)?m(a):a||[],!1).length}});var x,y=a.document,z=/^(?:\s*(<[\w\W]+>)[^>]*|#([\w-]*))$/,A=m.fn.init=function(a,b){var c,d;if(!a)return this;if("string"==typeof a){if(c="<"===a.charAt(0)&&">"===a.charAt(a.length-1)&&a.length>=3?[null,a,null]:z.exec(a),!c||!c[1]&&b)return!b||b.jquery?(b||x).find(a):this.constructor(b).find(a);if(c[1]){if(b=b instanceof m?b[0]:b,m.merge(this,m.parseHTML(c[1],b&&b.nodeType?b.ownerDocument||b:y,!0)),u.test(c[1])&&m.isPlainObject(b))for(c in b)m.isFunction(this[c])?this[c](b[c]):this.attr(c,b[c]);return this}if(d=y.getElementById(c[2]),d&&d.parentNode){if(d.id!==c[2])return x.find(a);this.length=1,this[0]=d}return this.context=y,this.selector=a,this}return a.nodeType?(this.context=this[0]=a,this.length=1,this):m.isFunction(a)?"undefined"!=typeof x.ready?x.ready(a):a(m):(void 0!==a.selector&&(this.selector=a.selector,this.context=a.context),m.makeArray(a,this))};A.prototype=m.fn,x=m(y);var B=/^(?:parents|prev(?:Until|All))/,C={children:!0,contents:!0,next:!0,prev:!0};m.extend({dir:function(a,b,c){var d=[],e=a[b];while(e&&9!==e.nodeType&&(void 0===c||1!==e.nodeType||!m(e).is(c)))1===e.nodeType&&d.push(e),e=e[b];return d},sibling:function(a,b){for(var c=[];a;a=a.nextSibling)1===a.nodeType&&a!==b&&c.push(a);return c}}),m.fn.extend({has:function(a){var b,c=m(a,this),d=c.length;return this.filter(function(){for(b=0;d>b;b++)if(m.contains(this,c[b]))return!0})},closest:function(a,b){for(var c,d=0,e=this.length,f=[],g=t.test(a)||"string"!=typeof a?m(a,b||this.context):0;e>d;d++)for(c=this[d];c&&c!==b;c=c.parentNode)if(c.nodeType<11&&(g?g.index(c)>-1:1===c.nodeType&&m.find.matchesSelector(c,a))){f.push(c);break}return this.pushStack(f.length>1?m.unique(f):f)},index:function(a){return a?"string"==typeof a?m.inArray(this[0],m(a)):m.inArray(a.jquery?a[0]:a,this):this[0]&&this[0].parentNode?this.first().prevAll().length:-1},add:function(a,b){return this.pushStack(m.unique(m.merge(this.get(),m(a,b))))},addBack:function(a){return this.add(null==a?this.prevObject:this.prevObject.filter(a))}});function D(a,b){do a=a[b];while(a&&1!==a.nodeType);return a}m.each({parent:function(a){var b=a.parentNode;return b&&11!==b.nodeType?b:null},parents:function(a){return m.dir(a,"parentNode")},parentsUntil:function(a,b,c){return m.dir(a,"parentNode",c)},next:function(a){return D(a,"nextSibling")},prev:function(a){return D(a,"previousSibling")},nextAll:function(a){return m.dir(a,"nextSibling")},prevAll:function(a){return m.dir(a,"previousSibling")},nextUntil:function(a,b,c){return m.dir(a,"nextSibling",c)},prevUntil:function(a,b,c){return m.dir(a,"previousSibling",c)},siblings:function(a){return m.sibling((a.parentNode||{}).firstChild,a)},children:function(a){return m.sibling(a.firstChild)},contents:function(a){return m.nodeName(a,"iframe")?a.contentDocument||a.contentWindow.document:m.merge([],a.childNodes)}},function(a,b){m.fn[a]=function(c,d){var e=m.map(this,b,c);return"Until"!==a.slice(-5)&&(d=c),d&&"string"==typeof d&&(e=m.filter(d,e)),this.length>1&&(C[a]||(e=m.unique(e)),B.test(a)&&(e=e.reverse())),this.pushStack(e)}});var E=/\S+/g,F={};function G(a){var b=F[a]={};return m.each(a.match(E)||[],function(a,c){b[c]=!0}),b}m.Callbacks=function(a){a="string"==typeof a?F[a]||G(a):m.extend({},a);var b,c,d,e,f,g,h=[],i=!a.once&&[],j=function(l){for(c=a.memory&&l,d=!0,f=g||0,g=0,e=h.length,b=!0;h&&e>f;f++)if(h[f].apply(l[0],l[1])===!1&&a.stopOnFalse){c=!1;break}b=!1,h&&(i?i.length&&j(i.shift()):c?h=[]:k.disable())},k={add:function(){if(h){var d=h.length;!function f(b){m.each(b,function(b,c){var d=m.type(c);"function"===d?a.unique&&k.has(c)||h.push(c):c&&c.length&&"string"!==d&&f(c)})}(arguments),b?e=h.length:c&&(g=d,j(c))}return this},remove:function(){return h&&m.each(arguments,function(a,c){var d;while((d=m.inArray(c,h,d))>-1)h.splice(d,1),b&&(e>=d&&e--,f>=d&&f--)}),this},has:function(a){return a?m.inArray(a,h)>-1:!(!h||!h.length)},empty:function(){return h=[],e=0,this},disable:function(){return h=i=c=void 0,this},disabled:function(){return!h},lock:function(){return i=void 0,c||k.disable(),this},locked:function(){return!i},fireWith:function(a,c){return!h||d&&!i||(c=c||[],c=[a,c.slice?c.slice():c],b?i.push(c):j(c)),this},fire:function(){return k.fireWith(this,arguments),this},fired:function(){return!!d}};return k},m.extend({Deferred:function(a){var b=[["resolve","done",m.Callbacks("once memory"),"resolved"],["reject","fail",m.Callbacks("once memory"),"rejected"],["notify","progress",m.Callbacks("memory")]],c="pending",d={state:function(){return c},always:function(){return e.done(arguments).fail(arguments),this},then:function(){var a=arguments;return m.Deferred(function(c){m.each(b,function(b,f){var g=m.isFunction(a[b])&&a[b];e[f[1]](function(){var a=g&&g.apply(this,arguments);a&&m.isFunction(a.promise)?a.promise().done(c.resolve).fail(c.reject).progress(c.notify):c[f[0]+"With"](this===d?c.promise():this,g?[a]:arguments)})}),a=null}).promise()},promise:function(a){return null!=a?m.extend(a,d):d}},e={};return d.pipe=d.then,m.each(b,function(a,f){var g=f[2],h=f[3];d[f[1]]=g.add,h&&g.add(function(){c=h},b[1^a][2].disable,b[2][2].lock),e[f[0]]=function(){return e[f[0]+"With"](this===e?d:this,arguments),this},e[f[0]+"With"]=g.fireWith}),d.promise(e),a&&a.call(e,e),e},when:function(a){var b=0,c=d.call(arguments),e=c.length,f=1!==e||a&&m.isFunction(a.promise)?e:0,g=1===f?a:m.Deferred(),h=function(a,b,c){return function(e){b[a]=this,c[a]=arguments.length>1?d.call(arguments):e,c===i?g.notifyWith(b,c):--f||g.resolveWith(b,c)}},i,j,k;if(e>1)for(i=new Array(e),j=new Array(e),k=new Array(e);e>b;b++)c[b]&&m.isFunction(c[b].promise)?c[b].promise().done(h(b,k,c)).fail(g.reject).progress(h(b,j,i)):--f;return f||g.resolveWith(k,c),g.promise()}});var H;m.fn.ready=function(a){return m.ready.promise().done(a),this},m.extend({isReady:!1,readyWait:1,holdReady:function(a){a?m.readyWait++:m.ready(!0)},ready:function(a){if(a===!0?!--m.readyWait:!m.isReady){if(!y.body)return setTimeout(m.ready);m.isReady=!0,a!==!0&&--m.readyWait>0||(H.resolveWith(y,[m]),m.fn.triggerHandler&&(m(y).triggerHandler("ready"),m(y).off("ready")))}}});function I(){y.addEventListener?(y.removeEventListener("DOMContentLoaded",J,!1),a.removeEventListener("load",J,!1)):(y.detachEvent("onreadystatechange",J),a.detachEvent("onload",J))}function J(){(y.addEventListener||"load"===event.type||"complete"===y.readyState)&&(I(),m.ready())}m.ready.promise=function(b){if(!H)if(H=m.Deferred(),"complete"===y.readyState)setTimeout(m.ready);else if(y.addEventListener)y.addEventListener("DOMContentLoaded",J,!1),a.addEventListener("load",J,!1);else{y.attachEvent("onreadystatechange",J),a.attachEvent("onload",J);var c=!1;try{c=null==a.frameElement&&y.documentElement}catch(d){}c&&c.doScroll&&!function e(){if(!m.isReady){try{c.doScroll("left")}catch(a){return setTimeout(e,50)}I(),m.ready()}}()}return H.promise(b)};var K="undefined",L;for(L in m(k))break;k.ownLast="0"!==L,k.inlineBlockNeedsLayout=!1,m(function(){var a,b,c,d;c=y.getElementsByTagName("body")[0],c&&c.style&&(b=y.createElement("div"),d=y.createElement("div"),d.style.cssText="position:absolute;border:0;width:0;height:0;top:0;left:-9999px",c.appendChild(d).appendChild(b),typeof b.style.zoom!==K&&(b.style.cssText="display:inline;margin:0;border:0;padding:1px;width:1px;zoom:1",k.inlineBlockNeedsLayout=a=3===b.offsetWidth,a&&(c.style.zoom=1)),c.removeChild(d))}),function(){var a=y.createElement("div");if(null==k.deleteExpando){k.deleteExpando=!0;try{delete a.test}catch(b){k.deleteExpando=!1}}a=null}(),m.acceptData=function(a){var b=m.noData[(a.nodeName+" ").toLowerCase()],c=+a.nodeType||1;return 1!==c&&9!==c?!1:!b||b!==!0&&a.getAttribute("classid")===b};var M=/^(?:\{[\w\W]*\}|\[[\w\W]*\])$/,N=/([A-Z])/g;function O(a,b,c){if(void 0===c&&1===a.nodeType){var d="data-"+b.replace(N,"-$1").toLowerCase();if(c=a.getAttribute(d),"string"==typeof c){try{c="true"===c?!0:"false"===c?!1:"null"===c?null:+c+""===c?+c:M.test(c)?m.parseJSON(c):c}catch(e){}m.data(a,b,c)}else c=void 0}return c}function P(a){var b;for(b in a)if(("data"!==b||!m.isEmptyObject(a[b]))&&"toJSON"!==b)return!1;
 
@@ -2642,7 +2418,7 @@ distill-header .nav a {
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Equating Oral Reading Fluency Scores from Reading Passages","description":"A non-peer reviewed opinion about how one can equate oral reading fluency scores from two reading passages with different difficulty levels using Samejima's Continuous Response Model.","authors":[{"author":"Cengiz Zopluoglu","authorURL":"#","affiliation":"University of Miami","affiliationURL":"#","orcidID":""}],"publishedDate":"2020-05-05T00:00:00.000-07:00","citationText":"Zopluoglu, 2020"}
+{"title":"A Fascinating Behind-the-Scenes Look at the Population Covariance Matrix for Multidimensional Items","description":"This post provides R code to use numerical integration for calculating population-level mean and covariances between item scores generated based on the compensatory and partially compensatory multidimensional models.","authors":[{"author":"Cengiz Zopluoglu","authorURL":"#","affiliation":"University of Oregon","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-01-03T00:00:00.000-08:00","citationText":"Zopluoglu, 2021"}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -2652,26 +2428,38 @@ distill-header .nav a {
 <!--/radix_placeholder_site_before_body-->
 
 <div class="d-title">
-<h1>Equating Oral Reading Fluency Scores from Reading Passages</h1>
+<h1>A Fascinating Behind-the-Scenes Look at the Population Covariance Matrix for Multidimensional Items</h1>
 <!--radix_placeholder_categories-->
 <div class="dt-tags">
+<div class="dt=tag">multidimensional IRT</div>
 <div class="dt=tag">item response theory</div>
-<div class="dt=tag">continuous response model</div>
-<div class="dt=tag">equating</div>
 <div class="dt=tag">R</div>
-<div class="dt=tag">2020</div>
+<div class="dt=tag">numerical integration</div>
+<div class="dt=tag">2021</div>
 </div>
 <!--/radix_placeholder_categories-->
-<p><p>A non-peer reviewed opinion about how one can equate oral reading fluency scores from two reading passages with different difficulty levels using Samejima’s Continuous Response Model.</p></p>
+<p><p>This post provides R code to use numerical integration for calculating population-level mean and covariances between item scores generated based on the compensatory and partially compensatory multidimensional models.</p></p>
 </div>
 
 <div class="d-byline">
-  Cengiz Zopluoglu  (University of Miami)
+  Cengiz Zopluoglu  (University of Oregon)
   
-<br />05-05-2020
+<br />1-3-2021
 </div>
 
 <div class="d-article">
+<div class="d-contents d-contents-float">
+<nav class="l-text toc figcaption" id="TOC">
+<h3>Contents</h3>
+<ul>
+<li><a href="#compensatory-models">Compensatory Models</a><ul>
+<li><a href="#population-level-means">Population-Level Means</a></li>
+<li><a href="#population-level-variances-and-covariances">Population-Level Variances and Covariances</a></li>
+</ul></li>
+<li><a href="#partially-compensatory-models">Partially Compensatory Models</a></li>
+</ul>
+</nav>
+</div>
 <style>
 
 body {
@@ -2681,441 +2469,692 @@ text-align: justify}
 <div class="layout-chunk" data-layout="l-body">
 
 </div>
-<p>Suppose you fit Samejima’s Continous Response Model (CRM) to several reading passages (or MAZE forms) and estimated item parameters for all passages/forms in a way that they are all on the same scale. There are a couple of ways you can do this (concurrent calibration, chain equating, or more traditional methods, as explained in <a href="https://link.springer.com/article/10.2333/bhmk.30.155">this paper by Shojima</a>). You can read <a href="https://cengiz.me/posts/crm-stan/">this post</a> to learn more about this model, how to estimate its parameters, and what these parameters mean.</p>
-<p>So, let’s assume that the parameters for all reading passages are on the same scale, and you have 20 of these reading passages (Form 1, Form 2, …, Form 20).</p>
-<div class="layout-chunk" data-layout="l-body">
-<table class="table table-striped table-hover table-condensed table-responsive" style="margin-left: auto; margin-right: auto;">
-<thead>
-<tr>
-<th style="text-align:left;">
-</th>
-<th style="text-align:right;">
-<span class="math inline">\(a\)</span>
-</th>
-<th style="text-align:right;">
-<span class="math inline">\(b\)</span>
-</th>
-<th style="text-align:right;">
-<span class="math inline">\(\alpha\)</span>
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-Form 1
-</td>
-<td style="text-align:right;">
-1.246
-</td>
-<td style="text-align:right;">
--1.068
-</td>
-<td style="text-align:right;">
-0.965
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 2
-</td>
-<td style="text-align:right;">
-1.469
-</td>
-<td style="text-align:right;">
--0.218
-</td>
-<td style="text-align:right;">
-0.990
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 3
-</td>
-<td style="text-align:right;">
-3.594
-</td>
-<td style="text-align:right;">
--1.026
-</td>
-<td style="text-align:right;">
-0.937
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 4
-</td>
-<td style="text-align:right;">
-1.708
-</td>
-<td style="text-align:right;">
--0.729
-</td>
-<td style="text-align:right;">
-1.108
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 5
-</td>
-<td style="text-align:right;">
-1.759
-</td>
-<td style="text-align:right;">
--0.625
-</td>
-<td style="text-align:right;">
-1.060
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 6
-</td>
-<td style="text-align:right;">
-3.887
-</td>
-<td style="text-align:right;">
--1.687
-</td>
-<td style="text-align:right;">
-0.944
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 7
-</td>
-<td style="text-align:right;">
-2.076
-</td>
-<td style="text-align:right;">
-0.838
-</td>
-<td style="text-align:right;">
-0.980
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 8
-</td>
-<td style="text-align:right;">
-0.876
-</td>
-<td style="text-align:right;">
-0.153
-</td>
-<td style="text-align:right;">
-0.977
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 9
-</td>
-<td style="text-align:right;">
-1.169
-</td>
-<td style="text-align:right;">
--1.138
-</td>
-<td style="text-align:right;">
-1.039
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 10
-</td>
-<td style="text-align:right;">
-1.319
-</td>
-<td style="text-align:right;">
-1.254
-</td>
-<td style="text-align:right;">
-0.996
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 11
-</td>
-<td style="text-align:right;">
-3.041
-</td>
-<td style="text-align:right;">
-0.426
-</td>
-<td style="text-align:right;">
-1.013
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 12
-</td>
-<td style="text-align:right;">
-1.974
-</td>
-<td style="text-align:right;">
--0.295
-</td>
-<td style="text-align:right;">
-0.999
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 13
-</td>
-<td style="text-align:right;">
-2.015
-</td>
-<td style="text-align:right;">
-0.895
-</td>
-<td style="text-align:right;">
-0.998
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 14
-</td>
-<td style="text-align:right;">
-1.743
-</td>
-<td style="text-align:right;">
-0.878
-</td>
-<td style="text-align:right;">
-1.068
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 15
-</td>
-<td style="text-align:right;">
-1.249
-</td>
-<td style="text-align:right;">
-0.822
-</td>
-<td style="text-align:right;">
-0.989
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 16
-</td>
-<td style="text-align:right;">
-4.029
-</td>
-<td style="text-align:right;">
-0.689
-</td>
-<td style="text-align:right;">
-1.076
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 17
-</td>
-<td style="text-align:right;">
-2.115
-</td>
-<td style="text-align:right;">
-0.554
-</td>
-<td style="text-align:right;">
-0.923
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 18
-</td>
-<td style="text-align:right;">
-0.617
-</td>
-<td style="text-align:right;">
--0.062
-</td>
-<td style="text-align:right;">
-1.029
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 19
-</td>
-<td style="text-align:right;">
-2.341
-</td>
-<td style="text-align:right;">
--0.306
-</td>
-<td style="text-align:right;">
-1.006
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-Form 20
-</td>
-<td style="text-align:right;">
-1.302
-</td>
-<td style="text-align:right;">
--0.380
-</td>
-<td style="text-align:right;">
-1.011
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<p>Let’s say that Form 4 is administered in the Fall semester, and Form 11 semester is administered in the Spring Semester. The scores from these two reading passages may not be directly comparable because they may differ in their difficulty (<span class="math inline">\(b\)</span> parameter), and also in other characteristics (<span class="math inline">\(a\)</span> parameter and <span class="math inline">\(\alpha\)</span>). The difference in the <span class="math inline">\(b\)</span> parameter is probably most critical here. It wouldn’t make much sense to compare the ORF scores from Fall and Spring without any equating between the two forms, and practitioners would probably appreciate an easy to understand score conversion table between two reading passages. I don’t know much about CBM-Reading literature. I am aware that there are already methods used and published to create such a table using traditional equating methods (e.g., <a href="https://www.sciencedirect.com/science/article/pii/S0022440511000549">Albano and Rodriguez, 2012</a>). There may also be other works published. Here, I would like to accomplish the same thing using an IRT approach when Samejima’s CRM is used to scale many reading passages.</p>
-<p>Form 4 and Form 11 has the following item parameters:</p>
-<p><span class="math display">\[(a_4,b_4,\alpha_4)=(1.708,-0.729,1.108)\]</span> <span class="math display">\[(a_{11},b_{11},\alpha_{11})=(3.041,0.426,1.013)\]</span></p>
-<p>Also, let’s assume that the maximum possible ORF score is 250 for both forms.</p>
-<p>We need to remember a few formulas for CRM. In this model, the probability of an individual with a latent parameter <span class="math inline">\(\theta_i\)</span> obtaining a score of <span class="math inline">\(x\)</span> or higher on an item with three parameters (<span class="math inline">\(a\)</span>, <span class="math inline">\(b\)</span>, and <span class="math inline">\(\alpha\)</span>) is specified as,</p>
-<p><span class="math display" id="eq:1">\[\begin{equation} 
-  P_{ij}(X\geq x|\theta_{i},a_j,b_j,\alpha_j)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^{v}{e^{-\frac{t^2}{2}}dt}
-  \tag{1}
-\end{equation}\]</span></p>
-<p><span class="math display" id="eq:2">\[\begin{equation} 
-  v=a_j\times (\theta_i-b_j-\frac{1}{\alpha_j}ln\frac{x_{ij}}{k_j-x_{ij}})
-  \tag{2}
-\end{equation}\]</span></p>
-<p>where <span class="math inline">\(k_j\)</span> is the maximum possible score for the item.</p>
-<p><span class="math inline">\(x_{ij}^*\)</span> is a nonlinear transformation of the observed continous score,</p>
-<p><span class="math display" id="eq:3">\[\begin{equation} 
-  x_{ij}^* = ln(\frac{x_{ij}}{k_j-x_{ij}}),
-  \tag{3}
-\end{equation}\]</span></p>
-<p>and its conditional PDF is a normal distribution with a mean of <span class="math inline">\(\alpha_j(\theta_i - b_j)\)</span> and standard deviation of <span class="math inline">\(\alpha_j/a_j\)</span>.</p>
-<p><span class="math display" id="eq:4">\[\begin{equation} 
-  x^* \sim N(\alpha_j(\theta_i - b_j),\alpha_j/a_j).
-  \tag{4}
-\end{equation}\]</span></p>
-<p>Let’s also remember that the maximum likelihood estimate of <span class="math inline">\(\theta\)</span> in CRM has a closed formula and can easily be computed based on the item parameters.</p>
-<p><span class="math display" id="eq:5">\[\begin{equation} 
-  \hat\theta_i = \frac{\sum_{j=1}^{n}a_j^2(b_j+\frac{x_{ij}^*}{\alpha_j})}{\sum_{j=1}^{n}a_j^2}
-  \tag{5}
-\end{equation}\]</span></p>
-<p>Now, given that what we know, let’s do a quick exercise. Let’s say a student got a score of 120 from Form 4. What would be the expected score if we administered Form 11 to the same student?</p>
-<p><strong>Step 1</strong>: Transform the observed score from Form 4 (Eq. 3).</p>
-<p><span class="math display">\[x_{ij}^* = ln(\frac{120}{250-120})=-0.080\]</span></p>
-<p><strong>Step 2</strong>: Given the item parameters for Form 4 and the transformed score, obtain an estimate of latent ability, <span class="math inline">\(\hat\theta_i\)</span> (Eg. 5). I know it will sound absurd for those who are familiar with other IRT models to estimate latent trait using a single item. We can do it in CRM. Note that when there is only one item, the ML estimate simplifies. So, if you write Eq.5 for a single item, the estimate is equal to <span class="math display">\[\hat\theta_i = b_j + \frac{x_{ij}^*}{\alpha_j}.\]</span></p>
-<p>Alternatively, you can think about it as the following. For a given <span class="math inline">\(x_{ij}^*\)</span>, we know its expected value is <span class="math inline">\(\alpha_j(\theta_i - b_j)\)</span>. So, we can get the same equation if we solve the following equation for <span class="math inline">\(\theta\)</span>,</p>
-<p><span class="math display">\[x_{ij}^* = \alpha_j(\theta_i - b_j).\]</span> Either way, we can get the estimate of <span class="math inline">\(\theta\)</span> based on the Form 4 score.</p>
-<p><span class="math display">\[\hat\theta_i = -0.729 + \frac{-0.08}{1.108}= -0.801 \]</span></p>
-<p><strong>Step 3</strong>: Given the theta estimate in Step 2 and item parameters for Form 11, compute the expected transformed score (mean of the conditional distribution) in Form 11.</p>
-<p><span class="math display">\[x_{ij}^* = \alpha_j(\theta_i - b_j) = 1.013*(-0.801-0.426) = -1.243\]</span></p>
-<p><strong>Step 4</strong>: Transform the expected score in Form 11 back to its original scale.</p>
-<p><span class="math display">\[ x_{ij} = \frac{e^{x_{ij}^*}*k_j}{e^{x_{ij}^*}+1}\]</span></p>
-<p><span class="math display">\[ x_{ij} = \frac{e^{-1.243}*250}{e^{-1.243}+1}=55.98\]</span></p>
-<p>This indicates that a student who received a score of 120 from Form 4 is expected to receive a score of 55.98 (~ 56) from Form 11. This is not surprising as Form 11 is more difficult than Form 4.</p>
-<p>Below is an R code to produce some sort of conversion table for all possible scores from 1 to 249. You can change the item parameters and maximum score to get the conversion table for any hypothetical two forms.</p>
+<p><em>Note. The title comes from a click-bait headline generator, and I apologize for that. It was just an experiment.</em></p>
+<p>Recently, I had to compute the population level mean and covariances for a set of items given the item parameters when the underlying response process is based on a multidimensional item response model. One can always approximate these values by simulating a dataset with a considerable sample size (e.g., 100,000) using the response model and then calculate the descriptive statistics. Given the large sample size, these numbers will be very close to population values. Instead, I was trying to calculate them directly from the model by integrating out the latent variables. The nice thing about this approach is that you can compute population-level parameters (e.g., SEM fit indices) if you are doing a simulation, or you can examine the plausibility of your soon-to-be generated datasets. Below, I will present the approach for compensatory and partially compensatory multidimensional IRT models.</p>
+<h2 id="compensatory-models">Compensatory Models</h2>
+<p>Suppose you are working with a three-dimensional 4-PL compensatory item response model. In this model, the probability of a correct response can be written as,</p>
+<p><span class="math display" id="eq:1">\[
+\begin{equation}
+P(Y=1 | \theta_1,\theta_2,\theta_3,a_1,a_2,a_3,d,g,u) = g + (u-g)\frac{1}{1 + e^{-(a_1\theta_1 + a_2 \theta_2+a_3\theta_3+d)}}\tag{1},
+\end{equation}
+\]</span></p>
+<p>in which <span class="math inline">\(\theta_1\)</span>, <span class="math inline">\(\theta_2\)</span>, and <span class="math inline">\(\theta_3\)</span> are the coordinates for an individual on three latent dimensions; <span class="math inline">\(a_1\)</span>, <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(a_3\)</span> are the item discrimination parameters, <span class="math inline">\(g\)</span> is the item guessing parameter (lower bound), <span class="math inline">\(u\)</span> is the slipping parameter (upper bound), and <span class="math inline">\(d\)</span> is the intercept parameter.</p>
+<p>Below is a slightly modified table of item parameters from Reckase(2009) to generate data (Table 6.1).</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre><code><span class="co"># Generate CRM item parameters</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span>
-
-<span class="va">a</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Lognormal.html">rlnorm</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">.5</span>,<span class="fl">.5</span><span class="op">)</span>
-<span class="va">b</span>     <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>
-<span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span><span class="op">(</span><span class="fl">20</span>,<span class="fl">1</span>,<span class="fl">.05</span><span class="op">)</span>
-
-<span class="va">ipar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">cbind</a></span><span class="op">(</span><span class="va">a</span>,<span class="va">b</span>,<span class="va">alpha</span><span class="op">)</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">ipar</span><span class="op">)</span> <span class="op">=</span> <span class="cn">NULL</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="va">ipar</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="st">&quot;Form &quot;</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span>
-
-<span class="co">#################################</span>
-
-<span class="co"># two forms to be equated</span>
-
-  <span class="va">form1</span> <span class="op">=</span> <span class="fl">4</span>
-  <span class="va">form2</span> <span class="op">=</span> <span class="fl">11</span>
-
-<span class="va">ipar1</span> <span class="op">&lt;-</span> <span class="va">ipar</span><span class="op">[</span><span class="va">form1</span>,<span class="op">]</span>
-<span class="va">ipar2</span> <span class="op">&lt;-</span> <span class="va">ipar</span><span class="op">[</span><span class="va">form2</span>,<span class="op">]</span>
-<span class="va">max.score</span> <span class="op">=</span> <span class="fl">250</span>
-
-<span class="va">raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">249</span><span class="op">)</span><span class="op">)</span>
-<span class="va">raw</span><span class="op">$</span><span class="va">Form2</span> <span class="op">=</span> <span class="cn">NA</span>
-<span class="va">raw</span><span class="op">$</span><span class="va">Theta</span> <span class="op">=</span> <span class="cn">NA</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">raw</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">&quot;Form1&quot;</span>
-
-<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">raw</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
-  <span class="va">z1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">raw</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span><span class="op">/</span><span class="op">(</span><span class="va">max.score</span><span class="op">-</span><span class="va">raw</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span>
-  <span class="va">theta</span> <span class="op">=</span> <span class="op">(</span><span class="va">z1</span><span class="op">/</span><span class="va">ipar1</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span><span class="op">+</span><span class="va">ipar1</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>
-  <span class="va">z2</span> <span class="op">=</span> <span class="va">ipar2</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span><span class="op">*</span><span class="op">(</span><span class="va">theta</span><span class="op">-</span><span class="va">ipar2</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span><span class="op">)</span>
-  <span class="va">raw</span><span class="op">[</span><span class="va">i</span>,<span class="fl">2</span><span class="op">]</span><span class="op">=</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">z2</span><span class="op">)</span><span class="op">*</span><span class="va">max.score</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">z2</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span>
-  <span class="va">raw</span><span class="op">[</span><span class="va">i</span>,<span class="fl">3</span><span class="op">]</span><span class="op">=</span> <span class="va">theta</span>
-<span class="op">}</span>
-
-<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">raw</span>,<span class="fl">2</span><span class="op">)</span>
+<pre><code><span class="va">ipar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">&#39;data/ipar.csv&#39;</span><span class="op">)</span>
+<span class="va">ipar</span>
 </code></pre>
 </div>
-<pre><code>    Form1  Form2 Theta
-1       1   0.50 -5.71
-2       2   0.95 -5.08
-3       3   1.37 -4.71
-4       4   1.79 -4.44
-5       5   2.20 -4.24
-6       6   2.60 -4.07
-7       7   3.00 -3.93
-8       8   3.40 -3.80
-9       9   3.79 -3.69
-10     10   4.18 -3.60
-11     11   4.57 -3.51
-12     12   4.96 -3.42
-13     13   5.35 -3.35
-14     14   5.74 -3.28
-15     15   6.13 -3.21
-16     16   6.52 -3.15
-17     17   6.90 -3.09
-18     18   7.29 -3.04
-19     19   7.68 -2.98
-20     20   8.06 -2.93
-21     21   8.45 -2.88
-22     22   8.84 -2.84
-23     23   9.23 -2.79
-24     24   9.62 -2.75
-25     25  10.01 -2.71
-26     26  10.40 -2.67
-27     27  10.79 -2.63
-28     28  11.18 -2.60
-29     29  11.57 -2.56
-30     30  11.97 -2.53
-31     31  12.36 -2.49
-32     32  12.76 -2.46
-33     33  13.15 -2.43
-34     34  13.55 -2.40
-35     35  13.95 -2.37
-36     36  14.35 -2.34
-37     37  14.75 -2.31
-38     38  15.16 -2.28
-39     39  15.56 -2.25
-....</code></pre>
+<pre><code>    a1   a2   a3     d    g    u
+1 1.01 0.01 0.05  0.01 0.09 0.99
+2 1.35 0.01 0.54 -0.58 0.07 0.98
+3 1.38 0.09 0.47 -1.04 0.11 0.95
+4 0.41 1.11 0.20 -0.37 0.08 0.97
+5 0.29 1.24 0.02  0.49 0.18 0.96
+6 0.05 0.48 0.00  0.29 0.12 0.99
+7 0.00 0.19 1.19 -0.19 0.09 0.99
+8 0.02 0.33 2.14 -1.84 0.01 1.00
+9 0.00 0.22 0.90  0.51 0.05 1.00</code></pre>
 </div>
-<p>We can also plot the expected score for both forms as a function of theta.</p>
+<p><a href="&#39;data/ipar.csv&#39;">Download the item parameter file</a></p>
+<h3 id="population-level-means">Population-Level Means</h3>
+<p>We can compute the expected value (mean) for any single item by integrating the probability function over the joint distribution of <span class="math inline">\(\theta_1\)</span>, <span class="math inline">\(\theta_2\)</span>, and <span class="math inline">\(\theta_3\)</span>.</p>
+<p><span class="math display" id="eq:2">\[\begin{equation}
+E[Y]=\int_{\theta_1}\int_{\theta_2}\int_{\theta_3}P(Y=1)f(\theta_1,\theta_2,\theta_3)d_{\theta_1}d_{\theta_2}d_{\theta_3}\tag{2}
+\end{equation}\]</span></p>
+<p>where <span class="math inline">\(f(\theta_1,\theta_2,\theta_3)\)</span> is the joint density function for <span class="math inline">\(\theta_1\)</span>, <span class="math inline">\(\theta_2\)</span>, and <span class="math inline">\(\theta_3\)</span> and <span class="math inline">\(P(Y=1)\)</span> is given in Eq<a href="#eq:1">(1)</a>. In this post, it is assumed that <span class="math inline">\(\theta_1\)</span>, <span class="math inline">\(\theta_2\)</span>, and <span class="math inline">\(\theta_3\)</span> follow a multivariate normal distribution with</p>
+<p> </p>
+<center>
+<strong>μ</strong> <span class="math inline">\(=(0,0,0)\)</span>
+</center>
+<p> </p>
+<center>
+<strong>Σ</strong>= <span class="math inline">\(\begin{pmatrix} \sigma_{1}^{2} &amp; \sigma_{12} &amp; \sigma_{13}\\ \sigma_{12} &amp; \sigma_{2}^{2} &amp; \sigma_{23} \\ \sigma_{13} &amp; \sigma_{23} &amp; \sigma_{3}^{2} \end{pmatrix}\)</span>.
+</center>
+<p> </p>
+<p>I was recently experimenting with R packages for numerical integration, and I found the <code>mvQuad</code> package very easy to use and super fast. To do this integration using the <code>mvQuad</code> function, we first write a function that takes item parameters, person parameters, and <strong>μ</strong> and <strong>Σ</strong> for the multivariate normal distribution as arguments and returns the value of the following product. <span class="math display">\[P(Y=1)f(\theta_1,\theta_2,\theta_3).\]</span></p>
 <div class="layout-chunk" data-layout="l-body">
-<p><img src="data:image/png;base64,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" width="624" /></p>
+<div class="sourceCode">
+<pre><code><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="http://mvtnorm.R-forge.R-project.org">mvtnorm</a></span><span class="op">)</span>
+
+<span class="va">p.m4pl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">theta</span>,<span class="va">a1</span>,<span class="va">a2</span>,<span class="va">a3</span>,<span class="va">d</span>,<span class="va">g</span>,<span class="va">u</span>,<span class="va">M</span>,<span class="va">S</span><span class="op">)</span><span class="op">{</span> 
+  
+  <span class="va">z</span>  <span class="op">=</span> <span class="va">a1</span><span class="op">*</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">a2</span><span class="op">*</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">a3</span><span class="op">*</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">+</span> <span class="va">d</span>
+  
+  <span class="va">p</span> <span class="op">=</span> <span class="va">g</span> <span class="op">+</span> <span class="op">(</span><span class="va">u</span><span class="op">-</span><span class="va">g</span><span class="op">)</span><span class="op">*</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">z</span><span class="op">)</span><span class="op">)</span>
+
+  <span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">dmvnorm</a></span><span class="op">(</span><span class="va">theta</span>,mean<span class="op">=</span><span class="va">M</span>,sigma<span class="op">=</span><span class="va">S</span><span class="op">)</span>
+  
+  <span class="va">p</span><span class="op">*</span><span class="va">f</span>
+<span class="op">}</span>
+</code></pre>
 </div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+</div>
+<p>In this function:</p>
+<ul>
+<li><code>theta</code> is a 3-column matrix with columns representing <span class="math inline">\(\theta_1\)</span>, <span class="math inline">\(\theta_2\)</span>, <span class="math inline">\(\theta_3\)</span>, respectively.</li>
+<li><span class="math inline">\(a_1\)</span>, <span class="math inline">\(a_2\)</span>, and <span class="math inline">\(a_3\)</span> are the discrimination parameters</li>
+<li><span class="math inline">\(d\)</span> is the intercept parameter</li>
+<li><span class="math inline">\(g\)</span> is the lower bound parameter</li>
+<li><span class="math inline">\(u\)</span> is the upper bound parameter</li>
+<li><strong>M</strong> is the mean vector with a length of 3 for <span class="math inline">\(\theta_1\)</span>, <span class="math inline">\(\theta_2\)</span>, <span class="math inline">\(\theta_3\)</span>, respectively</li>
+<li><strong>S</strong> is the 3 x 3 covariance matrix for <span class="math inline">\(\theta_1\)</span>, <span class="math inline">\(\theta_2\)</span>, <span class="math inline">\(\theta_3\)</span></li>
+</ul>
+<p><strong>M</strong> and <strong>S</strong> are internally passed to the <code>dmvrnorm()</code> function from the <code>mvtnorm</code> package to compute the joint density for <span class="math inline">\(\theta_1\)</span>, <span class="math inline">\(\theta_2\)</span>, <span class="math inline">\(\theta_3\)</span>.</p>
+<p>Next, we generate a multivariate grid of Gauss-Hermite quadratures using the <code>createNIGrid()</code> function from the <code>mvQuad</code> package. This multivariate grid will be used for argument <code>theta</code> in the <code>p.m4pl</code> function. As we have three dimensions in our model and calculating a triple integration, the <code>dim</code> argument should be set to three. The <code>type</code> argument is set to <code>GHe</code> for the Gauss-Hermite rule. The <code>level</code> argument is the number of grid points you want to approximate the latent continuum. For instance, if we choose 3, three points on the continuum will be selected to represent the whole <span class="math inline">\(\theta\)</span> scale. When the number of grid points increases, the precision of approximation to integration also increases at the expense of increased computational time. However, I found this package super fast, although I use 40 grid points, as you will see later. For now, I set it to three to demonstrate the structure. Also, even though it sounds few, three grid points do a fine job of approximation.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="kw"><a href="https://rdrr.io/r/base/library.html">require</a></span><span class="op">(</span><span class="va"><a href="https://github.com/weiserc/mvQuad/">mvQuad</a></span><span class="op">)</span>
+
+<span class="va">nw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvQuad/man/createNIGrid.html">createNIGrid</a></span><span class="op">(</span>dim<span class="op">=</span><span class="fl">3</span>, 
+                   type<span class="op">=</span><span class="st">&quot;GHe&quot;</span>, 
+                   level<span class="op">=</span><span class="fl">3</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mvQuad/man/getNodesWeights.html">getNodes</a></span><span class="op">(</span><span class="va">nw</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>        [,1]   [,2]   [,3]
+ [1,] -1.732 -1.732 -1.732
+ [2,]  0.000 -1.732 -1.732
+ [3,]  1.732 -1.732 -1.732
+ [4,] -1.732  0.000 -1.732
+ [5,]  0.000  0.000 -1.732
+ [6,]  1.732  0.000 -1.732
+ [7,] -1.732  1.732 -1.732
+ [8,]  0.000  1.732 -1.732
+ [9,]  1.732  1.732 -1.732
+[10,] -1.732 -1.732  0.000
+[11,]  0.000 -1.732  0.000
+[12,]  1.732 -1.732  0.000
+[13,] -1.732  0.000  0.000
+[14,]  0.000  0.000  0.000
+[15,]  1.732  0.000  0.000
+[16,] -1.732  1.732  0.000
+[17,]  0.000  1.732  0.000
+[18,]  1.732  1.732  0.000
+[19,] -1.732 -1.732  1.732
+[20,]  0.000 -1.732  1.732
+[21,]  1.732 -1.732  1.732
+[22,] -1.732  0.000  1.732
+[23,]  0.000  0.000  1.732
+[24,]  1.732  0.000  1.732
+[25,] -1.732  1.732  1.732
+[26,]  0.000  1.732  1.732
+[27,]  1.732  1.732  1.732</code></pre>
+</div>
+<p>When we set the <code>level</code> argument to three, it picked three points representing each latent dimension: -1.732, 0, and 1.732. <code>nw</code> is a 27 x 3 matrix. Each column represents a dimension, and 27 (<span class="math inline">\(3^3\)</span>) is the number of all possible combinations for these three grid points. If we set the <code>level</code> argument to 40, <code>nw</code> would be a <span class="math inline">\(40^3\)</span> x 3 matrix.</p>
+<p>You can also get the assigned weights for each combination of grid points.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/mvQuad/man/getNodesWeights.html">getWeights</a></span><span class="op">(</span><span class="va">nw</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>       [,1]
+ [1,] 6.564
+ [2,] 5.858
+ [3,] 6.564
+ [4,] 5.858
+ [5,] 5.229
+ [6,] 5.858
+ [7,] 6.564
+ [8,] 5.858
+ [9,] 6.564
+[10,] 5.858
+[11,] 5.229
+[12,] 5.858
+[13,] 5.229
+[14,] 4.667
+[15,] 5.229
+[16,] 5.858
+[17,] 5.229
+[18,] 5.858
+[19,] 6.564
+[20,] 5.858
+[21,] 6.564
+[22,] 5.858
+[23,] 5.229
+[24,] 5.858
+[25,] 6.564
+[26,] 5.858
+[27,] 6.564</code></pre>
+</div>
+<p>After we create the function object (<code>p.m4pl</code>) to integrate over and an object for multivariate grid points (<code>nw</code>), we can now use the <code>quadrature()</code> function to compute the expected value. The first argument for the <code>quadrature()</code> function is the name of the function object. The second argument for the <code>quadrature()</code> function is the object for the multivariate grid which is passed to the function to be integrated as the first argument (<code>theta</code>). Then, all arguments expected by the function to be integrated are given to the <code>quadrature()</code> function. Below, I assume the latent dimensions do not correlate to each other, but we can simply modify the <code>Sigma</code> if we want to assume the latent dimensions are correlated.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="va">mu</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>
+<span class="va">Sigma</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/pkg/mvQuad/man/quadrature.html">quadrature</a></span><span class="op">(</span><span class="va">p.m4pl</span>, 
+           grid <span class="op">=</span> <span class="va">nw</span>,
+           a1<span class="op">=</span><span class="fl">1.01</span>,
+           a2<span class="op">=</span><span class="fl">0.01</span>,
+           a3<span class="op">=</span><span class="fl">0.05</span>,
+           d<span class="op">=</span><span class="fl">0.01</span>,
+           g<span class="op">=</span><span class="fl">0.09</span>,
+           u<span class="op">=</span><span class="fl">0.99</span>,
+           M<span class="op">=</span><span class="va">mu</span>,
+           S<span class="op">=</span><span class="va">Sigma</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.5419</code></pre>
+</div>
+<p>This indicates that the expected value for an item with parameters of <span class="math inline">\((a_1,a_2,a_3,d,g,u) = (1.01, 0.01, 0.05, 0.01, 0.09, 0.99)\)</span> would be 0.5419 assuming that three latent dimensions follow a multivariate normal distribution with zero means, unit variances, and zero correlations.</p>
+<p>To make this easier, we wrap everything in a single function, and call this function <code>e.m4pl</code>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="va">e.m4pl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a1</span>,<span class="va">a2</span>,<span class="va">a3</span>,<span class="va">d</span>,<span class="va">g</span>,<span class="va">u</span>,<span class="va">M</span>,<span class="va">S</span>,<span class="va">nquad</span><span class="op">)</span><span class="op">{</span>
+
+    <span class="va">p.m4pl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">theta</span>,<span class="va">a1</span>,<span class="va">a2</span>,<span class="va">a3</span>,<span class="va">d</span>,<span class="va">g</span>,<span class="va">u</span>,<span class="va">M</span>,<span class="va">S</span><span class="op">)</span><span class="op">{</span> 
+      
+      <span class="va">z</span>  <span class="op">=</span> <span class="va">a1</span><span class="op">*</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">a2</span><span class="op">*</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">a3</span><span class="op">*</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">+</span> <span class="va">d</span>
+      
+      <span class="va">p</span> <span class="op">=</span> <span class="va">g</span> <span class="op">+</span> <span class="op">(</span><span class="va">u</span><span class="op">-</span><span class="va">g</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">z</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+    
+      <span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">dmvnorm</a></span><span class="op">(</span><span class="va">theta</span>,mean<span class="op">=</span><span class="va">M</span>,sigma<span class="op">=</span><span class="va">S</span><span class="op">)</span>
+      
+      <span class="va">p</span><span class="op">*</span><span class="va">f</span>
+    <span class="op">}</span>
+    
+    
+    <span class="va">nw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvQuad/man/createNIGrid.html">createNIGrid</a></span><span class="op">(</span>dim<span class="op">=</span><span class="fl">3</span>, type<span class="op">=</span><span class="st">&quot;GHe&quot;</span>, level<span class="op">=</span><span class="va">nquad</span><span class="op">)</span>
+    
+      
+  <span class="fu"><a href="https://rdrr.io/pkg/mvQuad/man/quadrature.html">quadrature</a></span><span class="op">(</span><span class="va">p.m4pl</span>, 
+             grid <span class="op">=</span> <span class="va">nw</span>,
+             a1<span class="op">=</span><span class="va">a1</span>,
+             a2<span class="op">=</span><span class="va">a2</span>,
+             a3<span class="op">=</span><span class="va">a3</span>,
+             d<span class="op">=</span><span class="va">d</span>,
+             g<span class="op">=</span><span class="va">g</span>,
+             u<span class="op">=</span><span class="va">u</span>,
+             M<span class="op">=</span><span class="va">M</span>,
+             S<span class="op">=</span><span class="va">S</span><span class="op">)</span>
+<span class="op">}</span>
+</code></pre>
+</div>
+</div>
+<p>Now, we can compute the expected value for any given set of item parameters when the responses are generated based on a multidimensional 4PL model as shown in Eq<a href="#eq:1">(1)</a></p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="va">mu</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>
+<span class="va">Sigma</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
+
+<span class="va">i</span> <span class="op">=</span> <span class="fl">2</span> <span class="co"># item number</span>
+
+  <span class="fu">e.m4pl</span><span class="op">(</span>a1 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+         a2 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+         a3 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a3</span>,
+         d  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">d</span>,
+         g  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+         u  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+         M  <span class="op">=</span> <span class="va">mu</span>,
+         S  <span class="op">=</span> <span class="va">Sigma</span>,
+      nquad <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.4315</code></pre>
+<div class="sourceCode">
+<pre><code><span class="co"># Compute the population level means for all 9 items</span>
+  
+<span class="va">exp.means</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span>
+
+<span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">{</span>
+
+  <span class="va">exp.means</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">=</span> <span class="fu">e.m4pl</span><span class="op">(</span>a1 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                       a2 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                       a3 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a3</span>,
+                       d  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">d</span>,
+                       g  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                       u  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                       M  <span class="op">=</span> <span class="va">mu</span>,
+                       S  <span class="op">=</span> <span class="va">Sigma</span>,
+                       nquad <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>
+<span class="op">}</span>
+
+<span class="va">exp.means</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.5419 0.4315 0.3795 0.4614 0.6418 0.6144 0.5069 0.2610 0.6259</code></pre>
+</div>
+<h3 id="population-level-variances-and-covariances">Population-Level Variances and Covariances</h3>
+<p>We can compute the population level variance for any item using</p>
+<p><span class="math display" id="eq:3">\[\begin{equation}
+\sigma_{Y}^{2}=E[Y]-E[Y]^2.\tag{3}
+\end{equation}\]</span></p>
+<p>This equation holds as <span class="math inline">\(Y\)</span> is binary and can take only two values (0, 1). This is straightforward since we know how to compute <span class="math inline">\(E[Y]\)</span>. For instance, the population variance for Item 1 would be 0.2482.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="va">mu</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>
+<span class="va">Sigma</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
+
+<span class="va">i</span> <span class="op">=</span> <span class="fl">1</span> <span class="co"># item number</span>
+
+  <span class="va">e</span>  <span class="op">&lt;-</span> <span class="fu">e.m4pl</span><span class="op">(</span>a1 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+               a2 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+               a3 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a3</span>,
+               d  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">d</span>,
+               g  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+               u  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+               M  <span class="op">=</span> <span class="va">mu</span>, S  <span class="op">=</span> <span class="va">Sigma</span>, nquad <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>
+  <span class="va">e</span> <span class="op">-</span> <span class="va">e</span><span class="op">^</span><span class="fl">2</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.2482</code></pre>
+</div>
+<p>To compute the covariance for an item pair given the set of item parameters, we first need to write a new function for the joint probability to integrate over.</p>
+<p><span class="math display" id="eq:4">\[\begin{equation}
+E[Y_iY_j]=\int_{\theta_1}\int_{\theta_2}\int_{\theta_3}P(Y_i=1)P(Y_j=1)f(\theta_1,\theta_2,\theta_3)d_{\theta_1}d_{\theta_2}d_{\theta_3}\tag{4}
+\end{equation}\]</span></p>
+<p>Below is what we get after tweaking a little bit of the above code written for <span class="math inline">\(E[Y]\)</span>.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="va">e12.m4pl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a11</span>,<span class="va">a12</span>,<span class="va">a13</span>,<span class="va">d1</span>,<span class="va">g1</span>,<span class="va">u1</span>,<span class="va">a21</span>,<span class="va">a22</span>,<span class="va">a23</span>,<span class="va">d2</span>,<span class="va">g2</span>,<span class="va">u2</span>,<span class="va">M</span>,<span class="va">S</span>,<span class="va">nquad</span><span class="op">)</span><span class="op">{</span>
+
+    <span class="va">p12.m4pl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">theta</span>,<span class="va">a11</span>,<span class="va">a12</span>,<span class="va">a13</span>,<span class="va">d1</span>,<span class="va">g1</span>,<span class="va">u1</span>,<span class="va">a21</span>,<span class="va">a22</span>,<span class="va">a23</span>,<span class="va">d2</span>,<span class="va">g2</span>,<span class="va">u2</span>,<span class="va">M</span>,<span class="va">S</span><span class="op">)</span><span class="op">{</span> 
+      
+      <span class="va">z1</span>  <span class="op">=</span> <span class="va">a11</span><span class="op">*</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">a12</span><span class="op">*</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">a13</span><span class="op">*</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">+</span> <span class="va">d1</span>
+      <span class="va">z2</span>  <span class="op">=</span> <span class="va">a21</span><span class="op">*</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">+</span> <span class="va">a22</span><span class="op">*</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">+</span> <span class="va">a23</span><span class="op">*</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">+</span> <span class="va">d2</span>
+
+      <span class="va">p1</span> <span class="op">=</span> <span class="va">g1</span> <span class="op">+</span> <span class="op">(</span><span class="va">u1</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">z1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+      <span class="va">p2</span> <span class="op">=</span> <span class="va">g2</span> <span class="op">+</span> <span class="op">(</span><span class="va">u2</span><span class="op">-</span><span class="va">g2</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">z2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+      
+      <span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">dmvnorm</a></span><span class="op">(</span><span class="va">theta</span>,mean<span class="op">=</span><span class="va">M</span>,sigma<span class="op">=</span><span class="va">S</span><span class="op">)</span>
+      
+      <span class="va">p1</span><span class="op">*</span><span class="va">p2</span><span class="op">*</span><span class="va">f</span>
+    <span class="op">}</span>
+    
+    
+    <span class="va">nw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvQuad/man/createNIGrid.html">createNIGrid</a></span><span class="op">(</span>dim<span class="op">=</span><span class="fl">3</span>, type<span class="op">=</span><span class="st">&quot;GHe&quot;</span>, level<span class="op">=</span><span class="va">nquad</span><span class="op">)</span>
+    
+      
+  <span class="fu"><a href="https://rdrr.io/pkg/mvQuad/man/quadrature.html">quadrature</a></span><span class="op">(</span><span class="va">p12.m4pl</span>, 
+             grid <span class="op">=</span> <span class="va">nw</span>,
+             a11 <span class="op">=</span> <span class="va">a11</span>,
+             a12 <span class="op">=</span> <span class="va">a12</span>,
+             a13 <span class="op">=</span> <span class="va">a13</span>,
+             d1  <span class="op">=</span> <span class="va">d1</span>,
+             g1  <span class="op">=</span> <span class="va">g1</span>,
+             u1  <span class="op">=</span> <span class="va">u1</span>,
+             a21 <span class="op">=</span> <span class="va">a21</span>,
+             a22 <span class="op">=</span> <span class="va">a22</span>,
+             a23 <span class="op">=</span> <span class="va">a23</span>,
+             d2  <span class="op">=</span> <span class="va">d2</span>,
+             g2  <span class="op">=</span> <span class="va">g2</span>,
+             u2  <span class="op">=</span> <span class="va">u2</span>,
+             M   <span class="op">=</span> <span class="va">M</span>,
+             S   <span class="op">=</span> <span class="va">S</span><span class="op">)</span>
+<span class="op">}</span>
+</code></pre>
+</div>
+</div>
+<p>Now, we can compute the expected covariance for any item pair using</p>
+<p><span class="math display" id="eq:5">\[\begin{equation}
+\sigma_{Y_1Y_2}=E[Y_1Y_2]-E[Y_1]E[Y_2].\tag{5}
+\end{equation}\]</span></p>
+<p>For instance, the population covariance between Item 1 and Item 2 would be 0.0414.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="va">mu</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>
+<span class="va">Sigma</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
+
+<span class="va">i</span> <span class="op">=</span> <span class="fl">1</span> <span class="co"># item number for the first item</span>
+<span class="va">j</span> <span class="op">=</span> <span class="fl">2</span> <span class="co"># item number for the second item</span>
+
+  <span class="va">e1</span>  <span class="op">&lt;-</span> <span class="fu">e.m4pl</span><span class="op">(</span>a1 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                a2 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                a3 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a3</span>,
+                d  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">d</span>,
+                g  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                u  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                M  <span class="op">=</span> <span class="va">mu</span>, S  <span class="op">=</span> <span class="va">Sigma</span>, nquad <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>
+
+  <span class="va">e2</span>  <span class="op">&lt;-</span> <span class="fu">e.m4pl</span><span class="op">(</span>a1 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                a2 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                a3 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a3</span>,
+                d  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">d</span>,
+                g  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                u  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                M  <span class="op">=</span> <span class="va">mu</span>, S  <span class="op">=</span> <span class="va">Sigma</span>, nquad <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>
+
+  <span class="va">e12</span> <span class="op">&lt;-</span> <span class="fu">e12.m4pl</span><span class="op">(</span>a11 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                  a12 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                  a13 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a3</span>,
+                  d1  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">d</span>,
+                  g1  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                  u1  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                  a21 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                  a22 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                  a23 <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a3</span>,
+                  d2  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">d</span>,
+                  g2  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                  u2  <span class="op">=</span> <span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                  M  <span class="op">=</span> <span class="va">mu</span>,
+                  S  <span class="op">=</span> <span class="va">Sigma</span>,
+                  nquad <span class="op">=</span> <span class="fl">40</span><span class="op">)</span>
+
+  <span class="va">e12</span> <span class="op">-</span> <span class="va">e1</span><span class="op">*</span><span class="va">e2</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.04137</code></pre>
+</div>
+<p>Let’s create a wrapper function using these smaller functions to return a population variance-covariance matrix for a given set of item parameters.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="va">pop.vcov</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">ip</span>, <span class="va">M</span>, <span class="va">S</span>, <span class="va">nq</span><span class="op">)</span><span class="op">{</span>
+  
+  <span class="va">VCOV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ip</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ip</span><span class="op">)</span><span class="op">)</span>
+  
+  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ip</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+    
+      <span class="va">e</span>  <span class="op">&lt;-</span> <span class="fu">e.m4pl</span><span class="op">(</span>a1 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                   a2 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                   a3 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a3</span>,
+                   d  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">d</span>,
+                   g  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                   u  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                   M  <span class="op">=</span> <span class="va">M</span>, S  <span class="op">=</span> <span class="va">S</span>, nquad <span class="op">=</span> <span class="va">nq</span><span class="op">)</span>
+
+      <span class="va">VCOV</span><span class="op">[</span><span class="va">i</span>,<span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span>  <span class="va">e</span> <span class="op">-</span> <span class="va">e</span><span class="op">^</span><span class="fl">2</span>
+  <span class="op">}</span>
+  
+  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ip</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+    <span class="kw">for</span><span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="op">(</span><span class="va">i</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ip</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+      
+      <span class="va">e1</span>  <span class="op">&lt;-</span> <span class="fu">e.m4pl</span><span class="op">(</span>a1 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                    a2 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                    a3 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a3</span>,
+                    d  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">d</span>,
+                    g  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                    u  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                    M  <span class="op">=</span> <span class="va">M</span>, S  <span class="op">=</span> <span class="va">S</span>, nquad <span class="op">=</span> <span class="va">nq</span><span class="op">)</span>
+      
+      <span class="va">e2</span>  <span class="op">&lt;-</span> <span class="fu">e.m4pl</span><span class="op">(</span>a1 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                    a2 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                    a3 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a3</span>,
+                    d  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">d</span>,
+                    g  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                    u  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                    M  <span class="op">=</span> <span class="va">M</span>, S  <span class="op">=</span> <span class="va">S</span>, nquad <span class="op">=</span> <span class="va">nq</span><span class="op">)</span>
+      
+      <span class="va">e12</span> <span class="op">&lt;-</span> <span class="fu">e12.m4pl</span><span class="op">(</span>a11 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                      a12 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                      a13 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a3</span>,
+                      d1  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">d</span>,
+                      g1  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                      u1  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                      a21 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                      a22 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                      a23 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a3</span>,
+                      d2  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">d</span>,
+                      g2  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                      u2  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                      M  <span class="op">=</span> <span class="va">M</span>,
+                      S  <span class="op">=</span> <span class="va">S</span>,
+                      nquad <span class="op">=</span> <span class="va">nq</span><span class="op">)</span>
+      
+      <span class="va">VCOV</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">VCOV</span><span class="op">[</span><span class="va">j</span>,<span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">e12</span> <span class="op">-</span> <span class="va">e1</span><span class="op">*</span><span class="va">e2</span>
+    <span class="op">}</span>
+  <span class="op">}</span>
+  
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span>VCOV<span class="op">=</span><span class="va">VCOV</span><span class="op">)</span>
+<span class="op">}</span>
+</code></pre>
+</div>
+</div>
+<p>We can now compute the population variance-covariance matrix for all these 9 items, and then convert it to a correlation matrix using the <code>cov2cor()</code> function.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="va">mu</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>
+<span class="va">Sigma</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>
+
+<span class="va">VCOV</span> <span class="op">&lt;-</span> <span class="fu">pop.vcov</span><span class="op">(</span>ip <span class="op">=</span> <span class="va">ipar</span>, M <span class="op">=</span> <span class="va">mu</span>, S <span class="op">=</span> <span class="va">Sigma</span>,nq<span class="op">=</span><span class="fl">40</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">VCOV</span>,<span class="fl">3</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>       [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9]
+ [1,] 0.248 0.041 0.036 0.014 0.008 0.002 0.002 0.003 0.002
+ [2,] 0.041 0.245 0.047 0.018 0.009 0.002 0.018 0.022 0.015
+ [3,] 0.036 0.047 0.235 0.017 0.010 0.003 0.013 0.017 0.011
+ [4,] 0.014 0.018 0.017 0.249 0.037 0.019 0.013 0.016 0.014
+ [5,] 0.008 0.009 0.010 0.037 0.230 0.018 0.006 0.007 0.008
+ [6,] 0.002 0.002 0.003 0.019 0.018 0.237 0.003 0.004 0.004
+ [7,] 0.002 0.018 0.013 0.013 0.006 0.003 0.250 0.054 0.038
+ [8,] 0.003 0.022 0.017 0.016 0.007 0.004 0.054 0.193 0.042
+ [9,] 0.002 0.015 0.011 0.014 0.008 0.004 0.038 0.042 0.234</code></pre>
+<div class="sourceCode">
+<pre><code><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov2cor</a></span><span class="op">(</span><span class="va">VCOV</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>       [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9]
+ [1,] 1.000 0.168 0.148 0.055 0.034 0.009 0.008 0.013 0.007
+ [2,] 0.168 1.000 0.197 0.073 0.039 0.010 0.072 0.100 0.062
+ [3,] 0.148 0.197 1.000 0.072 0.043 0.013 0.056 0.078 0.048
+ [4,] 0.055 0.073 0.072 1.000 0.155 0.079 0.053 0.072 0.057
+ [5,] 0.034 0.039 0.043 0.155 1.000 0.077 0.027 0.035 0.035
+ [6,] 0.009 0.010 0.013 0.079 0.077 1.000 0.013 0.017 0.017
+ [7,] 0.008 0.072 0.056 0.053 0.027 0.013 1.000 0.244 0.156
+ [8,] 0.013 0.100 0.078 0.072 0.035 0.017 0.244 1.000 0.199
+ [9,] 0.007 0.062 0.048 0.057 0.035 0.017 0.156 0.199 1.000</code></pre>
+<div class="sourceCode">
+<pre><code><span class="va">corr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov2cor</a></span><span class="op">(</span><span class="va">VCOV</span><span class="op">)</span>
+
+<span class="va">eigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">corr</span><span class="op">)</span><span class="op">$</span><span class="va">values</span>
+
+<span class="va">eigens</span>
+</code></pre>
+</div>
+<pre><code>[1] 1.6102 1.2309 1.1392 0.9374 0.8530 0.8449 0.8406 0.7982 0.7456</code></pre>
+<div class="sourceCode">
+<pre><code><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">eigens</span><span class="op">)</span>
+</code></pre>
+</div>
+<p><img src="data:image/png;base64,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" width="624" /></p>
+</div>
+<h2 id="partially-compensatory-models">Partially Compensatory Models</h2>
+<p>The process above can be applied to any probability model for item responses. The only thing that needs to be adjusted is how we define the probability of correct response given the item and person parameters. Suppose you are working with a two-dimensional 4-PL partially compensatory item response model. In this model, the probability of a correct response can be written as,</p>
+<p><span class="math display" id="eq:6">\[
+\begin{equation}
+P(Y=1 | \theta_1,\theta_2,a_1,a_2,b_1,b_2,g,u) = g + (u-g) \left(\prod_{l=1}^{2}\frac{1}{1+e^{-a_l(\theta_l-b_l)}}\right)\tag{6},
+\end{equation}
+\]</span></p>
+<p>in which <span class="math inline">\(\theta_l\)</span>, <span class="math inline">\(a_l\)</span>, and <span class="math inline">\(b_l\)</span> are the person parameter, item discrimination parameter, and item difficulty parameters on the <span class="math inline">\(l^{th}\)</span> latent dimension, respectively; <span class="math inline">\(g\)</span> is the item guessing parameter (lower bound), and <span class="math inline">\(u\)</span> is the slipping parameter (upper bound). Below is a table of item parameters for some hypothetical items.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="va">ipar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/read.table.html">read.csv</a></span><span class="op">(</span><span class="st">&#39;data/ipar2.csv&#39;</span><span class="op">)</span>
+<span class="va">ipar</span>
+</code></pre>
+</div>
+<pre><code>    a1   a2    b1    b2    g    u
+1 0.94 1.99 -1.36 -1.65 0.05 0.98
+2 1.83 1.38  0.11 -2.63 0.04 0.97
+3 1.75 1.25 -2.97 -1.09 0.10 0.95
+4 1.10 0.95 -0.29 -0.08 0.09 0.96
+5 1.89 1.92 -0.49  0.45 0.07 0.98</code></pre>
+</div>
+<p><a href="&#39;data/ipar2.csv&#39;">Download the item parameter file</a></p>
+<p>Below are the auxiliary and wrapper functions for this model to compute the population variance-covariance matrix and correlations.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="co"># Function to compute the marginal expectation</span>
+
+<span class="va">e.pcm4pl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a1</span>,<span class="va">a2</span>,<span class="va">b1</span>,<span class="va">b2</span>,<span class="va">g</span>,<span class="va">u</span>,<span class="va">M</span>,<span class="va">S</span>,<span class="va">nquad</span><span class="op">)</span><span class="op">{</span>
+
+    <span class="va">p.pcm4pl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">theta</span>,<span class="va">a1</span>,<span class="va">a2</span>,<span class="va">b1</span>,<span class="va">b2</span>,<span class="va">d</span>,<span class="va">g</span>,<span class="va">u</span>,<span class="va">M</span>,<span class="va">S</span><span class="op">)</span><span class="op">{</span> 
+      
+      <span class="va">z1</span>  <span class="op">=</span> <span class="va">a1</span><span class="op">*</span><span class="op">(</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">b1</span><span class="op">)</span> 
+      <span class="va">z2</span>  <span class="op">=</span> <span class="va">a2</span><span class="op">*</span><span class="op">(</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">-</span><span class="va">b2</span><span class="op">)</span> 
+      <span class="va">p</span> <span class="op">=</span> <span class="va">g</span> <span class="op">+</span> <span class="op">(</span><span class="va">u</span><span class="op">-</span><span class="va">g</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">z1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">z2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+    
+      <span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">dmvnorm</a></span><span class="op">(</span><span class="va">theta</span>,mean<span class="op">=</span><span class="va">M</span>,sigma<span class="op">=</span><span class="va">S</span><span class="op">)</span>
+      
+      <span class="va">p</span><span class="op">*</span><span class="va">f</span>
+    <span class="op">}</span>
+    
+    
+    <span class="va">nw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvQuad/man/createNIGrid.html">createNIGrid</a></span><span class="op">(</span>dim<span class="op">=</span><span class="fl">2</span>, type<span class="op">=</span><span class="st">&quot;GHe&quot;</span>, level<span class="op">=</span><span class="va">nquad</span><span class="op">)</span>
+    
+      
+  <span class="fu"><a href="https://rdrr.io/pkg/mvQuad/man/quadrature.html">quadrature</a></span><span class="op">(</span><span class="va">p.pcm4pl</span>, 
+             grid <span class="op">=</span> <span class="va">nw</span>,
+             a1<span class="op">=</span><span class="va">a1</span>,
+             a2<span class="op">=</span><span class="va">a2</span>,
+             b1<span class="op">=</span><span class="va">b1</span>,
+             b2<span class="op">=</span><span class="va">b2</span>,
+             g<span class="op">=</span><span class="va">g</span>,
+             u<span class="op">=</span><span class="va">u</span>,
+             M<span class="op">=</span><span class="va">M</span>,
+             S<span class="op">=</span><span class="va">S</span><span class="op">)</span>
+<span class="op">}</span>
+
+
+<span class="co"># Function to compute the expectation for joint probability</span>
+
+<span class="va">e12.pcm4pl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a11</span>,<span class="va">a12</span>,<span class="va">b11</span>,<span class="va">b12</span>,<span class="va">g1</span>,<span class="va">u1</span>,<span class="va">a21</span>,<span class="va">a22</span>,<span class="va">b21</span>,<span class="va">b22</span>,<span class="va">g2</span>,<span class="va">u2</span>,<span class="va">M</span>,<span class="va">S</span>,<span class="va">nquad</span><span class="op">)</span><span class="op">{</span>
+
+    <span class="va">p12.pcm4pl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">theta</span>,<span class="va">a11</span>,<span class="va">a12</span>,<span class="va">b11</span>,<span class="va">b12</span>,<span class="va">g1</span>,<span class="va">u1</span>,<span class="va">a21</span>,<span class="va">a22</span>,<span class="va">b21</span>,<span class="va">b22</span>,<span class="va">g2</span>,<span class="va">u2</span>,<span class="va">M</span>,<span class="va">S</span><span class="op">)</span><span class="op">{</span> 
+      
+      <span class="va">z11</span>  <span class="op">=</span> <span class="va">a11</span><span class="op">*</span><span class="op">(</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">b11</span><span class="op">)</span>
+      <span class="va">z12</span>  <span class="op">=</span> <span class="va">a12</span><span class="op">*</span><span class="op">(</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">-</span><span class="va">b12</span><span class="op">)</span>
+      
+      <span class="va">z21</span>  <span class="op">=</span> <span class="va">a21</span><span class="op">*</span><span class="op">(</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span><span class="op">-</span><span class="va">b21</span><span class="op">)</span>
+      <span class="va">z22</span>  <span class="op">=</span> <span class="va">a22</span><span class="op">*</span><span class="op">(</span><span class="va">theta</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">-</span><span class="va">b22</span><span class="op">)</span>
+      
+      <span class="va">p1</span> <span class="op">=</span> <span class="va">g1</span> <span class="op">+</span> <span class="op">(</span><span class="va">u1</span><span class="op">-</span><span class="va">g1</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">z11</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">z12</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+      <span class="va">p2</span> <span class="op">=</span> <span class="va">g2</span> <span class="op">+</span> <span class="op">(</span><span class="va">u2</span><span class="op">-</span><span class="va">g2</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">z21</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="va">z22</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
+    
+      <span class="va">f</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/mvtnorm/man/Mvnorm.html">dmvnorm</a></span><span class="op">(</span><span class="va">theta</span>,mean<span class="op">=</span><span class="va">M</span>,sigma<span class="op">=</span><span class="va">S</span><span class="op">)</span>
+      
+      <span class="va">p1</span><span class="op">*</span><span class="va">p2</span><span class="op">*</span><span class="va">f</span>
+    <span class="op">}</span>
+    
+    
+    <span class="va">nw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/mvQuad/man/createNIGrid.html">createNIGrid</a></span><span class="op">(</span>dim<span class="op">=</span><span class="fl">2</span>, type<span class="op">=</span><span class="st">&quot;GHe&quot;</span>, level<span class="op">=</span><span class="va">nquad</span><span class="op">)</span>
+    
+      
+  <span class="fu"><a href="https://rdrr.io/pkg/mvQuad/man/quadrature.html">quadrature</a></span><span class="op">(</span><span class="va">p12.pcm4pl</span>, 
+             grid <span class="op">=</span> <span class="va">nw</span>,
+             a11  <span class="op">=</span> <span class="va">a11</span>,
+             a12  <span class="op">=</span> <span class="va">a12</span>,
+             b11  <span class="op">=</span> <span class="va">b11</span>,
+             b12  <span class="op">=</span> <span class="va">b12</span>,
+             g1   <span class="op">=</span> <span class="va">g1</span>,
+             u1   <span class="op">=</span> <span class="va">u1</span>,
+             a21  <span class="op">=</span> <span class="va">a21</span>,
+             a22  <span class="op">=</span> <span class="va">a22</span>,
+             b21  <span class="op">=</span> <span class="va">b21</span>,
+             b22  <span class="op">=</span> <span class="va">b22</span>,
+             g2   <span class="op">=</span> <span class="va">g2</span>,
+             u2   <span class="op">=</span> <span class="va">u2</span>,
+             M    <span class="op">=</span> <span class="va">M</span>,
+             S    <span class="op">=</span> <span class="va">S</span><span class="op">)</span>
+<span class="op">}</span> 
+  
+<span class="co"># Wrapper function</span>
+  
+<span class="va">pop.vcov</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">ip</span>, <span class="va">M</span>, <span class="va">S</span>, <span class="va">nq</span><span class="op">)</span><span class="op">{</span>
+  
+  <span class="va">VCOV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span>nrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ip</span><span class="op">)</span>,ncol<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ip</span><span class="op">)</span><span class="op">)</span>
+  
+  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ip</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+    
+      <span class="va">e</span>  <span class="op">&lt;-</span> <span class="fu">e.pcm4pl</span><span class="op">(</span>a1 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                     a2 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                     b1 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">b1</span>,
+                     b2 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">b2</span>,
+                     g  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                     u  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                     M  <span class="op">=</span> <span class="va">M</span>, S  <span class="op">=</span> <span class="va">S</span>, nquad <span class="op">=</span> <span class="va">nq</span><span class="op">)</span>
+
+      <span class="va">VCOV</span><span class="op">[</span><span class="va">i</span>,<span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span>  <span class="va">e</span> <span class="op">-</span> <span class="va">e</span><span class="op">^</span><span class="fl">2</span>
+  <span class="op">}</span>
+  
+  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ip</span><span class="op">)</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+    <span class="kw">for</span><span class="op">(</span><span class="va">j</span> <span class="kw">in</span> <span class="op">(</span><span class="va">i</span><span class="op">+</span><span class="fl">1</span><span class="op">)</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">ip</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+      
+      <span class="va">e1</span>  <span class="op">&lt;-</span> <span class="fu">e.pcm4pl</span><span class="op">(</span>a1 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                     a2 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                     b1 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">b1</span>,
+                     b2 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">b2</span>,
+                     g  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                     u  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">i</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                     M  <span class="op">=</span> <span class="va">M</span>, S  <span class="op">=</span> <span class="va">S</span>, nquad <span class="op">=</span> <span class="va">nq</span><span class="op">)</span>
+      
+      <span class="va">e2</span> <span class="op">&lt;-</span> <span class="fu">e.pcm4pl</span><span class="op">(</span>a1 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a1</span>,
+                     a2 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">a2</span>,
+                     b1 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">b1</span>,
+                     b2 <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">b2</span>,
+                     g  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">g</span>,
+                     u  <span class="op">=</span> <span class="va">ip</span><span class="op">[</span><span class="va">j</span>,<span class="op">]</span><span class="op">$</span><span class="va">u</span>,
+                     M  <span class="op">=</span> <span class="va">M</span>, S  <span class="op">=</span> <span class="va">S</span>, nquad <span class="op">=</span> <span class="va">nq</span><span class="op">)</span>
+
+      <span class="va">e12</span> <span class="op">&lt;-</span> <span class="fu">e12.pcm4pl</span><span class="op">(</span>a11<span class="op">=</span><span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="fl">1</span><span class="op">]</span>,
+                        a12<span class="op">=</span><span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="fl">2</span><span class="op">]</span>,
+                        b11<span class="op">=</span><span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="fl">3</span><span class="op">]</span>,
+                        b12<span class="op">=</span><span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="fl">4</span><span class="op">]</span>,
+                        g1<span class="op">=</span><span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="fl">5</span><span class="op">]</span>,
+                        u1<span class="op">=</span><span class="va">ipar</span><span class="op">[</span><span class="va">i</span>,<span class="fl">6</span><span class="op">]</span>,
+                        a21<span class="op">=</span><span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="fl">1</span><span class="op">]</span>,
+                        a22<span class="op">=</span><span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="fl">2</span><span class="op">]</span>,
+                        b21<span class="op">=</span><span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="fl">3</span><span class="op">]</span>,
+                        b22<span class="op">=</span><span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="fl">4</span><span class="op">]</span>,
+                        g2<span class="op">=</span><span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="fl">5</span><span class="op">]</span>,
+                        u2<span class="op">=</span><span class="va">ipar</span><span class="op">[</span><span class="va">j</span>,<span class="fl">6</span><span class="op">]</span>,
+                        M<span class="op">=</span><span class="va">mu</span>,S<span class="op">=</span><span class="va">Sigma</span>,nquad<span class="op">=</span><span class="fl">10</span><span class="op">)</span>
+
+       <span class="va">VCOV</span><span class="op">[</span><span class="va">i</span>,<span class="va">j</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">VCOV</span><span class="op">[</span><span class="va">j</span>,<span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">e12</span> <span class="op">-</span> <span class="va">e1</span><span class="op">*</span><span class="va">e2</span>
+    <span class="op">}</span>
+  <span class="op">}</span>
+  
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span>VCOV<span class="op">=</span><span class="va">VCOV</span><span class="op">)</span>
+<span class="op">}</span>  
+</code></pre>
+</div>
+</div>
+<p>We can now compute the population level variance-covariance and correlations for these 5 items using the wrapper function.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre><code><span class="va">mu</span>    <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">0</span><span class="op">)</span>
+<span class="va">Sigma</span> <span class="op">&lt;-</span>  <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span><span class="op">(</span><span class="fl">2</span><span class="op">)</span>
+
+<span class="va">VCOV</span> <span class="op">&lt;-</span> <span class="fu">pop.vcov</span><span class="op">(</span>ip <span class="op">=</span> <span class="va">ipar</span>, M <span class="op">=</span> <span class="va">mu</span>, S <span class="op">=</span> <span class="va">Sigma</span>, nq<span class="op">=</span><span class="fl">40</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">VCOV</span>,<span class="fl">3</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>      [,1]  [,2]  [,3]  [,4]  [,5]
+[1,] 0.221 0.037 0.021 0.023 0.027
+[2,] 0.037 0.248 0.009 0.029 0.029
+[3,] 0.021 0.009 0.203 0.018 0.027
+[4,] 0.023 0.029 0.018 0.225 0.029
+[5,] 0.027 0.029 0.027 0.029 0.204</code></pre>
+<div class="sourceCode">
+<pre><code><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov2cor</a></span><span class="op">(</span><span class="va">VCOV</span><span class="op">)</span>,<span class="fl">3</span><span class="op">)</span>
+</code></pre>
+</div>
+<pre><code>      [,1]  [,2]  [,3]  [,4]  [,5]
+[1,] 1.000 0.158 0.100 0.101 0.125
+[2,] 0.158 1.000 0.041 0.123 0.131
+[3,] 0.100 0.041 1.000 0.083 0.132
+[4,] 0.101 0.123 0.083 1.000 0.134
+[5,] 0.125 0.131 0.132 0.134 1.000</code></pre>
+<div class="sourceCode">
+<pre><code><span class="va">corr</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cov2cor</a></span><span class="op">(</span><span class="va">VCOV</span><span class="op">)</span>
+
+<span class="va">eigens</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">corr</span><span class="op">)</span><span class="op">$</span><span class="va">values</span>
+
+<span class="va">eigens</span>
+</code></pre>
+</div>
+<pre><code>[1] 1.4562 0.9700 0.9054 0.8517 0.8167</code></pre>
+<div class="sourceCode">
+<pre><code><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">eigens</span><span class="op">)</span>
+</code></pre>
+</div>
+<p><img src="data:image/png;base64,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" width="624" /></p>
+</div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

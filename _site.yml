@@ -71,7 +71,8 @@ collections:
     share: [twitter, linkedin, pinterest, facebook]
 
 rss:
-  full_content: TRUE
+  full_content: FALSE
   categories:
     - R  
+    
 output: distill::distill_article
