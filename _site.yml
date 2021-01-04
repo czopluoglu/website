@@ -26,6 +26,9 @@ navbar:
         - text: "fitPMM"
           href: fitpmm.html
       
+    - text: "Shiny Apps"
+      href: https://cengiz-shiny.app/shiny/
+  
     - text: "Courses"
       menu:
         - text: "Introduction to R Programming"
