@@ -1,0 +1,342 @@
+---
+title: 'Simultaneous Detection of Compromised Items and Examinees with Item Preknowledge'
+description: |
+  
+  Yes, you heard it right! This post introduces a model that incorporates both response time and item responses for simultaneous estimation of probability that an item is compromised and probability an examinee has item preknowledge. The model improves upon the ideas laid out in [Shu et al. (2013)](https://link.springer.com/article/10.1007/s11336-012-9311-3) and [Kasli et al. (2020)](https://psyarxiv.com/bqa3t) and further relaxes the assumption that the set of compromised items is known. The model is fitted using a Bayesian framework as implemented in Stan.
+draft: true
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Oregon
+date: 6-17-2021
+categories:
+  - item response theory
+  - R
+  - Stan
+  - item preknowledge
+  - detecting test misconduct
+  - '2021'
+output:
+  distill::distill_article:
+    self_contained: true
+    toc: true
+    toc_float: true
+preview: image.png
+header-includes:
+  - \usepackage{amsmath} 
+  - \usepackage{upgreek}
+  - \usepackage{bm}
+  - \usepackage{unicode-math}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+<style>
+
+body {
+text-align: justify}
+
+</style>
+
+```{r echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+require(knitr)
+require(kableExtra)
+require(here)
+require(htmltools)
+require(mime)
+
+# the default output hook
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+    if (!is.null(n <- options$out.lines)) {
+        x = knitr:::split_lines(x)
+        if (length(x) > n) {
+            # truncate the output
+            x = c(head(x, n), '....\n')
+        }
+        x = paste(x, collapse = '\n')  # paste first n lines together
+    }
+    hook_output(x, options)
+})
+
+opts_chunk$set(out.lines = 40)
+opts_chunk$set(width = 40)
+options(max.print=1000000)
+options(knitr.table.format = 'html') 
+options(knitr.kable.NA = '')
+options(scipen=99)
+options(digits = 4)
+```
+
+Detecting item preknowledge is difficult problem. There are so many unknowns and it is difficult to attempt to detect it without making assumptions about certain unknowns. For instance, we don't know who had item preknowledge and this is typically the purpose of analysis. We don't necessarily know which items are compromised although there may be certain scenarios that we know the set of compromised items. We don't know whether the same group of examinees had access to the same set of items, or different smaller groups of examinees had access to the different subsets of items. Maybe, there is some overlap among these compromised subsets used by different groups, maybe not. We don't know if the examinees with item preknowledge had access to the items with the right keyed responses. So, they may respond faster but not necessarily correct to items they had seen before. We don't know if the examinees manipulate their response time to obscure evidence to be used against them. So, they may intentionally spend longer times on items, but they give the correct response at the end to benefit from cheating.
+
+It is easier to develop certain methods/algorithms to detect examinees when we assume that the compromised items are known. It is also easier to develop certain methods/algorithm to detect compromised items when we assume that the examinees with item preknowledge are known. It is the most difficult when we don't know anything at all. We may not even know if there is any fraud happened due to item preknowledge. That's where the literature is scarce in tools and models, the simultaneous prediction of item compromise status and examinee item preknowledge status through simultaneous use of both response time and item responses.
+
+In this post, I am playing with a modified version of [van der Linden's Hierarchical IRT model (2007)](https://link.springer.com/article/10.1007/s11336-006-1478-z) using Stan. The nice thing about this model is that it both uses response times and item responses as evidence of item preknowledge. It also assumes neither that the set of compromised item is known nor that the examinees with item preknowledge is known a priori. The model is built upon the ideas laid out in [Shu et al. (2013)](https://link.springer.com/article/10.1007/s11336-012-9311-3) and [Kasli et al. (2020)](https://psyarxiv.com/bqa3t), further relaxes the assumption that the set of compromised items is known during the model fitting process, and yields a probability estimate an item being compromised and of an examinee having item preknowledge in addition to typical item and person parameters estimated for the response accuracy and response time components. 
+
+## First-level models
+
+### Response accuracy component
+
+Suppose $R_{ij}$ represents the dichotomous item response (0: incorrect, 1: correct) for the $i^{th}$ person  on the $j^{th}$ item. We hypothesize that there are two item parameters for each item, item difficulty parameter ($b_j$) and item discrimination ($a_j$). We also hypothesize that there are two latent trait parameters for each examinee, a true latent trait parameter the examinee operationalizes when responding to an uncompromised item ($\theta_{ti}$) and a cheating latent trait parameter the examinee operationalizes when responding to a compromised item ($\theta_{ci}$). In addition, we hypothesize a discrete parameter for each item indicating whether or not item is compromised ($C_j$, 0: not compromised, 1: compromised) and we hypothesize a discrete parameter for each examinee indicating whether or not examinee has item preknowledge($H_i$, 0: has item preknowledge, 1: doesn't have item preknowledge).
+
+The dichotomous response for the $i^{th}$ person on the $j^{th}$ item is assumed to follow a Bernoulli distribution with a probability of correct response ($P$).
+
+\begin{equation}
+
+R_{ij} | \theta_{ti},\theta_{ci},H_i,a_j,b_j,C_j \sim Bernoulli(P)
+
+(\#eq:rij)
+
+\end{equation}
+
+The probability of correct response for examinee for the $i^{th}$ person  on the $j^{th}$ item is then defined as:
+
+\begin{equation}
+
+P(R_{ij} = 1 | \theta_{ti},\theta_{ci},H_i,a_j,b_j,C_j) = \frac{1}{1+e^{a_j\times(b_j - \theta_i)}},
+
+(\#eq:pcorrect)
+
+\end{equation}
+
+where $\theta_i$ can be found using
+
+\begin{equation} 
+
+\theta_i = \theta_{ti}^{1-H_i} \times \Big (C_j \times \theta_{ci} + (1-C_j) \times \theta_{ti} \Big )^{H_i}. 
+
+(\#eq:pcorrect-gating)
+
+\end{equation}
+
+
+Eq. \@ref(eq:pcorrect-gating) seems a bit confusing, but it simply indicates that the examinee is using $\theta_{ci}$ when $C_j=1$ and $H_i=1$ and using $\theta_{ti}$ otherwise when responding to items. In other words, when an examinee has item preknowledge and a compromised item is administered to this examinee, the probability they get the item correct depends on their cheating ability ($\theta_{ci}$). In all other three scenarios ($H_i=1,C_j=0$;$H_i=0,C_j=1$;$H_i=0,C_j=0$), the examinee is using their true ability ($\theta_{ti}$) when responding to an item.
+
+We have to rewrite Eq. \@ref(eq:pcorrect) because Stan doesn't handle discrete parameters and requires marginalization over discrete parameters during the model fitting process whenever they are involved in the model. Some related discussion about this can be found [here](https://github.com/stan-dev/stan/issues/2094). [Stan manual](https://mc-stan.org/docs/2_24/stan-users-guide/summing-out-the-responsibility-parameter.html) has an example of how to do it in the context of mixture models. I also found [this blog post](https://elevanth.org/blog/2018/01/29/algebra-and-missingness/) very helpful while I was trying to understand what this is all about.
+
+So, let's rewrite Eq. \@ref(eq:pcorrect) by explicitly considering each possible combination of the two discrete parameters while the $i^{th}$ person is responding on the $j^{th}$ item.
+
+$$
+\begin{aligned}
+P(R_{ij} = 1 | \theta_{ti},\theta_{ci},H_i,a_j,b_j,C_j) =
+P(R_{ij} = 1 | \theta_{ti},\theta_{ci},a_j,b_j,C_j=1,H_i=1) \times P(C_j = 1) \times P(H_i =1) +\\
+P(R_{ij} = 1 | \theta_{ti},\theta_{ci},a_j,b_j,C_j=1,H_i=0) \times P(C_j = 1) \times P(H_i =0) +\\
+P(R_{ij} = 1 | \theta_{ti},\theta_{ci},a_j,b_j,C_j=0,H_i=1) \times P(C_j = 0) \times P(H_i =1) +\\
+P(R_{ij} = 1 | \theta_{ti},\theta_{ci},a_j,b_j,C_j=0,H_i=0) \times P(C_j = 0) \times P(H_i =0)
+\end{aligned}
+$$
+
+Note that the model actually uses either $\theta_{ti}$ or $\theta_{ci}$ for each combination, so we can write this in a less cluttered way.
+
+$$
+\begin{aligned}
+P(R_{ij} = 1 | \theta_{ti},\theta_{ci},H_i,a_j,b_j,C_j) = P(R_{ij} = 1 | \theta_{ci},a_j,b_j) \times P(C_j = 1) \times P(H_i =1) +\\ P(R_{ij} = 1 | \theta_{ti},a_j,b_j) \times P(C_j = 1) \times P(H_i =0) +\\
+P(R_{ij} = 1 | \theta_{ti},a_j,b_j) \times P(C_j = 0) \times P(H_i =1) +\\ 
+P(R_{ij} = 1 | \theta_{ti},a_j,b_j) \times P(C_j = 0) \times P(H_i =0)
+\end{aligned}
+$$
+
+These four terms are crucially important about how we will specify the model in Stan language. Another thing to keep in mind is that we will instead work with log of these four terms to get the most precision possible.
+
+### Response time component
+
+Suppose $RT_{ij}$ represents the log of the response time for the $i^{th}$ person  on the $j^{th}$ item. We hypothesize that there are two item parameters for each item, time intensity parameter ($\beta_j$) and time discrimination parameter ($\alpha_j$). Similar to the response accuracy component, we hypothesize that there are two latent speed parameters for each examinee, a true latent speed parameter the examinee operationalizes when responding to an uncompromised item ($\tau_{ti}$) and a cheating latent speed parameter the examinee operationalizes when responding to a compromised item ($\tau_{ci}$). We keep the same discrete parameters for each item indicating whether or not item is compromised ($C_j$) and for each examinee indicating whether or examinee has item preknowledge($H_i$). 
+
+Then, the log of the response time the $i^{th}$ person  on the $j^{th}$ item is assumed to follow a normal distribution
+
+\begin{equation}
+
+RT_{ij} | \tau_{ti},\tau_{ci},H_i,\alpha_j,\beta_j,C_j \sim N(\mu_{ij},\sigma_j)
+
+(\#eq:rt)
+
+\end{equation}
+
+with a density function
+
+\begin{equation}
+
+f(RT_{ij} | \tau_{ti},\tau_{ci},H_i,\alpha_j,\beta_j,C_j) = \frac{1}{\sigma_j \sqrt{2\pi}} e^{-\frac{1}{2}(\frac{RT_{ij} - \mu_{ij}}{\sigma_j})^2}
+
+(\#eq:rtdens)
+
+\end{equation}
+
+
+where $\mu_{ij}$ and $\sigma_j$ are defined as
+
+\begin{equation} 
+
+\mu_{ij} = (\beta_j - \tau_{ti})^{1-H_i} \times \Big (C_j \times (\beta_j - \tau_{ci}) + (1-C_j) \times (\beta_j - \tau_{ti} \Big )^{H_i}
+
+(\#eq:muij)
+
+\end{equation}
+
+
+\begin{equation} 
+
+\sigma_{j} = \frac{1}{\alpha_j}. 
+
+(\#eq:sigmaj)
+
+\end{equation}
+
+Eq. \@ref(eq:muij) also seems a bit confusing, but it again just indicates that the examinee is using $\tau_{ci}$ when $C_j=1$ and $H_i=1$ and using $\tau_{ti}$ otherwise when responding to items. In other words, when an examinee has item preknowledge and a compromised item is administered to this examinee, the log of response time depends on their cheating latent speed ($\tau_{ci}$). In all other three scenarios ($H_i=1,C_j=0$;$H_i=0,C_j=1$;$H_i=0,C_j=0$), the examinee is using their true latent speed ($\tau_{ti}$) when responding to an item. We have to similarly rewrite the density of observed log response time $f(RT_{ij}| \tau_{ti},\tau_{ci},H_i,\alpha_j,\beta_j,C_j)$ in a less cluttered way.
+
+$$
+\begin{aligned}
+f(RT_{ij}| \tau_{ti},\tau_{ci},H_i,\alpha_j,\beta_j,C_j) =
+f(RT_{ij}| \tau_{ci},\alpha_j,\beta_j) \times P(C_j = 1) \times P(H_i =1) +\\
+f(RT_{ij}| \tau_{ti},\alpha_j,\beta_j) \times P(C_j = 1) \times P(H_i =0) +\\
+f(RT_{ij}| \tau_{ti},\alpha_j,\beta_j) \times P(C_j = 0) \times P(H_i =1) +\\
+f(RT_{ij}| \tau_{ti},\alpha_j,\beta_j) \times P(C_j = 0) \times P(H_i =0)
+\end{aligned}
+$$
+
+## Second-level models
+
+At the second-level, we define the joint distribution of person parameters and item parameters. The person parameters in both components are assumed to follow a multivariate normal distribution.
+
+$$ \begin{pmatrix}
+\theta_{t}\\ \theta_{c} \\ \tau_{t} \\ \tau_{c} 
+\end{pmatrix}
+=
+N(\mu_{\mathcal{P}},\Sigma_{\mathcal{P}} )$$
+
+with $\mu_{\mathcal{P}}$ is a vector of means and $\Sigma_{\mathcal{P}}$ is the covariance matrix decomposed into a diagonal matrix of standard deviations and a correlation matrix for person parameters. 
+
+$$ \Sigma_{\mathcal{P}} = 
+\begin{pmatrix}
+\sigma_{\theta_t} & 0 & 0 & 0\\ 
+0 & \sigma_{\theta_c} & 0 & 0 \\ 
+0 & 0 & \sigma_{\tau_t} & 0\\ 
+0 & 0 & 0 & \sigma_{\tau_c}
+\end{pmatrix} 
+\Omega_\mathcal{P}
+\begin{pmatrix}
+\sigma_{\theta_t} & 0 & 0 & 0\\ 
+0 & \sigma_{\theta_c} & 0 & 0 \\ 
+0 & 0 & \sigma_{\tau_t} & 0\\ 
+0 & 0 & 0 & \sigma_{\tau_c}
+\end{pmatrix},$$
+$$\Omega_\mathcal{P}=
+\begin{pmatrix}
+1 & \rho_{\theta_t,\theta_c} & \rho_{\theta_t,\tau_t} & \rho_{\theta_t,\tau_c}\\ 
+\rho_{\theta_c,\theta_t} & 1 & \rho_{\theta_c,\tau_t} & \rho_{\theta_c,\tau_c}\\ 
+\rho_{\tau_t,\theta_t} & \rho_{\tau_t,\theta_c} & 1 & \rho_{\tau_t,\tau_c} \\
+\rho_{\tau_c,\theta_t} & \rho_{\tau_c,\theta_c} & \rho_{\tau_t,\tau_c} & 1
+\end{pmatrix} $$
+
+This decomposition is a recommended practice in [Stan User's Guide](https://mc-stan.org/docs/2_27/stan-users-guide/multivariate-hierarchical-priors-section.html). 
+
+The person parameter indicating whether or not the $i^{th}$ examinee have item preknowledge is assumed to follow a Bernoulli distribution
+
+$$ H_i \sim Bernoulli(P_{H_i=1}), $$
+
+where $P_{H_i=1}$ is the probability that the $i^{th}$ individual has item preknowledge.
+
+The item parameters in both components are similarly assumed to follow a multivariate normal distribution.
+
+$$ \begin{pmatrix}
+a \\ b \\ \alpha \\ \beta 
+\end{pmatrix}
+=
+N(\mu_{\mathcal{I}},\Sigma_{\mathcal{I}} )$$
+
+with $\mu_{\mathcal{I}}$ is a vector of means and $\Sigma_{\mathcal{I}}$ is the covariance matrix decomposed into a diagonal matrix of standard deviations and a correlation matrix for item parameters. 
+
+$$ \Sigma_{\mathcal{I}} = 
+\begin{pmatrix}
+\sigma_{a} & 0 & 0 & 0\\ 
+0 & \sigma_{b} & 0 & 0 \\ 
+0 & 0 & \sigma_{\alpha} & 0\\ 
+0 & 0 & 0 & \sigma_{\beta}
+\end{pmatrix} 
+\Omega_\mathcal{I}
+\begin{pmatrix}
+\sigma_{a} & 0 & 0 & 0\\ 
+0 & \sigma_{b} & 0 & 0 \\ 
+0 & 0 & \sigma_{\alpha} & 0\\ 
+0 & 0 & 0 & \sigma_{\beta}
+\end{pmatrix}$$
+
+$$\Omega_\mathcal{I}=\begin{pmatrix}
+1 & \rho_{a,b} & \rho_{a,\alpha} & \rho_{a,\beta}\\ 
+\rho_{b,a} & 1 & \rho_{b,\alpha} & \rho_{b,\beta}\\ 
+\rho_{\alpha,a} & \rho_{\alpha,b} & 1 & \rho_{\alpha,\beta} \\
+\rho_{\tau_c,\theta_t} & \rho_{\tau_c,\theta_c} & \rho_{\tau_t,\tau_c} & 1
+\end{pmatrix} $$
+
+The item parameter indicating whether or not the $j^{th}$ item is compromised is assumed to follow a Bernoulli distribution
+
+$$ C_j \sim Bernoulli(P_{C_j=1}), $$
+
+where $P_{C_j=1}$ is the probability that the $j^{th}$ item is compromised.
+
+
+## Model Identification and Prior Specifications
+
+For model identification purposes, the mean vector of person parameters are fixed to zero, $$\mu_{\mathcal{P}} = (0,0,0,0).$$ In addition, the standard deviations of $\theta_{t}$ and $\theta_{c}$ are fixed to 1,
+
+$$\sigma_{\theta_{t}} = 1 \\ \sigma_{\theta_{c}} = 1.$$. 
+
+Everything else in the model is estimated based on the following prior specifications.
+
+First, all standard deviations are drawn from an exponential distribution with rate equals 1.
+
+$$\sigma_a \sim exp(1) \\ 
+\sigma_b \sim exp(1) \\
+\sigma_\alpha \sim exp(1) \\
+\sigma_\beta \sim exp(1) \\
+\sigma_{\tau_t} \sim exp(1) \\
+\sigma_{\tau_c} \sim exp(1) $$
+
+The mean for the item difficulty and time intensity parameters are drawn from a normal distribution.
+
+$$\mu_b \sim N(0,1) \\ \mu_\beta \sim N(4,1)$$
+
+The mean for the item discrimination and time discrimination parameters are drawn from a lognormal distribution.
+
+$$ln(\mu_a) \sim N(0,.5) \\ ln(\mu_\alpha) \sim N(0,.5)$$
+
+Finally, [Lewandowski-Kurowicka-Joe (LKJ)](https://distribution-explorer.github.io/multivariate_continuous/lkj.html) distribution with a parameter 1 is used as a prior for the correlation matrices as recommended in the [Stan User's Guide](https://mc-stan.org/docs/2_18/stan-users-guide/multivariate-hierarchical-priors-section.html). For more information about the LKJ distribution, also see [this link](http://srmart.in/is-the-lkj1-prior-uniform-yes/).
+
+$$\Omega_{\mathcal{P}} \sim LKJ(1)$$ 
+$$\Omega_{\mathcal{I}} \sim LKJ(1)$$ 
+
+$$P_{H_i=1} \sim Beta(1,1)$$
+$$P_{C_j=1} \sim Beta(1,1)$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,761 @@
+---
+title: 'Simultaneous Detection of Compromised Items and Examinees with Item Preknowledge using Response Time Information'
+description: |
+  
+  Yes, you heard it right! This post introduces a model that uses response time information for simultaneous estimation of an item being compromised and an examinee having item preknowledge. The model improves upon the ideas laid out in [Kasli et al. (2020)](https://psyarxiv.com/bqa3t), and further relaxes the assumption that the set of compromised items is known. The model is fitted using a Bayesian framework as implemented in Stan.
+draft: false
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Oregon
+date: 6-21-2021
+categories:
+  - item response theory
+  - R
+  - Stan
+  - item preknowledge
+  - detecting test misconduct
+  - '2021'
+output:
+  distill::distill_article:
+    self_contained: true
+    toc: true
+    toc_float: true
+    code_folding: hide
+preview: image.png
+header-includes:
+  - \usepackage{amsmath} 
+  - \usepackage{upgreek}
+  - \usepackage{bm}
+  - \usepackage{unicode-math}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+<style>
+
+body {
+text-align: justify}
+
+</style>
+
+```{r echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+require(knitr)
+require(kableExtra)
+require(here)
+require(htmltools)
+require(mime)
+require(ggplot2)
+require(gridExtra)
+
+# the default output hook
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+    if (!is.null(n <- options$out.lines)) {
+        x = knitr:::split_lines(x)
+        if (length(x) > n) {
+            # truncate the output
+            x = c(head(x, n), '....\n')
+        }
+        x = paste(x, collapse = '\n')  # paste first n lines together
+    }
+    hook_output(x, options)
+})
+
+opts_chunk$set(out.lines = 40)
+opts_chunk$set(width = 40)
+options(max.print=1000000)
+options(knitr.table.format = 'html') 
+options(knitr.kable.NA = '')
+options(scipen=99)
+options(digits = 4)
+```
+
+
+*Acknowledgment. I want to thank [Jacob Socolar](https://jsocolar.github.io/) and [Luiz Max Carvalho](https://scholar.google.com/citations?user=y2mxpbcAAAAJ&hl=en) from [Stan Forums](https://discourse.mc-stan.org/) to give me a push in the right direction while working on this problem. The idea of marginalizing the discrete parameters in Stan was a difficult one to understand. [This post](https://elevanth.org/blog/2018/01/29/algebra-and-missingness/
+) was also handy if you are interested in the idea of marginalizing discrete parameters.*
+
+Detecting item preknowledge is a complex problem. It is challenging to detect compromised items or fraudulent examinees at the same time. For instance, we don’t typically know who had item preknowledge, which is typically the purpose of analysis. We don’t necessarily know which items are compromised, although there may be specific scenarios that we know the set of compromised items. We don’t know whether the same examinees had access to the same set of items or different smaller subsets of examinees had access to the different subsets of items. Maybe, there is some overlap among these compromised subsets used by different groups, maybe not. We don’t know if the examinees with item preknowledge had access to the items with the right keyed responses. So, they may respond faster but not necessarily correct to items they had seen before. We don’t know if the examinees manipulate their response time to obscure evidence to be used against them. So, they may intentionally spend longer times on items, but they give the correct response at the end to benefit from cheating. With many unknowns, researchers tend to simplify the problem by making assumptions and focusing on one aspect of the problem at a time. Some methods use either response time or item responses in their modeling. Some methods assume that the set of compromised items is known. Some methods assume that the group of examinees with item preknowledge is known. Some methods attempt to solve the problem in two stages or using iterative cycles, solving a smaller problem in each step/iteration. 
+
+In this post, I am playing with an improved version of Kasli et al. (2020). In the paper by Kasli et al. (2020), the set of compromised items was assumed to be known. This improved version of the model does not make that assumption. Instead, it yields a probability estimate of being compromised for each item and a probability estimate of having item preknowledge for each examinee.
+
+
+## Lognormal Response Time Model
+
+For those who unfamiliar, [van der Linden's lognormal response time model (LNRT)](https://journals.sagepub.com/doi/abs/10.3102/10769986031002181) is one of the available IRT models to model response time information. In this model, the observed response time for an examinee on an item is modeled through two item parameters and one person parameter. For example, suppose $RT_{ij}$ represents the log of the response time for the $i^{th}$ person  on the $j^{th}$ item. There are two item parameters for each item, time intensity parameter ($\beta_j$) and time discrimination parameter ($\alpha_j$). There is also a latent speed parameter for each examinee ($\tau_i$).
+
+The log of the response time for the $i^{th}$ person  on the $j^{th}$ item is assumed to follow a normal distribution
+
+\begin{equation}
+
+RT_{ij} | \tau_{i},\alpha_j,\beta_j \sim N(\mu_{ij},\sigma_j)
+
+(\#eq:rt-normal)
+
+\end{equation}
+
+with a density function
+
+\begin{equation}
+
+f(RT_{ij} | \tau_{i},\alpha_j,\beta_j) = \frac{1}{\sigma_j \sqrt{2\pi}} e^{-\frac{1}{2}(\frac{RT_{ij} - \mu_{ij}}{\sigma_j})^2}
+
+(\#eq:rtdens-normal)
+
+\end{equation}
+
+
+where $\mu_{ij}$ and $\sigma_j$ are defined as
+
+\begin{equation} 
+
+\mu_{ij} = \beta_j - \tau_{i}
+
+(\#eq:muij-normal)
+
+\end{equation}
+
+
+\begin{equation} 
+
+\sigma_{j} = \frac{1}{\alpha_j}. 
+
+(\#eq:sigmaj-normal)
+
+\end{equation}
+
+
+Below are some plots to get some insight into these parameters. The plots feature three different $(\beta,\alpha)$ combination. The straight blue lines represent the expected response time, while the gray dashed lines represent the variability around the expected response time, 1.96 SD below and above the expected response time.
+
+
+-  $(\beta,\alpha) = (4,4)$
+-  $(\beta,\alpha) = (3,4)$
+-  $(\beta,\alpha) = (4,8)$
+
+In all these plots, the expected response time decreases as the latent speed increases. In all these plots, the expected response time decreases as the latent speed increases. The LNRT implies that an examinee with a higher latent speed is expected to respond faster to the administered items. The two plots in the first row present two hypothetical items with the same $\alpha$ parameter, but they differ in the $\beta$ parameters. If the same examinee responds to two items, the observed response time is expected to be smaller for the item with the lower $\beta$ parameter. $\beta$ parameter represents how much time an item require to respond for an average examinee. LNRT implies that items with smaller time-intensity parameters require less time to respond than items with higher time-intensity parameters. The two plots in the second row present two hypothetical items with the same $\beta$ parameter, but they differ in the $\alpha$ parameters. Notice that everything else being equal, there is more variance in response time when for an item with a lower $\alpha$. LNRT implies that the items with lower time-discrimination parameters have more noise and contributing factors to response time other than an examinee's latent speed. 
+
+```{r, fig.align='center',fig.height=6,fig.width=8}
+
+tau <- seq(-1,1,.01)
+
+p1 <- ggplot()+
+  geom_line(aes(x=tau,y=exp(4 - tau)),col='blue')+
+  geom_line(aes(x=tau,y=exp(4 - tau - 1.96*sqrt(1/4))),col='gray',lty=2)+
+  geom_line(aes(x=tau,y=exp(4 - tau + 1.96*sqrt(1/4))),col='gray',lty=2)+
+  theme_bw()+
+  xlab(expression(paste('Latent Speed (',tau,')')))+
+  ylab('Response Time (y)')+
+  annotate('text',0.9,375,label=expression(paste(alpha,' = 4.0')))+
+  annotate('text',0.9,400,label=expression(paste(beta,' = 4.0')))+
+  ylim(0,400)
+
+######################################################################
+
+p2 <- ggplot()+
+  geom_line(aes(x=tau,y=exp(3 - tau)),col='blue')+
+  geom_line(aes(x=tau,y=exp(3 - tau - 1.96*sqrt(1/4))),col='gray',lty=2)+
+  geom_line(aes(x=tau,y=exp(3 - tau + 1.96*sqrt(1/4))),col='gray',lty=2)+
+  theme_bw()+
+  xlab(expression(paste('Latent Speed (',tau,')')))+
+  ylab('Response Time (y)')+
+  annotate('text',0.9,375,label=expression(paste(alpha,' = 4.0')))+
+  annotate('text',0.9,400,label=expression(paste(beta,' = 3.0')))+
+  ylim(0,400)
+
+######################################################################
+
+p3 <- ggplot()+
+  geom_line(aes(x=tau,y=exp(4 - tau)),col='blue')+
+  geom_line(aes(x=tau,y=exp(4 - tau - 1.96*sqrt(1/8))),col='gray',lty=2)+
+  geom_line(aes(x=tau,y=exp(4 - tau + 1.96*sqrt(1/8))),col='gray',lty=2)+
+  theme_bw()+
+  xlab(expression(paste('Latent Speed (',tau,')')))+
+  ylab('Response Time (y)')+
+  annotate('text',0.9,375,label=expression(paste(alpha,' = 8.0')))+
+  annotate('text',0.9,400,label=expression(paste(beta,' = 4.0')))+
+  ylim(0,400)
+
+
+grid.arrange(p1,p2,p1,p3,nrow=2,ncol=2)
+```
+
+
+
+## Let's make the model a little bit more complex!
+
+We will add a few more parameters to the original LNRT model to detect examinees with item preknowledge and items being compromised simultaneously. These modifications are inspired by the Deterministic Gated IRT model by 
+[Shu et al. (2013)](https://link.springer.com/article/10.1007/s11336-012-9311-3). In an earlier attempt by [Kasli et al. (2020)](https://psyarxiv.com/bqa3t), we applied the idea of Shu et al. (2013) to modeling response times. However, a critical limitation for both Shu et al. (2013) and Kasli et al. (2020) is that they assume the set of compromised items is known, and this information enters into the model as data. In this post, I try to improve it further by relaxing that assumption. Instead of assuming that the compromised status of each item is known, I estimate this as a parameter.
+
+I first hypothesize that there are two latent speed parameters for each examinee, a true latent speed parameter and a cheating latent speed parameter. The model operationalizes the true latent speed when responding to an uncompromised item ($\tau_{ti}$) and the cheating latent speed when responding to a compromised item ($\tau_{ci}$). In addition, we add a discrete person parameter for each examinee ($H_i$) indicating whether an examinee has item preknowledge (0: examinee does not have preknowlegde, 1: examinee has preknowledge) and add a discrete parameter for each item ($C_j$) indicating whether or not an item is compromised.
+
+In this modified model, the log of the response time the $i^{th}$ person  on the $j^{th}$ item is assumed to follow a normal distribution
+
+\begin{equation}
+
+RT_{ij} | \tau_{ti},\tau_{ci},H_i,\alpha_j,\beta_j,C_j \sim N(\mu_{ij},\sigma_j)
+
+(\#eq:rt)
+
+\end{equation}
+
+with a density function
+
+\begin{equation}
+
+f(RT_{ij} | \tau_{ti},\tau_{ci},H_i,\alpha_j,\beta_j,C_j) = \frac{1}{\sigma_j \sqrt{2\pi}} e^{-\frac{1}{2}(\frac{RT_{ij} - \mu_{ij}}{\sigma_j})^2}
+
+(\#eq:rtdens)
+
+\end{equation}
+
+
+where $\mu_{ij}$ and $\sigma_j$ are defined as
+
+\begin{equation} 
+
+\mu_{ij} = (\beta_j - \tau_{ti})^{1-H_i} \times \Big (C_j \times (\beta_j - \tau_{ci}) + (1-C_j) \times (\beta_j - \tau_{ti} \Big )^{H_i}
+
+(\#eq:muij)
+
+\end{equation}
+
+
+\begin{equation} 
+
+\sigma_{j} = \frac{1}{\alpha_j}. 
+
+(\#eq:sigmaj)
+
+\end{equation}
+
+Eq. \@ref(eq:muij) seems a bit confusing. It just indicates that the expected response time is equal to $$\beta_j - \tau_{ci},$$
+
+when an examinee has item preknowledge and responds to a compromised item ($H_i=1, C_j=1$), and equal to 
+
+$$\beta_j - \tau_{ti},$$
+
+in all other three scenarios,($H_i=1,C_j=0$; $H_i=0,C_j=1$; $H_i=0,C_j=0$).
+
+To implement the model in Stan, we also have to rewrite the original density function to marginalize the discrete parameters. Stan, in its current form, cannot handle discrete parameters in the model. Therefore, we have to explicitly write the original density function for every possible combination of the discrete parameters. Later, we will use the following to model the response time.
+
+
+$$
+\begin{aligned}
+P(RT_{ij} = 1 | \tau_{ti},\tau_{ci},H_i,\alpha_j,b_j,C_j) =
+P(RT_{ij} = 1 | \tau_{ti},\tau_{ci},\alpha_j,\beta_j,C_j=1,H_i=1) \times P(C_j = 1) \times P(H_i =1) +\\
+P(RT_{ij} = 1 | \tau_{ti},\tau_{ci},\alpha_j,\beta_j,C_j=1,H_i=0) \times P(C_j = 1) \times P(H_i =0) +\\
+P(RT_{ij} = 1 | \tau_{ti},\tau_{ci},\alpha_j,\beta_j,C_j=0,H_i=1) \times P(C_j = 0) \times P(H_i =1) +\\
+P(RT_{ij} = 1 | \tau_{ti},\tau_{ci},\alpha_j,\beta_j,C_j=0,H_i=0) \times P(C_j = 0) \times P(H_i =0)
+\end{aligned}
+$$
+Or, we can write it in a less cluttered way.
+
+$$
+\begin{aligned}
+f(RT_{ij}| \tau_{ti},\tau_{ci},H_i,\alpha_j,\beta_j,C_j) =
+f(RT_{ij}| \tau_{ci},\alpha_j,\beta_j) \times P(C_j = 1) \times P(H_i =1) +\\
+f(RT_{ij}| \tau_{ti},\alpha_j,\beta_j) \times P(C_j = 1) \times P(H_i =0) +\\
+f(RT_{ij}| \tau_{ti},\alpha_j,\beta_j) \times P(C_j = 0) \times P(H_i =1) +\\
+f(RT_{ij}| \tau_{ti},\alpha_j,\beta_j) \times P(C_j = 0) \times P(H_i =0)
+\end{aligned}
+$$
+
+$P(C_j = 1)$ represents the probability of the jth item being compromised and $P(H_i = 1)$ represents the probability of the ith examinee having item preknowledge. Notice that we consider four possible combinations of the discrete parameters and write the density for each possible combination. While the density relies on $\tau_{ci}$ when ($H_i=1, C_j=1$), it relied on $tau_{ti}$ for other three possible combinations. 
+
+## Model Identification and Prior Specifications
+
+We assume that the joint distribution of true latent speed and cheating latent speed follow a multivariate normal distribution.
+
+$$ \begin{pmatrix}
+\theta_{t}\\ \theta_{c}
+\end{pmatrix}
+=
+N(\mu_{\mathcal{P}},\Sigma_{\mathcal{P}} )$$
+
+with $\mu_{\mathcal{P}}$ is a vector of means and $\Sigma_{\mathcal{P}}$ is the covariance matrix decomposed into a diagonal matrix of standard deviations and a correlation matrix for person parameters. 
+
+$$ \Sigma_{\mathcal{P}} = 
+\begin{pmatrix}
+\sigma_{\tau_t} & 0\\ 
+0 & \sigma_{\tau_c}
+\end{pmatrix} 
+\Omega_\mathcal{P}
+\begin{pmatrix}
+\sigma_{\tau_t} & 0\\ 
+0 & \sigma_{\tau_c}
+\end{pmatrix},$$
+
+$$\Omega_\mathcal{P}=
+\begin{pmatrix}
+1 & \rho_{\tau_t,\tau_c}\\ 
+\rho_{\tau_c,\tau_t} & 1 
+\end{pmatrix} $$
+
+This decomposition is a recommended practice in [Stan User's Guide](https://mc-stan.org/docs/2_27/stan-users-guide/multivariate-hierarchical-priors-section.html). 
+For model identification purposes, the mean vector of person parameters are fixed to zero, $$\mu_{\mathcal{P}} = (0,0).$$ The standard deviations and the correlation matrix are parameters to be estimated with the following priors:
+
+$$\sigma_{\tau_t} \sim exp(1) \\
+\sigma_{\tau_c} \sim exp(1) \\
+\Omega_{\mathcal{P}} \sim LKJ(1)$$
+
+[Lewandowski-Kurowicka-Joe (LKJ)](https://distribution-explorer.github.io/multivariate_continuous/lkj.html) distribution with a parameter 1 is used as a prior for the correlation matrices as recommended in the [Stan User's Guide](https://mc-stan.org/docs/2_18/stan-users-guide/multivariate-hierarchical-priors-section.html). For more information about the LKJ distribution, also see [this link](http://srmart.in/is-the-lkj1-prior-uniform-yes/).
+
+The item parameters are similarly assumed to follow a multivariate normal distribution. The only caveat is that I prefer working with the log of the $\alpha$ parameter.
+
+$$ \begin{pmatrix}
+ln(\alpha) \\ \beta 
+\end{pmatrix}
+=
+N(\mu_{\mathcal{I}},\Sigma_{\mathcal{I}} )$$
+
+with $\mu_{\mathcal{I}}$ is a vector of means and $\Sigma_{\mathcal{I}}$ is the covariance matrix decomposed into a diagonal matrix of standard deviations and a correlation matrix for item parameters. 
+
+$$ \Sigma_{\mathcal{I}} = 
+\begin{pmatrix}
+\sigma_{ln(\alpha)} & 0 \\ 
+0 & \sigma_{\beta}
+\end{pmatrix} 
+\Omega_\mathcal{I}
+\begin{pmatrix}
+\sigma_{ln(\alpha)} & 0\\ 
+0 & \sigma_{\beta}
+\end{pmatrix}$$
+
+$$\Omega_\mathcal{I}=\begin{pmatrix}
+1 & \rho_{ln(\alpha),\beta}\\
+\rho_{ln(\alpha),\beta} & 1
+\end{pmatrix} $$
+
+The following priors can be used for the parameters related to item characteristics.
+
+$$\mu_{ln(\alpha)} \sim N(0,0.5) \\
+\sigma_{ln(\alpha)} \sim exp(1) \\
+\mu_{\beta} \sim N(4,1) \\
+\sigma_{\beta} \sim exp(1) \\
+\Omega_{\mathcal{I}} \sim LKJ(1)$$
+
+
+Finally, we can define the following non-informative priors on the probability that a person is having item preknowledge and the probability that an item is being compromised.
+
+$$ P(H_i =1) \sim Beta(1,1) \\
+P(C_j =1) \sim Beta(1,1)$$
+
+## Stan Model Syntax
+
+I will try to explain below how we can fit the described model with these specifications in Stan. 
+
+First, the **data block** provides the input data. I only specify the number of examinees (I), the number of items (J), and the I x J matrix, including the log of response time for each examinee on each item.  
+
+```{r, eval=FALSE,echo=TRUE}
+data{
+    int <lower=1> I;                       // number of examinees          
+    int <lower=1> J;                       // number of items
+    real RT[I,J];                          // matrix  the log of responses
+}
+```
+
+Then, we define the model parameters in the **parameter block**. In this block, we define every single parameter describe earlier in the model, $\mu_{ln(\alpha)}$, $\sigma_{ln(\alpha)}$, $\mu_{\beta}$, $\sigma_{\beta}$, $\sigma_{\tau_t}$, $\sigma_{\tau_c}$, an array for individual $\tau_t$ and $\tau_c$ parameters, $\Omega_P$, $\Omega_I$, $P(C)$, and $P(H)$.
+
+```{r, eval=FALSE,echo=TRUE}
+parameters {
+  real mu_beta;                 // mean for time intensity parameters
+  real<lower=0> sigma_beta;     // sd for time intensity parameters
+  
+  real mu_alpha;                // mean for log of time discrimination parameters
+  real<lower=0> sigma_alpha;    // sd for log of time discrimination parameters
+  
+  real<lower=0> sigma_taut;     // sd for tau_t
+  real<lower=0> sigma_tauc;     // sd for tau_c
+  
+  corr_matrix[2] omega_P;       // 2 x 2 correlation matrix for person parameters
+  corr_matrix[2] omega_I;       // 2 x 2 correlation matrix for item parameters
+  
+  vector<lower=0,upper=1>[J] pC; // vector of length J for the probability of item compromise status
+  
+  vector<lower=0,upper=1>[I] pH; // vector of length I for the probability of examinee item peknowledge 
+  
+  vector[2] person[I];         // an array with length I for person specific latent parameters
+                               // Each array has two elements
+                               // first element is tau_t
+                               // second element is tau_c
+
+  vector[2] item[J];           // an array with length J for item specific parameters
+                               // each array has two elements
+                               // first element is alpha
+                               // second element is beta
+}
+```
+
+We will need to have a **transformed parameters** block. In this block, we define the vector of means and vector of standard deviations for item and person parameters later to be used in the model block.  As we draw the person and item parameters from a multivariate normal distribution, the parameters defined in the **parameters** block are combined into vector forms in the **transformed parameters** block. For instance,  
+
+- $\mu_{ln(\alpha)}$ and $\mu_{\beta}$ becomes $\mu_\mathcal{I} = (\mu_{ln(\alpha)},\mu_{\beta})$;
+
+- a vector of fixed means for person parameters is formed as $\mu_\mathcal{P} = (0,0)$; 
+
+- $\sigma_{\alpha}$,$\sigma_{\beta}$, and $\Omega_\mathcal{I}$ are used to form the item parameter covariance matrix ($\Sigma_\mathcal{I}$) through `quad_form_diag` function in Stan; and,
+
+- $\sigma_{\tau_t}$,$\sigma_{\tau_c}$, and $\Omega_\mathcal{P}$ are used to form the person parameter covariance matrix ($\Sigma_\mathcal{I}$) through `quad_form_diag` function in Stan.
+
+
+```{r, eval=FALSE,echo=TRUE}
+transformed parameters{
+  
+  vector[2] mu_P;                        // vector for mean vector of person parameters 
+  vector[2] mu_I;                        // vector for mean vector of item parameters
+  
+  vector[2] scale_P;                     // vector of standard deviations for person parameters
+  vector[2] scale_I;                     // vector of standard deviations for item parameters
+  
+  cov_matrix[2] Sigma_P;                 // covariance matrix for person parameters
+  cov_matrix[2] Sigma_I;                 // covariance matrix for person parameters
+  
+  mu_P[1] = 0;
+  mu_P[2] = 0;
+  
+  scale_P[1] = sigma_taut;               
+  scale_P[2] = sigma_tauc;
+  
+  Sigma_P = quad_form_diag(omega_P, scale_P); 
+  
+  mu_I[1] = mu_alpha;
+  mu_I[2] = mu_beta;
+  
+  scale_I[1] = sigma_alpha;               
+  scale_I[2] = sigma_beta;
+  
+  Sigma_I = quad_form_diag(omega_I, scale_I); 
+}
+```
+
+Finally, we specify the distributions and model in the **model block**. 
+
+```{r, eval=FALSE,echo=TRUE}
+
+model{
+  
+ 
+  sigma_taut  ~ exponential(1);
+  sigma_tauc  ~ exponential(1);
+  sigma_beta  ~ exponential(1);
+  sigma_alpha ~ exponential(1);
+  
+  mu_beta      ~ normal(4,1);
+  mu_alpha     ~ lognormal(0,0.5);
+  
+  pC ~ beta(1,1);
+  pH ~ beta(1,1);
+  
+  omega_P   ~ lkj_corr(1);
+  omega_I   ~ lkj_corr(1);
+  
+  person  ~ multi_normal(mu_P,Sigma_P);
+  
+  item    ~ multi_normal(mu_I,Sigma_I);
+  
+  
+  for (i in 1:I) {
+    for(j in 1:J) {
+      
+      // item[j,1] represents log of parameter alpha of the jth item
+          // that's why we use exp(item[j,1]) below 
+      // item[j,2] represents parameter beta of the jth item
+      
+      //person[i,1] represents parameter tau_t of the ith person
+      //person[i,2] represents parameter tau_c of the ith person
+      
+      
+      real p_t = item[j,2]-person[i,1];   //expected response time for non-cheating response
+      real p_c = item[j,2]-person[i,2];  //expected response time for cheating response
+      
+      // log of probability densities for each combination of two discrete parameters
+      // (C,T) = {(0,0),(0,1),(1,0),(1,1)}
+      
+      real lprt1 = log1m(pC[j]) + log1m(pH[i]) + normal_lpdf(RT[i,j] | p_t, 1/exp(item[j,1]));  // T = 0, C=0
+      real lprt2 = log1m(pC[j]) + log(pH[i])   + normal_lpdf(RT[i,j] | p_t, 1/exp(item[j,1]));  // T = 1, C=0
+      real lprt3 = log(pC[j])   + log1m(pH[i]) + normal_lpdf(RT[i,j] | p_t, 1/exp(item[j,1]));  // T = 0, C=1
+      real lprt4 = log(pC[j])   + log(pH[i])   + normal_lpdf(RT[i,j] | p_c, 1/exp(item[j,1]));  // T = 1, C=1 
+      
+      target += log_sum_exp([lprt1, lprt2, lprt3, lprt4]);
+      
+    }
+  }
+  
+}
+```
+
+The whole Stan syntax for the model can be saved as a stan file [Download the Stan model syntax](https://github.com/czopluoglu/website/blob/master/docs/posts/dglnrt2/dglnrt.stan).
+
+
+To test if the model can successfully be fitted and how well it works, I will first test it using the experimental data from [Toton and Maynes (2019)](https://www.frontiersin.org/articles/10.3389/feduc.2019.00049/full).
+
+## Does this work?
+
+I imported the dataset and it is stored in an object called `d.sub` (not allowed to publicize this dataset). Below is the first three rows and 5 columns.
+
+\linebreak
+ 
+```{r echo = FALSE, eval=TRUE}
+
+# Import the dataset from Sarah and Toton 2019
+
+d <- read.csv('B:/Ongoing_Research/Murat/DG-LNRT/Manuscript/JEM/Revision1/dg-lnrt/data/uva_rt.csv',
+na.strings = '#N/A')
+
+
+# Create a subset by select the response time data
+
+d.sub <- d[,c("ï..ID","COND","Q1RT","Q2RT","Q3RT","Q4RT","Q5RT","Q6RT","Q7RT",
+              "Q8RT","Q9RT","Q10RT","Q11RT","Q12RT","Q13RT","Q14RT","Q15RT",
+              "Q16RT","Q17RT","Q18RT","Q19RT","Q20RT","Q21RT","Q22RT","Q23RT",
+              "Q24RT","Q25RT")]
+
+# Update IDs such that ID goes from 1 to 93
+
+colnames(d.sub)[1] <- 'ID'
+
+d.sub$ID <- 1:93
+
+for(i in 3:27){
+  
+  loc <- which(is.na(d.sub[,i])==TRUE)
+  if(length(loc)>0){
+    d.sub[loc,i] = mean(d.sub[,i],na.rm=TRUE)
+  }
+  
+}
+
+
+d.long <- reshape(data        = d.sub,
+                  idvar       = "ID",
+                  varying     = list(colnames(d.sub)[3:27]),
+                  timevar     = "Item",
+                  times       = 1:25,
+                  v.names      = "RT",
+                  direction   = "long")
+
+```
+
+
+```{r echo = TRUE, eval=TRUE}
+head(d.sub[,1:5],3)
+
+dim(d.sub)
+
+table(d.sub$COND)
+```
+
+In this dataset, there are 93 examinees and 25 items. The first two columns are variables for a unique identification number and a group membership. The last 25 items include the observed response time for 25 items in the test. One group (Group 1) was a control group, and they responded to all 25 items without any preknowledge. The second and third groups were experimental groups. Group 2 was allowed to study  12 items (even-numbered items) without the correct key, while Group 3 was allowed to study the same 12 items with the correct key before taking the test. The plots below show the distribution of log response time within each group for odd-numbered items and even-numbered items. While there is not much difference among the groups for the undisclosed odd-numbered items, the experimental effect reveals itself with shorter response times in disclosed even-numbered items for the examinees in Group 2 and 3. So, in theory, the model should successfully separate these three groups of examinees by assigning a higher probability of item preknowledge for examinees in Group 2 and Group 3. Also, the model should successfully separate two groups of items by assigning a higher probability of being compromised for the even-numbered items.
+
+```{r echo = FALSE, eval=TRUE,fig.height=12,fig.width=8}
+
+p1 <- ggplot(d.long[d.long$Item%%2==1,], aes(x=factor(Item), y=log(RT),fill=factor(COND))) + 
+       geom_boxplot()+
+       theme_bw() + 
+       xlab('Item Number')+
+       ylab('Log of Response Time')+
+       guides(fill=guide_legend(title="Group"))+
+       ggtitle('Odd-numbered Items')
+  
+
+
+p2 <- ggplot(d.long[d.long$Item%%2==0,], aes(x=factor(Item), y=log(RT),fill=factor(COND))) + 
+       geom_boxplot()+
+       theme_bw() + 
+       xlab('Item Number')+
+       ylab('Log of Response Time')+
+       guides(fill=guide_legend(title="Group"))+
+       ggtitle('Even-numbered Items')
+
+grid.arrange(p1,p2)
+
+```
+
+We first prepare a list for the input data.
+
+```{r echo = TRUE, eval=FALSE}
+
+data_rt <- list(
+  J               = 93,
+  I               = 25,
+  RT              = log(d.sub[,3:27])
+)
+
+```
+
+
+I will use the `cmdstanr` package to fit the model using the Stan model syntax developed before. There are four chains. There are 100 warm-up iterations followed by 500 sampling iterations for each chain.
+
+```{r echo = TRUE, eval=FALSE}
+
+require(cmdstanr)
+
+mod <- cmdstan_model(here('_posts/dglnrt2/dglnrt.stan'))
+  
+  fit <- mod$sample(
+    data            = data_rt,
+    seed            = 1234,
+    chains          = 4,
+    parallel_chains = 4,
+    iter_warmup     = 200,
+    iter_sampling   = 1000,
+    refresh         = 10,
+    adapt_delta     = 0.99)
+  
+  fit$cmdstan_summary()
+  
+  stanfit <- rstan::read_stan_csv(fit$output_files())
+
+```
+
+```{r echo = FALSE, eval=TRUE}
+load('B:/Ongoing_Research/dglnrt2/dglnrt2/data/toy example_toton and maynes data.RData')
+```
+
+It took about 34 minutes to run on my computer. There are so many parameters in the model. I will only focus on two for the sake of keeping this post short. These parameters are the probability of being compromised for each item and probability of each examinee having item preknowledge.
+
+### Probability of items being compromised
+
+As you can see the numbers below, the model predicted probability estimates perfectly separated two groups of items (disclosed and undisclosed). $\hat{R}$ values ranged from 1 to 1.22. I should probably increase the number of warm-up and sampling iterations and re-run to get better convergence, but I think these are good enough for the sake of this demo.
+
+The probability estimates ranged from 0.04 t0 0.29 with an average of 0.13 for the undisclosed items, while they ranged from 0.78 to 0.97 with a mean of 0.91 for the disclosed items. The AUC estimate was one, indicating that the probability estimate coming out of the model did a perfect job of separating the items in these two groups. The perfect separation of two groups of items can also be seen in the density plots below. For instance, if one uses a cut-off value of 0.9 to detect whether or not an item is compromised, this model would perfectly recover the disclosed items in the experimental setting.
+
+```{r echo = TRUE, eval=TRUE}
+
+require(rstan)
+require(psych)
+require(mltools)
+
+pC <- summary(stanfit, pars = c("pC"), probs = c(0.025, 0.975))$summary
+pC
+
+describe(pC[,7])
+
+describe(pC[seq(1,25,2),1])
+
+describe(pC[seq(2,25,2),1])
+
+auc_roc(preds = pC[,1],
+        actuals = c(rep(c(0,1),12),0))
+
+plot(density(pC[seq(1,25,2),1]),xlim=c(0,1),main="")
+points(density(pC[seq(2,25,2),1]),lty=2,type='l')
+```  
+
+```{r echo = FALSE, eval=FALSE}
+
+require(rstan)
+require(psych)
+require(mltools)
+
+ipar <- summary(stanfit, pars = c("item"), probs = c(0.025, 0.975))$summary
+ipar
+
+
+summary(stanfit, pars = c("omega_I"), probs = c(0.025, 0.975))$summary
+
+describe(ipar[,7])
+
+alpha <- exp(ipar[seq(1,50,2),1])
+alpha
+describe(alpha)
+beta <- ipar[seq(2,50,2),1]
+beta
+describe(beta)
+
+
+pC <- summary(stanfit, pars = c("pC"), probs = c(0.025, 0.975))$summary
+pC
+
+describe(pC[,7])
+
+describe(pC[seq(1,25,2),1])
+
+describe(pC[seq(2,25,2),1])
+
+auc_roc(preds = pC[,1],
+        actuals = c(rep(c(0,1),12),0))
+
+plot(density(pC[seq(1,25,2),1]),xlim=c(0,1),main="")
+points(density(pC[seq(2,25,2),1]),lty=2,type='l')
+
+
+```  
+
+
+### Probability of examinees having item preknowledge
+
+The probability estimates of examinees having item preknowledge were not as good as the probability estimates of items being compromised. However, it still provided some promising results. $\hat{R}$ values ranged from 1 to 3.18. The $\hat{R}$ values were indeed smaller than 1.1 for 90 examinees. They were relatively higher for only three examinees. It would probably help to increase the number of warm-up and sampling iterations and re-run to get better convergence.
+
+The probability estimates ranged from 0.17 t0 0.74 with an average of 0.44 for the examinees in the control group (no preknowledge), while they ranged from 0.26 to 0.92 with a mean of 0.67 for the second group (preknowledge without the correct responses and ranged from 0.32 to 0.92 with a mean of 0.78 for the third group (preknowledge with the correct responses). The AUC estimate was 0.89, indicating that the probability estimate coming out of the model did a reasonable job of separating the examinees in these three groups. The modest degree of separation can also be seen in the density plots below. 
+
+```{r echo = TRUE, eval=TRUE}
+
+pH <- summary(stanfit, pars = c("pH"), probs = c(0.025, 0.975))$summary
+pH
+
+
+plot(density(pH[which(d.sub$COND==1)]),xlim=c(0,1),main="")
+points(density(pH[which(d.sub$COND==2)]),type='l',lty=2)
+points(density(pH[which(d.sub$COND==3)]),type='l',lty=3)
+
+    
+describe(pH[,7])
+
+describe(pH[which(d.sub$COND==1)])
+
+describe(pH[which(d.sub$COND==2)])
+
+describe(pH[which(d.sub$COND==3)])
+
+
+
+auc_roc(preds = pH[,1],
+        actuals = ifelse(d.sub$COND==1,0,1))
+
+```
+
+
+
+For instance, if one uses a cut-off value of 0.8 to detect whether or not an examinee has item preknowledge, we would get the following confusion matrix, yielding a false-positive rate of 0, true-positive rate of 0.43, and precision of 1. 
+
+```{r echo = TRUE, eval=TRUE}
+
+table(ifelse(d.sub$COND==1,0,1),
+      ifelse(pH[,1]<0.8,0,1))
+
+```
+
+Or, if one uses a more liberal cut-off value of 0.7 to detect whether or not an examinee has item preknowledge, we would get the following confusion matrix, yielding a false-positive rate of 0.06, true-positive rate of 0.65, and precision of 0.95. 
+
+```{r echo = TRUE, eval=TRUE}
+
+table(ifelse(d.sub$COND==1,0,1),
+      ifelse(pH[,1]<0.7,0,1))
+
+```
+
+
+## Some Considerations
+
+I think we have a decent model that may potentially work in practice. The most important thing about this model is that it does not assume that the compromised items are known.  The model returns a probability of an item being compromised and a probability of an examinee having item preknowledge. Below are some considerations about this model as I work on improving it:
+
+-	The model can easily be generalized to incorporate actual item response data (0: correct, 1:incorrect), as a modified version of van der Linden’s Hierarchical IRT model. The model performance would potentially be better by incorporating information from both item responses and response times.
+
+-	The model is flexible enough to incorporate partial information. Suppose that you know certain items were compromised (e.g., through web monitoring) and certain examinees had item preknowledge (e.g., confession). This information can be provided to the model by fixing the relevant values to 1 in the **transformed parameters** block.
+
+
+-	The promising results in this post using the experimental data from Toton and Maynes (2019) are probably overestimating how this model would perform in a real setting. We know that the effect size of item preknowledge on response times in this dataset is massive yielding 70%-80$ reductions in response time. So, there is more than enough signal in the data for the model to work in an ideal condition. The effect size in natural settings is probably much smaller (e.g., a 20% reduction in response times). Also, there will be more noise with different contributing factors to response times (e.g., rapid guessing). In such conditions, it will be more difficult for the model to detect items and examinees.
+
+-	The real dataset used for demonstration provides an ideal setting in which the same examinees had access to the same set of items, and they were provided the correct key. Any deviation from this perfect scenario may deteriorate the model performance, such as smaller groups having access to a different subset of items or the disclosed keys are flawed. 
+
+
+
+
+
+
+
+
+
+
+
+
