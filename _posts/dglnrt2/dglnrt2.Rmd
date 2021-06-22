@@ -82,7 +82,7 @@ In this post, I am playing with an improved version of Kasli et al. (2020). In t
 
 ## Lognormal Response Time Model
 
-For those who unfamiliar, [van der Linden's lognormal response time model (LNRT)](https://journals.sagepub.com/doi/abs/10.3102/10769986031002181) is one of the available IRT models to model response time information. In this model, the observed response time for an examinee on an item is modeled through two item parameters and one person parameter. For example, suppose $RT_{ij}$ represents the log of the response time for the $i^{th}$ person  on the $j^{th}$ item. There are two item parameters for each item, time intensity parameter ($\beta_j$) and time discrimination parameter ($\alpha_j$). There is also a latent speed parameter for each examinee ($\tau_i$).
+For those unfamiliar, [van der Linden's lognormal response time model (LNRT)](https://journals.sagepub.com/doi/abs/10.3102/10769986031002181) is one of the available IRT models to model response time information. In this model, the observed response time for an examinee on an item is modeled through two item parameters and one person parameter. For example, suppose $RT_{ij}$ represents the log of the response time for the $i^{th}$ person  on the $j^{th}$ item. There are two item parameters for each item, time intensity parameter ($\beta_j$) and time discrimination parameter ($\alpha_j$). There is also a latent speed parameter for each examinee ($\tau_i$).
 
 The log of the response time for the $i^{th}$ person  on the $j^{th}$ item is assumed to follow a normal distribution
 
@@ -125,14 +125,13 @@ where $\mu_{ij}$ and $\sigma_j$ are defined as
 \end{equation}
 
 
-Below are some plots to get some insight into these parameters. The plots feature three different $(\beta,\alpha)$ combination. The straight blue lines represent the expected response time, while the gray dashed lines represent the variability around the expected response time, 1.96 SD below and above the expected response time.
-
+Below are some plots to get some insight into these parameters. The plots feature three different $(\beta,\alpha)$ combinations. The straight blue lines represent the expected response time, while the gray dashed lines represent the variability around the expected response time, 1.96 SD below and 1.96 SD above the expected response time.
 
 -  $(\beta,\alpha) = (4,4)$
 -  $(\beta,\alpha) = (3,4)$
 -  $(\beta,\alpha) = (4,8)$
 
-In all these plots, the expected response time decreases as the latent speed increases. In all these plots, the expected response time decreases as the latent speed increases. The LNRT implies that an examinee with a higher latent speed is expected to respond faster to the administered items. The two plots in the first row present two hypothetical items with the same $\alpha$ parameter, but they differ in the $\beta$ parameters. If the same examinee responds to two items, the observed response time is expected to be smaller for the item with the lower $\beta$ parameter. $\beta$ parameter represents how much time an item require to respond for an average examinee. LNRT implies that items with smaller time-intensity parameters require less time to respond than items with higher time-intensity parameters. The two plots in the second row present two hypothetical items with the same $\beta$ parameter, but they differ in the $\alpha$ parameters. Notice that everything else being equal, there is more variance in response time when for an item with a lower $\alpha$. LNRT implies that the items with lower time-discrimination parameters have more noise and contributing factors to response time other than an examinee's latent speed. 
+In all these plots, the expected response time decreases as the latent speed increases. The LNRT model implies that an examinee with a higher latent speed is expected to respond faster to the administered items. The two plots in the first row present two hypothetical items with the same $\alpha$ parameter, but they differ in the $\beta$ parameters. If the same examinee responds to two items, the observed response time is expected to be smaller for the item with the lower $\beta$ parameter. $\beta$ parameter represents how much time an item require to respond for an average examinee. LNRT implies that items with smaller time-intensity parameters require less time to respond than items with higher time-intensity parameters. The two plots in the second row present two hypothetical items with the same $\beta$ parameter, but they differ in the $\alpha$ parameters. Notice that everything else being equal, there is more variance in response time when for an item with a lower $\alpha$. LNRT implies that the items with lower time-discrimination parameters have more noise and contributing factors to response time other than an examinee's latent speed. 
 
 ```{r, fig.align='center',fig.height=6,fig.width=8}
 
@@ -241,11 +240,11 @@ To implement the model in Stan, we also have to rewrite the original density fun
 
 $$
 \begin{aligned}
-P(RT_{ij} = 1 | \tau_{ti},\tau_{ci},H_i,\alpha_j,b_j,C_j) =
-P(RT_{ij} = 1 | \tau_{ti},\tau_{ci},\alpha_j,\beta_j,C_j=1,H_i=1) \times P(C_j = 1) \times P(H_i =1) +\\
-P(RT_{ij} = 1 | \tau_{ti},\tau_{ci},\alpha_j,\beta_j,C_j=1,H_i=0) \times P(C_j = 1) \times P(H_i =0) +\\
-P(RT_{ij} = 1 | \tau_{ti},\tau_{ci},\alpha_j,\beta_j,C_j=0,H_i=1) \times P(C_j = 0) \times P(H_i =1) +\\
-P(RT_{ij} = 1 | \tau_{ti},\tau_{ci},\alpha_j,\beta_j,C_j=0,H_i=0) \times P(C_j = 0) \times P(H_i =0)
+f(RT_{ij}| \tau_{ti},\tau_{ci},H_i,\alpha_j,b_j,C_j) =
+f(RT_{ij}| \tau_{ti},\tau_{ci},\alpha_j,\beta_j,C_j=1,H_i=1) \times P(C_j = 1) \times P(H_i =1) +\\
+f(RT_{ij}| \tau_{ti},\tau_{ci},\alpha_j,\beta_j,C_j=1,H_i=0) \times P(C_j = 1) \times P(H_i =0) +\\
+f(RT_{ij}| \tau_{ti},\tau_{ci},\alpha_j,\beta_j,C_j=0,H_i=1) \times P(C_j = 0) \times P(H_i =1) +\\
+f(RT_{ij}| \tau_{ti},\tau_{ci},\alpha_j,\beta_j,C_j=0,H_i=0) \times P(C_j = 0) \times P(H_i =0)
 \end{aligned}
 $$
 Or, we can write it in a less cluttered way.
@@ -260,14 +259,14 @@ f(RT_{ij}| \tau_{ti},\alpha_j,\beta_j) \times P(C_j = 0) \times P(H_i =0)
 \end{aligned}
 $$
 
-$P(C_j = 1)$ represents the probability of the jth item being compromised and $P(H_i = 1)$ represents the probability of the ith examinee having item preknowledge. Notice that we consider four possible combinations of the discrete parameters and write the density for each possible combination. While the density relies on $\tau_{ci}$ when ($H_i=1, C_j=1$), it relied on $tau_{ti}$ for other three possible combinations. 
+$P(C_j = 1)$ represents the probability of the jth item being compromised and $P(H_i = 1)$ represents the probability of the ith examinee having item preknowledge. Notice that we consider four possible combinations of the discrete parameters and write the density for each possible combination. While the density relies on $\tau_{ci}$ when ($H_i=1, C_j=1$), it relied on $\tau_{ti}$ for other three possible combinations. 
 
 ## Model Identification and Prior Specifications
 
 We assume that the joint distribution of true latent speed and cheating latent speed follow a multivariate normal distribution.
 
 $$ \begin{pmatrix}
-\theta_{t}\\ \theta_{c}
+\tau_{t}\\ \tau_{c}
 \end{pmatrix}
 =
 N(\mu_{\mathcal{P}},\Sigma_{\mathcal{P}} )$$
@@ -723,6 +722,9 @@ For instance, if one uses a cut-off value of 0.8 to detect whether or not an exa
 table(ifelse(d.sub$COND==1,0,1),
       ifelse(pH[,1]<0.8,0,1))
 
+0/33
+26/60
+26/26
 ```
 
 Or, if one uses a more liberal cut-off value of 0.7 to detect whether or not an examinee has item preknowledge, we would get the following confusion matrix, yielding a false-positive rate of 0.06, true-positive rate of 0.65, and precision of 0.95. 
@@ -732,6 +734,9 @@ Or, if one uses a more liberal cut-off value of 0.7 to detect whether or not an 
 table(ifelse(d.sub$COND==1,0,1),
       ifelse(pH[,1]<0.7,0,1))
 
+2/33
+39/60
+39/41
 ```
 
 
