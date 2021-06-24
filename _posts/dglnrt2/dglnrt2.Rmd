@@ -2,7 +2,7 @@
 title: 'Simultaneous Detection of Compromised Items and Examinees with Item Preknowledge using Response Time Information'
 description: |
   
-  Yes, you heard it right! This post introduces a model that uses response time information for simultaneous estimation of an item being compromised and an examinee having item preknowledge. The model improves upon the ideas laid out in [Kasli et al. (2020)](https://psyarxiv.com/bqa3t), and further relaxes the assumption that the set of compromised items is known. The model is fitted using a Bayesian framework as implemented in Stan.
+  Yes, you heard it right! This post introduces a model that uses response time information for simultaneous estimation of items being compromised and examinees having item preknowledge. The model improves upon the ideas laid out in [Kasli et al. (2020)](https://psyarxiv.com/bqa3t), and further relaxes the assumption that the compromised items are known. The model is fitted using a Bayesian framework as implemented in Stan.
 draft: false
 author:
   - name: Cengiz Zopluoglu
@@ -73,7 +73,7 @@ options(digits = 4)
 
 
 *Acknowledgment. I want to thank [Jacob Socolar](https://jsocolar.github.io/) and [Luiz Max Carvalho](https://scholar.google.com/citations?user=y2mxpbcAAAAJ&hl=en) from [Stan Forums](https://discourse.mc-stan.org/) to give me a push in the right direction while working on this problem. The idea of marginalizing the discrete parameters in Stan was a difficult one to understand. [This post](https://elevanth.org/blog/2018/01/29/algebra-and-missingness/
-) was also handy if you are interested in the idea of marginalizing discrete parameters.*
+) was also handy if you are interested in the idea of marginalizing discrete parameters. [This post](https://mc-stan.org/users/documentation/case-studies/identifying_mixture_models.html) was also very helpful to get an idea about how to fix some identification issues initially leading multi-modal posteriors.*
 
 Detecting item preknowledge is a complex problem. It is challenging to detect compromised items or fraudulent examinees at the same time. For instance, we don’t typically know who had item preknowledge, which is typically the purpose of analysis. We don’t necessarily know which items are compromised, although there may be specific scenarios that we know the set of compromised items. We don’t know whether the same examinees had access to the same set of items or different smaller subgroups of examinees had access to the different subsets of items. Maybe, there is some overlap among these compromised subsets used by different groups, maybe not. We don’t know if the examinees with item preknowledge had access to the items with the right keyed responses. So, they may respond faster but not necessarily correct to items they had seen before. We don’t know if the examinees manipulate their response time to obscure evidence to be used against them. So, they may intentionally spend longer times on items, but they give the correct response at the end to benefit from cheating. With many unknowns, researchers tend to simplify the problem by making assumptions and focusing on one aspect of the problem at a time. Some methods use either response time or item responses in their modeling. Some methods assume that the set of compromised items is known. Some methods assume that the group of examinees with item preknowledge is known. Some methods attempt to solve the problem in two stages or using iterative cycles, solving a smaller problem in each step/iteration. 
 

@@ -17,7 +17,7 @@
       <title>Simultaneous Detection of Compromised Items and Examinees with Item Preknowledge using Response Time Information</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/dglnrt2</link>
-      <description>Yes, you heard it right! This post introduces a model that uses response time information for simultaneous estimation of an item being compromised and an examinee having item preknowledge. The model improves upon the ideas laid out in [Kasli et al. (2020)](https://psyarxiv.com/bqa3t), and further relaxes the assumption that the set of compromised items is known. The model is fitted using a Bayesian framework as implemented in Stan.</description>
+      <description>Yes, you heard it right! This post introduces a model that uses response time information for simultaneous estimation of items being compromised and examinees having item preknowledge. The model improves upon the ideas laid out in [Kasli et al. (2020)](https://psyarxiv.com/bqa3t), and further relaxes the assumption that the compromised items are known. The model is fitted using a Bayesian framework as implemented in Stan.</description>
       <category>item response theory</category>
       <category>R</category>
       <category>Stan</category>
