@@ -7,7 +7,7 @@ draft: false
 author:
   - name: Cengiz Zopluoglu
     affiliation: University of Oregon
-date: 6-21-2021
+date: 6-24-2021
 categories:
   - item response theory
   - R
@@ -75,10 +75,10 @@ options(digits = 4)
 *Acknowledgment. I want to thank [Jacob Socolar](https://jsocolar.github.io/) and [Luiz Max Carvalho](https://scholar.google.com/citations?user=y2mxpbcAAAAJ&hl=en) from [Stan Forums](https://discourse.mc-stan.org/) to give me a push in the right direction while working on this problem. The idea of marginalizing the discrete parameters in Stan was a difficult one to understand. [This post](https://elevanth.org/blog/2018/01/29/algebra-and-missingness/
 ) was also handy if you are interested in the idea of marginalizing discrete parameters.*
 
-Detecting item preknowledge is a complex problem. It is challenging to detect compromised items or fraudulent examinees at the same time. For instance, we don’t typically know who had item preknowledge, which is typically the purpose of analysis. We don’t necessarily know which items are compromised, although there may be specific scenarios that we know the set of compromised items. We don’t know whether the same examinees had access to the same set of items or different smaller subsets of examinees had access to the different subsets of items. Maybe, there is some overlap among these compromised subsets used by different groups, maybe not. We don’t know if the examinees with item preknowledge had access to the items with the right keyed responses. So, they may respond faster but not necessarily correct to items they had seen before. We don’t know if the examinees manipulate their response time to obscure evidence to be used against them. So, they may intentionally spend longer times on items, but they give the correct response at the end to benefit from cheating. With many unknowns, researchers tend to simplify the problem by making assumptions and focusing on one aspect of the problem at a time. Some methods use either response time or item responses in their modeling. Some methods assume that the set of compromised items is known. Some methods assume that the group of examinees with item preknowledge is known. Some methods attempt to solve the problem in two stages or using iterative cycles, solving a smaller problem in each step/iteration. 
+Detecting item preknowledge is a complex problem. It is challenging to detect compromised items or fraudulent examinees at the same time. For instance, we don’t typically know who had item preknowledge, which is typically the purpose of analysis. We don’t necessarily know which items are compromised, although there may be specific scenarios that we know the set of compromised items. We don’t know whether the same examinees had access to the same set of items or different smaller subgroups of examinees had access to the different subsets of items. Maybe, there is some overlap among these compromised subsets used by different groups, maybe not. We don’t know if the examinees with item preknowledge had access to the items with the right keyed responses. So, they may respond faster but not necessarily correct to items they had seen before. We don’t know if the examinees manipulate their response time to obscure evidence to be used against them. So, they may intentionally spend longer times on items, but they give the correct response at the end to benefit from cheating. With many unknowns, researchers tend to simplify the problem by making assumptions and focusing on one aspect of the problem at a time. Some methods use either response time or item responses in their modeling. Some methods assume that the set of compromised items is known. Some methods assume that the group of examinees with item preknowledge is known. Some methods attempt to solve the problem in two stages or using iterative cycles, solving a smaller problem in each step/iteration. 
 
-In this post, I am playing with an improved version of Kasli et al. (2020). In the paper by Kasli et al. (2020), the set of compromised items was assumed to be known. This improved version of the model does not make that assumption. Instead, it yields a probability estimate of being compromised for each item and a probability estimate of having item preknowledge for each examinee.
-
+In this post, I am playing with an improved version of [Kasli et al. (2020)](https://psyarxiv.com/bqa3t). In the paper by Kasli et al. (2020), they described a model to detect examinees with item preknowledge by using response time data assuming that compromised items were known. This improved version of the model does not make that assumption. Instead, I also define item compromise status as a parameter, and estimate probabilities for items being compromised along with probabilities for examinees having item preknowledge at the same time.
+In a follow-up post, I will lay out the details of how item response data can also be incorporated into this model to provide more information in estimating these parameters.
 
 ## Lognormal Response Time Model
 
@@ -333,7 +333,6 @@ $$\mu_{ln(\alpha)} \sim N(0,0.5) \\
 \sigma_{\beta} \sim exp(1) \\
 \Omega_{\mathcal{I}} \sim LKJ(1)$$
 
-
 Finally, we can define the following non-informative priors on the probability that a person is having item preknowledge and the probability that an item is being compromised.
 
 $$ P(H_i =1) \sim Beta(1,1) \\
@@ -353,7 +352,7 @@ data{
 }
 ```
 
-Then, we define the model parameters in the **parameter block**. In this block, we define every single parameter describe earlier in the model, $\mu_{ln(\alpha)}$, $\sigma_{ln(\alpha)}$, $\mu_{\beta}$, $\sigma_{\beta}$, $\sigma_{\tau_t}$, $\sigma_{\tau_c}$, an array for individual $\tau_t$ and $\tau_c$ parameters, $\Omega_P$, $\Omega_I$, $P(C)$, and $P(H)$.
+Then, we define the model parameters in the **parameters block**. In this block, we define every single parameter describe earlier in the model, $\mu_{ln(\alpha)}$, $\sigma_{ln(\alpha)}$, $\mu_{\beta}$, $\sigma_{\beta}$, $\sigma_{\tau_t}$, $\sigma_{\tau_c}$, an array for individual $\tau_t$ and $\tau_c$ parameters, an array for item parameters, $\Omega_P$, $\Omega_I$, $P(C)$, and $P(H)$.
 
 ```{r, eval=FALSE,echo=TRUE}
 parameters {
@@ -361,7 +360,7 @@ parameters {
   real<lower=0> sigma_beta;     // sd for time intensity parameters
   
   real mu_alpha;                // mean for log of time discrimination parameters
-  real<lower=0> sigma_alpha;    // sd for log of time discrimination parameters
+  real<lower=0> sigma_alpha;    // sd for time discrimination parameters
   
   real<lower=0> sigma_taut;     // sd for tau_t
   real<lower=0> sigma_tauc;     // sd for tau_c
@@ -373,17 +372,29 @@ parameters {
   
   vector<lower=0,upper=1>[I] pH; // vector of length I for the probability of examinee item peknowledge 
   
-  vector[2] person[I];         // an array with length I for person specific latent parameters
-                               // Each array has two elements
-                               // first element is tau_t
-                               // second element is tau_c
-
+  ordered[2] person[I];           // an array with length I for person specific latent parameters
+  // Each array has two elements
+  // first element is tau_t
+  // second element is tau_c
+  // ordered vector makes sure that tau_c > tau_t for every person
+  // to make sure chains are exploring the same mode and 
+  // do not go east and west leading multi-modal posteriors
+ 
+  
   vector[2] item[J];           // an array with length J for item specific parameters
-                               // each array has two elements
-                               // first element is alpha
-                               // second element is beta
+  // each array has two elements
+  // first element is alpha
+  // second element is beta
+}
 }
 ```
+
+
+In the **parameters block**, notice that I use `ordered[2] person[I]` when I define the array for person parameters instead of just writing `vector[2] person[I]`. This is something you can do in Stan if you want to force an order for the vector elements. In this case, this is forcing $\tau_c$ to be larger than $\tau_t$ for every single person. It appeared that this was really important; otherwise, you would get multi-modal posterior distributions due to the different chains going to different directions for P(C) and P(H) parameters. For instance, see below an example for a parameter before I fixed this problem. It took a while to understand the importance of it and to figure out how to fix the problem. Once I forced $\tau_c$ to be larger than $\tau_t$ by using `ordered` instead of plain `vector`, it resolved the direction issue for these parameters.
+
+![Non-mixing chains](stan1.png)
+![Multimodal posterior](stan2.png)
+![Chains are going to east and west without ordering restrictionon tau](stan3.png)
 
 We will need to have a **transformed parameters** block. In this block, we define the vector of means and vector of standard deviations for item and person parameters later to be used in the model block.  As we draw the person and item parameters from a multivariate normal distribution, the parameters defined in the **parameters** block are combined into vector forms in the **transformed parameters** block. For instance,  
 
@@ -485,108 +496,175 @@ model{
 The whole Stan syntax for the model can be saved as a stan file [Download the Stan model syntax](https://github.com/czopluoglu/website/blob/master/docs/posts/dglnrt2/dglnrt.stan).
 
 
-To test if the model can successfully be fitted and how well it works, I will first test it using the experimental data from [Toton and Maynes (2019)](https://www.frontiersin.org/articles/10.3389/feduc.2019.00049/full).
+To test if the model can successfully be fitted and how well it works, I will first test it using a simulated data and then using the experimental data from [Toton and Maynes (2019)](https://www.frontiersin.org/articles/10.3389/feduc.2019.00049/full).
 
-## Does this work?
+## Simulated Data Example
 
-I imported the dataset and it is stored in an object called `d.sub` (not allowed to publicize this dataset). Below is the first three rows and 5 columns.
+### Data Generation
 
-\linebreak
- 
-```{r echo = FALSE, eval=TRUE}
+I will first simulate a dataset to test the performance the model. The followings are some important variables to consider in this simulation:
 
-# Import the dataset from Sarah and Toton 2019
+- There are 200 hypothetical examinees responding to 30 items.
+- 40 hypothetical examinees had prior knowledge for 15 items.
+- $\beta$ parameters are normally distributed with a mean of 4 and standard deviation of 0.5. 
+- $\alpha$ parameters are normally distributed with a mean of 2 and standard deviation of 0.5.
+- $\tau_t$ and $\tau_c$ parameters follow a multivariate normal distribution with the following parameters:
 
-d <- read.csv('B:/Ongoing_Research/Murat/DG-LNRT/Manuscript/JEM/Revision1/dg-lnrt/data/uva_rt.csv',
-na.strings = '#N/A')
+$$ \begin{pmatrix}
+\tau_t \\ \tau_c 
+\end{pmatrix}
+=
+N(\mu_{\mathcal{P}},\Sigma_{\mathcal{P}} )$$
 
+with $\mu_{\mathcal{I}} = (0,0.4)$ and
 
-# Create a subset by select the response time data
+$$ \Sigma_{\mathcal{P}} = 
+\begin{pmatrix}
+0.0100 \ \ 0.0105 \\
+0.0105 \ \ 0.0225
+\end{pmatrix}.$$ 
 
-d.sub <- d[,c("ï..ID","COND","Q1RT","Q2RT","Q3RT","Q4RT","Q5RT","Q6RT","Q7RT",
-              "Q8RT","Q9RT","Q10RT","Q11RT","Q12RT","Q13RT","Q14RT","Q15RT",
-              "Q16RT","Q17RT","Q18RT","Q19RT","Q20RT","Q21RT","Q22RT","Q23RT",
-              "Q24RT","Q25RT")]
-
-# Update IDs such that ID goes from 1 to 93
-
-colnames(d.sub)[1] <- 'ID'
-
-d.sub$ID <- 1:93
-
-for(i in 3:27){
-  
-  loc <- which(is.na(d.sub[,i])==TRUE)
-  if(length(loc)>0){
-    d.sub[loc,i] = mean(d.sub[,i],na.rm=TRUE)
-  }
-  
-}
-
-
-d.long <- reshape(data        = d.sub,
-                  idvar       = "ID",
-                  varying     = list(colnames(d.sub)[3:27]),
-                  timevar     = "Item",
-                  times       = 1:25,
-                  v.names      = "RT",
-                  direction   = "long")
-
-```
-
+The specifications about $\tau_t$ and $\tau_c$ correspond to a correlation of 0.7 between true latent speed and cheating latent speed, an about %35 reduction in response time on average when an examinees responds to a compromised item. Below are the code to simulate response time data with these specifications.
 
 ```{r echo = TRUE, eval=TRUE}
-head(d.sub[,1:5],3)
+require(MASS)
 
-dim(d.sub)
+set.seed(06202021)
 
-table(d.sub$COND)
+N = 200    # number of examinees
+n = 30     # number of items
+
+# Time intensity parameters
+
+  beta  <- rnorm(n,4,.5)
+  
+# Time discrimination parameters
+  
+  alpha <- rnorm(n,2,0.5) 
+  
+# Tau_t and tau_c
+  
+  tau <- mvrnorm(N,
+                 mu = c(0,0.4),
+                 Sigma = matrix(c(0.01,0.0105,0.0105,0.0225),2,2))
+  
+  tau_t <- tau[,1]
+  tau_c <- tau[,2]
+
+# Randomly select (approximately) 20% of examinees as having item prekowledge
+  
+  H <- rbinom(N,1,.2)
+  
+# Randomly select (approximately) 50% of items as compromised
+  
+  C <- rbinom(n,1,.5)
+  
+# Generate observed response times according to the model
+  
+  rt <- matrix(nrow=N,ncol=n)
+  
+  for(i in 1:N){
+    for(j in 1:n){
+      
+      p_t <- beta[j] - tau_t[i]
+      p_c <- beta[j] - tau_c[i]
+      
+      if(H[i] == 1 & C[j] == 1){
+        rt[i,j] = exp(rnorm(1,p_c,1/alpha[j]))
+      } else {
+        rt[i,j] = exp(rnorm(1,p_t,1/alpha[j]))
+      }
+      
+    }
+  }
+  
+  # Convert it to data frame and add group membership and a unique ID
+  
+    rt       <- as.data.frame(rt)
+    rt$group <- H
+    rt$id    <- 1:nrow(rt)
+    
+  # Check the data
+  
+  head(rt)
+
+  # Reshape it to long format (for plotting purposes)
+  
+  rt.long <- reshape(data        = rt,
+                     idvar       = 'id',
+                     varying     = list(colnames(rt)[1:n]),
+                     timevar     = "Item",
+                     times       = 1:n,
+                     v.names      = "RT",
+                     direction   = "long")
+  
+  # Add item status
+  
+    rt.long$compromised <- NA
+  
+    for(j in 1:n){
+      
+      rt.long[rt.long$Item==j,]$compromised = C[j]
+      
+    }
+  
+  head(rt.long)
+  
 ```
 
-In this dataset, there are 93 examinees and 25 items. The first two columns are variables for a unique identification number and a group membership. The last 25 items include the observed response time for 25 items in the test. One group (Group 1) was a control group, and they responded to all 25 items without any preknowledge. The second and third groups were experimental groups. Group 2 was allowed to study  12 items (even-numbered items) without the correct key, while Group 3 was allowed to study the same 12 items with the correct key before taking the test. The plots below show the distribution of log response time within each group for odd-numbered items and even-numbered items. While there is not much difference among the groups for the undisclosed odd-numbered items, the experimental effect reveals itself with shorter response times in disclosed even-numbered items for the examinees in Group 2 and 3. So, in theory, the model should successfully separate these three groups of examinees by assigning a higher probability of item preknowledge for examinees in Group 2 and Group 3. Also, the model should successfully separate two groups of items by assigning a higher probability of being compromised for the even-numbered items.
+### Data Check
 
-```{r echo = FALSE, eval=TRUE,fig.height=12,fig.width=8}
+Below boxplots provide a snapshot of distributions for the generated response times for hypothetetical examinees with and without item preknowledge for compromised and uncompromised items. Not surprisingly, average log response time is about same for two groups of examinees for uncompromised items while examinees with item preknowledge respond slightly faster to compromised items.
 
-p1 <- ggplot(d.long[d.long$Item%%2==1,], aes(x=factor(Item), y=log(RT),fill=factor(COND))) + 
+```{r echo = TRUE, eval=TRUE,fig.height=12,fig.width=8}
+require(ggplot2)
+require(gridExtra)
+
+p1 <- ggplot(rt.long[rt.long$compromised==0,], 
+             aes(x=factor(Item), y=log(RT),fill=factor(group))) + 
        geom_boxplot()+
        theme_bw() + 
        xlab('Item Number')+
        ylab('Log of Response Time')+
        guides(fill=guide_legend(title="Group"))+
-       ggtitle('Odd-numbered Items')
+       ggtitle('Uncompromised Items')
   
 
 
-p2 <- ggplot(d.long[d.long$Item%%2==0,], aes(x=factor(Item), y=log(RT),fill=factor(COND))) + 
+p2 <- ggplot(rt.long[rt.long$compromised==1,], 
+             aes(x=factor(Item), y=log(RT),fill=factor(group))) + 
        geom_boxplot()+
        theme_bw() + 
        xlab('Item Number')+
        ylab('Log of Response Time')+
        guides(fill=guide_legend(title="Group"))+
-       ggtitle('Even-numbered Items')
-
+       ggtitle('Compromised Items')
+  
 grid.arrange(p1,p2)
 
 ```
+
+### Fitting the model
 
 We first prepare a list for the input data.
 
 ```{r echo = TRUE, eval=FALSE}
 
 data_rt <- list(
-  J               = 93,
-  I               = 25,
-  RT              = log(d.sub[,3:27])
+  I               = 200,
+  J               = 30,
+  RT              = log(rt[,1:30])
 )
 
 ```
-
 
 I will use the `cmdstanr` package to fit the model using the Stan model syntax developed before. There are four chains. There are 100 warm-up iterations followed by 500 sampling iterations for each chain.
 
 ```{r echo = TRUE, eval=FALSE}
 
+require(here)
 require(cmdstanr)
+require(rstan)
 
 mod <- cmdstan_model(here('_posts/dglnrt2/dglnrt.stan'))
   
@@ -595,8 +673,8 @@ mod <- cmdstan_model(here('_posts/dglnrt2/dglnrt.stan'))
     seed            = 1234,
     chains          = 4,
     parallel_chains = 4,
-    iter_warmup     = 200,
-    iter_sampling   = 1000,
+    iter_warmup     = 100,
+    iter_sampling   = 500,
     refresh         = 10,
     adapt_delta     = 0.99)
   
@@ -607,16 +685,50 @@ mod <- cmdstan_model(here('_posts/dglnrt2/dglnrt.stan'))
 ```
 
 ```{r echo = FALSE, eval=TRUE}
-load('B:/Ongoing_Research/dglnrt2/dglnrt2/data/toy example_toton and maynes data.RData')
+load('B:/Ongoing_Research/dglnrt2/dglnrt2/data/toy example_simulated response times.RData')
 ```
 
-It took about 34 minutes to run on my computer. There are so many parameters in the model. I will only focus on two for the sake of keeping this post short. These parameters are the probability of being compromised for each item and probability of each examinee having item preknowledge.
+```{r echo = FALSE, eval=FALSE}
+
+list_of_draws <- extract(stanfit)
+
+hist(list_of_draws$pC[,1])
+
+hist(list_of_draws$pH[,1])
+
+require(bayesplot)
+
+mcmc_trace(as.array(stanfit),
+           pars='pC[6]')
+
+mcmc_areas(as.array(stanfit),
+           pars='pC[6]')
+
+
+mcmc_hist(as.array(stanfit),
+           pars='pC[6]')
+
+mcmc_hist_by_chain(as.array(stanfit),
+                   pars='pC[6]')
+
+mcmc_hist_by_chain(as.array(stanfit),
+                   pars='omega_P[1,2]')
+
+
+mcmc_hist_by_chain(as.array(stanfit),
+                   pars='omega_I[1,2]')
+
+
+stan_diag(stanfit, info = 'sample', par = 'mu_beta) 
+stan_par(stanfit,par = 'mu_beta') 
+
+```
+
+This model took about 3 hours to run on my computer. There are so many parameters in the model. I will only focus on two for the sake of keeping this post short. These parameters are the probability of being compromised for each item and probability of each examinee having item preknowledge.
 
 ### Probability of items being compromised
 
-As you can see the numbers below, the model predicted probability estimates perfectly separated two groups of items (disclosed and undisclosed). $\hat{R}$ values ranged from 1 to 1.22. I should probably increase the number of warm-up and sampling iterations and re-run to get better convergence, but I think these are good enough for the sake of this demo.
-
-The probability estimates ranged from 0.04 t0 0.29 with an average of 0.13 for the undisclosed items, while they ranged from 0.78 to 0.97 with a mean of 0.91 for the disclosed items. The AUC estimate was one, indicating that the probability estimate coming out of the model did a perfect job of separating the items in these two groups. The perfect separation of two groups of items can also be seen in the density plots below. For instance, if one uses a cut-off value of 0.9 to detect whether or not an item is compromised, this model would perfectly recover the disclosed items in the experimental setting.
+As you can see the numbers below, the model predicted probability estimates perfectly separated two groups of items (disclosed and undisclosed). $\hat{R}$ values ranged from 0.999 to 1.002, suggesting good convergence. The probability estimates ranged from 0.12 to 0.54 with an average of 0.27 for the simulated uncompromised items, while they ranged from 0.54 to 0.86 with a mean of 0.72 for the simulated compromised items. The AUC estimate was one, indicating that the probability estimates coming out of the model did a perfect job of separating the items in these two groups. The perfect separation of two groups of items can also be seen in the density plots below. For instance, if one uses a cut-off value of 0.5 to detect whether or not an item is compromised, this model would accurately detect all compromised items while detecting only one uncompromised item as false-positive.
 
 ```{r echo = TRUE, eval=TRUE}
 
@@ -624,20 +736,22 @@ require(rstan)
 require(psych)
 require(mltools)
 
-pC <- summary(stanfit, pars = c("pC"), probs = c(0.025, 0.975))$summary
+pC <- as.data.frame(summary(stanfit, pars = c("pC"), probs = c(0.025, 0.975))$summary)
+pC$trueC <- C
+
 pC
 
-describe(pC[,7])
-
-describe(pC[seq(1,25,2),1])
-
-describe(pC[seq(2,25,2),1])
+describeBy(pC[,1],group=C)
 
 auc_roc(preds = pC[,1],
-        actuals = c(rep(c(0,1),12),0))
+        actuals = C)
 
-plot(density(pC[seq(1,25,2),1]),xlim=c(0,1),main="")
-points(density(pC[seq(2,25,2),1]),lty=2,type='l')
+plot(density(pC[C==0,1]),xlim=c(0,1),main="",ylim = c(0,4))
+points(density(pC[C==1,1]),lty=2,type='l')
+
+
+table(pC$trueC,pC$mean>.5)
+
 ```  
 
 ```{r echo = FALSE, eval=FALSE}
@@ -680,78 +794,187 @@ points(density(pC[seq(2,25,2),1]),lty=2,type='l')
 
 ```  
 
+### Probability of examinees having item preknowledge
+
+The probability estimates of examinees having item preknowledge were not as perfect as the probability estimates of items being compromised. However, it still provided some promising results. $\hat{R}$ values ranged from 0.998 to 1.003, indicating good convergence. 
+
+The probability estimates ranged from 0.39 t0 0.64 with an average of 0.47 for the simulated examinees without item preknowledge and ranged from 0.42 to 0.84 with a mean of 0.67 for the simulated examinees with item preknowledge. The AUC estimate was about 0.95, indicating that the probability estimates coming out of the model did a reasonable job of separating the examinees with and without item preknowledge. The separation can also be seen in the density plots below. 
+
+```{r echo = TRUE, eval=TRUE}
+
+pH       <- as.data.frame(summary(stanfit, pars = c("pH"), probs = c(0.025, 0.975))$summary)
+pH$trueH <- H
+
+pH
+
+plot(density(pH[H==0,1]),xlim=c(0,1),main="")
+points(density(pH[H==1,1]),type='l',lty=2)
+
+describeBy(pH[,1],group=H)
+
+auc_roc(preds = pH[,1],
+        actuals =H)
+
+```
+
+For instance, if one uses a cut-off value of 0.6 to detect whether or not an examinee has item preknowledge, we would get the following confusion matrix, yielding a false-positive rate of 0.026, true-positive rate of 0.68, and precision of 0.89. 
+
+```{r echo = TRUE, eval=TRUE}
+
+table(pH$trueH,pH$mean>.6)
+
+```
+
+## Real Data Example
+
+```{r echo = FALSE, eval=TRUE}
+
+load('B:/Ongoing_Research/dglnrt2/dglnrt2/data/toy example_toton and maynes data.RData')
+
+```
+
+In this dataset, there are 93 examinees and 25 items. Below is the first three rows and 5 columns (not allowed to publicize this dataset). The first two columns are variables for a unique identification number and a group membership. The last 25 items include the observed response time for 25 items in the test. 
+
+```{r echo = FALSE, eval=TRUE}
+head(d.sub[,1:5],3)
+
+dim(d.sub)
+
+table(d.sub$COND)
+```
+
+One group (Group 1) was a control group, and they responded to all 25 items without any preknowledge. The second and third groups were experimental groups. Group 2 was allowed to study  12 items (even-numbered items) without the correct key, while Group 3 was allowed to study the same 12 items with the correct key before taking the test. The plots below show the distribution of log response time within each group for odd-numbered items and even-numbered items. While there is not much difference among the groups for the undisclosed odd-numbered items, the experimental effect reveals itself with shorter response times in disclosed even-numbered items for the examinees in Group 2 and 3. So, in theory, the model should successfully separate these three groups of examinees by assigning a higher probability of item preknowledge for examinees in Group 2 and Group 3. Also, the model should successfully separate two groups of items by assigning a higher probability of being compromised for the even-numbered items.
+
+### Data Check
+
+```{r echo = FALSE, eval=TRUE,fig.height=12,fig.width=8}
+
+p1 <- ggplot(d.long[d.long$Item%%2==1,], aes(x=factor(Item), y=log(RT),fill=factor(COND))) + 
+       geom_boxplot()+
+       theme_bw() + 
+       xlab('Item Number')+
+       ylab('Log of Response Time')+
+       guides(fill=guide_legend(title="Group"))+
+       ggtitle('Odd-numbered Items')
+  
+
+
+p2 <- ggplot(d.long[d.long$Item%%2==0,], aes(x=factor(Item), y=log(RT),fill=factor(COND))) + 
+       geom_boxplot()+
+       theme_bw() + 
+       xlab('Item Number')+
+       ylab('Log of Response Time')+
+       guides(fill=guide_legend(title="Group"))+
+       ggtitle('Even-numbered Items')
+
+grid.arrange(p1,p2)
+
+```
+
+### Model Fitting
+
+We first prepare a list for the input data.
+
+```{r echo = TRUE, eval=FALSE}
+
+data_rt <- list(
+  I               = 93,
+  J               = 25,
+  RT              = log(d.sub[,3:27])
+)
+
+```
+
+I will use the `cmdstanr` package to fit the model using the Stan model syntax developed before. There are four chains. There are 100 warm-up iterations followed by 500 sampling iterations for each chain.
+
+```{r echo = TRUE, eval=FALSE}
+
+require(cmdstanr)
+
+mod <- cmdstan_model(here('_posts/dglnrt2/dglnrt.stan'))
+  
+  fit <- mod$sample(
+    data            = data_rt,
+    seed            = 1234,
+    chains          = 4,
+    parallel_chains = 4,
+    iter_warmup     = 100,
+    iter_sampling   = 500,
+    refresh         = 10,
+    adapt_delta     = 0.99)
+  
+  fit$cmdstan_summary()
+  
+  stanfit <- rstan::read_stan_csv(fit$output_files())
+
+```
+
+It took about 35 minutes to run on my computer. 
+
+### Probability of items being compromised
+
+As you can see the numbers below, the model predicted probability estimates perfectly separated two groups of items (disclosed and undisclosed). $\hat{R}$ values ranged from 1 to 1.22. I should probably increase the number of warm-up and sampling iterations and re-run to get better convergence, but I think these are good enough for the sake of this demo.
+
+The probability estimates ranged from 0.02 t0 0.39 with an average of 0.14 for the undisclosed items, while they ranged from 0.81 to 0.98 with a mean of 0.92 for the disclosed items. The AUC estimate was one indicating a perfect separation of the disclosed and undisclosed items. The perfect separation of two groups of items can also be seen in the density plots below. For instance, if one uses a cut-off value of 0.5 to detect whether or not an item is compromised, this model would perfectly recover the disclosed items in the experimental setting.
+
+```{r echo = TRUE, eval=TRUE}
+
+pC       <- as.data.frame(summary(stanfit, pars = c("pC"), probs = c(0.025, 0.975))$summary)
+pC$trueC <- c(rep(c(0,1),12),0)
+pC
+
+describeBy(pC$mean,group=pC$trueC)
+
+auc_roc(preds = pC$mean,
+        actuals = pC$trueC)
+
+plot(density(pC[pC$trueC==0,1]),xlim=c(0,1),main="",ylim = c(0,10))
+points(density(pC[pC$trueC==1,1]),lty=2,type='l')
+
+
+table(pC$trueC,pC$mean>.5)
+```  
 
 ### Probability of examinees having item preknowledge
 
-The probability estimates of examinees having item preknowledge were not as good as the probability estimates of items being compromised. However, it still provided some promising results. $\hat{R}$ values ranged from 1 to 3.18. The $\hat{R}$ values were indeed smaller than 1.1 for 90 examinees. They were relatively higher for only three examinees. It would probably help to increase the number of warm-up and sampling iterations and re-run to get better convergence.
-
-The probability estimates ranged from 0.17 t0 0.74 with an average of 0.44 for the examinees in the control group (no preknowledge), while they ranged from 0.26 to 0.92 with a mean of 0.67 for the second group (preknowledge without the correct responses and ranged from 0.32 to 0.92 with a mean of 0.78 for the third group (preknowledge with the correct responses). The AUC estimate was 0.89, indicating that the probability estimate coming out of the model did a reasonable job of separating the examinees in these three groups. The modest degree of separation can also be seen in the density plots below. 
+The probability estimates of examinees having item preknowledge were almost as good as the probability estimates of items being compromised. $\hat{R}$ values ranged from 0.983 to 1.006. The probability estimates ranged from 0.19 t0 0.46 with an average of 0.32 for the examinees in the control group (no preknowledge), while they ranged from 0.30 to 0.94 with a mean of 0.72 for the second group (having preknowledge without the correct responses) and ranged from 0.50 to 0.95 with a mean of 0.82 for the third group (having preknowledge with the correct responses). The AUC estimate was 0.98, indicating a good degree of separation among the examinees in these three groups. The separation can also be seen in the density plots below. 
 
 ```{r echo = TRUE, eval=TRUE}
 
-pH <- summary(stanfit, pars = c("pH"), probs = c(0.025, 0.975))$summary
+pH       <- as.data.frame(summary(stanfit, pars = c("pH"), probs = c(0.025, 0.975))$summary)
+pH$trueH <- ifelse(d.sub$COND==1,0,1)
 pH
 
-
-plot(density(pH[which(d.sub$COND==1)]),xlim=c(0,1),main="")
-points(density(pH[which(d.sub$COND==2)]),type='l',lty=2)
-points(density(pH[which(d.sub$COND==3)]),type='l',lty=3)
+plot(density(pH[which(d.sub$COND==1),1]),xlim=c(0,1),main="")
+points(density(pH[which(d.sub$COND==2),1]),type='l',lty=2)
+points(density(pH[which(d.sub$COND==3),1]),type='l',lty=3)
 
     
-describe(pH[,7])
+describeBy(pH$mean,group=d.sub$COND)
 
-describe(pH[which(d.sub$COND==1)])
-
-describe(pH[which(d.sub$COND==2)])
-
-describe(pH[which(d.sub$COND==3)])
-
-
-
-auc_roc(preds = pH[,1],
-        actuals = ifelse(d.sub$COND==1,0,1))
+auc_roc(preds = pH$mean,
+        actuals = pH$trueH)
 
 ```
 
-
-
-For instance, if one uses a cut-off value of 0.8 to detect whether or not an examinee has item preknowledge, we would get the following confusion matrix, yielding a false-positive rate of 0, true-positive rate of 0.43, and precision of 1. 
+For instance, if one uses a cut-off value of 0.5 to detect whether or not an examinee has item preknowledge, we would get the following confusion matrix, yielding a false-positive rate of 0, true-positive rate of 0.92, and precision of 1. 
 
 ```{r echo = TRUE, eval=TRUE}
 
-table(ifelse(d.sub$COND==1,0,1),
-      ifelse(pH[,1]<0.8,0,1))
-
-0/33
-26/60
-26/26
+table(pH$trueH,pH$mean>.5)
 ```
-
-Or, if one uses a more liberal cut-off value of 0.7 to detect whether or not an examinee has item preknowledge, we would get the following confusion matrix, yielding a false-positive rate of 0.06, true-positive rate of 0.65, and precision of 0.95. 
-
-```{r echo = TRUE, eval=TRUE}
-
-table(ifelse(d.sub$COND==1,0,1),
-      ifelse(pH[,1]<0.7,0,1))
-
-2/33
-39/60
-39/41
-```
-
 
 ## Some Considerations
 
 I think we have a decent model that may potentially work in practice. The most important thing about this model is that it does not assume that the compromised items are known.  The model returns a probability of an item being compromised and a probability of an examinee having item preknowledge. Below are some considerations about this model as I work on improving it:
 
--	The model can easily be generalized to incorporate actual item response data (0: correct, 1:incorrect), as a modified version of van der Linden’s Hierarchical IRT model. The model performance would potentially be better by incorporating information from both item responses and response times.
+-	The model can easily be generalized to incorporate actual item response data (0: correct, 1:incorrect), as a modified version of van der Linden’s Hierarchical IRT model. The model performance would potentially be better by incorporating information from both item responses and response times (it is almost done, will be posted soon!).
 
 -	The model is flexible enough to incorporate partial information. Suppose that you know certain items were compromised (e.g., through web monitoring) and certain examinees had item preknowledge (e.g., confession). This information can be provided to the model by fixing the relevant values to 1 in the **transformed parameters** block.
 
+-	The promising results in this post using the experimental data from Toton and Maynes (2019) are probably overestimating how this model would perform in a real setting. We know that the effect size of item preknowledge on response times in this dataset is massive, yielding 70%-80% reductions in response time. Similarly, the item preknowledge effect in the simulated data example yields on average about 35% reduction in response time. So, there is more than enough signal in both real and simulated datasets for the model to work in an ideal condition. The effect size in natural settings is probably much smaller (e.g., a 10%-20% reduction in response times). Also, there will be more noise with different contributing factors to response times (e.g., rapid guessing). In such conditions, it will be more difficult for the model to detect items and examinees.
 
--	The promising results in this post using the experimental data from Toton and Maynes (2019) are probably overestimating how this model would perform in a real setting. We know that the effect size of item preknowledge on response times in this dataset is massive yielding 70%-80$ reductions in response time. So, there is more than enough signal in the data for the model to work in an ideal condition. The effect size in natural settings is probably much smaller (e.g., a 20% reduction in response times). Also, there will be more noise with different contributing factors to response times (e.g., rapid guessing). In such conditions, it will be more difficult for the model to detect items and examinees.
-
--	The real dataset used for demonstration provides an ideal setting in which the same examinees had access to the same set of items, and they were provided the correct key. Any deviation from this perfect scenario may deteriorate the model performance, such as smaller groups having access to a different subset of items or the disclosed keys are flawed. 
+-	Both the real and simulated datasets used for demonstration provides an ideal setting in which the same examinees had access to the same set of items, and they were provided the correct key. Any deviation from this perfect scenario may deteriorate the model performance, such as smaller groups having access to a different subset of items or the disclosed keys are flawed. 
 
 
 

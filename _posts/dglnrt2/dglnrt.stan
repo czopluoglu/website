@@ -21,10 +21,14 @@ parameters {
   
   vector<lower=0,upper=1>[I] pH; // vector of length I for the probability of examinee item peknowledge 
   
-  vector[2] person[I];           // an array with length I for person specific latent parameters
+  ordered[2] person[I];           // an array with length I for person specific latent parameters
   // Each array has two elements
   // first element is tau_t
   // second element is tau_c
+  // ordered vector makes sure that tau_c > tau_t for every person
+  // to make sure chains are exploring the same mode and 
+  // do not go east and west leading multi-modal posteriors
+  
   
   vector[2] item[J];           // an array with length J for item specific parameters
   // each array has two elements
@@ -58,6 +62,7 @@ transformed parameters{
   scale_I[2] = sigma_beta;
   
   Sigma_I = quad_form_diag(omega_I, scale_I); 
+  
 }
 
 model{
