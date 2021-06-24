@@ -493,7 +493,7 @@ model{
 }
 ```
 
-The whole Stan syntax for the model can be saved as a stan file [Download the Stan model syntax](https://github.com/czopluoglu/website/blob/master/docs/posts/dglnrt2/dglnrt.stan).
+The whole Stan syntax for the model can be saved as a stan file ([Download the Stan model syntax](https://github.com/czopluoglu/website/blob/master/docs/posts/dglnrt2/dglnrt.stan)).
 
 
 To test if the model can successfully be fitted and how well it works, I will first test it using a simulated data and then using the experimental data from [Toton and Maynes (2019)](https://www.frontiersin.org/articles/10.3389/feduc.2019.00049/full).
@@ -516,7 +516,7 @@ $$ \begin{pmatrix}
 =
 N(\mu_{\mathcal{P}},\Sigma_{\mathcal{P}} )$$
 
-with $\mu_{\mathcal{I}} = (0,0.4)$ and
+with $\mu_{\mathcal{P}} = (0,0.4)$ and
 
 $$ \Sigma_{\mathcal{P}} = 
 \begin{pmatrix}
