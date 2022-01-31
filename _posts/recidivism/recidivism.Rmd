@@ -1,0 +1,86 @@
+---
+title: "Team CrescentStar Won Prizes in the NIJ's Recidivism Forecasting Challenge"
+description: |
+  
+  Last summer, I participated in the NIJ's Recidivism Forecasting Challenge. Surprisingly, the predictions I submitted won some prizes in certain categories. 
+  
+draft: false
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Oregon
+date: 09-17-2021
+categories:
+  - machine learning
+  - R
+  - XGBoost
+  - regression
+  - recidivism
+  - forecasting
+  - '2021'
+output:
+  distill::distill_article:
+    self_contained: true
+    toc: true
+    toc_float: true
+preview: img1.png
+header-includes:
+  - \usepackage{amsmath} 
+  - \usepackage{upgreek}
+  - \usepackage{bm}
+  - \usepackage{unicode-math}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+<style>
+
+body {
+text-align: justify}
+
+</style>
+
+```{r echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+require(knitr)
+require(kableExtra)
+require(here)
+require(htmltools)
+require(mime)
+require(ggplot2)
+require(gridExtra)
+
+# the default output hook
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+    if (!is.null(n <- options$out.lines)) {
+        x = knitr:::split_lines(x)
+        if (length(x) > n) {
+            # truncate the output
+            x = c(head(x, n), '....\n')
+        }
+        x = paste(x, collapse = '\n')  # paste first n lines together
+    }
+    hook_output(x, options)
+})
+
+opts_chunk$set(out.lines = 40)
+opts_chunk$set(width = 40)
+options(max.print=1000000)
+options(knitr.table.format = 'html') 
+options(knitr.kable.NA = '')
+options(scipen=99)
+options(digits = 4)
+```
+
+
+Last spring, the National Institute of Justice's (NIJ) opened a forecasting challenge that aimed to increase public safety and improve the fair administration of justice across the United States. The Recidivism Forecasting Challenge used data from the State of Georgia about persons released from prison to parole supervision from January 1, 2013, through December 31, 2015. Contestants were asked to submit forecasts (percent likelihoods) of whether individuals in the dataset recidivated within one year, two years, or three years after release using a total of 48 predictor variables.
+
+I learned about the challenge via an email from the [Social Systems Data Science Network](https://blogs.uoregon.edu/sdsnetwork/) in the College of Education. I was looking for potential datasets for a machine learning class I was assigned to teach during Fall 2021. I started playing with the dataset, gathered additional information from different data sources, and fitted a few basic models (XGBoost and Penalized regression). AUC was very low even for the best models, and I wouldn't use these models for any high-stakes decisions; however, I decided to give it a shot and submitted my predictions without much expectation. Then, surprise! Among many categories, my entries yielded the 3rd best performance for predicting recidivism in Year 1 for male parolees, female parolees, and average accuracy. They also yielded the best 5th performance in Year 2 for female parolees. All entries were submitted in the Large Team Category with a team name CrescentStar. I was expecting more competition because the prizes were very large, but only about 20 teams participated in the Large Team Category.
+
+All the details about the challenge can be found on the [NIJ's website](https://nij.ojp.gov/funding/recidivism-forecasting-challenge). Official results were released at [this link](https://nij.ojp.gov/funding/recidivism-forecasting-challenge-results). Finally, all my code, datasets, entries etc., were released in this [Github repo](https://github.com/czopluoglu/nij-competition). The repo also includes a [final report](https://github.com/czopluoglu/nij-competition/blob/main/report/Final%20Report_draft.docx?raw=true) summarizing the steps I implemented and models I built.
+
+If you are into similar challenges, I discovered [https://www.challenge.gov/](https://www.challenge.gov/) that provides a list of active challenges opened by different government agencies. There are some interesting datasets and problems. From time to time, some challanges are coming out for those in education or social sciences may be interested.
+
+
+
+

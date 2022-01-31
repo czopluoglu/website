@@ -46,7 +46,7 @@
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/publications.html</loc>
-    <lastmod>2021-06-22T08:48:38-07:00</lastmod>
+    <lastmod>2021-12-20T16:42:43-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/qm.html</loc>
@@ -55,6 +55,14 @@
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/README.html</loc>
     <lastmod>2020-12-04T16:35:09-08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/huggingface/</loc>
+    <lastmod>2022-01-31T13:31:55-08:00</lastmod>
+  </url>
+  <url>
+    <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/recidivism/</loc>
+    <lastmod>2021-12-23T21:47:24-08:00</lastmod>
   </url>
   <url>
     <loc>https://github.com/czopluoglu/website/tree/master/docs/posts/dglnrt2/</loc>

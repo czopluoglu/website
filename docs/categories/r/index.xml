@@ -12,7 +12,40 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Thu, 24 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 30 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>R, Reticulate, and Hugging Face Models</title>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/huggingface</link>
+      <description>Join me to get your feet wet with thousands of models available on Hugging Face! Hugging Face is like a CRAN of pre-trained AI/ML models. There are thousands of pre-trained models that can be imported and used within seconds at no charge to achieve tasks like text generation, text classification, translation, speech recognition, image classification, object detection, etc. In this post, I am exploring how to access these pre-trained models without leaving the comfort of RStudio using the `reticulate` package.</description>
+      <category>machine learning</category>
+      <category>artificial intelligence</category>
+      <category>R</category>
+      <category>NLP</category>
+      <category>Python</category>
+      <category>reticulate</category>
+      <category>Huggingface</category>
+      <category>2022</category>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/huggingface</guid>
+      <pubDate>Sun, 30 Jan 2022 00:00:00 +0000</pubDate>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/huggingface/img.png" medium="image" type="image/png" width="711" height="566"/>
+    </item>
+    <item>
+      <title>Team CrescentStar Won Prizes in the NIJ's Recidivism Forecasting Challenge</title>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/recidivism</link>
+      <description>Last summer, I participated in the NIJ's Recidivism Forecasting Challenge. Surprisingly, the predictions I submitted won some prizes in certain categories.</description>
+      <category>machine learning</category>
+      <category>R</category>
+      <category>XGBoost</category>
+      <category>regression</category>
+      <category>recidivism</category>
+      <category>forecasting</category>
+      <category>2021</category>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/recidivism</guid>
+      <pubDate>Fri, 17 Sep 2021 00:00:00 +0000</pubDate>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/recidivism/img1.png" medium="image" type="image/png" width="1269" height="573"/>
+    </item>
     <item>
       <title>Simultaneous Detection of Compromised Items and Examinees with Item Preknowledge using Response Time Information</title>
       <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>

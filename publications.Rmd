@@ -14,16 +14,24 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ## Working Papers
 
-- Kasli, M., Zopluoglu, C., & Toton, S. (under review). A Deterministic Gated Lognormal Response Time Model to Identify Examinees with Item Preknowledge. <br>[**Download Preprint**](https://psyarxiv.com/bqa3t)
+- Kasli, M., Zopluoglu, C., & Toton, S. (under review). A Deterministic Gated Lognormal Response Time Model to Identify Examinees with Item Preknowledge. <br>
+[**Download Preprint**](https://psyarxiv.com/bqa3t)
 
 ## Published Papers
 
-- Zopluoglu, C., Kasli, M., & Toton, S. (2021, in press). The Effect of Item Preknowledge on Response Time: Analysis of Two Datasets Using the Multiple-Group Lognormal Response Time Model with a Gating Mechanism. Educational Measurement: Issues and Practices. https://doi.org/10.1111/emip.12428 <br>
-
-- Patel, Z.S., Jensen-Doss, A. & Zopluoglu, C (2021, in press). Illustrating the Applicability of IRT to Implementation Science: Examining an Instrument of Therapist Attitudes. Administration and Policy in Mental Health Services Research. https://doi.org/10.1007/s10488-021-01139-1 <br>
+- Scarpa, M.P., Zopluoglu, C., & Prilleltensky, I (in press). Mattering in the community. Domain and demographic differences in a US sample. Journal of Community Psychology.  https://doi.org/10.1002/jcop.22728 <br>
 [**Download/Request**](mailto:cengiz@uoregon.edu)
 
-- Lee, J., Zopluoglu, C., Andersen, L., Stanton, A., Magidson, J., Kagee, A., Joska, J.A., O’Cleirigh, C., & Safren, S.A. (2021, in press). Improving the Measurement of Food Insecurity among People with HIV in South Africa: A Psychometric Examination. Public Health Nutrition. https://doi:10.1017/S1368980021001312 <br>
+- Scarpa, M.P., Zopluoglu, C., & Prilleltensky, I (in press). Assessing multidimensional mattering: Development and exploratory validation of the Mattering in Domains of Life Scale (MIDLS). Journal of Community Psychology. https://doi.org/10.1002/jcop.22725 <br>
+[**Download/Request**](mailto:cengiz@uoregon.edu)
+
+- Zopluoglu, C., Kasli, M., & Toton, S. (2021, in press). The Effect of Item Preknowledge on Response Time: Analysis of Two Datasets Using the Multiple-Group Lognormal Response Time Model with a Gating Mechanism. Educational Measurement: Issues and Practices, 40(3), 42-51. https://doi.org/10.1111/emip.12428 <br>
+[**Download/Request**](mailto:cengiz@uoregon.edu)
+
+- Patel, Z.S., Jensen-Doss, A. & Zopluoglu, C (2021, in press). Illustrating the Applicability of IRT to Implementation Science: Examining an Instrument of Therapist Attitudes. Administration and Policy in Mental Health Services Research, 48, 921-935. https://doi.org/10.1007/s10488-021-01139-1 <br>
+[**Download/Request**](mailto:cengiz@uoregon.edu)
+
+- Lee, J., Zopluoglu, C., Andersen, L., Stanton, A., Magidson, J., Kagee, A., Joska, J.A., O’Cleirigh, C., & Safren, S.A. (2021, in press). Improving the Measurement of Food Insecurity among People with HIV in South Africa: A Psychometric Examination. Public Health Nutrition, 24(12),3805-3817. https://doi:10.1017/S1368980021001312 <br>
 [**Download/Request**](mailto:cengiz@uoregon.edu)
 
 - Park, S.E., Ahn, S., & Zopluoglu, C. (2021). Differential item functioning effect size from the multigroup confirmatory factor analysis for a meta-analysis: A simulation study. Educational and Psychological Measurement, 81(1), 182-199. https://doi.org/10.1177/0013164420925885 <br>

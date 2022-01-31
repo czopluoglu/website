@@ -27,20 +27,26 @@ navbar:
           href: fitpmm.html
       
     - text: "Shiny Apps"
-      href: https://cengiz-shiny.app/shiny/
-  
-    - text: "Courses"
       menu:
-        - text: "Introduction to R Programming"
-          href: intror.html
-        - text: "Quantitative Methods"
-          href: qm.html
-        - text: "Categorical Data Analysis"
-          href: categorical.html
-        - text: "Measurement and Psychometric Theory"
-          href: measurement.html 
-        - text: "Item Response Theory"
-          href: irt.html
+        - text: "Exploring Loglikelihood for IRT Models"
+          href: https://cengiz-shiny.app/shiny/loglikelihood/
+        - text: "Person Parameter Estimation for IRT Models"
+          href: https://cengiz-shiny.app/shiny/personparameter
+        - text: "Propensity Demo for IRT Models"
+          href: https://cengiz-shiny.app/shiny/irtpropensity
+
+#    - text: "Courses"
+#      menu:
+#        - text: "Introduction to R Programming"
+#          href: intror.html
+#        - text: "Quantitative Methods"
+#          href: qm.html
+#        - text: "Categorical Data Analysis"
+#          href: categorical.html
+#        - text: "Measurement and Psychometric Theory"
+#          href: measurement.html 
+#        - text: "Item Response Theory"
+#          href: irt.html
 
     - text: "CV"
       href: data/CV_Cengiz Zopluoglu.pdf
