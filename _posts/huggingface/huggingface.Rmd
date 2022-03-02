@@ -23,6 +23,7 @@ output:
     self_contained: true
     toc: true
     toc_float: true
+    highlight_downlit: false
 preview: img.png
 header-includes:
   - \usepackage{amsmath} 

@@ -19,6 +19,7 @@ categories:
 output:
   distill::distill_article:
     self_contained: true
+    highlight_downlit: false
 
 preview: images/image.png
 ---
@@ -60,7 +61,7 @@ The ORF dataset from MPS was the only reason I was interested in CRM at all. Dur
 
 require(foreign)
 
-d <- read.spss("C:/Users/c.zopluoglu1/Documents/ORA.spring.2008.without ID.sav",
+d <- read.spss("C:/Users/cengiz/Documents/ORA.spring.2008.without ID.sav",
           to.data.frame=TRUE)
 
 
@@ -274,9 +275,9 @@ Below is the Stan model syntax for fitting CRM. I follow the guidelines in the S
 prior on model parameters.
 
 
-```{r echo = TRUE, eval=TRUE}
+```{r echo = TRUE, eval=FALSE}
 
-crm <-'
+crm <- '
 
   data{
 	int  J;                    //  number of items
@@ -356,7 +357,7 @@ fit_crm <- stan(model_code = crm,
 
 ```{r echo = FALSE, eval=TRUE}
 
-load("C:/Users/c.zopluoglu1/Documents/crm.Rdata")
+load("C:/Users/cengiz/Documents/crm_stan.Rdata")
 require(rstan)
 require(psych)
 ```
@@ -369,7 +370,6 @@ sum(get_elapsed_time(fit_crm))/3600    # how many hours it took to run the model
                                        # above settings
 ```
 
-It took about 4 hours to fit the model with the above settings with processor "Intel(R) Core(TM) i7-3840QM CPU @2.80GHz". I used only one core, although this processor has four cores. Note that I could use all four cores, and the estimation time would be down to about an hour. However, my R kept crashing when I tried to do it for some reason I don't know. That might be related to my computer settings.
 
 ## Model Convergence
 
@@ -435,11 +435,11 @@ thetas = summary(fit_crm)$summary[16:2609,1]
 
 ```
 
-The $b$ parameters for three reading passages in this dataset were 1.52, 1.13, 1.27. I think it is fair to call them "reading passage difficulty" in this context. Given that we fix the mean and variance of the latent person parameter ($\theta$) to 0 and 1, we can compare the passage difficulty relative to the levels of individuals. Note that $\theta$ represents here a latent variable indicating oral reading fluency. So, these three reading passages seem very difficult compared to the ORF levels of these individuals.
+The $b$ parameters for three reading passages in this dataset were `r round(b[1],2)`, `r round(b[2],2)`, `r round(b[3],2)`. I think it is fair to call them "reading passage difficulty" in this context. Given that we fix the mean and variance of the latent person parameter ($\theta$) to 0 and 1, we can compare the passage difficulty relative to the levels of individuals. Note that $\theta$ represents here a latent variable indicating oral reading fluency. So, these three reading passages seem very difficult compared to the ORF levels of these individuals.
 
-The $a$ parameters were 3,20, 5.16, and 4.60. We can call them "reading passage discrimination" parameters. So, these reading passages are highly informative about the latent construct being measured. These very high discrimination parameters are not very surprising, given that the correlations among the three variables were 0.94, 0.94, and 0.96.
+The $a$ parameters were `r round(a[1],2)`, `r round(a[2],2)`, `r round(a[3],2)`. We can call them "reading passage discrimination" parameters. So, these reading passages are highly informative about the latent construct being measured. These very high discrimination parameters are not very surprising, given that the correlations among the three variables were 0.94, 0.94, and 0.96.
 
-The $\alpha$ parameters were 0.83, 1.01, and 1.00. I think it would be wise to go back and fix all the $\alpha$ parameters to 1 in the model and then re-fit, but I will not do it. Note that the $\alpha$ scales the distance between the response categories.
+The $\alpha$ parameters were `r round(alpha[1],2)`, `r round(alpha[2],2)`, `r round(alpha[3],2)`. I think it would be wise to go back and fix all the $\alpha$ parameters to 1 in the model and then re-fit, but I will not do it. Note that the $\alpha$ scales the distance between the response categories.
 
 We can plot the operating characteristic curves, but it would be too messy for all 250 score categories, However, I can draw it for  $P(X\geq 50)$, $P(X\geq 100)$, $P(X\geq 150)$, ..., $P(X\geq 200)$. Below is the plot for Item 1.
 
