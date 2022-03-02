@@ -17,6 +17,17 @@ knitr::opts_chunk$set(echo = FALSE)
 - Kasli, M., Zopluoglu, C., & Toton, S. (under review). A Deterministic Gated Lognormal Response Time Model to Identify Examinees with Item Preknowledge. <br>
 [**Download Preprint**](https://psyarxiv.com/bqa3t)
 
+- Dietz, S., Prilleltensky, I., McMahon, A., Zopluoglu, C., Lipsky, M., & Hartnett, C.(under review). Assessing a Culture of Belonging in a Higher Education Context.
+
+
+- Zopluoglu, C., & Kasli, M. (in preparation). Simultaneous Detection of Compromised Items and Examinees with Item Preknowledge using Response Time Information.
+
+- Zopluoglu, C. (in preparation). Simultaneous Detection of Compromised Items and Examinees with Item Preknowledge using Response Accuracy: Improvments on the Deterministic Gated Item Response Model.
+
+- Zopluoglu, C., Combs, T. (in preparation). Modeling Response Times with Variable Latent Speed as a Piecewise Function.
+
+- Zopluoglu, C. & colleagues (in preparation). GeoCAT: Designing a Computerized Adaptive Test to Measure Geometry Knowledge for K-3 Grades.
+
 ## Published Papers
 
 - Scarpa, M.P., Zopluoglu, C., & Prilleltensky, I (in press). Mattering in the community. Domain and demographic differences in a US sample. Journal of Community Psychology.  https://doi.org/10.1002/jcop.22728 <br>
