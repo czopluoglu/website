@@ -1,5 +1,29 @@
 [
   {
+    "path": "posts/ncme22/",
+    "title": "NCME 2022 Presentation",
+    "description": "I was not able to go to NCME 2022 this year. Our session organizers, Huijuan Meng and Anjali Weber, kindly let me make an asynchronous video presentation. The session provided a collaborative exercise in which five independent research groups each propose a method that could help effectively and efficiently detect cheaters in the operational setting. Each group used the same data from two linear fixed-form IT certification exams with known security breaches. The five approaches were evaluated regarding their accuracy in detecting cheating and feasibility to implement. Here, I provide the slides, a Github repository for the code, and a video for my presentation.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2022-04-22",
+    "categories": [
+      "item response theory",
+      "R",
+      "Stan",
+      "item preknowledge",
+      "detecting test misconduct",
+      "2022"
+    ],
+    "contents": "\r\n\r\nContents\r\nSession Information\r\n\r\n\r\n\r\nbody {\r\ntext-align: justify}\r\n\r\nblockquote {\r\n  background: #f9f9f9;\r\n  border-left: 5px solid #ccc;\r\n  margin: 1.5em 10px;\r\n  padding: 0.5em 1.5em;\r\n}\r\n\r\n\r\n\r\nMy NCME 22 presentation was a supplemental analysis for another blog post I wrote about a year ago.\r\nhttps://cengiz.me/posts/dglnrt2/\r\nIn this post, I played with an idea to simultaneously detect compromised items and examinees with item preknowledge using the response time. The model worked fine with a simulated dataset and a real dataset with known item preknowledge. When I was invited to submit a paper for this session, I thought the IT certification exam datasets offered to be used in the session would be a great test of the model in the wild. I applied the model to a random subset of examinees, and I think the results were encouraging.\r\nI hope to turn this accumulated knowledge on this model into a formal paper in the coming months! Here is some more information and additional results until it is published.\r\nDownload the Slides\r\nR code used for the analysis\r\nVideo Presentation\r\n\r\n\r\nSession Information\r\nCheating Detection: A Collaborative Case Study using IT Certification Exams\r\nCoordinated Paper Session\r\nFriday, April 22\r\n4:15 to 5:45 pm PT\r\nWestin San Diego Gaslamp: Del Mar\r\nCheating damages the integrity of a testing program and can cause testing organizations significant losses. Security breaches can arise from individuals memorizing and sharing items, the concerted efforts of a test preparation company to harvest items and teach them to their customers, and answer copying or collusion among examinees during a testing event. Without proper detection, these types of cheating could remain undetected until their presence becomes significant enough to threaten test-score validity. It is crucial for a test sponsor to accurately identify cheaters and invalidate their scores to effectively deter cheating behaviors. However, many cheating detection techniques developed so far are based on complicated mathematical models and extensive ad-hoc data analyses and thus cannot be practically conducted on daily basis. Therefore, we propose a collaborative exercise in which five independent research groups each propose a method that could help effectively and efficiently detect cheaters in the operational setting. Each group will use the same data from two linear fixed-form IT certification exams with known security breaches. The five approaches will be comparatively evaluated regarding their accuracy in detecting cheating and feasibility to implement.\r\nSession Organizer:\r\nAnjali Weber, Amazon Web Services\r\nParticipants:\r\nVarying item parameters and collusion detection(Kirk Becker, Pearson; Paul Edward Jones, Pearson VUE)\r\nSimultaneous Estimation of Compromised Items and Examinees with Item Preknowledge using Response Times (Cengiz Zopluoglu, University of Oregon)\r\nA practical application of response similarity (Russell Smith, Alpine Testing)\r\nIdentifying Anomalous Response Patterns with Multinomial Logistic Regression (Jennifer Davis, Amazon Web Services)\r\nMachine Learning Based Profiling in Test Fraud Detection (Huijuan Meng, Amazon Web Services)\r\nDiscussant:\r\nJames Wollack, University of Wisconsin\r\n",
+    "preview": {},
+    "last_modified": "2022-04-21T16:19:19-07:00",
+    "input_file": "ncme22.knit.md"
+  },
+  {
     "path": "posts/huggingface/",
     "title": "R, Reticulate, and Hugging Face Models",
     "description": "Join me to get your feet wet with thousands of models available on Hugging Face! Hugging Face is like a CRAN of pre-trained AI/ML models. There are thousands of pre-trained models that can be imported and used within seconds at no charge to achieve tasks like text generation, text classification, translation, speech recognition, image classification, object detection, etc. In this post, I am exploring how to access these pre-trained models without leaving the comfort of RStudio using the `reticulate` package.",

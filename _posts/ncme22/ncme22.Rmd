@@ -1,0 +1,144 @@
+---
+title: "NCME 2022 Presentation"
+description: |
+  
+  I was not able to go to NCME 2022 this year. Our session organizers, Huijuan Meng and Anjali Weber, kindly let me make an asynchronous video presentation. The session provided a collaborative exercise in which five independent research groups each propose a method that could help effectively and efficiently detect cheaters in the operational setting. Each group used the same data from two linear fixed-form IT certification exams with known security breaches. The five approaches were evaluated regarding their accuracy in detecting cheating and feasibility to implement. Here, I provide the slides, a Github repository for the code, and a video for my presentation.
+  
+draft: false
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Oregon
+date: 04-22-2022
+categories:
+  - item response theory
+  - R
+  - Stan
+  - item preknowledge
+  - detecting test misconduct
+  - '2022'
+output:
+  distill::distill_article:
+    self_contained: true
+    toc: true
+    toc_float: true
+    highlight_downlit: false
+preview: img.png
+header-includes:
+  - \usepackage{amsmath} 
+  - \usepackage{upgreek}
+  - \usepackage{bm}
+  - \usepackage{unicode-math}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+<style>
+
+body {
+text-align: justify}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 5px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 1.5em;
+}
+</style>
+
+
+
+```{r echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+require(knitr)
+require(kableExtra)
+require(here)
+require(htmltools)
+require(mime)
+require(ggplot2)
+require(gridExtra)
+
+# the default output hook
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+    if (!is.null(n <- options$out.lines)) {
+        x = knitr:::split_lines(x)
+        if (length(x) > n) {
+            # truncate the output
+            x = c(head(x, n), '....\n')
+        }
+        x = paste(x, collapse = '\n')  # paste first n lines together
+    }
+    hook_output(x, options)
+})
+
+opts_chunk$set(out.lines = 40)
+opts_chunk$set(width = 40)
+options(max.print=1000000)
+options(knitr.table.format = 'html') 
+options(knitr.kable.NA = '')
+options(scipen=99)
+options(digits = 4)
+options(width = 80)
+```
+
+My NCME 22 presentation was a supplemental analysis for another blog post I wrote about a year ago.
+
+https://cengiz.me/posts/dglnrt2/
+
+In this post, I played with an idea to simultaneously detect compromised items and examinees with item preknowledge using the response time. The model worked fine with a simulated dataset and a real dataset with known item preknowledge. When I was invited to submit a paper for this session, I thought the IT certification exam datasets offered to be used in the session would be a great test of the model in the wild. I applied the model to a random subset of examinees, and I think the results were encouraging. 
+
+I hope to turn this accumulated knowledge on this model into a formal paper in the coming months! Here is some more information and additional results until it is published.
+
+[Download the Slides](Zopluoglu_NCME22_Simultaneous Estimation of Compromised Items and Examinees with Item Preknowledge using Response Time Data.pdf)
+
+[R code used for the analysis](https://github.com/czopluoglu/dglnrt2/tree/main/R/ncme22/dglnrt/)
+
+[Video Presentation](https://www.youtube.com/embed/lV-qJGel1Og)
+
+<iframe width="560" height="400" src="https://www.youtube.com/embed/lV-qJGel1Og" data-external = "1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+
+## Session Information
+
+**Cheating Detection: A Collaborative Case Study using IT Certification Exams**
+
+Coordinated Paper Session
+
+Friday, April 22
+
+4:15 to 5:45 pm PT
+
+Westin San Diego Gaslamp: Del Mar
+
+Cheating damages the integrity of a testing program and can cause testing organizations significant losses. Security breaches can arise from individuals memorizing and sharing items, the concerted efforts of a test preparation company to harvest items and teach them to their customers, and answer copying or collusion among examinees during a testing event. Without proper detection, these types of cheating could remain undetected until their presence becomes significant enough to threaten test-score validity. It is crucial for a test sponsor to accurately identify cheaters and invalidate their scores to effectively deter cheating behaviors. However, many cheating detection techniques developed so far are based on complicated mathematical models and extensive ad-hoc data analyses and thus cannot be practically conducted on daily basis. Therefore, we propose a collaborative exercise in which five
+independent research groups each propose a method that could help effectively and efficiently detect cheaters in the operational setting. Each group will use the same data from two linear fixed-form IT certification exams with known security breaches. The five approaches will be comparatively evaluated regarding their accuracy in detecting cheating and feasibility to implement.
+
+**Session Organizer:**
+
+- *Anjali Weber, Amazon Web Services*
+
+**Participants:**
+
+- Varying item parameters and collusion detection(*Kirk Becker, Pearson; Paul Edward Jones, Pearson VUE*)
+
+- Simultaneous Estimation of Compromised Items and Examinees with Item Preknowledge using Response Times (*Cengiz Zopluoglu, University of Oregon*)
+
+- A practical application of response similarity (*Russell Smith, Alpine Testing*)
+
+- Identifying Anomalous Response Patterns with Multinomial Logistic Regression (*Jennifer Davis, Amazon Web Services*)
+
+- Machine Learning Based Profiling in Test Fraud Detection (*Huijuan Meng, Amazon Web Services*)
+
+**Discussant:**
+
+- *James Wollack, University of Wisconsin*
+
+
+
+
+
+
+
+
+
+  
