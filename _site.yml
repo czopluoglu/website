@@ -35,8 +35,10 @@ navbar:
         - text: "Propensity Demo for IRT Models"
           href: https://cengiz-shiny.app/shiny/irtpropensity
 
-#    - text: "Courses"
-#      menu:
+    - text: "Courses"
+      menu:
+        - text: "Applied Machine Learning"
+          href: https://edld654-fall22.netlify.app/
 #        - text: "Introduction to R Programming"
 #          href: intror.html
 #        - text: "Quantitative Methods"

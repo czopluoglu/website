@@ -50,16 +50,17 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  { color: #00769e; background-color: #f1f3f5; }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span { color: #00769e; } /* Normal */
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { } /* Attribute */
+code span.at { color: #657422; } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
+code span.cf { color: #00769e; } /* ControlFlow */
 code span.ch { color: #20794d; } /* Char */
 code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #5e5e5e; } /* Comment */
@@ -73,9 +74,9 @@ code span.fl { color: #ad0000; } /* Float */
 code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
+code span.kw { color: #00769e; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
+code span.ot { color: #00769e; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
 code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
@@ -1031,10 +1032,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     margin-top: 1.5em;
   }
 
-  .figure img {
-    width: 100%;
-  }
-
   .figure .caption {
     color: rgba(0, 0, 0, 0.6);
     font-size: 12px;
@@ -1864,6 +1861,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
           return "<p>" + $('#ref-' + ref).html() + "</p>";
@@ -1878,6 +1881,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           placement: 'bottom-start'
         });
       });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
 
       // clear polling timer
       clearInterval(tid);
@@ -1977,6 +2005,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
       if ($(this).attr('data-layout') !== "l-body") {
         figures.css('width', '100%');
       } else {
@@ -1999,7 +2029,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
-        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
       });
     }
 
@@ -2038,7 +2068,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2108,6 +2138,16 @@ Shiny Apps
 <a href="https://cengiz-shiny.app/shiny/irtpropensity">Propensity Demo for IRT Models</a>
 </div>
 </div>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Courses
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="https://edld654-fall22.netlify.app/">Applied Machine Learning</a>
+</div>
+</div>
 <a href="data/CV_Cengiz Zopluoglu.pdf">CV</a>
 <a href="links.html">Links</a>
 <a href="https://github.com/czopluoglu">
@@ -2144,59 +2184,262 @@ Shiny Apps
 <div class="d-article">
 <h2 id="working-papers">Working Papers</h2>
 <ul>
-<li><p>Kasli, M., Zopluoglu, C., &amp; Toton, S. (under review). A Deterministic Gated Lognormal Response Time Model to Identify Examinees with Item Preknowledge. <br> <a href="https://psyarxiv.com/bqa3t"><strong>Download Preprint</strong></a></p></li>
-<li><p>Dietz, S., Prilleltensky, I., McMahon, A., Zopluoglu, C., Lipsky, M., &amp; Hartnett, C.(under review). Assessing a Culture of Belonging in a Higher Education Context.</p></li>
-<li><p>Zopluoglu, C., &amp; Kasli, M. (in preparation). Simultaneous Detection of Compromised Items and Examinees with Item Preknowledge using Response Time Information.</p></li>
-<li><p>Zopluoglu, C. (in preparation). Simultaneous Detection of Compromised Items and Examinees with Item Preknowledge using Response Accuracy: Improvments on the Deterministic Gated Item Response Model.</p></li>
-<li><p>Zopluoglu, C., Combs, T. (in preparation). Modeling Response Times with Variable Latent Speed as a Piecewise Function.</p></li>
-<li><p>Zopluoglu, C. &amp; colleagues (in preparation). GeoCAT: Designing a Computerized Adaptive Test to Measure Geometry Knowledge for K-3 Grades.</p></li>
+<li><p>Wang, J., Combs, T., Zopluoglu, C. (under review) Fitting
+Hyperbolic Cosine Unfolding Models using the Stan Language.</p></li>
+<li><p>Dietz, S., Prilleltensky, I., McMahon, A., Zopluoglu, C., Lipsky,
+M., &amp; Hartnett, C.(under review). Assessing a Culture of Belonging
+in a Higher Education Context.</p></li>
+<li><p>Zopluoglu, C., &amp; Kasli, M. (in preparation). Simultaneous
+Detection of Compromised Items and Examinees with Item Preknowledge
+using Response Time Information.</p></li>
+<li><p>Zopluoglu, C. (in preparation). Simultaneous Detection of
+Compromised Items and Examinees with Item Preknowledge using Response
+Accuracy: Improvments on the Deterministic Gated Item Response
+Model.</p></li>
+<li><p>Zopluoglu, C., Combs, T. (in preparation). Modeling Response
+Times with Variable Latent Speed as a Piecewise Function.</p></li>
+<li><p>Zopluoglu, C. &amp; colleagues (in preparation). GeoCAT:
+Designing a Computerized Adaptive Test to Measure Geometry Knowledge for
+K-3 Grades.</p></li>
 </ul>
 <h2 id="published-papers">Published Papers</h2>
 <ul>
-<li><p>Scarpa, M.P., Zopluoglu, C., &amp; Prilleltensky, I (in press). Mattering in the community. Domain and demographic differences in a US sample. Journal of Community Psychology. <a href="https://doi.org/10.1002/jcop.22728" class="uri">https://doi.org/10.1002/jcop.22728</a> <br> <a href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
-<li><p>Scarpa, M.P., Zopluoglu, C., &amp; Prilleltensky, I (in press). Assessing multidimensional mattering: Development and exploratory validation of the Mattering in Domains of Life Scale (MIDLS). Journal of Community Psychology. <a href="https://doi.org/10.1002/jcop.22725" class="uri">https://doi.org/10.1002/jcop.22725</a> <br> <a href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C., Kasli, M., &amp; Toton, S. (2021, in press). The Effect of Item Preknowledge on Response Time: Analysis of Two Datasets Using the Multiple-Group Lognormal Response Time Model with a Gating Mechanism. Educational Measurement: Issues and Practices, 40(3), 42-51. <a href="https://doi.org/10.1111/emip.12428" class="uri">https://doi.org/10.1111/emip.12428</a> <br> <a href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
-<li><p>Patel, Z.S., Jensen-Doss, A. &amp; Zopluoglu, C (2021, in press). Illustrating the Applicability of IRT to Implementation Science: Examining an Instrument of Therapist Attitudes. Administration and Policy in Mental Health Services Research, 48, 921-935. <a href="https://doi.org/10.1007/s10488-021-01139-1" class="uri">https://doi.org/10.1007/s10488-021-01139-1</a> <br> <a href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
-<li><p>Lee, J., Zopluoglu, C., Andersen, L., Stanton, A., Magidson, J., Kagee, A., Joska, J.A., O’Cleirigh, C., &amp; Safren, S.A. (2021, in press). Improving the Measurement of Food Insecurity among People with HIV in South Africa: A Psychometric Examination. Public Health Nutrition, 24(12),3805-3817. <a href="https://doi:10.1017/S1368980021001312" class="uri">https://doi:10.1017/S1368980021001312</a> <br> <a href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
-<li><p>Park, S.E., Ahn, S., &amp; Zopluoglu, C. (2021). Differential item functioning effect size from the multigroup confirmatory factor analysis for a meta-analysis: A simulation study. Educational and Psychological Measurement, 81(1), 182-199. <a href="https://doi.org/10.1177/0013164420925885" class="uri">https://doi.org/10.1177/0013164420925885</a> <br> <a href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
-<li><p>de l’Etoile, S. K., Bennett, C., &amp; Zopluoglu, C. (2020). Infant movement response to auditory rhythm. Perceptual and Motor Skills, 127(4), 651-670. <a href="https://doi.org/10.1177/0031512520922642" class="uri">https://doi.org/10.1177/0031512520922642</a> <br> <a href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
-<li><p>Prilleltensky, I., Dietz, S., Zopluoglu, C., Clarke, A., Lipsky, M., &amp; Hartnett, C. (2020). Assessing a culture of mattering in a higher education context. Journal for the Study of Postsecondary and Tertiary Education, 5, 58-104. <a href="https://doi.org/10.28945/4539" class="uri">https://doi.org/10.28945/4539</a> <br> <a href="http://www.jspte.org/Volume5/JSPTEv5p085-104Prilleltensky6169.pdf"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C. (2020). A Finite Mixture Item Response Theory Model for Continuous Measurement Outcomes. Educational and Psychological Measurement, 80(2), 346–364. <a href="https://doi.org/10.1177/0013164419856663" class="uri">https://doi.org/10.1177/0013164419856663</a> <a href="https://doi.org/10.1177/0013164419856663" class="uri">https://doi.org/10.1177/0013164419856663</a> <br> <a href="https://www.researchgate.net/publication/317095748"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C. (2019). Computation of the Response Similarity Index M4 in R under the Dichotomous and Nominal Item Response Models. International Journal of Assessment Tools in Education , 6 (5) , 1-19 . DOI: 10.21449/ijate.527299 <br> <a href="https://dergipark.org.tr/en/pub/ijate/issue/43543/527299"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C. (2019). Detecting Examinees With Item Preknowledge in Large-Scale Testing Using Extreme Gradient Boosting (XGBoost). Educational and Psychological Measurement, 79(5), 931–961. <a href="https://doi.org/10.1177/0013164419839439" class="uri">https://doi.org/10.1177/0013164419839439</a> <br> <a href="https://www.researchgate.net/publication/332158210"><strong>Download/Request</strong></a></p></li>
-<li><p>Kohli, N., Peralta, Y., Zopluoglu, C., &amp; Davison, M. L. (2018). A note on estimating single-class piecewise mixed-effects models with unknown change points. International Journal of Behavioral Development, 42(5), 518–524. <a href="https://doi.org/10.1177/0165025418759237" class="uri">https://doi.org/10.1177/0165025418759237</a> <br> <a href="https://www.researchgate.net/publication/322554638"><strong>Download/Request</strong></a></p></li>
-<li><p>Sideridis, G.D., &amp; Zopluoglu, C. (2018). Validation of response similarity analysis for the detection of academic cheating: An experimental study. Journal of Applied Measurement, 19(1), 59-75. <br> <a href="https://www.researchgate.net/publication/321342650"><strong>Download/Request</strong></a></p></li>
-<li><p>Sari, H.I., Huggins-Manley, A.C., &amp; Zopluoglu, C. (2017). Comparing item selection methods in multidimensional computerized adaptive testing under different types of multidimensional structures. International Journal of Recent Scientific Research, 8 (8), 19269-19276. <br> <a href="http://recentscientific.com/sites/default/files/8247-A-2017.pdf"><strong>Download/Request</strong></a></p></li>
-<li><p>de l’Etoile,, Behura, S., &amp; Zopluoglu, C. (2017). Acoustic parameters of infant-directed singing in mothers of infants with Down syndrome. Infant Behavior and Development, 49, 151-160. <a href="https://doi.org/10.1016/j.infbeh.2017.09.001" class="uri">https://doi.org/10.1016/j.infbeh.2017.09.001</a> <br> <a href="https://www.researchgate.net/publication/334960784"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C., &amp; Davenport, E.C. (2017). A note on using eigenvalues in dimensionality assessment. Practical Assessment, Research &amp; Evaluation, 22 (7), 1-10. <br> <a href="https://scholarworks.umass.edu/cgi/viewcontent.cgi?article=1358&amp;context=pare"><strong>Download/Request</strong></a></p></li>
-<li><p>Brogaard, B,Marlow, K., Overgaard, M., Schwartz, B., Zopluoglu, C., Tomson, S., Neufeld, J., Sinke, C., Owen, C., Eagleman, D. (2017). Deaf hearing: Implicit discrimination of auditory content in a patient with mixed hearing loss. Philosophical Psychology, 30(1-2), 21-43. <a href="https://doi.org/10.1080/09515089.2016.1268680" class="uri">https://doi.org/10.1080/09515089.2016.1268680</a> <br> <a href="https://www.researchgate.net/publication/313483624"><strong>Download/Request</strong></a></p></li>
-<li><p>Myers, N. D., Ahn, S., Lu, M., Celimli, S., &amp; Zopluoglu, C. (2017). Reordering and reflecting factors for simulation studies with exploratory factor analysis. Structural Equation Modeling: A Multidisciplinary Journal, 24(1), 112-128. <a href="https://doi.org/10.1080/10705511.2016.1230721" class="uri">https://doi.org/10.1080/10705511.2016.1230721</a> <br> <a href="https://www.researchgate.net/publication/308663171"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C. (2016). Classification performance of answer-copying indices under different types of IRT models. Applied Psychological Measurement, 40(8), 592-607. <a href="https://doi.org/10.1177%2F0146621616664724" class="uri">https://doi.org/10.1177%2F0146621616664724</a> <br> <a href="https://www.researchgate.net/publication/307907874"><strong>Download/Request</strong></a></p></li>
-<li><p>Kohli, N., Harring J.R., &amp; Zopluoglu, C. (2016). A finite mixture of nonlinear random coefficient models for continuous repeated measures data. Psychometrika, 81(3), 851-880. <a href="https://doi.org/10.1007/s11336-015-9462-0" class="uri">https://doi.org/10.1007/s11336-015-9462-0</a> <br> <a href="https://www.researchgate.net/publication/270958026"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C. (2015). Evaluating the sampling performance of exploratory and cross-validated DETECT procedure with imperfect models. Multivariate Behavioral Research, 50(6), 632-644. <a href="https://doi.org/10.1080/00273171.2015.1070708" class="uri">https://doi.org/10.1080/00273171.2015.1070708</a> <br> <a href="https://www.researchgate.net/publication/281889397"><strong>Download/Request</strong></a></p></li>
-<li><p>Kohli, N., Hughes, J., Wang, C., Zopluoglu, C., &amp; Davison, M. (2015). Fitting a linear-linear piecewise growth mixture model with unknown knots: A comparison of two common approaches to inference. Psychological Methods, 20(2), 259-275. <a href="http://dx.doi.org/10.1037/met0000034" class="uri">http://dx.doi.org/10.1037/met0000034</a> <br> <a href="https://www.researchgate.net/publication/270286540"><strong>Download/Request</strong></a></p></li>
-<li><p>Kohli, N., Sullivan, A., Sadeh, S., &amp; Zopluoglu, C. (2015). Longitudinal mathematics development of students with learning disabilities and students without disabilities: A comparison of linear, quadratic, and piecewise linear mixed effects models. Journal of School Psychology, 53(2),105-120. <a href="https://doi.org/10.1016/j.jsp.2014.12.002" class="uri">https://doi.org/10.1016/j.jsp.2014.12.002</a> <br> <a href="https://www.researchgate.net/publication/268149157"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C., Harring J.R., &amp; Kohli, N. (2014). FitPMM: An R routine to fit finite miture of piecewise mixed-effect models with unknown random knots. Applied Psychological Measurement, 38(7), 583-584. [Computer software]. <a href="https://doi.org/10.1177/0146621614540482" class="uri">https://doi.org/10.1177/0146621614540482</a> <br> <a href="https://www.researchgate.net/publication/262561927"><strong>Download/Request</strong></a></p></li>
-<li><p>Myers, N.D., Jin, Y., Ahn, S., Celimli, S., &amp; Zopluoglu, C. (2015). Rotation to a partially specified target matrix in exploratory factor analysis in practice. Behavior Research Methods, 47(2), 494-505. <a href="https://doi.org/10.3758/s13428-014-0486-7" class="uri">https://doi.org/10.3758/s13428-014-0486-7</a> <br> <a href="https://www.researchgate.net/publication/262932403"><strong>Download/Request</strong></a> <br></p></li>
-<li><p>Van Norman E., Christ, T. J., Zopluoglu, C. (2013). The effects of baseline estimation on the reliability, validity, and precision of CBM-R growth estimates. School Psychology Quarterly, 28(3), 239-255. <a href="http://dx.doi.org/10.1037/spq0000023" class="uri">http://dx.doi.org/10.1037/spq0000023</a> <br> <a href="https://www.researchgate.net/publication/255787677"><strong>Download/Request</strong></a></p></li>
-<li><p>Christ, T. J., Monaghen, B., Zopluoglu, C. &amp; Van Norman, E. R. (2013). Curriculum-Based measurement of oral reading: Evaluation of growth estimates derived with pre-post assessment methods. Assessment for Effective Intervention, 38(3), 139-153. <a href="https://doi.org/10.1016/j.jsp.2012.11.001" class="uri">https://doi.org/10.1016/j.jsp.2012.11.001</a> <br> <a href="https://www.researchgate.net/publication/235247019"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C. (2013). A comparison of two estimation algorithms for Samejima’s continuous IRT model. Behavior Research Methods, 45(1), 54-64. <a href="https://doi.org/10.3758/s13428-012-0229-6" class="uri">https://doi.org/10.3758/s13428-012-0229-6</a> <br> <a href="https://www.researchgate.net/publication/228066472"><strong>Download/Request</strong></a></p></li>
-<li><p>Christ, T.J., Zopluoglu, C., Monaghen, B., &amp; Van Norman, E.R. (2013). Curriculum- Based measurement of oral reading: Multi-study evaluation of schedule, duration and dataset quality on progress monitoring outcomes. Journal of School Psychology, 51(1), 19-57. <a href="https://doi.org/10.1016/j.jsp.2012.11.001" class="uri">https://doi.org/10.1016/j.jsp.2012.11.001</a> <br> <a href="https://www.researchgate.net/publication/235395434"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C. (2013). CopyDetect: An R package to compute statistical indices for detecting answer copying on multiple-choice tests. Applied Psychological Measurement, 37(1), 75-77. [Computer software]. <a href="https://doi.org/10.1177/0146621612463119" class="uri">https://doi.org/10.1177/0146621612463119</a> <br> <a href="https://www.researchgate.net/publication/235247020"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C. &amp; Davenport, E.C. (2012). The empirical power and type-I error rates of the GBT and Omega indices in detecting answer copying on multiple-choice tests. Educational and Psychological Measurement, 72(6), 975-1000. <a href="https://doi.org/10.1177/0013164412442941" class="uri">https://doi.org/10.1177/0013164412442941</a> <br> <a href="https://www.researchgate.net/publication/235247021"><strong>Download/Request</strong></a></p></li>
-<li><p>Christ, T. J., Zopluoglu, C., Long, D. J., &amp; Monaghen, B.D. (2012). Curriculum-Based measurement of oral reading (CBM-R): Quality of progress monitoring outcomes. Exceptional Children, 78(3), 356-373. <a href="https://doi.org/10.1177/001440291207800306" class="uri">https://doi.org/10.1177/001440291207800306</a> <br> <a href="https://www.researchgate.net/publication/235246998"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C. (2012). EstCRM: An R package for Samejima’s continuous IRT model. Applied Psychological Measurement, 36(2), 149-150. [Computer software]. <a href="https://doi.org/10.1177/0146621612436599" class="uri">https://doi.org/10.1177/0146621612436599</a> <br> <a href="https://www.researchgate.net/publication/235247025"><strong>Download/Request</strong></a></p></li>
-<li><p>Zopluoglu, C. (2012). A cross-national comparison of intra-class correlation coefficient in educational achievement outcomes. Journal of Measurement and Evaluation in Education and Psychology, 3(1), 242-278. <br> <a href="https://www.researchgate.net/publication/262297789"><strong>Download/Request</strong></a></p></li>
+<li><p>Kasli, M., Zopluoglu, C., &amp; Toton, S. (in press). A
+Deterministic Gated Lognormal Response Time Model to Identify Examinees
+with Item Preknowledge. Journal of Educational Measurement. <a
+href="https://doi.org/10.1111/jedm.12340"
+class="uri">https://doi.org/10.1111/jedm.12340</a> <br> <a
+href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
+<li><p>Scarpa, M.P., Zopluoglu, C., &amp; Prilleltensky, I (2022).
+Mattering in the community. Domain and demographic differences in a US
+sample. Journal of Community Psychology, 50(3), 1481-1502. <a
+href="https://doi.org/10.1002/jcop.22728"
+class="uri">https://doi.org/10.1002/jcop.22728</a> <br> <a
+href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
+<li><p>Scarpa, M.P., Zopluoglu, C., &amp; Prilleltensky, I (2022).
+Assessing multidimensional mattering: Development and exploratory
+validation of the Mattering in Domains of Life Scale (MIDLS). Journal of
+Community Psychology, 50(3),1430-1453. <a
+href="https://doi.org/10.1002/jcop.22725"
+class="uri">https://doi.org/10.1002/jcop.22725</a> <br> <a
+href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C., Kasli, M., &amp; Toton, S. (2021). The Effect of
+Item Preknowledge on Response Time: Analysis of Two Datasets Using the
+Multiple-Group Lognormal Response Time Model with a Gating Mechanism.
+Educational Measurement: Issues and Practices, 40(3), 42-51. <a
+href="https://doi.org/10.1111/emip.12428"
+class="uri">https://doi.org/10.1111/emip.12428</a> <br> <a
+href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
+<li><p>Patel, Z.S., Jensen-Doss, A. &amp; Zopluoglu, C (2021).
+Illustrating the Applicability of IRT to Implementation Science:
+Examining an Instrument of Therapist Attitudes. Administration and
+Policy in Mental Health Services Research, 48, 921-935. <a
+href="https://doi.org/10.1007/s10488-021-01139-1"
+class="uri">https://doi.org/10.1007/s10488-021-01139-1</a> <br> <a
+href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
+<li><p>Lee, J., Zopluoglu, C., Andersen, L., Stanton, A., Magidson, J.,
+Kagee, A., Joska, J.A., O’Cleirigh, C., &amp; Safren, S.A. (2021).
+Improving the Measurement of Food Insecurity among People with HIV in
+South Africa: A Psychometric Examination. Public Health Nutrition,
+24(12),3805-3817. <a href="https://doi:10.1017/S1368980021001312"
+class="uri">https://doi:10.1017/S1368980021001312</a> <br> <a
+href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
+<li><p>Park, S.E., Ahn, S., &amp; Zopluoglu, C. (2021). Differential
+item functioning effect size from the multigroup confirmatory factor
+analysis for a meta-analysis: A simulation study. Educational and
+Psychological Measurement, 81(1), 182-199. <a
+href="https://doi.org/10.1177/0013164420925885"
+class="uri">https://doi.org/10.1177/0013164420925885</a> <br> <a
+href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
+<li><p>de l’Etoile, S. K., Bennett, C., &amp; Zopluoglu, C. (2020).
+Infant movement response to auditory rhythm. Perceptual and Motor
+Skills, 127(4), 651-670. <a
+href="https://doi.org/10.1177/0031512520922642"
+class="uri">https://doi.org/10.1177/0031512520922642</a> <br> <a
+href="mailto:cengiz@uoregon.edu"><strong>Download/Request</strong></a></p></li>
+<li><p>Prilleltensky, I., Dietz, S., Zopluoglu, C., Clarke, A., Lipsky,
+M., &amp; Hartnett, C. (2020). Assessing a culture of mattering in a
+higher education context. Journal for the Study of Postsecondary and
+Tertiary Education, 5, 58-104. <a href="https://doi.org/10.28945/4539"
+class="uri">https://doi.org/10.28945/4539</a> <br> <a
+href="http://www.jspte.org/Volume5/JSPTEv5p085-104Prilleltensky6169.pdf"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C. (2020). A Finite Mixture Item Response Theory Model
+for Continuous Measurement Outcomes. Educational and Psychological
+Measurement, 80(2), 346–364. <a
+href="https://doi.org/10.1177/0013164419856663"
+class="uri">https://doi.org/10.1177/0013164419856663</a> <a
+href="https://doi.org/10.1177/0013164419856663"
+class="uri">https://doi.org/10.1177/0013164419856663</a> <br> <a
+href="https://www.researchgate.net/publication/317095748"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C. (2019). Computation of the Response Similarity
+Index M4 in R under the Dichotomous and Nominal Item Response Models.
+International Journal of Assessment Tools in Education , 6 (5) , 1-19 .
+DOI: 10.21449/ijate.527299 <br> <a
+href="https://dergipark.org.tr/en/pub/ijate/issue/43543/527299"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C. (2019). Detecting Examinees With Item Preknowledge
+in Large-Scale Testing Using Extreme Gradient Boosting (XGBoost).
+Educational and Psychological Measurement, 79(5), 931–961. <a
+href="https://doi.org/10.1177/0013164419839439"
+class="uri">https://doi.org/10.1177/0013164419839439</a> <br> <a
+href="https://www.researchgate.net/publication/332158210"><strong>Download/Request</strong></a></p></li>
+<li><p>Kohli, N., Peralta, Y., Zopluoglu, C., &amp; Davison, M. L.
+(2018). A note on estimating single-class piecewise mixed-effects models
+with unknown change points. International Journal of Behavioral
+Development, 42(5), 518–524. <a
+href="https://doi.org/10.1177/0165025418759237"
+class="uri">https://doi.org/10.1177/0165025418759237</a> <br> <a
+href="https://www.researchgate.net/publication/322554638"><strong>Download/Request</strong></a></p></li>
+<li><p>Sideridis, G.D., &amp; Zopluoglu, C. (2018). Validation of
+response similarity analysis for the detection of academic cheating: An
+experimental study. Journal of Applied Measurement, 19(1), 59-75. <br>
+<a
+href="https://www.researchgate.net/publication/321342650"><strong>Download/Request</strong></a></p></li>
+<li><p>Sari, H.I., Huggins-Manley, A.C., &amp; Zopluoglu, C. (2017).
+Comparing item selection methods in multidimensional computerized
+adaptive testing under different types of multidimensional structures.
+International Journal of Recent Scientific Research, 8 (8), 19269-19276.
+<br> <a
+href="http://recentscientific.com/sites/default/files/8247-A-2017.pdf"><strong>Download/Request</strong></a></p></li>
+<li><p>de l’Etoile,, Behura, S., &amp; Zopluoglu, C. (2017). Acoustic
+parameters of infant-directed singing in mothers of infants with Down
+syndrome. Infant Behavior and Development, 49, 151-160. <a
+href="https://doi.org/10.1016/j.infbeh.2017.09.001"
+class="uri">https://doi.org/10.1016/j.infbeh.2017.09.001</a> <br> <a
+href="https://www.researchgate.net/publication/334960784"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C., &amp; Davenport, E.C. (2017). A note on using
+eigenvalues in dimensionality assessment. Practical Assessment, Research
+&amp; Evaluation, 22 (7), 1-10. <br> <a
+href="https://scholarworks.umass.edu/cgi/viewcontent.cgi?article=1358&amp;context=pare"><strong>Download/Request</strong></a></p></li>
+<li><p>Brogaard, B,Marlow, K., Overgaard, M., Schwartz, B., Zopluoglu,
+C., Tomson, S., Neufeld, J., Sinke, C., Owen, C., Eagleman, D. (2017).
+Deaf hearing: Implicit discrimination of auditory content in a patient
+with mixed hearing loss. Philosophical Psychology, 30(1-2), 21-43. <a
+href="https://doi.org/10.1080/09515089.2016.1268680"
+class="uri">https://doi.org/10.1080/09515089.2016.1268680</a> <br> <a
+href="https://www.researchgate.net/publication/313483624"><strong>Download/Request</strong></a></p></li>
+<li><p>Myers, N. D., Ahn, S., Lu, M., Celimli, S., &amp; Zopluoglu, C.
+(2017). Reordering and reflecting factors for simulation studies with
+exploratory factor analysis. Structural Equation Modeling: A
+Multidisciplinary Journal, 24(1), 112-128. <a
+href="https://doi.org/10.1080/10705511.2016.1230721"
+class="uri">https://doi.org/10.1080/10705511.2016.1230721</a> <br> <a
+href="https://www.researchgate.net/publication/308663171"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C. (2016). Classification performance of
+answer-copying indices under different types of IRT models. Applied
+Psychological Measurement, 40(8), 592-607. <a
+href="https://doi.org/10.1177%2F0146621616664724"
+class="uri">https://doi.org/10.1177%2F0146621616664724</a> <br> <a
+href="https://www.researchgate.net/publication/307907874"><strong>Download/Request</strong></a></p></li>
+<li><p>Kohli, N., Harring J.R., &amp; Zopluoglu, C. (2016). A finite
+mixture of nonlinear random coefficient models for continuous repeated
+measures data. Psychometrika, 81(3), 851-880. <a
+href="https://doi.org/10.1007/s11336-015-9462-0"
+class="uri">https://doi.org/10.1007/s11336-015-9462-0</a> <br> <a
+href="https://www.researchgate.net/publication/270958026"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C. (2015). Evaluating the sampling performance of
+exploratory and cross-validated DETECT procedure with imperfect models.
+Multivariate Behavioral Research, 50(6), 632-644. <a
+href="https://doi.org/10.1080/00273171.2015.1070708"
+class="uri">https://doi.org/10.1080/00273171.2015.1070708</a> <br> <a
+href="https://www.researchgate.net/publication/281889397"><strong>Download/Request</strong></a></p></li>
+<li><p>Kohli, N., Hughes, J., Wang, C., Zopluoglu, C., &amp; Davison, M.
+(2015). Fitting a linear-linear piecewise growth mixture model with
+unknown knots: A comparison of two common approaches to inference.
+Psychological Methods, 20(2), 259-275. <a
+href="http://dx.doi.org/10.1037/met0000034"
+class="uri">http://dx.doi.org/10.1037/met0000034</a> <br> <a
+href="https://www.researchgate.net/publication/270286540"><strong>Download/Request</strong></a></p></li>
+<li><p>Kohli, N., Sullivan, A., Sadeh, S., &amp; Zopluoglu, C. (2015).
+Longitudinal mathematics development of students with learning
+disabilities and students without disabilities: A comparison of linear,
+quadratic, and piecewise linear mixed effects models. Journal of School
+Psychology, 53(2),105-120. <a
+href="https://doi.org/10.1016/j.jsp.2014.12.002"
+class="uri">https://doi.org/10.1016/j.jsp.2014.12.002</a> <br> <a
+href="https://www.researchgate.net/publication/268149157"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C., Harring J.R., &amp; Kohli, N. (2014). FitPMM: An R
+routine to fit finite miture of piecewise mixed-effect models with
+unknown random knots. Applied Psychological Measurement, 38(7), 583-584.
+[Computer software]. <a href="https://doi.org/10.1177/0146621614540482"
+class="uri">https://doi.org/10.1177/0146621614540482</a> <br> <a
+href="https://www.researchgate.net/publication/262561927"><strong>Download/Request</strong></a></p></li>
+<li><p>Myers, N.D., Jin, Y., Ahn, S., Celimli, S., &amp; Zopluoglu, C.
+(2015). Rotation to a partially specified target matrix in exploratory
+factor analysis in practice. Behavior Research Methods, 47(2), 494-505.
+<a href="https://doi.org/10.3758/s13428-014-0486-7"
+class="uri">https://doi.org/10.3758/s13428-014-0486-7</a> <br> <a
+href="https://www.researchgate.net/publication/262932403"><strong>Download/Request</strong></a>
+<br></p></li>
+<li><p>Van Norman E., Christ, T. J., Zopluoglu, C. (2013). The effects
+of baseline estimation on the reliability, validity, and precision of
+CBM-R growth estimates. School Psychology Quarterly, 28(3), 239-255. <a
+href="http://dx.doi.org/10.1037/spq0000023"
+class="uri">http://dx.doi.org/10.1037/spq0000023</a> <br> <a
+href="https://www.researchgate.net/publication/255787677"><strong>Download/Request</strong></a></p></li>
+<li><p>Christ, T. J., Monaghen, B., Zopluoglu, C. &amp; Van Norman, E.
+R. (2013). Curriculum-Based measurement of oral reading: Evaluation of
+growth estimates derived with pre-post assessment methods. Assessment
+for Effective Intervention, 38(3), 139-153. <a
+href="https://doi.org/10.1016/j.jsp.2012.11.001"
+class="uri">https://doi.org/10.1016/j.jsp.2012.11.001</a> <br> <a
+href="https://www.researchgate.net/publication/235247019"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C. (2013). A comparison of two estimation algorithms
+for Samejima’s continuous IRT model. Behavior Research Methods, 45(1),
+54-64. <a href="https://doi.org/10.3758/s13428-012-0229-6"
+class="uri">https://doi.org/10.3758/s13428-012-0229-6</a> <br> <a
+href="https://www.researchgate.net/publication/228066472"><strong>Download/Request</strong></a></p></li>
+<li><p>Christ, T.J., Zopluoglu, C., Monaghen, B., &amp; Van Norman, E.R.
+(2013). Curriculum- Based measurement of oral reading: Multi-study
+evaluation of schedule, duration and dataset quality on progress
+monitoring outcomes. Journal of School Psychology, 51(1), 19-57. <a
+href="https://doi.org/10.1016/j.jsp.2012.11.001"
+class="uri">https://doi.org/10.1016/j.jsp.2012.11.001</a> <br> <a
+href="https://www.researchgate.net/publication/235395434"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C. (2013). CopyDetect: An R package to compute
+statistical indices for detecting answer copying on multiple-choice
+tests. Applied Psychological Measurement, 37(1), 75-77. [Computer
+software]. <a href="https://doi.org/10.1177/0146621612463119"
+class="uri">https://doi.org/10.1177/0146621612463119</a> <br> <a
+href="https://www.researchgate.net/publication/235247020"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C. &amp; Davenport, E.C. (2012). The empirical power
+and type-I error rates of the GBT and Omega indices in detecting answer
+copying on multiple-choice tests. Educational and Psychological
+Measurement, 72(6), 975-1000. <a
+href="https://doi.org/10.1177/0013164412442941"
+class="uri">https://doi.org/10.1177/0013164412442941</a> <br> <a
+href="https://www.researchgate.net/publication/235247021"><strong>Download/Request</strong></a></p></li>
+<li><p>Christ, T. J., Zopluoglu, C., Long, D. J., &amp; Monaghen, B.D.
+(2012). Curriculum-Based measurement of oral reading (CBM-R): Quality of
+progress monitoring outcomes. Exceptional Children, 78(3), 356-373. <a
+href="https://doi.org/10.1177/001440291207800306"
+class="uri">https://doi.org/10.1177/001440291207800306</a> <br> <a
+href="https://www.researchgate.net/publication/235246998"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C. (2012). EstCRM: An R package for Samejima’s
+continuous IRT model. Applied Psychological Measurement, 36(2), 149-150.
+[Computer software]. <a href="https://doi.org/10.1177/0146621612436599"
+class="uri">https://doi.org/10.1177/0146621612436599</a> <br> <a
+href="https://www.researchgate.net/publication/235247025"><strong>Download/Request</strong></a></p></li>
+<li><p>Zopluoglu, C. (2012). A cross-national comparison of intra-class
+correlation coefficient in educational achievement outcomes. Journal of
+Measurement and Evaluation in Education and Psychology, 3(1), 242-278.
+<br> <a
+href="https://www.researchgate.net/publication/262297789"><strong>Download/Request</strong></a></p></li>
 </ul>
 <h1 id="bookbook-chapters">Book/Book Chapters</h1>
 <ul>
-<li>Zopluoglu, C. (2017). Similarity, answer copying, and aberrance: Understanding the status quo. In G.J. Cizek &amp; J.A. Wollack, Handbook of Detecting Cheating on Tests. Taylor &amp; Francis. <br> <a href="https://www.researchgate.net/publication/309351878"><strong>Download/Request</strong></a></li>
+<li>Zopluoglu, C. (2017). Similarity, answer copying, and aberrance:
+Understanding the status quo. In G.J. Cizek &amp; J.A. Wollack, Handbook
+of Detecting Cheating on Tests. Taylor &amp; Francis. <br> <a
+href="https://www.researchgate.net/publication/309351878"><strong>Download/Request</strong></a></li>
 </ul>
 <h2 id="dead-and-buried">Dead and Buried</h2>
 <ul>
-<li>Zopluoglu, C. (buried). A Note on MLE estimation of person parameters for mixture IRT models. <a href="https://www.researchgate.net/publication/317095944"><strong>Download/Request</strong></a></li>
+<li>Zopluoglu, C. (buried). A Note on MLE estimation of person
+parameters for mixture IRT models. <a
+href="https://www.researchgate.net/publication/317095944"><strong>Download/Request</strong></a></li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

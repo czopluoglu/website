@@ -50,16 +50,17 @@ pre.numberSource code > span > a:first-child::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {   }
+  { color: #00769e; background-color: #f1f3f5; }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
+code span { color: #00769e; } /* Normal */
 code span.al { color: #ad0000; } /* Alert */
 code span.an { color: #5e5e5e; } /* Annotation */
-code span.at { } /* Attribute */
+code span.at { color: #657422; } /* Attribute */
 code span.bn { color: #ad0000; } /* BaseN */
 code span.bu { } /* BuiltIn */
-code span.cf { color: #007ba5; } /* ControlFlow */
+code span.cf { color: #00769e; } /* ControlFlow */
 code span.ch { color: #20794d; } /* Char */
 code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #5e5e5e; } /* Comment */
@@ -73,9 +74,9 @@ code span.fl { color: #ad0000; } /* Float */
 code span.fu { color: #4758ab; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #5e5e5e; } /* Information */
-code span.kw { color: #007ba5; } /* Keyword */
+code span.kw { color: #00769e; } /* Keyword */
 code span.op { color: #5e5e5e; } /* Operator */
-code span.ot { color: #007ba5; } /* Other */
+code span.ot { color: #00769e; } /* Other */
 code span.pp { color: #ad0000; } /* Preprocessor */
 code span.sc { color: #5e5e5e; } /* SpecialChar */
 code span.ss { color: #20794d; } /* SpecialString */
@@ -1031,10 +1032,6 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     margin-top: 1.5em;
   }
 
-  .figure img {
-    width: 100%;
-  }
-
   .figure .caption {
     color: rgba(0, 0, 0, 0.6);
     font-size: 12px;
@@ -1864,6 +1861,12 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
+        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
+          var fn = $(this).children()[0]
+          $(this).html(fn.shadowRoot.querySelector("sup"))
+          $(this).id = fn.id
+          fn.remove()
+        }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
           return "<p>" + $('#ref-' + ref).html() + "</p>";
@@ -1878,6 +1881,31 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
           placement: 'bottom-start'
         });
       });
+
+      // fix footnotes in tables (#411)
+      // replacing broken distill.pub feature
+      $('table d-footnote').each(function() {
+        // we replace internal showAtNode methode which is triggered when hovering a footnote
+        this.hoverBox.showAtNode = function(node) {
+          // ported from https://github.com/distillpub/template/pull/105/files
+          calcOffset = function(elem) {
+              let x = elem.offsetLeft;
+              let y = elem.offsetTop;
+              // Traverse upwards until an `absolute` element is found or `elem`
+              // becomes null.
+              while (elem = elem.offsetParent && elem.style.position != 'absolute') {
+                  x += elem.offsetLeft;
+                  y += elem.offsetTop;
+              }
+
+              return { left: x, top: y };
+          }
+          // https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetTop
+          const bbox = node.getBoundingClientRect();
+          const offset = calcOffset(node);
+          this.show([offset.left + bbox.width, offset.top + bbox.height]);
+        }
+      })
 
       // clear polling timer
       clearInterval(tid);
@@ -1977,6 +2005,8 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // mark non-body figures created by knitr chunks as 100% width
     $('.layout-chunk').each(function(i, val) {
       var figures = $(this).find('img, .html-widget');
+      // ignore leaflet img layers (#106)
+      figures = figures.filter(':not(img[class*="leaflet"])')
       if ($(this).attr('data-layout') !== "l-body") {
         figures.css('width', '100%');
       } else {
@@ -1999,7 +2029,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
     // get rid of index.html references in header
     if (window.location.protocol !== "file:") {
       $('.distill-site-header a[href]').each(function(i,val) {
-        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+        $(this).attr('href', $(this).attr('href').replace(/^index[.]html/, "./"));
       });
     }
 
@@ -2038,7 +2068,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2108,6 +2138,16 @@ Shiny Apps
 <a href="https://cengiz-shiny.app/shiny/irtpropensity">Propensity Demo for IRT Models</a>
 </div>
 </div>
+<div class="nav-dropdown">
+<button class="nav-dropbtn">
+Courses
+ 
+<span class="down-arrow">&#x25BE;</span>
+</button>
+<div class="nav-dropdown-content">
+<a href="https://edld654-fall22.netlify.app/">Applied Machine Learning</a>
+</div>
+</div>
 <a href="data/CV_Cengiz Zopluoglu.pdf">CV</a>
 <a href="links.html">Links</a>
 <a href="https://github.com/czopluoglu">
@@ -2151,19 +2191,42 @@ Shiny Apps
 <div class="column" style="background-color:#ffffff;text-align: justify;">
 
 <p>
-<p>I am an Associate Professor in the <a href="https://education.uoregon.edu/qrme">Quantitative Research Methods program</a> in the Department of Educational Methodology, Policy, and Leadership (EMPL) at the <a href="https://www.uoregon.edu/">University of Oregon</a>. Before joining the EMPL faculty in 2020, I served seven years in the Research, Measurement, and Evaluation Program in the <a href="https://sites.education.miami.edu/eps/">Department of Educational and Psychological Studies (EPS)</a> at the <a href="https://welcome.miami.edu/">University of Miami</a>, specializing in educational measurement and statistics.</p>
-I received my Ph.D. in <a href="https://www.cehd.umn.edu/edpsych/programs/qme/">Quantitative Methods in Education program</a> from the Department of Educational Psychology at the University of Minnesota. During my graduate education, I held research positions with the Quantitative Methods in Education program and Office of Research and Consultation Services at the University of Minnesota. I also completed my internships at the Minneapolis Public Schools in Minnesota and ACT, Inc. in Iowa. While anything related to computation and statistics attracts my attention, my primary research interests in the past decade were in three areas: item response theory, statistical detection of test fraud, and nonlinear mixed-effects models.
+<p>I am an Associate Professor in the <a
+href="https://education.uoregon.edu/sped">Special Education program</a>
+in the Department of Special Education and Clinical Sciences(SPECS) at
+the <a href="https://www.uoregon.edu/">University of Oregon</a>. Before
+joining the University of Oregon faculty in 2020, I served seven years
+in the Research, Measurement, and Evaluation Program in the <a
+href="https://sites.education.miami.edu/eps/">Department of Educational
+and Psychological Studies (EPS)</a> at the <a
+href="https://welcome.miami.edu/">University of Miami</a>, specializing
+in educational measurement and statistics.</p>
+I received my Ph.D. in <a
+href="https://www.cehd.umn.edu/edpsych/programs/qme/">Quantitative
+Methods in Education program</a> from the Department of Educational
+Psychology at the University of Minnesota. During my graduate education,
+I held research positions with the Quantitative Methods in Education
+program and Office of Research and Consultation Services at the
+University of Minnesota. I also completed my internships at the
+Minneapolis Public Schools in Minnesota and ACT, Inc. in Iowa. While
+anything related to computation and statistics attracts my attention, my
+primary research interests in the past decade were in three areas: item
+response theory, statistical detection of test fraud, and nonlinear
+mixed-effects models.
 </p>
 <p>
-<p>I post blogs to develop and maintain a habit of writing and coding. I intend to blog about</p>
+<p>I post blogs to develop and maintain a habit of writing and coding. I
+intend to blog about</p>
 <ul>
 <li>reproducible R code for my published papers,</li>
 <li>documentation about the R packages I have written,</li>
 <li>things I learn as I read papers in my research areas,</li>
-<li>some new ideas before I invest my time in writing a formal academic paper,</li>
+<li>some new ideas before I invest my time in writing a formal academic
+paper,</li>
 <li>tutorial type applications (in R) from courses I teach,</li>
 <li>any fancy implementation of R programming such as web scraping,</li>
-<li>and anything else that excites me about using R and my research.</li>
+<li>and anything else that excites me about using R and my
+research.</li>
 </ul>
 </p>
 <!-- Add icon library -->
@@ -2171,18 +2234,23 @@ I received my Ph.D. in <a href="https://www.cehd.umn.edu/edpsych/programs/qme/"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></p>
 <!-- Add font awesome icons -->
 <p style="text-align: center;">
-<a href="https://twitter.com/cengiz_zo" target="_blank" class="fa fa-twitter" style="font-size:60px;"></a> <a href="https://github.com/czopluoglu" target="_blank" class="fa fa-github"  style="font-size:60px;"></a>
+<a href="https://twitter.com/cengiz_zo" target="_blank" class="fa fa-twitter" style="font-size:60px;"></a>
+<a href="https://github.com/czopluoglu" target="_blank" class="fa fa-github"  style="font-size:60px;"></a>
 </p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!-- Add icon library -->
 <p><link rel="stylesheet"
 href="https://cdn.rawgit.com/jpswalsh/academicons/master/css/academicons.min.css"></p>
 <!-- Add font awesome icons -->
 <p style="text-align: center;">
-<a href="https://scholar.google.com/citations?user=zC3ieCYAAAAJ" target="_blank" class="ai ai-google-scholar-square" style="font-size:60px;"></a> <a href="https://www.researchgate.net/profile/Cengiz_Zopluoglu" target="_blank" class="ai ai-researchgate"  style="font-size:60px;"></a>
+<a href="https://scholar.google.com/citations?user=zC3ieCYAAAAJ" target="_blank" class="ai ai-google-scholar-square" style="font-size:60px;"></a>
+<a href="https://www.researchgate.net/profile/Cengiz_Zopluoglu" target="_blank" class="ai ai-researchgate"  style="font-size:60px;"></a>
 </p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>
