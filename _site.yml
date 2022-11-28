@@ -53,14 +53,14 @@ navbar:
     - text: "CV"
       href: data/CV_Cengiz Zopluoglu.pdf
           
-    - text: "Links"
-      href: links.html
+#    - text: "Links"
+#      href: links.html
       
     - icon: fa fa-github
       href: https://github.com/czopluoglu
       
-    - icon: fa fa-twitter
-      href: https://twitter.com/cengizzopluoglu
+#    - icon: fa fa-twitter
+#      href: https://twitter.com/cengizzopluoglu
       
     - icon: fa fa-google
       href: https://scholar.google.com/citations?user=zC3ieCYAAAAJ

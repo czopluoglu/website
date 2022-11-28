@@ -6,7 +6,7 @@
       "description": "A short description of who I am\n",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\nI am an Associate Professor in the Special Education program\r\nin the Department of Special Education and Clinical Sciences(SPECS) at\r\nthe University of Oregon. Before\r\njoining the University of Oregon faculty in 2020, I served seven years\r\nin the Research, Measurement, and Evaluation Program in the Department of Educational\r\nand Psychological Studies (EPS) at the University of Miami, specializing\r\nin educational measurement and statistics.\r\nI received my Ph.D. in Quantitative\r\nMethods in Education program from the Department of Educational\r\nPsychology at the University of Minnesota. During my graduate education,\r\nI held research positions with the Quantitative Methods in Education\r\nprogram and Office of Research and Consultation Services at the\r\nUniversity of Minnesota. I also completed my internships at the\r\nMinneapolis Public Schools in Minnesota and ACT, Inc. in Iowa. While\r\nanything related to computation and statistics attracts my attention, my\r\nprimary research interests in the past decade were in three areas: item\r\nresponse theory, statistical detection of test fraud, and nonlinear\r\nmixed-effects models.\r\n\r\n\r\nI post blogs to develop and maintain a habit of writing and coding. I\r\nintend to blog about\r\nreproducible R code for my published papers,\r\ndocumentation about the R packages I have written,\r\nthings I learn as I read papers in my research areas,\r\nsome new ideas before I invest my time in writing a formal academic\r\npaper,\r\ntutorial type applications (in R) from courses I teach,\r\nany fancy implementation of R programming such as web scraping,\r\nand anything else that excites me about using R and my\r\nresearch.\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-09-26T17:01:26-07:00"
+      "last_modified": "2022-11-28T10:28:03-08:00"
     },
     {
       "path": "categorical.html",
@@ -14,38 +14,38 @@
       "description": "Course material for an introduction to categorical data analysis class",
       "author": [],
       "contents": "\r\nThis page is under development.\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-03-02T11:50:46-08:00"
+      "last_modified": "2022-11-28T10:28:04-08:00"
     },
     {
       "path": "copydetect.html",
       "title": "CopyDetect",
       "description": "Computing Response Similarity Indices\n",
       "author": [],
-      "contents": "\r\nCopyDetect is an R package to compute a number of of response similarity indices for multiple-choice tests. It is a compilation of functions I wrote when I was writing my master’s thesis in 2009 and doing my internship in ACT in 2012. It contains functions for several IRT and non-IRT based response similarity indices proposed in the literature for multiple-choice examinations such as the \\(\\omega\\) (Wollack, 1997), generalized binomial test (van der Linden & Sotaridona, 2006), K index and its variants (Sotaridona & Meijer,2002), and S1 and S2 indices (Sotaridona & Meijer, 2003), and M4 (Maynes, 2014)\r\nPlease visit this page later as I plan to publish some detailed documentation about the implementation of these indices in the CopyDetect package.\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-03-02T11:50:47-08:00"
+      "contents": "\r\nCopyDetect\r\nis an R package to compute a number of of response similarity indices\r\nfor multiple-choice tests. It is a compilation of functions I wrote when\r\nI was writing my master’s thesis in 2009 and doing my internship in ACT\r\nin 2012. It contains functions for several IRT and non-IRT based\r\nresponse similarity indices proposed in the literature for\r\nmultiple-choice examinations such as the \\(\\omega\\) (Wollack, 1997), generalized binomial\r\ntest (van der Linden & Sotaridona, 2006), K index and\r\nits variants (Sotaridona & Meijer,2002), and S1 and S2\r\nindices (Sotaridona & Meijer, 2003), and M4\r\n(Maynes, 2014)\r\nPlease visit this page later as I plan to publish some detailed\r\ndocumentation about the implementation of these indices in the\r\nCopyDetect package.\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-11-28T10:28:05-08:00"
     },
     {
       "path": "estcrm.html",
       "title": "EstCRM",
       "description": "Calibrating Parameters for the Samejima's Continuous Response Model",
       "author": [],
-      "contents": "\r\nEstCRM is an R package develope to calibrate the item and person parameters from the Samejima’s Continuous Response Model for continous measurement outcomes. It estimates item and person parameters for the Samejima’s Continuous Response Model, computes item fit residual statistics, draws empirical 3D item category response curves, draws theoretical 3D item category response curves, and generates data under the CRM for simulation studies.\r\nPlease visit this page later for more documentation and tutorials about using this package.\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-03-02T11:50:48-08:00"
+      "contents": "\r\nEstCRM\r\nis an R package develope to calibrate the item and person parameters\r\nfrom the Samejima’s\r\nContinuous Response Model for continous measurement outcomes. It\r\nestimates item and person parameters for the Samejima’s Continuous\r\nResponse Model, computes item fit residual statistics, draws empirical\r\n3D item category response curves, draws theoretical 3D item category\r\nresponse curves, and generates data under the CRM for simulation\r\nstudies.\r\nPlease visit this page later for more documentation and tutorials\r\nabout using this package.\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-11-28T10:28:07-08:00"
     },
     {
       "path": "fitpmm.html",
       "title": "fitPMM",
       "description": "An R Routine to Fit Finite Mixture of Piecewise Mixed-Effect Models With Unknown Random Knots",
       "author": [],
-      "contents": "\r\nfitPMM is a routine I wrote when I was working with Dr. Nidhi Kohli and Dr. Jeff Harring for the paper we subsequently published.\r\nPlease visit this page later as I plan to publish more documentation and demo analysis using this package.\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-03-02T11:50:50-08:00"
+      "contents": "\r\nfitPMM\r\nis a routine I wrote when I was working with Dr. Nidhi\r\nKohli and Dr. Jeff\r\nHarring for the\r\npaper we subsequently published.\r\nPlease visit this page later as I plan to publish more documentation\r\nand demo analysis using this package.\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-11-28T10:28:08-08:00"
     },
     {
       "path": "index.html",
       "title": "Cengiz Zopluoglu",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-04-21T16:25:26-07:00"
+      "last_modified": "2022-11-28T10:28:10-08:00"
     },
     {
       "path": "intror.html",
@@ -53,7 +53,7 @@
       "description": "Course material for intro and advanced R programming",
       "author": [],
       "contents": "\r\nThis page is under development.\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-03-02T11:50:52-08:00"
+      "last_modified": "2022-11-28T10:28:11-08:00"
     },
     {
       "path": "irt.html",
@@ -61,23 +61,23 @@
       "description": "Course material for item response theory class",
       "author": [],
       "contents": "\r\nThis page is under development.\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-03-02T11:50:53-08:00"
+      "last_modified": "2022-11-28T10:28:12-08:00"
     },
     {
       "path": "itemanalysis.html",
       "title": "itemanalysis",
       "description": "Classical Test Theory Item Analysis",
       "author": [],
-      "contents": "\r\nitemanalysis is an R package I specifically compiled for an intro measurement class I teach. It is customized based on the content and concepts I cover in that class about Classical Test Theory Item Analysis. It has two simple functions to run classical test theory item analysis for multiple-choice test items and polytomous items (e.g., rating scales). It also provides empirical item trace lines. The statistics reported in this package can be found in any classic measurement textbook,\r\nPlease visit this page later as I plan to publish more documentation and tutorials about using this package.\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-03-02T11:50:55-08:00"
+      "contents": "\r\nitemanalysis\r\nis an R package I specifically compiled for an intro measurement class I\r\nteach. It is customized based on the content and concepts I cover in\r\nthat class about Classical Test Theory Item Analysis. It has two simple\r\nfunctions to run classical test theory item analysis for multiple-choice\r\ntest items and polytomous items (e.g., rating scales). It also provides\r\nempirical item trace lines. The statistics reported in this package can\r\nbe found in any classic measurement textbook,\r\nPlease visit this page later as I plan to publish more documentation\r\nand tutorials about using this package.\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-11-28T10:28:13-08:00"
     },
     {
       "path": "links.html",
       "title": "Links",
       "description": "##",
       "author": [],
-      "contents": "\r\nDatabase\r\nData Tools for College Professors and Students\r\nOpen Psychometrics\r\nPISA\r\nTIMSS and PIRLS\r\nThe Educational Opportunity Project\r\nMiscellaneous Datasets\r\nGoogle Dataset Search\r\nDiscover Mendeley Data\r\nStatistics/Data Science\r\nMachine Learning Crash Course\r\nCourse Handouts for Bayesian Data Analysis\r\nData Science in Education Using R\r\nDoing Bayesian Data Analysis in brms and the tidyverse\r\nQuantitative Developmental Systems Methodology Core\r\nUCLA IDRE Data Analysis Examples\r\nHarvard Data Science Review\r\nR for Data Science\r\nFast.ai\r\nReading in Applied Data Science\r\nMachine Learning Course by Yaser Abu-Mostafa\r\nBayesian model evaluation\r\nData Science in Education Using R\r\nOpen Stats Lab\r\nApplied Machine Learning\r\nMachine Learning from Scratch\r\nIntroduction to Casual Inference\r\nAI Expert Roadmap\r\nR/Shiny\r\nAdvanced R by Hadley Wickham\r\nMastering Shiny\r\nHow to create R Tutorial Interface\r\nSetting up Shiny Server on Cloud\r\nLearning R - Youtube: Compiled by Flavio Azevedo\r\nLearn R for Free: Compiled by Mine Dogucu\r\nR Bloggers\r\nConferences\r\nConference on Test Security\r\nNCME\r\nPeople\r\nDavid Thissen\r\nPaul Meehl\r\nNotes on Meehl\r\nAndrew Gelman\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-03-02T11:50:56-08:00"
+      "contents": "\r\nDatabase\r\nData\r\nTools for College Professors and Students\r\nOpen Psychometrics\r\nPISA\r\nTIMSS and PIRLS\r\nThe Educational Opportunity\r\nProject\r\nMiscellaneous\r\nDatasets\r\nGoogle Dataset\r\nSearch\r\nDiscover Mendeley\r\nData\r\nStatistics/Data Science\r\nMachine\r\nLearning Crash Course\r\nCourse Handouts for\r\nBayesian Data Analysis\r\nData\r\nScience in Education Using R\r\nDoing Bayesian\r\nData Analysis in brms and the tidyverse\r\nQuantitative\r\nDevelopmental Systems Methodology Core\r\nUCLA IDRE Data\r\nAnalysis Examples\r\nHarvard Data Science\r\nReview\r\nR for Data Science\r\nFast.ai\r\nReading\r\nin Applied Data Science\r\nMachine\r\nLearning Course by Yaser Abu-Mostafa\r\nBayesian\r\nmodel evaluation\r\nData Science in\r\nEducation Using R\r\nOpen Stats Lab\r\nApplied\r\nMachine Learning\r\nMachine\r\nLearning from Scratch\r\nIntroduction to\r\nCasual Inference\r\nAI Expert\r\nRoadmap\r\nR/Shiny\r\nAdvanced R by Hadley\r\nWickham\r\nMastering Shiny\r\nHow to create R\r\nTutorial Interface\r\nSetting\r\nup Shiny Server on Cloud\r\nLearning\r\nR - Youtube: Compiled by Flavio Azevedo\r\nLearn R for\r\nFree: Compiled by Mine Dogucu\r\nR Bloggers\r\nConferences\r\nConference on Test\r\nSecurity\r\nNCME\r\nPeople\r\nDavid\r\nThissen\r\nPaul\r\nMeehl\r\nNotes on\r\nMeehl\r\nAndrew\r\nGelman\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-11-28T10:28:15-08:00"
     },
     {
       "path": "measurement.html",
@@ -85,7 +85,7 @@
       "description": "Course material for an intro to measurement course",
       "author": [],
       "contents": "\r\nThis page is under development.\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-03-02T11:50:57-08:00"
+      "last_modified": "2022-11-28T10:28:16-08:00"
     },
     {
       "path": "publications.html",
@@ -93,7 +93,7 @@
       "description": "Publications\n",
       "author": [],
       "contents": "\r\nWorking Papers\r\nWang, J., Combs, T., Zopluoglu, C. (under review) Fitting\r\nHyperbolic Cosine Unfolding Models using the Stan Language.\r\nDietz, S., Prilleltensky, I., McMahon, A., Zopluoglu, C., Lipsky,\r\nM., & Hartnett, C.(under review). Assessing a Culture of Belonging\r\nin a Higher Education Context.\r\nZopluoglu, C., & Kasli, M. (in preparation). Simultaneous\r\nDetection of Compromised Items and Examinees with Item Preknowledge\r\nusing Response Time Information.\r\nZopluoglu, C. (in preparation). Simultaneous Detection of\r\nCompromised Items and Examinees with Item Preknowledge using Response\r\nAccuracy: Improvments on the Deterministic Gated Item Response\r\nModel.\r\nZopluoglu, C., Combs, T. (in preparation). Modeling Response\r\nTimes with Variable Latent Speed as a Piecewise Function.\r\nZopluoglu, C. & colleagues (in preparation). GeoCAT:\r\nDesigning a Computerized Adaptive Test to Measure Geometry Knowledge for\r\nK-3 Grades.\r\nPublished Papers\r\nKasli, M., Zopluoglu, C., & Toton, S. (in press). A\r\nDeterministic Gated Lognormal Response Time Model to Identify Examinees\r\nwith Item Preknowledge. Journal of Educational Measurement. https://doi.org/10.1111/jedm.12340 Download/Request\r\nScarpa, M.P., Zopluoglu, C., & Prilleltensky, I (2022).\r\nMattering in the community. Domain and demographic differences in a US\r\nsample. Journal of Community Psychology, 50(3), 1481-1502. https://doi.org/10.1002/jcop.22728 Download/Request\r\nScarpa, M.P., Zopluoglu, C., & Prilleltensky, I (2022).\r\nAssessing multidimensional mattering: Development and exploratory\r\nvalidation of the Mattering in Domains of Life Scale (MIDLS). Journal of\r\nCommunity Psychology, 50(3),1430-1453. https://doi.org/10.1002/jcop.22725 Download/Request\r\nZopluoglu, C., Kasli, M., & Toton, S. (2021). The Effect of\r\nItem Preknowledge on Response Time: Analysis of Two Datasets Using the\r\nMultiple-Group Lognormal Response Time Model with a Gating Mechanism.\r\nEducational Measurement: Issues and Practices, 40(3), 42-51. https://doi.org/10.1111/emip.12428 Download/Request\r\nPatel, Z.S., Jensen-Doss, A. & Zopluoglu, C (2021).\r\nIllustrating the Applicability of IRT to Implementation Science:\r\nExamining an Instrument of Therapist Attitudes. Administration and\r\nPolicy in Mental Health Services Research, 48, 921-935. https://doi.org/10.1007/s10488-021-01139-1 Download/Request\r\nLee, J., Zopluoglu, C., Andersen, L., Stanton, A., Magidson, J.,\r\nKagee, A., Joska, J.A., O’Cleirigh, C., & Safren, S.A. (2021).\r\nImproving the Measurement of Food Insecurity among People with HIV in\r\nSouth Africa: A Psychometric Examination. Public Health Nutrition,\r\n24(12),3805-3817. https://doi:10.1017/S1368980021001312 Download/Request\r\nPark, S.E., Ahn, S., & Zopluoglu, C. (2021). Differential\r\nitem functioning effect size from the multigroup confirmatory factor\r\nanalysis for a meta-analysis: A simulation study. Educational and\r\nPsychological Measurement, 81(1), 182-199. https://doi.org/10.1177/0013164420925885 Download/Request\r\nde l’Etoile, S. K., Bennett, C., & Zopluoglu, C. (2020).\r\nInfant movement response to auditory rhythm. Perceptual and Motor\r\nSkills, 127(4), 651-670. https://doi.org/10.1177/0031512520922642 Download/Request\r\nPrilleltensky, I., Dietz, S., Zopluoglu, C., Clarke, A., Lipsky,\r\nM., & Hartnett, C. (2020). Assessing a culture of mattering in a\r\nhigher education context. Journal for the Study of Postsecondary and\r\nTertiary Education, 5, 58-104. https://doi.org/10.28945/4539 Download/Request\r\nZopluoglu, C. (2020). A Finite Mixture Item Response Theory Model\r\nfor Continuous Measurement Outcomes. Educational and Psychological\r\nMeasurement, 80(2), 346–364. https://doi.org/10.1177/0013164419856663 https://doi.org/10.1177/0013164419856663 Download/Request\r\nZopluoglu, C. (2019). Computation of the Response Similarity\r\nIndex M4 in R under the Dichotomous and Nominal Item Response Models.\r\nInternational Journal of Assessment Tools in Education , 6 (5) , 1-19 .\r\nDOI: 10.21449/ijate.527299 Download/Request\r\nZopluoglu, C. (2019). Detecting Examinees With Item Preknowledge\r\nin Large-Scale Testing Using Extreme Gradient Boosting (XGBoost).\r\nEducational and Psychological Measurement, 79(5), 931–961. https://doi.org/10.1177/0013164419839439 Download/Request\r\nKohli, N., Peralta, Y., Zopluoglu, C., & Davison, M. L.\r\n(2018). A note on estimating single-class piecewise mixed-effects models\r\nwith unknown change points. International Journal of Behavioral\r\nDevelopment, 42(5), 518–524. https://doi.org/10.1177/0165025418759237 Download/Request\r\nSideridis, G.D., & Zopluoglu, C. (2018). Validation of\r\nresponse similarity analysis for the detection of academic cheating: An\r\nexperimental study. Journal of Applied Measurement, 19(1), 59-75. Download/Request\r\nSari, H.I., Huggins-Manley, A.C., & Zopluoglu, C. (2017).\r\nComparing item selection methods in multidimensional computerized\r\nadaptive testing under different types of multidimensional structures.\r\nInternational Journal of Recent Scientific Research, 8 (8), 19269-19276.\r\nDownload/Request\r\nde l’Etoile,, Behura, S., & Zopluoglu, C. (2017). Acoustic\r\nparameters of infant-directed singing in mothers of infants with Down\r\nsyndrome. Infant Behavior and Development, 49, 151-160. https://doi.org/10.1016/j.infbeh.2017.09.001 Download/Request\r\nZopluoglu, C., & Davenport, E.C. (2017). A note on using\r\neigenvalues in dimensionality assessment. Practical Assessment, Research\r\n& Evaluation, 22 (7), 1-10. Download/Request\r\nBrogaard, B,Marlow, K., Overgaard, M., Schwartz, B., Zopluoglu,\r\nC., Tomson, S., Neufeld, J., Sinke, C., Owen, C., Eagleman, D. (2017).\r\nDeaf hearing: Implicit discrimination of auditory content in a patient\r\nwith mixed hearing loss. Philosophical Psychology, 30(1-2), 21-43. https://doi.org/10.1080/09515089.2016.1268680 Download/Request\r\nMyers, N. D., Ahn, S., Lu, M., Celimli, S., & Zopluoglu, C.\r\n(2017). Reordering and reflecting factors for simulation studies with\r\nexploratory factor analysis. Structural Equation Modeling: A\r\nMultidisciplinary Journal, 24(1), 112-128. https://doi.org/10.1080/10705511.2016.1230721 Download/Request\r\nZopluoglu, C. (2016). Classification performance of\r\nanswer-copying indices under different types of IRT models. Applied\r\nPsychological Measurement, 40(8), 592-607. https://doi.org/10.1177%2F0146621616664724 Download/Request\r\nKohli, N., Harring J.R., & Zopluoglu, C. (2016). A finite\r\nmixture of nonlinear random coefficient models for continuous repeated\r\nmeasures data. Psychometrika, 81(3), 851-880. https://doi.org/10.1007/s11336-015-9462-0 Download/Request\r\nZopluoglu, C. (2015). Evaluating the sampling performance of\r\nexploratory and cross-validated DETECT procedure with imperfect models.\r\nMultivariate Behavioral Research, 50(6), 632-644. https://doi.org/10.1080/00273171.2015.1070708 Download/Request\r\nKohli, N., Hughes, J., Wang, C., Zopluoglu, C., & Davison, M.\r\n(2015). Fitting a linear-linear piecewise growth mixture model with\r\nunknown knots: A comparison of two common approaches to inference.\r\nPsychological Methods, 20(2), 259-275. http://dx.doi.org/10.1037/met0000034 Download/Request\r\nKohli, N., Sullivan, A., Sadeh, S., & Zopluoglu, C. (2015).\r\nLongitudinal mathematics development of students with learning\r\ndisabilities and students without disabilities: A comparison of linear,\r\nquadratic, and piecewise linear mixed effects models. Journal of School\r\nPsychology, 53(2),105-120. https://doi.org/10.1016/j.jsp.2014.12.002 Download/Request\r\nZopluoglu, C., Harring J.R., & Kohli, N. (2014). FitPMM: An R\r\nroutine to fit finite miture of piecewise mixed-effect models with\r\nunknown random knots. Applied Psychological Measurement, 38(7), 583-584.\r\n[Computer software]. https://doi.org/10.1177/0146621614540482 Download/Request\r\nMyers, N.D., Jin, Y., Ahn, S., Celimli, S., & Zopluoglu, C.\r\n(2015). Rotation to a partially specified target matrix in exploratory\r\nfactor analysis in practice. Behavior Research Methods, 47(2), 494-505.\r\nhttps://doi.org/10.3758/s13428-014-0486-7 Download/Request\r\n\r\nVan Norman E., Christ, T. J., Zopluoglu, C. (2013). The effects\r\nof baseline estimation on the reliability, validity, and precision of\r\nCBM-R growth estimates. School Psychology Quarterly, 28(3), 239-255. http://dx.doi.org/10.1037/spq0000023 Download/Request\r\nChrist, T. J., Monaghen, B., Zopluoglu, C. & Van Norman, E.\r\nR. (2013). Curriculum-Based measurement of oral reading: Evaluation of\r\ngrowth estimates derived with pre-post assessment methods. Assessment\r\nfor Effective Intervention, 38(3), 139-153. https://doi.org/10.1016/j.jsp.2012.11.001 Download/Request\r\nZopluoglu, C. (2013). A comparison of two estimation algorithms\r\nfor Samejima’s continuous IRT model. Behavior Research Methods, 45(1),\r\n54-64. https://doi.org/10.3758/s13428-012-0229-6 Download/Request\r\nChrist, T.J., Zopluoglu, C., Monaghen, B., & Van Norman, E.R.\r\n(2013). Curriculum- Based measurement of oral reading: Multi-study\r\nevaluation of schedule, duration and dataset quality on progress\r\nmonitoring outcomes. Journal of School Psychology, 51(1), 19-57. https://doi.org/10.1016/j.jsp.2012.11.001 Download/Request\r\nZopluoglu, C. (2013). CopyDetect: An R package to compute\r\nstatistical indices for detecting answer copying on multiple-choice\r\ntests. Applied Psychological Measurement, 37(1), 75-77. [Computer\r\nsoftware]. https://doi.org/10.1177/0146621612463119 Download/Request\r\nZopluoglu, C. & Davenport, E.C. (2012). The empirical power\r\nand type-I error rates of the GBT and Omega indices in detecting answer\r\ncopying on multiple-choice tests. Educational and Psychological\r\nMeasurement, 72(6), 975-1000. https://doi.org/10.1177/0013164412442941 Download/Request\r\nChrist, T. J., Zopluoglu, C., Long, D. J., & Monaghen, B.D.\r\n(2012). Curriculum-Based measurement of oral reading (CBM-R): Quality of\r\nprogress monitoring outcomes. Exceptional Children, 78(3), 356-373. https://doi.org/10.1177/001440291207800306 Download/Request\r\nZopluoglu, C. (2012). EstCRM: An R package for Samejima’s\r\ncontinuous IRT model. Applied Psychological Measurement, 36(2), 149-150.\r\n[Computer software]. https://doi.org/10.1177/0146621612436599 Download/Request\r\nZopluoglu, C. (2012). A cross-national comparison of intra-class\r\ncorrelation coefficient in educational achievement outcomes. Journal of\r\nMeasurement and Evaluation in Education and Psychology, 3(1), 242-278.\r\nDownload/Request\r\nBook/Book Chapters\r\nZopluoglu, C. (2017). Similarity, answer copying, and aberrance:\r\nUnderstanding the status quo. In G.J. Cizek & J.A. Wollack, Handbook\r\nof Detecting Cheating on Tests. Taylor & Francis. Download/Request\r\nDead and Buried\r\nZopluoglu, C. (buried). A Note on MLE estimation of person\r\nparameters for mixture IRT models. Download/Request\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-09-26T16:54:42-07:00"
+      "last_modified": "2022-11-28T10:28:17-08:00"
     },
     {
       "path": "qm.html",
@@ -101,13 +101,13 @@
       "description": "Course material for quantitative methods I and II",
       "author": [],
       "contents": "\r\n\r\n\r\n\r\n",
-      "last_modified": "2022-03-02T11:50:59-08:00"
+      "last_modified": "2022-11-28T10:28:18-08:00"
     },
     {
       "path": "README.html",
       "author": [],
       "contents": "\r\n\r\nCengiz Zopluoglu’s Personal Site/ Blog\r\ncengiz.me based on RStudio’s distill and distill_website theme.\r\n\r\n\r\n",
-      "last_modified": "2022-09-26T17:01:26-07:00"
+      "last_modified": "2022-11-28T10:28:19-08:00"
     }
   ],
   "collections": ["posts/posts.json"]
