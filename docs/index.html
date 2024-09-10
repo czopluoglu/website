@@ -2167,141 +2167,187 @@ Courses
 <!--radix_placeholder_site_before_body-->
 <!--/radix_placeholder_site_before_body-->
 <!--radix_placeholder_article_listing-->
-
-
-<script type="application/javascript">
-
-function init_posts_list() {
-
-  function load_image(img) {
-    var src = $(img).attr('data-src');
-    if (src) {
-      $(img).attr('src', src);
-      $(img).on("load", function() {
-        img.removeAttribute('data-src');
-      });
-    }
-  }
-
-  function set_posts_visible(posts, visible) {
-    if (visible) {
-
-      // show bottom border by default
-      $(posts).removeClass('post-preview-last');
-
-      // apply limits if need be
-      var max_posts = 25;
-      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
-      if (apply_limits && posts.length > max_posts) {
-        posts = $(posts).slice(0, max_posts);
-      } else {
-        $('.posts-more a').addClass('hidden');
-      }
-
-      // apply last style
-      $(posts.slice(-1)[0]).addClass('post-preview-last');
-
-      $(posts).removeClass('hidden');
-      $(posts).find('img[data-src]').each(function(i, img) {
-        load_image(img);
-      });
-    } else {
-      $(posts).addClass('hidden');
-    }
-  }
-
-  function apply_hash_filter() {
-
-    // clear active state
-    $('.categories .active').removeClass('active');
-
-    // mark all posts invisible to start
-    set_posts_visible($('.posts-list').children('a'), false);
-
-    // if we have a hash filter
-    if (window.location.hash && window.location.hash.startsWith("#category:")) {
-
-      // mark posts that match the category visible
-      var page_category = window.location.hash.replace(/^#category:/, "");
-      page_category = decodeURIComponent(page_category)
-      var posts = $('.post-metadata').map(function(idx, script) {
-        var metadata = $.parseJSON($(script).html());
-        var post = null;
-        $.each(metadata.categories, function(idx, category) {
-          category = category.replace(/ /g,"_");
-          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
-            post = $(script).parent().get();
-            return false;
-          }
-        });
-        return post;
-      });
-      set_posts_visible(posts, true);
-
-      // mark the hash active
-      $('.categories li>a[href="' + decodeURIComponent(window.location.hash) + '"]').addClass('active');
-
-      // update the list_caption
-      var list_caption = $('.posts-list-caption');
-      var caption = (page_category || '').toLowerCase() === "articles"
-        ? list_caption.attr('data-caption')
-        : ('Category: ' + page_category.replace(/_/g," "));
-      list_caption.text(caption);
-
-    } else {
-
-      // no hash filter, make all posts visible (subject to max display)
-      set_posts_visible($('.posts-list').children(), true);
-
-      // reset list caption
-      var list_caption = $('.posts-list-caption');
-      list_caption.text(list_caption.attr('data-caption'));
-
-
-    }
-  }
-
-  // more articles
-  function apply_post_limits(apply) {
-    if (apply) {
-      $('.posts-container').addClass('posts-apply-limit');
-      $('.posts-more a').removeClass('hidden');
-    } else {
-      $('.posts-container').removeClass('posts-apply-limit');
-      $('.posts-more a').addClass('hidden');
-    }
-  }
-
-  // click handling for tags
-  $('.dt-tag').click(function(ev) {
-    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
-    return false;
-  })
-
-  // hash filter handling
-  apply_hash_filter();
-  $(window).on('hashchange',function() {
-    apply_post_limits(true);
-    apply_hash_filter();
-  });
-
-  // more articles link
-  $('.posts-more a').click(function(e) {
-    e.preventDefault();
-    apply_post_limits(false);
-    apply_hash_filter();
-    return false;
-  });
-
-}
-
-</script>
-
-
+
+
+<script type="application/javascript">
+
+function init_posts_list() {
+
+  function load_image(img) {
+    var src = $(img).attr('data-src');
+    if (src) {
+      $(img).attr('src', src);
+      $(img).on("load", function() {
+        img.removeAttribute('data-src');
+      });
+    }
+  }
+
+  function set_posts_visible(posts, visible) {
+    if (visible) {
+
+      // show bottom border by default
+      $(posts).removeClass('post-preview-last');
+
+      // apply limits if need be
+      var max_posts = 25;
+      var apply_limits = $('.posts-container').hasClass('posts-apply-limit');
+      if (apply_limits && posts.length > max_posts) {
+        posts = $(posts).slice(0, max_posts);
+      } else {
+        $('.posts-more a').addClass('hidden');
+      }
+
+      // apply last style
+      $(posts.slice(-1)[0]).addClass('post-preview-last');
+
+      $(posts).removeClass('hidden');
+      $(posts).find('img[data-src]').each(function(i, img) {
+        load_image(img);
+      });
+    } else {
+      $(posts).addClass('hidden');
+    }
+  }
+
+  function apply_hash_filter() {
+
+    // clear active state
+    $('.categories .active').removeClass('active');
+
+    // mark all posts invisible to start
+    set_posts_visible($('.posts-list').children('a'), false);
+
+    // if we have a hash filter
+    if (window.location.hash && window.location.hash.startsWith("#category:")) {
+
+      // mark posts that match the category visible
+      var page_category = window.location.hash.replace(/^#category:/, "");
+      page_category = decodeURIComponent(page_category)
+      var posts = $('.post-metadata').map(function(idx, script) {
+        var metadata = $.parseJSON($(script).html());
+        var post = null;
+        $.each(metadata.categories, function(idx, category) {
+          category = category.replace(/ /g,"_");
+          if ((page_category || '').toLowerCase() === "articles" || category === page_category) {
+            post = $(script).parent().get();
+            return false;
+          }
+        });
+        return post;
+      });
+      set_posts_visible(posts, true);
+
+      // mark the hash active
+      $('.categories li>a[href="' + decodeURIComponent(window.location.hash) + '"]').addClass('active');
+
+      // update the list_caption
+      var list_caption = $('.posts-list-caption');
+      var caption = (page_category || '').toLowerCase() === "articles"
+        ? list_caption.attr('data-caption')
+        : ('Category: ' + page_category.replace(/_/g," "));
+      list_caption.text(caption);
+
+    } else {
+
+      // no hash filter, make all posts visible (subject to max display)
+      set_posts_visible($('.posts-list').children(), true);
+
+      // reset list caption
+      var list_caption = $('.posts-list-caption');
+      list_caption.text(list_caption.attr('data-caption'));
+
+
+    }
+  }
+
+  // more articles
+  function apply_post_limits(apply) {
+    if (apply) {
+      $('.posts-container').addClass('posts-apply-limit');
+      $('.posts-more a').removeClass('hidden');
+    } else {
+      $('.posts-container').removeClass('posts-apply-limit');
+      $('.posts-more a').addClass('hidden');
+    }
+  }
+
+  // click handling for tags
+  $('.dt-tag').click(function(ev) {
+    window.location.hash = '#category:' + $(this).text().replace(/ /g, "_");
+    return false;
+  })
+
+  // hash filter handling
+  apply_hash_filter();
+  $(window).on('hashchange',function() {
+    apply_post_limits(true);
+    apply_hash_filter();
+  });
+
+  // more articles link
+  $('.posts-more a').click(function(e) {
+    e.preventDefault();
+    apply_post_limits(false);
+    apply_hash_filter();
+    return false;
+  });
+
+}
+
+</script>
+
+
 
 <div class="posts-container posts-with-sidebar posts-apply-limit l-screen-inset">
 <div class="posts-list">
 <h1 class="posts-list-caption" data-caption="Cengiz Zopluoglu">Cengiz Zopluoglu</h1>
+<a href="posts/duolingo23/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["item response theory","continuous response model","Stan","R","2023"]}</script>
+<div class="metadata">
+<div class="publishedDate">Nov. 12, 2023</div>
+<div class="dt-authors">
+<div class="dt-author">Cengiz Zopluoglu</div>
+</div>
+</div>
+<div class="thumbnail">
+<img src="posts/duolingo23/img.png"/>
+</div>
+<div class="description">
+<h2>Fitting IRT models for zero-and-one inflated bounded continous response data</h2>
+<div class="dt-tags">
+<div class="dt-tag">item response theory</div>
+<div class="dt-tag">continuous response model</div>
+<div class="dt-tag">Stan</div>
+<div class="dt-tag">R</div>
+<div class="dt-tag">2023</div>
+</div>
+<p>I’ve published a new tutorial based on a recently published paper with Dr. Lockwood from Duolingo. The tutorial is on fitting IRT models for zero-and-one inflated bounded continous response data. This resource provides a step-by-step guide for performing model estimation and evaluating model fit using Stan. It includes simulated datasets, complete code, and explanations to help users explore advanced IRT modeling techniques discussed in the paper.</p>
+</div>
+</a>
+<a href="posts/naep23/" class="post-preview">
+<script class="post-metadata" type="text/json">{"categories":["NLP","Automated scoring","Math assessment","Transformers","2023"]}</script>
+<div class="metadata">
+<div class="publishedDate">Sept. 18, 2023</div>
+<div class="dt-authors">
+<div class="dt-author">Cengiz Zopluoglu</div>
+</div>
+</div>
+<div class="thumbnail">
+<img src="posts/naep23/img.png"/>
+</div>
+<div class="description">
+<h2>NAEP Math Automated Scoring Challenge</h2>
+<div class="dt-tags">
+<div class="dt-tag">NLP</div>
+<div class="dt-tag">Automated scoring</div>
+<div class="dt-tag">Math assessment</div>
+<div class="dt-tag">Transformers</div>
+<div class="dt-tag">2023</div>
+</div>
+<p>In 2023, the National Center for Education Statistics (NCES) hosted the NAEP Math Automated Scoring Challenge to explore the use of automated algorithms for scoring open-ended mathematics responses in large-scale assessments. The challenge aimed to assess whether artificial intelligence could perform scoring tasks as accurately as human raters, while ensuring fairness across diverse student demographics. I was recognized as a runner-up for my submission, which focused on using advanced natural language processing models to handle both symbolic and conceptual information in math problems. I am honored to have participated alongside leading teams from Vanderbilt University and UMass Amherst, contributing to advancements in this important field.</p>
+</div>
+</a>
 <a href="posts/ncme22/" class="post-preview">
 <script class="post-metadata" type="text/json">{"categories":["item response theory","R","Stan","item preknowledge","detecting test misconduct","2022"]}</script>
 <div class="metadata">
@@ -2386,7 +2432,7 @@ function init_posts_list() {
 </div>
 </div>
 <div class="thumbnail">
-<img src="posts/dglnrt2/image.png"/>
+<img data-src="posts/dglnrt2/image.png"/>
 </div>
 <div class="description">
 <h2>Simultaneous Detection of Compromised Items and Examinees with Item Preknowledge using Response Time Information</h2>
@@ -2410,7 +2456,7 @@ function init_posts_list() {
 </div>
 </div>
 <div class="thumbnail">
-<img src="posts/popvcov_mirt/image.png"/>
+<img data-src="posts/popvcov_mirt/image.png"/>
 </div>
 <div class="description">
 <h2>A Fascinating Behind-the-Scenes Look at the Population Covariance Matrix for Multidimensional Items</h2>
@@ -2785,7 +2831,7 @@ function init_posts_list() {
 <ul>
 <li>
 <a href="#category:Articles">Articles</a>
-<span class="category-count">(21)</span>
+<span class="category-count">(23)</span>
 </li>
 <li>
 <a href="#category:2018">2018</a>
@@ -2808,12 +2854,20 @@ function init_posts_list() {
 <span class="category-count">(2)</span>
 </li>
 <li>
+<a href="#category:2023">2023</a>
+<span class="category-count">(2)</span>
+</li>
+<li>
 <a href="#category:artificial_intelligence">artificial intelligence</a>
 <span class="category-count">(1)</span>
 </li>
 <li>
+<a href="#category:Automated_scoring">Automated scoring</a>
+<span class="category-count">(1)</span>
+</li>
+<li>
 <a href="#category:continuous_response_model">continuous response model</a>
-<span class="category-count">(2)</span>
+<span class="category-count">(3)</span>
 </li>
 <li>
 <a href="#category:covid19">covid19</a>
@@ -2861,11 +2915,15 @@ function init_posts_list() {
 </li>
 <li>
 <a href="#category:item_response_theory">item response theory</a>
-<span class="category-count">(8)</span>
+<span class="category-count">(9)</span>
 </li>
 <li>
 <a href="#category:machine_learning">machine learning</a>
 <span class="category-count">(2)</span>
+</li>
+<li>
+<a href="#category:Math_assessment">Math assessment</a>
+<span class="category-count">(1)</span>
 </li>
 <li>
 <a href="#category:multidimensional_IRT">multidimensional IRT</a>
@@ -2873,7 +2931,7 @@ function init_posts_list() {
 </li>
 <li>
 <a href="#category:NLP">NLP</a>
-<span class="category-count">(1)</span>
+<span class="category-count">(2)</span>
 </li>
 <li>
 <a href="#category:numerical_integration">numerical integration</a>
@@ -2885,7 +2943,7 @@ function init_posts_list() {
 </li>
 <li>
 <a href="#category:R">R</a>
-<span class="category-count">(18)</span>
+<span class="category-count">(19)</span>
 </li>
 <li>
 <a href="#category:recidivism">recidivism</a>
@@ -2901,7 +2959,11 @@ function init_posts_list() {
 </li>
 <li>
 <a href="#category:Stan">Stan</a>
-<span class="category-count">(4)</span>
+<span class="category-count">(5)</span>
+</li>
+<li>
+<a href="#category:Transformers">Transformers</a>
+<span class="category-count">(1)</span>
 </li>
 <li>
 <a href="#category:Turkish_elections">Turkish elections</a>
@@ -2926,7 +2988,7 @@ function init_posts_list() {
 <a href="#">More articles &raquo;</a>
 </div>
 </div>
-<!--/radix_placeholder_article_listing-->
+<!--/radix_placeholder_article_listing-->
 
 <div class="d-title">
 <h1>Cengiz Zopluoglu</h1>

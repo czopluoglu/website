@@ -15,7 +15,7 @@
     <lastBuildDate>Sun, 12 Nov 2023 00:00:00 +0000</lastBuildDate>
     <item>
       <title>Fitting IRT models for zero-and-one inflated bounded continous response data</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo23</link>
       <description>I’ve published a new tutorial based on a recently published paper with Dr. Lockwood from Duolingo. The tutorial is on fitting IRT models for zero-and-one inflated bounded continous response data. This resource provides a step-by-step guide for performing model estimation and evaluating model fit using Stan. It includes simulated datasets, complete code, and explanations to help users explore advanced IRT modeling techniques discussed in the paper.</description>
       <category>item response theory</category>
@@ -25,25 +25,11 @@
       <category>2023</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo23</guid>
       <pubDate>Sun, 12 Nov 2023 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo23/img.png" medium="image" type="image/png" width="752" height="741"/>
-    </item>
-    <item>
-      <title>NAEP Math Automated Scoring Challenge</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
-      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/naep23</link>
-      <description>In 2023, the National Center for Education Statistics (NCES) hosted the NAEP Math Automated Scoring Challenge to explore the use of automated algorithms for scoring open-ended mathematics responses in large-scale assessments. The challenge aimed to assess whether artificial intelligence could perform scoring tasks as accurately as human raters, while ensuring fairness across diverse student demographics. I was recognized as a runner-up for my submission, which focused on using advanced natural language processing models to handle both symbolic and conceptual information in math problems. I am honored to have participated alongside leading teams from Vanderbilt University and UMass Amherst, contributing to advancements in this important field.</description>
-      <category>NLP</category>
-      <category>Automated scoring</category>
-      <category>Math assessment</category>
-      <category>Transformers</category>
-      <category>2023</category>
-      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/naep23</guid>
-      <pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/naep23/img.png" medium="image" type="image/png" width="795" height="677"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo23/img.png" medium="image" type="image/png" width="752" height="741"/>
     </item>
     <item>
       <title>NCME 2022 Presentation</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/ncme22</link>
       <description>I was not able to go to NCME 2022 this year. Our session organizers, Huijuan Meng and Anjali Weber, kindly let me make an asynchronous video presentation. The session provided a collaborative exercise in which five independent research groups each propose a method that could help effectively and efficiently detect cheaters in the operational setting. Each group used the same data from two linear fixed-form IT certification exams with known security breaches. The five approaches were evaluated regarding their accuracy in detecting cheating and feasibility to implement. Here, I provide the slides, a Github repository for the code, and a video for my presentation.</description>
       <category>item response theory</category>
@@ -54,11 +40,11 @@
       <category>2022</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/ncme22</guid>
       <pubDate>Fri, 22 Apr 2022 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/ncme22/img.png" medium="image" type="image/png" width="681" height="283"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/ncme22/img.png" medium="image" type="image/png" width="681" height="283"/>
     </item>
     <item>
       <title>R, Reticulate, and Hugging Face Models</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/huggingface</link>
       <description>Join me to get your feet wet with thousands of models available on Hugging Face! Hugging Face is like a CRAN of pre-trained AI/ML models. There are thousands of pre-trained models that can be imported and used within seconds at no charge to achieve tasks like text generation, text classification, translation, speech recognition, image classification, object detection, etc. In this post, I am exploring how to access these pre-trained models without leaving the comfort of RStudio using the `reticulate` package.</description>
       <category>machine learning</category>
@@ -71,11 +57,11 @@
       <category>2022</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/huggingface</guid>
       <pubDate>Sun, 30 Jan 2022 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/huggingface/img.png" medium="image" type="image/png" width="711" height="566"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/huggingface/img.png" medium="image" type="image/png" width="711" height="566"/>
     </item>
     <item>
       <title>Team CrescentStar Won Prizes in the NIJ's Recidivism Forecasting Challenge</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/recidivism</link>
       <description>Last summer, I participated in the NIJ's Recidivism Forecasting Challenge. Surprisingly, the predictions I submitted won some prizes in certain categories.</description>
       <category>machine learning</category>
@@ -87,11 +73,11 @@
       <category>2021</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/recidivism</guid>
       <pubDate>Fri, 17 Sep 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/recidivism/img1.png" medium="image" type="image/png" width="1269" height="573"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/recidivism/img1.png" medium="image" type="image/png" width="1269" height="573"/>
     </item>
     <item>
       <title>Simultaneous Detection of Compromised Items and Examinees with Item Preknowledge using Response Time Information</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/dglnrt2</link>
       <description>Yes, you heard it right! This post introduces a model that uses response time information for simultaneous estimation of items being compromised and examinees having item preknowledge. The model improves upon the ideas laid out in [Kasli et al. (2020)](https://psyarxiv.com/bqa3t), and further relaxes the assumption that the compromised items are known. The model is fitted using a Bayesian framework as implemented in Stan.</description>
       <category>item response theory</category>
@@ -102,11 +88,11 @@
       <category>2021</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/dglnrt2</guid>
       <pubDate>Thu, 24 Jun 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/dglnrt2/image.png" medium="image" type="image/png" width="1188" height="900"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/dglnrt2/image.png" medium="image" type="image/png" width="1188" height="900"/>
     </item>
     <item>
       <title>A Fascinating Behind-the-Scenes Look at the Population Covariance Matrix for Multidimensional Items</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/popvcov_mirt</link>
       <description>This post provides R code to use numerical integration for calculating population-level mean and covariances between item scores generated based on the compensatory and partially compensatory multidimensional models.</description>
       <category>multidimensional IRT</category>
@@ -116,11 +102,11 @@
       <category>2021</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/popvcov_mirt</guid>
       <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/popvcov_mirt/image.png" medium="image" type="image/png" width="651" height="231"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/popvcov_mirt/image.png" medium="image" type="image/png" width="651" height="231"/>
     </item>
     <item>
       <title>Automated DETECT analysis using R</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/2020-12-04-detect</link>
       <description>The post is organized as follows. First, we simulate a dataset using a multidimensional IRT model and compute the actual DETECT value using the correct item partitioning. Second, a brief description of the DETECT index is provided, and the DETECT value is calculated based on this definition based on the true item clustering for the simulated dataset. Then, we compute the same value using the original DETECT program by executing it through R. Finally, we conduct a simple simulation to demonstrate how to automate running DETECT to analyze many datasets and processing the DETECT output files in R.</description>
       <category>dimensionality</category>
@@ -131,11 +117,11 @@
       <category>2020</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/2020-12-04-detect</guid>
       <pubDate>Tue, 08 Dec 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/2020-12-04-detect/download.png" medium="image" type="image/png" width="1152" height="1152"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/2020-12-04-detect/download.png" medium="image" type="image/png" width="1152" height="1152"/>
     </item>
     <item>
       <title>Equating Oral Reading Fluency Scores from Reading Passages</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-equating</link>
       <description>A non-peer reviewed opinion about how one can equate oral reading fluency scores from two reading passages with different difficulty levels using Samejima's Continuous Response Model.</description>
       <category>item response theory</category>
@@ -145,45 +131,11 @@
       <category>2020</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-equating</guid>
       <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/crm-equating/image.png" medium="image" type="image/png" width="1108" height="825"/>
-    </item>
-    <item>
-      <title>Tracking the Number of Deceased People by Scraping Data from www.turkiye.gov.tr</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
-      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-turkey.gov.tr</link>
-      <description>A Shiny app is designed to track the number of deceased individuals from 11 major cities in Turkey by scraping data from www.turkiye.gov.tr. By using this Shiny app, you can compare the number of deceased individuals for any given day or date range in 2020 to the number of deceased individuals in the past 10 years on the same day or same date range.</description>
-      <category>2020</category>
-      <category>web scraping</category>
-      <category>covid19</category>
-      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-turkey.gov.tr</guid>
-      <pubDate>Sat, 28 Mar 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-turkey.gov.tr/files/plot.jpg" medium="image" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>Intersection Points Between Two Adjacent Categories in the Graded Response Model</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
-      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/grmint</link>
-      <description>The interpretation of between-category thresholds in the Graded Response Model is different than the step difficulty parameters in the RSM/PCM/GPCM family due to a different functional form. While the step parameters in the RSM/PCM/GPCM family represent the point on the latent trait continuum where one category becomes more likely than the previous category, it is not the same for between-category thresholds in the Graded Response Model. So, this post is my response to a curious student who wondered at what point on the latent trait continuum the intersections occur between two adjacent categories for the Graded Response Model.</description>
-      <category>2020</category>
-      <category>item response theory</category>
-      <category>graded response model</category>
-      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/grmint</guid>
-      <pubDate>Wed, 26 Feb 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/grmint/files/grm.jpeg" medium="image" type="image/jpeg"/>
-    </item>
-    <item>
-      <title>This is a test post with a Shiny App</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
-      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp</link>
-      <description>Shiny app</description>
-      <category>2019</category>
-      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp</guid>
-      <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp/images/image.png" medium="image" type="image/png" width="1920" height="978"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/crm-equating/image.png" medium="image" type="image/png" width="1108" height="825"/>
     </item>
     <item>
       <title>Measuring Oral Reading Fluency: A Case for Samejima's Continuous Response Model</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan</link>
       <description>I pitched the idea of using Samejima's Continuous Response Model (CRM) to measure the Oral Reading Fluency (ORF) a while ago when I published a paper in 2012. In that paper, I used an ORF dataset from the Minneapolis Public Schools District (MPS) as a real data example. Since then, I don't think anybody has bought the idea of using CRM to measure ORF, so here I am trying one more time with some accessible R code.</description>
       <category>item response theory</category>
@@ -193,11 +145,11 @@
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan</guid>
       <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan/images/image.png" medium="image" type="image/png" width="811" height="461"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan/images/image.png" medium="image" type="image/png" width="811" height="461"/>
     </item>
     <item>
       <title>Fitting Hyperbolic Cosine Model (HCM) For Unfolding Dichotomous Responses using Stan</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan</link>
       <description>In this post, I do a quick exercise on fitting the hyperbolic cosine model using Stan. The information about this model can be found in Andrich &amp; Luo (1993). The most interesting part is an "Aha!" moment when I discover the bimodality of posterior distribution due to lack of directional constrain.</description>
       <category>item response theory</category>
@@ -207,11 +159,11 @@
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan</guid>
       <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan/images/image.png" medium="image" type="image/png" width="645" height="389"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan/images/image.png" medium="image" type="image/png" width="645" height="389"/>
     </item>
     <item>
       <title>2019 Turkish Mayoral Elections – Scraping Ballot Box Level Data</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2</link>
       <description>A while ago, I compiled the election data for the 2019 mayoral elections in Turkey, which took place on March 31, 2019, through the Anadolu Agency website, only accessible information back then because the website for the Turkey's Higher Electoral Commission (YSK) was down and they did not make the official election data available until recently. This data was also limited as the Anadolu Agency only provided overall numbers (not for each ballot box). Now, it seems that YSK's website is alive back again and provides a nice-user friendly dashboard for the election data at the ballot box level. However, their dashboard is not very data-analyst friendly for those who has been starving for a more deeper analysis. Here, I provide the data and the R code I used to scrap this data from YSK's website.</description>
       <category>web scraping</category>
@@ -221,11 +173,11 @@
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2</guid>
       <pubDate>Fri, 24 May 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2/images/image.jpg" medium="image" type="image/jpeg"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2/images/image.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>
       <title>XGBoost Analysis of Real Dataset to Predict Item Preknowledge</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/xgboost</link>
       <description>This post includes supplemental material to reproduce the real data analysis presented in the recently published EPM paper.</description>
       <category>XGBoost</category>
@@ -234,11 +186,11 @@
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/xgboost</guid>
       <pubDate>Thu, 18 Apr 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/xgboost/images/image.png" medium="image" type="image/png" width="706" height="546"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/xgboost/images/image.png" medium="image" type="image/png" width="706" height="546"/>
     </item>
     <item>
       <title>Scraping Data for 2019 Local Elections in Turkey</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey</link>
       <description>A friend of mine, Dr. Abdullah Aydogan (https://twitter.com/abdaydgn), has asked me this morning if it is possible to pull the data for the 2019 local elections in Turkey. The only accessible information is through the Anadolu Agency (https://www.aa.com.tr/en) because the official election organization's website (http://www.ysk.gov.tr/) has not been working for a while. Here, I provide the code I used to scrap data from the Anadolu Agency, only available source for election results.</description>
       <category>web scraping</category>
@@ -248,11 +200,11 @@
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey</guid>
       <pubDate>Fri, 05 Apr 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey/images/image.jpg" medium="image" type="image/jpeg"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey/images/image.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>
       <title>Compiling Keywords from the Published Articles in Educational and Pscyhological Measurement</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/epm-keywords</link>
       <description>What are the most commonly used keywords in published articles in educational measurement journals? Is there any trending topic in educational measurement journals? I decided to do a sample analysis in the context of Educational and Psychological Measurement (EPM). However, I had figure out first how to compile a dataset of keywords used in EPM. It turned out to be another web scraping story.</description>
       <category>web scraping</category>
@@ -260,11 +212,11 @@
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/epm-keywords</guid>
       <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/epm-keywords/images/EPM2.png" medium="image" type="image/png" width="1221" height="920"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/epm-keywords/images/EPM2.png" medium="image" type="image/png" width="1221" height="920"/>
     </item>
     <item>
       <title>How Does Extreme Gradient Boosting (XGBoost) Work?</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting</link>
       <description>In one of the working papers under review, I am using the Extreme Gradient Boosting (XGBoost) to identify examinees with potential item preknowledge in a certification exam. In the original paper, one of the reviewers asked more description of the XGBoost to help readers get a conceptual understanding of how XGBoost works. After spending a few weeks on the original paper, I finally felt that I had a good grasp of it. In this post, I provide an informal introduction of XGboost using an illustration with accompanying R code.</description>
       <category>XGBoost</category>
@@ -272,11 +224,11 @@
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting</guid>
       <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting/images/tree.png" medium="image" type="image/png" width="737" height="786"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting/images/tree.png" medium="image" type="image/png" width="737" height="786"/>
     </item>
     <item>
       <title>Learning how to create maps in R</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data</link>
       <description>Using the elections 2018 data, I practiced how to create a map for an outcome variable,</description>
       <category>elections</category>
@@ -285,11 +237,11 @@
       <category>2018</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data</guid>
       <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data/images/image.png" medium="image" type="image/png" width="973" height="599"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data/images/image.png" medium="image" type="image/png" width="973" height="599"/>
     </item>
     <item>
       <title>A Quick Look at the Election 2018</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/a-quick-look-at-the-elections-2018</link>
       <description>Some quick insights about 2018 elections</description>
       <category>elections</category>
@@ -298,11 +250,11 @@
       <category>2018</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/a-quick-look-at-the-elections-2018</guid>
       <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/a-quick-look-at-the-elections-2018/images/image.png" medium="image" type="image/png" width="692" height="500"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/a-quick-look-at-the-elections-2018/images/image.png" medium="image" type="image/png" width="692" height="500"/>
     </item>
     <item>
       <title>Scraping Election 2018 Data</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-2018-election-data</link>
       <description>This post includes some follow-up R code to scrap 2018 election data from New York Times webpage.</description>
       <category>web scraping</category>
@@ -312,11 +264,11 @@
       <category>2018</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-2018-election-data</guid>
       <pubDate>Wed, 07 Nov 2018 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-2018-election-data/images/vote2.jpg" medium="image" type="image/jpeg"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-2018-election-data/images/vote2.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>
       <title>Scraping Data for 2014 Gubernatorial Elections</title>
-      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Cengiz Zopluoglu</dc:creator>
       <link>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-data-for-2014-gubernatorial-elections</link>
       <description>This post includes some R code to scrap 2014 election data from New York Times webpage.</description>
       <category>web scraping</category>
@@ -326,7 +278,7 @@
       <category>2018</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-data-for-2014-gubernatorial-elections</guid>
       <pubDate>Tue, 06 Nov 2018 00:00:00 +0000</pubDate>
-      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-data-for-2014-gubernatorial-elections/images/image.jpg" medium="image" type="image/jpeg"/>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-data-for-2014-gubernatorial-elections/images/image.jpg" medium="image" type="image/jpeg"/>
     </item>
   </channel>
 </rss>

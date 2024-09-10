@@ -1,5 +1,55 @@
 [
   {
+    "path": "posts/duolingo23/",
+    "title": "Fitting IRT models for zero-and-one inflated bounded continous response data",
+    "description": "I’ve published a new tutorial based on a recently published paper with Dr. Lockwood from Duolingo. The tutorial is on fitting IRT models for zero-and-one inflated bounded continous response data. This resource provides a step-by-step guide for performing model estimation and evaluating model fit using Stan. It includes simulated datasets, complete code, and explanations to help users explore advanced IRT modeling techniques discussed in the paper.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2023-11-12",
+    "categories": [
+      "item response theory",
+      "continuous response model",
+      "Stan",
+      "R",
+      "2023"
+    ],
+    "contents": "\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/duolingo23/img.png",
+    "last_modified": "2024-09-10T12:43:09-07:00",
+    "input_file": "duolingo23.knit.md",
+    "preview_width": 752,
+    "preview_height": 741
+  },
+  {
+    "path": "posts/naep23/",
+    "title": "NAEP Math Automated Scoring Challenge",
+    "description": "In 2023, the National Center for Education Statistics (NCES) hosted the NAEP Math Automated Scoring Challenge to explore the use of automated algorithms for scoring open-ended mathematics responses in large-scale assessments. The challenge aimed to assess whether artificial intelligence could perform scoring tasks as accurately as human raters, while ensuring fairness across diverse student demographics. I was recognized as a runner-up for my submission, which focused on using advanced natural language processing models to handle both symbolic and conceptual information in math problems. I am honored to have participated alongside leading teams from Vanderbilt University and UMass Amherst, contributing to advancements in this important field.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2023-09-18",
+    "categories": [
+      "NLP",
+      "Automated scoring",
+      "Math assessment",
+      "Transformers",
+      "2023"
+    ],
+    "contents": "\r\n\r\n\r\n\r\nI am pleased to share that I was one of the recognized submissions in the 2023 NAEP Math Automated Scoring Challenge, organized by the National Center for Education Statistics (NCES). The challenge provided a unique opportunity to contribute to advancing automated scoring methods for open-ended mathematics responses.\r\nThis competition focused on developing algorithms to automatically score student responses to open-ended math problems, which require a combination of symbolic understanding (e.g., arithmetic symbols) and conceptual reasoning (e.g., explanations of mathematical processes). These types of responses are typically more difficult for automated systems to evaluate, compared to multiple-choice or simpler text-based responses.\r\nThe goal was to create models that could perform this task with accuracy comparable to human raters, while also ensuring fairness—ensuring that the algorithms did not introduce bias based on student demographics, such as race, gender, or language background.\r\nIn my submission, I focused on pre-processing the data to handle variations in student responses, such as spelling errors and differences in formatting. I experimented finetuning many advanced transformer models to find the best one for different types of items.\r\nThe potential benefits of successful automated scoring systems are significant. They can reduce the time and cost associated with scoring large-scale assessments like NAEP, while also providing more detailed insights into student understanding. The challenge highlighted how far the recent technological developments can revolutionize this field, but also showed there is still work to be done in refining these methods for broader use.\r\nIt was an honor to participate alongside talented teams from Vanderbilt University and UMass Amherst, and to contribute to this growing area of research. While there is still much to learn, I am hopeful that this work can play a small part in advancing automated scoring technologies in education.\r\nFor more details about the challenge and the outcomes, you can visit\r\nthe official GitHub repo\r\nthe official NCES press release\r\nthe official IES announcement\r\n",
+    "preview": "posts/naep23/img.png",
+    "last_modified": "2024-09-10T12:00:38-07:00",
+    "input_file": "naep23.knit.md",
+    "preview_width": 795,
+    "preview_height": 677
+  },
+  {
     "path": "posts/ncme22/",
     "title": "NCME 2022 Presentation",
     "description": "I was not able to go to NCME 2022 this year. Our session organizers, Huijuan Meng and Anjali Weber, kindly let me make an asynchronous video presentation. The session provided a collaborative exercise in which five independent research groups each propose a method that could help effectively and efficiently detect cheaters in the operational setting. Each group used the same data from two linear fixed-form IT certification exams with known security breaches. The five approaches were evaluated regarding their accuracy in detecting cheating and feasibility to implement. Here, I provide the slides, a Github repository for the code, and a video for my presentation.",

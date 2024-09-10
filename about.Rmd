@@ -19,7 +19,7 @@ knitr::opts_chunk$set(echo = FALSE)
 
 ```{r, echo=FALSE, out.width= "45%", out.extra='style="float:right; padding:10px"'}
 
-knitr::include_graphics("images/Caricature.jpg")
+knitr::include_graphics("images/uo_headshot.jpg")
 
 ```
 

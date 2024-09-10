@@ -21,7 +21,7 @@
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -789,6 +789,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   d-article table.gt_table td,
   d-article table.gt_table th {
     border-bottom: none;
+    font-size: 100%;
   }
 
   .html-widget {
@@ -1861,15 +1862,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
       // hoverable references
       $('span.citation[data-cites]').each(function() {
-        if ($(this).children()[0].nodeName == "D-FOOTNOTE") {
-          var fn = $(this).children()[0]
+        const citeChild = $(this).children()[0]
+        // Do not process if @xyz has been used without escaping and without bibliography activated
+        // https://github.com/rstudio/distill/issues/466
+        if (citeChild === undefined) return true
+
+        if (citeChild.nodeName == "D-FOOTNOTE") {
+          var fn = citeChild
           $(this).html(fn.shadowRoot.querySelector("sup"))
           $(this).id = fn.id
           fn.remove()
         }
         var refs = $(this).attr('data-cites').split(" ");
         var refHtml = refs.map(function(ref) {
-          return "<p>" + $('#ref-' + ref).html() + "</p>";
+          // Could use CSS.escape too here, we insure backward compatibility in navigator
+          return "<p>" + $('div[id="ref-' + ref + '"]').html() + "</p>";
         }).join("\n");
         window.tippy(this, {
           allowHTML: true,
@@ -2068,7 +2075,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </script>
 
   <!--/radix_placeholder_distill-->
-  <script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+  <script src="site_libs/header-attrs-2.20/header-attrs.js"></script>
   <script src="site_libs/popper-2.6.0/popper.min.js"></script>
   <link href="site_libs/tippy-6.2.7/tippy.css" rel="stylesheet" />
   <link href="site_libs/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
@@ -2121,9 +2128,9 @@ R packages
 </button>
 <div class="nav-dropdown-content">
 <a href="copydetect.html">CopyDetect</a>
-<a href="estcrm.html">EstCRM</a>
-<a href="itemanalysis.html">itemanalysis</a>
-<a href="fitpmm.html">fitPMM</a>
+<a href="https://czopluoglu.github.io/estcrm_demo/">EstCRM</a>
+<a href="https://czopluoglu.github.io/itemanalysis_demo/">itemanalysis</a>
+<a href="https://czopluoglu.github.io/fitPMM/">fitPMM</a>
 </div>
 </div>
 <div class="nav-dropdown">
@@ -2178,29 +2185,25 @@ Courses
 
 
 <div class="d-article">
-<p><a
-href="https://cran.r-project.org/web/packages/CopyDetect/index.html">CopyDetect</a>
-is an R package to compute a number of of response similarity indices
-for multiple-choice tests. It is a compilation of functions I wrote when
-I was writing my master’s thesis in 2009 and doing my internship in ACT
-in 2012. It contains functions for several IRT and non-IRT based
-response similarity indices proposed in the literature for
-multiple-choice examinations such as the <a
-href="https://doi.org/10.1177/01466216970214002"><span
-class="math inline">\(\omega\)</span> (Wollack, 1997)</a>, <a
-href="https://doi.org/10.3102/10769986031003283">generalized binomial
-test (van der Linden &amp; Sotaridona, 2006)</a>, <a
-href="https://doi.org/10.1111/j.1745-3984.2002.tb01138.x">K index and
-its variants (Sotaridona &amp; Meijer,2002)</a>, and <a
-href="https://doi.org/10.1111/j.1745-3984.2003.tb01096.x">S1 and S2
-indices (Sotaridona &amp; Meijer, 2003)</a>, and <a
-href="https://dergipark.org.tr/en/download/article-file/649505">M4
-(Maynes, 2014)</a></p>
-<p>Please visit this page later as I plan to publish some detailed
-documentation about the implementation of these indices in the
-CopyDetect package.</p>
-<div class="sourceCode" id="cb1"><pre
-class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<p><a href="https://cran.r-project.org/web/packages/CopyDetect/index.html">CopyDetect</a> is an R package to compute a number of of response similarity indices for multiple-choice tests. It is a compilation of functions I wrote when I was writing my master’s thesis in 2009 and doing my internship in ACT in 2012. It contains functions for several IRT and non-IRT based response similarity indices proposed in the literature for multiple-choice examinations such as the <a href="https://doi.org/10.1177/01466216970214002"><span class="math inline">\(\omega\)</span> (Wollack, 1997)</a>, <a href="https://doi.org/10.3102/10769986031003283">generalized binomial test (van der Linden &amp; Sotaridona, 2006)</a>, <a href="https://doi.org/10.1111/j.1745-3984.2002.tb01138.x">K index and its variants (Sotaridona &amp; Meijer,2002)</a>, and <a href="https://doi.org/10.1111/j.1745-3984.2003.tb01096.x">S1 and S2 indices (Sotaridona &amp; Meijer, 2003)</a>, and <a href="https://dergipark.org.tr/en/download/article-file/649505">M4 (Maynes, 2014)</a></p>
+<p>I stop maintaining this package a while ago for a number of personal reasons. You can still access the latest version of this package from the following link:</p>
+<p><a href="https://cran.r-project.org/src/contrib/Archive/CopyDetect/">https://cran.r-project.org/src/contrib/Archive/CopyDetect/</a></p>
+<p>First, download the source file for Version 1.3 (CopyDetect_1.3.tar.gz) published in October 2018 to a local folder in your computer. Then, Install the package using the following code from this source:</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://rdrr.io/r/utils/install.packages.html'>install.packages</a></span><span class='op'>(</span><span class='st'>'path_to_file/CopyDetect_1.3.tar.gz'</span>, </span>
+<span>                 repos <span class='op'>=</span> <span class='cn'>NULL</span>, </span>
+<span>                 type<span class='op'>=</span><span class='st'>"source"</span><span class='op'>)</span></span></code></pre>
+</div>
+</div>
+<p>There are two main functions in the package. If you chec the help pages for these two function, you will find detailed information about their usage and sample code for demonstrating the analysis.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='op'>?</span><span class='va'>similarity1</span></span>
+<span><span class='op'>?</span><span class='va'>similarity2</span></span></code></pre>
+</div>
+</div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
 </div>

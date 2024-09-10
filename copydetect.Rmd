@@ -13,5 +13,32 @@ knitr::opts_chunk$set(echo = FALSE)
 
 [CopyDetect](https://cran.r-project.org/web/packages/CopyDetect/index.html) is an R package to compute a number of of response similarity indices for multiple-choice tests. It is a compilation of functions I wrote when I was writing my master's thesis in 2009 and doing my internship in ACT in 2012. It contains functions for several IRT and non-IRT based response similarity indices proposed in the literature for multiple-choice examinations such as the [$\omega$ (Wollack, 1997)](https://doi.org/10.1177/01466216970214002), [generalized binomial test (van der Linden & Sotaridona, 2006)](https://doi.org/10.3102/10769986031003283), [K index and its variants (Sotaridona & Meijer,2002)](https://doi.org/10.1111/j.1745-3984.2002.tb01138.x), and [S1 and S2 indices (Sotaridona & Meijer, 2003)](https://doi.org/10.1111/j.1745-3984.2003.tb01096.x), and [M4 (Maynes, 2014)](https://dergipark.org.tr/en/download/article-file/649505)
 
-Please visit this page later as I plan to publish some detailed documentation about the implementation of these indices in the CopyDetect package.
+I stop maintaining this package a while ago for personal reasons. You can still access the latest version of this package from the following link:
+
+[https://cran.r-project.org/src/contrib/Archive/CopyDetect/](https://cran.r-project.org/src/contrib/Archive/CopyDetect/)
+
+First, download the source file for Version 1.3 (CopyDetect_1.3.tar.gz) published in October 2018 to a local folder in your computer. Then, Install the package using the following code from this source:
+
+```{r,eval=FALSE,echo=TRUE}
+
+install.packages('path_to_file/CopyDetect_1.3.tar.gz', 
+                 repos = NULL, 
+                 type="source")
+
+```
+
+There are two main functions in the package. If you check the help pages for these two functions, you will find detailed information about their usage and sample code for demonstrating the analysis.
+
+```{r,eval=FALSE,echo=TRUE}
+?similarity1
+?similarity2
+```
+
+
+
+
+
+
+
+
 

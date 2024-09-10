@@ -1,0 +1,107 @@
+---
+title: "NAEP Math Automated Scoring Challenge"
+description: |
+  
+  In 2023, the National Center for Education Statistics (NCES) hosted the NAEP Math Automated Scoring Challenge to explore the use of automated algorithms for scoring open-ended mathematics responses in large-scale assessments. The challenge aimed to assess whether artificial intelligence could perform scoring tasks as accurately as human raters, while ensuring fairness across diverse student demographics. I was recognized as a runner-up for my submission, which focused on using advanced natural language processing models to handle both symbolic and conceptual information in math problems. I am honored to have participated alongside leading teams from Vanderbilt University and UMass Amherst, contributing to advancements in this important field.
+
+draft: false
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Oregon
+date: 09-18-2023
+categories:
+  - NLP
+  - Automated scoring
+  - Math assessment
+  - Transformers
+  - '2023'
+output:
+  distill::distill_article:
+    self_contained: true
+    toc: true
+    toc_float: true
+    highlight_downlit: false
+preview: img.png
+header-includes:
+  - \usepackage{amsmath} 
+  - \usepackage{upgreek}
+  - \usepackage{bm}
+  - \usepackage{unicode-math}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+<style>
+
+body {
+text-align: justify}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 5px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 1.5em;
+}
+</style>
+
+
+
+```{r echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+require(knitr)
+require(kableExtra)
+require(here)
+require(htmltools)
+require(mime)
+require(ggplot2)
+require(gridExtra)
+
+# the default output hook
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+    if (!is.null(n <- options$out.lines)) {
+        x = knitr:::split_lines(x)
+        if (length(x) > n) {
+            # truncate the output
+            x = c(head(x, n), '....\n')
+        }
+        x = paste(x, collapse = '\n')  # paste first n lines together
+    }
+    hook_output(x, options)
+})
+
+opts_chunk$set(out.lines = 40)
+opts_chunk$set(width = 40)
+options(max.print=1000000)
+options(knitr.table.format = 'html') 
+options(knitr.kable.NA = '')
+options(scipen=99)
+options(digits = 4)
+options(width = 80)
+```
+
+I am pleased to share that I was one of the recognized submissions in the 2023 NAEP Math Automated Scoring Challenge, organized by the National Center for Education Statistics (NCES). The challenge provided a unique opportunity to contribute to advancing automated scoring methods for open-ended mathematics responses.
+
+This competition focused on developing algorithms to automatically score student responses to open-ended math problems, which require a combination of symbolic understanding (e.g., arithmetic symbols) and conceptual reasoning (e.g., explanations of mathematical processes). These types of responses are typically more difficult for automated systems to evaluate, compared to multiple-choice or simpler text-based responses.
+
+The goal was to create models that could perform this task with accuracy comparable to human raters, while also ensuring fairness—ensuring that the algorithms did not introduce bias based on student demographics, such as race, gender, or language background.
+
+In my submission, I focused on pre-processing the data to handle variations in student responses, such as spelling errors and differences in formatting. I experimented finetuning many advanced transformer models to find the best one for different types of items.
+
+The potential benefits of successful automated scoring systems are significant. They can reduce the time and cost associated with scoring large-scale assessments like NAEP, while also providing more detailed insights into student understanding. The challenge highlighted how far the recent technological developments can revolutionize this field, but also showed there is still work to be done in refining these methods for broader use.
+
+It was an honor to participate alongside talented teams from Vanderbilt University and UMass Amherst, and to contribute to this growing area of research. While there is still much to learn, I am hopeful that this work can play a small part in advancing automated scoring technologies in education.
+
+For more details about the challenge and the outcomes, you can visit 
+
+- the official [GitHub repo](https://github.com/NAEP-AS-Challenge/math-prediction) 
+- the official [NCES press release](https://www.prnewswire.com/news-releases/three-teams-win-top-prizes-in-mathematics-automated-scoring-challenge-for-the-nations-report-card-301905769.html)
+- the official [IES announcement](https://osf.io/preprints/edarxiv/eyzgd)
+
+
+
+
+
+
+
+  

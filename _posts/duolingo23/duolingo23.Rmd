@@ -1,0 +1,89 @@
+---
+title: "Fitting IRT models for zero-and-one inflated bounded continous response data"
+description: |
+  
+  I’ve published a new tutorial based on a recently published paper with Dr. Lockwood from Duolingo. The tutorial is on fitting IRT models for zero-and-one inflated bounded continous response data. This resource provides a step-by-step guide for performing model estimation and evaluating model fit using Stan. It includes simulated datasets, complete code, and explanations to help users explore advanced IRT modeling techniques discussed in the paper.
+
+draft: false
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Oregon
+date: 11-12-2023
+categories:
+  - item response theory
+  - continuous response model
+  - Stan
+  - R
+  - "2023"
+output:
+  distill::distill_article:
+    self_contained: true
+    toc: true
+    toc_float: true
+    highlight_downlit: false
+preview: img.png
+header-includes:
+  - \usepackage{amsmath} 
+  - \usepackage{upgreek}
+  - \usepackage{bm}
+  - \usepackage{unicode-math}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+<style>
+
+body {
+text-align: justify}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 5px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 1.5em;
+}
+</style>
+
+
+
+```{r echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+require(knitr)
+require(kableExtra)
+require(here)
+require(htmltools)
+require(mime)
+require(ggplot2)
+require(gridExtra)
+
+# the default output hook
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+    if (!is.null(n <- options$out.lines)) {
+        x = knitr:::split_lines(x)
+        if (length(x) > n) {
+            # truncate the output
+            x = c(head(x, n), '....\n')
+        }
+        x = paste(x, collapse = '\n')  # paste first n lines together
+    }
+    hook_output(x, options)
+})
+
+opts_chunk$set(out.lines = 40)
+opts_chunk$set(width = 40)
+options(max.print=1000000)
+options(knitr.table.format = 'html') 
+options(knitr.kable.NA = '')
+options(scipen=99)
+options(digits = 4)
+options(width = 80)
+```
+
+<head>
+  <meta http-equiv="Refresh" content="0; URL=https://czopluoglu.github.io/Duolingo_paper/" />
+</head>
+
+
+
+  

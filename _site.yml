@@ -20,11 +20,11 @@ navbar:
         - text: "CopyDetect"
           href: copydetect.html
         - text: "EstCRM"
-          href: estcrm.html
+          href: https://czopluoglu.github.io/estcrm_demo/
         - text: "itemanalysis"
-          href: itemanalysis.html 
+          href: https://czopluoglu.github.io/itemanalysis_demo/ 
         - text: "fitPMM"
-          href: fitpmm.html
+          href: https://czopluoglu.github.io/fitPMM/
       
     - text: "Shiny Apps"
       menu:
