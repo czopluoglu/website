@@ -1,0 +1,89 @@
+---
+title: "Enhanced Deterministic Gated Item Response Model to Simultaneously Identify Compromised Items and Examinees with Item Preknowledge Using Response Accuracy Data"
+description: |
+  This post introduces the Enhanced Deterministic Gated Item Response Model (DG-IRT), a new model developed for detecting both compromised test items and examinees who might have prior knowledge—without needing to know which items are compromised ahead of time. I walk through the model setup, simulation, and a complete Stan implementation, showing how to estimate everything from scratch using only response accuracy data.
+
+draft: false
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Oregon
+date: 12-06-2024
+categories:
+  - item response theory
+  - Stan
+  - R
+  - item preknowledge
+  - detecting test misconduct
+  - "2024"
+output:
+  distill::distill_article:
+    self_contained: true
+    toc: true
+    toc_float: true
+    highlight_downlit: false
+preview: img.png
+header-includes:
+  - \usepackage{amsmath} 
+  - \usepackage{upgreek}
+  - \usepackage{bm}
+  - \usepackage{unicode-math}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+<style>
+
+body {
+text-align: justify}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 5px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 1.5em;
+}
+</style>
+
+
+
+```{r echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+require(knitr)
+require(kableExtra)
+require(here)
+require(htmltools)
+require(mime)
+require(ggplot2)
+require(gridExtra)
+
+# the default output hook
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+    if (!is.null(n <- options$out.lines)) {
+        x = knitr:::split_lines(x)
+        if (length(x) > n) {
+            # truncate the output
+            x = c(head(x, n), '....\n')
+        }
+        x = paste(x, collapse = '\n')  # paste first n lines together
+    }
+    hook_output(x, options)
+})
+
+opts_chunk$set(out.lines = 40)
+opts_chunk$set(width = 40)
+options(max.print=1000000)
+options(knitr.table.format = 'html') 
+options(knitr.kable.NA = '')
+options(scipen=99)
+options(digits = 4)
+options(width = 80)
+```
+
+<head>
+  <meta http-equiv="Refresh" content="0; URL=https://czopluoglu.github.io/duolingo_dgirt/" />
+</head>
+
+
+
+  

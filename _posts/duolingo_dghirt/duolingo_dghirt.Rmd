@@ -1,0 +1,89 @@
+---
+title: "Deterministic Gated Hierarchical Item Response Model to Simultaneously Identify Compromised Items and Examinees with Item Preknowledge Using Both Response Accuracy and Response Time Data"
+description: |
+  Ever wondered how to spot test questions that have been compromised or students who got a sneak peek before their exam? In this blog, I walk through a new statistical model that combines both how fast and how accurately people answer test items to flag compromised questions and examinees with prior knowledge—all at once. You’ll find a full walkthrough: model explanation, code, diagnostics, and example results using simulated data. If you’re into psychometrics, cheating detection, or just love seeing R and Stan in action, you’ll get a kick out of this hands-on guide!
+  
+draft: false
+author:
+  - name: Cengiz Zopluoglu
+    affiliation: University of Oregon
+date: 6-11-2025
+categories:
+  - item response theory
+  - Stan
+  - R
+  - item preknowledge
+  - detecting test misconduct
+  - "2025"
+output:
+  distill::distill_article:
+    self_contained: true
+    toc: true
+    toc_float: true
+    highlight_downlit: false
+preview: img.png
+header-includes:
+  - \usepackage{amsmath} 
+  - \usepackage{upgreek}
+  - \usepackage{bm}
+  - \usepackage{unicode-math}
+editor_options: 
+  chunk_output_type: console
+---
+
+
+<style>
+
+body {
+text-align: justify}
+
+blockquote {
+  background: #f9f9f9;
+  border-left: 5px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 1.5em;
+}
+</style>
+
+
+
+```{r echo = FALSE, eval=TRUE, message=FALSE, warning=FALSE}
+require(knitr)
+require(kableExtra)
+require(here)
+require(htmltools)
+require(mime)
+require(ggplot2)
+require(gridExtra)
+
+# the default output hook
+hook_output = knit_hooks$get('output')
+knit_hooks$set(output = function(x, options) {
+    if (!is.null(n <- options$out.lines)) {
+        x = knitr:::split_lines(x)
+        if (length(x) > n) {
+            # truncate the output
+            x = c(head(x, n), '....\n')
+        }
+        x = paste(x, collapse = '\n')  # paste first n lines together
+    }
+    hook_output(x, options)
+})
+
+opts_chunk$set(out.lines = 40)
+opts_chunk$set(width = 40)
+options(max.print=1000000)
+options(knitr.table.format = 'html') 
+options(knitr.kable.NA = '')
+options(scipen=99)
+options(digits = 4)
+options(width = 80)
+```
+
+<head>
+  <meta http-equiv="Refresh" content="0; URL=https://czopluoglu.github.io/duolingo_dghirt/" />
+</head>
+
+
+
+  

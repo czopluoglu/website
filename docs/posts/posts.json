@@ -1,5 +1,83 @@
 [
   {
+    "path": "posts/duolingo_dghirt/",
+    "title": "Deterministic Gated Hierarchical Item Response Model to Simultaneously Identify Compromised Items and Examinees with Item Preknowledge Using Both Response Accuracy and Response Time Data",
+    "description": "Ever wondered how to spot test questions that have been compromised or students who got a sneak peek before their exam? In this blog, I walk through a new statistical model that combines both how fast and how accurately people answer test items to flag compromised questions and examinees with prior knowledge—all at once. You’ll find a full walkthrough: model explanation, code, diagnostics, and example results using simulated data. If you’re into psychometrics, cheating detection, or just love seeing R and Stan in action, you’ll get a kick out of this hands-on guide!",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2025-06-11",
+    "categories": [
+      "item response theory",
+      "Stan",
+      "R",
+      "item preknowledge",
+      "detecting test misconduct",
+      "2025"
+    ],
+    "contents": "\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/duolingo_dghirt/img.png",
+    "last_modified": "2025-06-12T23:43:38-07:00",
+    "input_file": "duolingo_dghirt.knit.md",
+    "preview_width": 1024,
+    "preview_height": 1024
+  },
+  {
+    "path": "posts/duolingo_dglnrt/",
+    "title": "Enhanced Deterministic Gated Lognormal Response Time Model to Simultaneously Identify Compromised Items and Examinees with Item Preknowledge Using Response Time Data",
+    "description": "This post introduces the Enhanced Deterministic Gated Lognormal Response Time (DG-LNRT) model—a statistical approach for detecting both compromised test items and examinees with pre-knowledge at the same time using response time data. Unlike traditional methods, this model infers both item and person status as latent variables, jointly estimating them from response time data. The tutorial and open-source code here provide a practical resource for researchers and practitioners aiming to apply this advanced model in test security research.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2024-12-06",
+    "categories": [
+      "item response theory",
+      "Stan",
+      "R",
+      "item preknowledge",
+      "detecting test misconduct",
+      "2024"
+    ],
+    "contents": "\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/duolingo_dglnrt/img.png",
+    "last_modified": "2025-06-12T16:26:53-07:00",
+    "input_file": "duolingo_dglnrt.knit.md",
+    "preview_width": 975,
+    "preview_height": 783
+  },
+  {
+    "path": "posts/duolingo_dgirt/",
+    "title": "Enhanced Deterministic Gated Item Response Model to Simultaneously Identify Compromised Items and Examinees with Item Preknowledge Using Response Accuracy Data",
+    "description": "This post introduces the Enhanced Deterministic Gated Item Response Model (DG-IRT), a new model developed for detecting both compromised test items and examinees who might have prior knowledge—without needing to know which items are compromised ahead of time. I walk through the model setup, simulation, and a complete Stan implementation, showing how to estimate everything from scratch using only response accuracy data.",
+    "author": [
+      {
+        "name": "Cengiz Zopluoglu",
+        "url": {}
+      }
+    ],
+    "date": "2024-12-06",
+    "categories": [
+      "item response theory",
+      "Stan",
+      "R",
+      "item preknowledge",
+      "detecting test misconduct",
+      "2024"
+    ],
+    "contents": "\r\n\r\n\r\n\r\n\r\n",
+    "preview": "posts/duolingo_dgirt/img.png",
+    "last_modified": "2025-06-12T22:47:09-07:00",
+    "input_file": "duolingo_dgirt.knit.md",
+    "preview_width": 1024,
+    "preview_height": 1024
+  },
+  {
     "path": "posts/duolingo23/",
     "title": "Fitting IRT models for zero-and-one inflated bounded continous response data",
     "description": "I’ve published a new tutorial based on a recently published paper with Dr. Lockwood from Duolingo. The tutorial is on fitting IRT models for zero-and-one inflated bounded continous response data. This resource provides a step-by-step guide for performing model estimation and evaluating model fit using Stan. It includes simulated datasets, complete code, and explanations to help users explore advanced IRT modeling techniques discussed in the paper.",

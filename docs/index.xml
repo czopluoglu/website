@@ -12,7 +12,52 @@
       <link>https://github.com/czopluoglu/website/tree/master/docs</link>
     </image>
     <generator>Distill</generator>
-    <lastBuildDate>Sun, 12 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>2025-06-11</lastBuildDate>
+    <item>
+      <title>Deterministic Gated Hierarchical Item Response Model to Simultaneously Identify Compromised Items and Examinees with Item Preknowledge Using Both Response Accuracy and Response Time Data</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo_dghirt</link>
+      <description>Ever wondered how to spot test questions that have been compromised or students who got a sneak peek before their exam? In this blog, I walk through a new statistical model that combines both how fast and how accurately people answer test items to flag compromised questions and examinees with prior knowledge—all at once. You’ll find a full walkthrough: model explanation, code, diagnostics, and example results using simulated data. If you’re into psychometrics, cheating detection, or just love seeing R and Stan in action, you’ll get a kick out of this hands-on guide!</description>
+      <category>item response theory</category>
+      <category>Stan</category>
+      <category>R</category>
+      <category>item preknowledge</category>
+      <category>detecting test misconduct</category>
+      <category>2025</category>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo_dghirt</guid>
+      <pubDate>2025-06-11</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo_dghirt/img.png" medium="image" type="image/png" width="1024" height="1024"/>
+    </item>
+    <item>
+      <title>Enhanced Deterministic Gated Lognormal Response Time Model to Simultaneously Identify Compromised Items and Examinees with Item Preknowledge Using Response Time Data</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo_dglnrt</link>
+      <description>This post introduces the Enhanced Deterministic Gated Lognormal Response Time (DG-LNRT) model—a statistical approach for detecting both compromised test items and examinees with pre-knowledge at the same time using response time data. Unlike traditional methods, this model infers both item and person status as latent variables, jointly estimating them from response time data. The tutorial and open-source code here provide a practical resource for researchers and practitioners aiming to apply this advanced model in test security research.</description>
+      <category>item response theory</category>
+      <category>Stan</category>
+      <category>R</category>
+      <category>item preknowledge</category>
+      <category>detecting test misconduct</category>
+      <category>2024</category>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo_dglnrt</guid>
+      <pubDate>2024-12-06</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo_dglnrt/img.png" medium="image" type="image/png" width="975" height="783"/>
+    </item>
+    <item>
+      <title>Enhanced Deterministic Gated Item Response Model to Simultaneously Identify Compromised Items and Examinees with Item Preknowledge Using Response Accuracy Data</title>
+      <dc:creator>Cengiz Zopluoglu</dc:creator>
+      <link>https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo_dgirt</link>
+      <description>This post introduces the Enhanced Deterministic Gated Item Response Model (DG-IRT), a new model developed for detecting both compromised test items and examinees who might have prior knowledge—without needing to know which items are compromised ahead of time. I walk through the model setup, simulation, and a complete Stan implementation, showing how to estimate everything from scratch using only response accuracy data.</description>
+      <category>item response theory</category>
+      <category>Stan</category>
+      <category>R</category>
+      <category>item preknowledge</category>
+      <category>detecting test misconduct</category>
+      <category>2024</category>
+      <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo_dgirt</guid>
+      <pubDate>2024-12-06</pubDate>
+      <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo_dgirt/img.png" medium="image" type="image/png" width="1024" height="1024"/>
+    </item>
     <item>
       <title>Fitting IRT models for zero-and-one inflated bounded continous response data</title>
       <dc:creator>Cengiz Zopluoglu</dc:creator>
@@ -24,7 +69,7 @@
       <category>R</category>
       <category>2023</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo23</guid>
-      <pubDate>Sun, 12 Nov 2023 00:00:00 +0000</pubDate>
+      <pubDate>2023-11-12</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/duolingo23/img.png" medium="image" type="image/png" width="752" height="741"/>
     </item>
     <item>
@@ -38,7 +83,7 @@
       <category>Transformers</category>
       <category>2023</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/naep23</guid>
-      <pubDate>Mon, 18 Sep 2023 00:00:00 +0000</pubDate>
+      <pubDate>2023-09-18</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/naep23/img.png" medium="image" type="image/png" width="795" height="677"/>
     </item>
     <item>
@@ -53,7 +98,7 @@
       <category>detecting test misconduct</category>
       <category>2022</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/ncme22</guid>
-      <pubDate>Fri, 22 Apr 2022 00:00:00 +0000</pubDate>
+      <pubDate>2022-04-22</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/ncme22/img.png" medium="image" type="image/png" width="681" height="283"/>
     </item>
     <item>
@@ -70,7 +115,7 @@
       <category>Huggingface</category>
       <category>2022</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/huggingface</guid>
-      <pubDate>Sun, 30 Jan 2022 00:00:00 +0000</pubDate>
+      <pubDate>2022-01-30</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/huggingface/img.png" medium="image" type="image/png" width="711" height="566"/>
     </item>
     <item>
@@ -86,7 +131,7 @@
       <category>forecasting</category>
       <category>2021</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/recidivism</guid>
-      <pubDate>Fri, 17 Sep 2021 00:00:00 +0000</pubDate>
+      <pubDate>2021-09-17</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/recidivism/img1.png" medium="image" type="image/png" width="1269" height="573"/>
     </item>
     <item>
@@ -101,7 +146,7 @@
       <category>detecting test misconduct</category>
       <category>2021</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/dglnrt2</guid>
-      <pubDate>Thu, 24 Jun 2021 00:00:00 +0000</pubDate>
+      <pubDate>2021-06-24</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/dglnrt2/image.png" medium="image" type="image/png" width="1188" height="900"/>
     </item>
     <item>
@@ -115,7 +160,7 @@
       <category>numerical integration</category>
       <category>2021</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/popvcov_mirt</guid>
-      <pubDate>Sun, 03 Jan 2021 00:00:00 +0000</pubDate>
+      <pubDate>2021-01-03</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/popvcov_mirt/image.png" medium="image" type="image/png" width="651" height="231"/>
     </item>
     <item>
@@ -130,7 +175,7 @@
       <category>R</category>
       <category>2020</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/2020-12-04-detect</guid>
-      <pubDate>Tue, 08 Dec 2020 00:00:00 +0000</pubDate>
+      <pubDate>2020-12-08</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/2020-12-04-detect/download.png" medium="image" type="image/png" width="1152" height="1152"/>
     </item>
     <item>
@@ -144,7 +189,7 @@
       <category>R</category>
       <category>2020</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-equating</guid>
-      <pubDate>Tue, 05 May 2020 00:00:00 +0000</pubDate>
+      <pubDate>2020-05-05</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/crm-equating/image.png" medium="image" type="image/png" width="1108" height="825"/>
     </item>
     <item>
@@ -156,7 +201,7 @@
       <category>web scraping</category>
       <category>covid19</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-turkey.gov.tr</guid>
-      <pubDate>Sat, 28 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>2020-03-28</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-turkey.gov.tr/files/plot.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>
@@ -168,7 +213,7 @@
       <category>item response theory</category>
       <category>graded response model</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/grmint</guid>
-      <pubDate>Wed, 26 Feb 2020 00:00:00 +0000</pubDate>
+      <pubDate>2020-02-26</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/grmint/files/grm.jpeg" medium="image" type="image/jpeg"/>
     </item>
     <item>
@@ -178,7 +223,7 @@
       <description>Shiny app</description>
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp</guid>
-      <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>2020-01-07</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/shinyapp/images/image.png" medium="image" type="image/png" width="1920" height="978"/>
     </item>
     <item>
@@ -192,7 +237,7 @@
       <category>R</category>
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan</guid>
-      <pubDate>Tue, 31 Dec 2019 00:00:00 +0000</pubDate>
+      <pubDate>2019-12-31</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/crm-stan/images/image.png" medium="image" type="image/png" width="811" height="461"/>
     </item>
     <item>
@@ -206,7 +251,7 @@
       <category>R</category>
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan</guid>
-      <pubDate>Sun, 15 Dec 2019 00:00:00 +0000</pubDate>
+      <pubDate>2019-12-15</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/hcm-stan/images/image.png" medium="image" type="image/png" width="645" height="389"/>
     </item>
     <item>
@@ -220,7 +265,7 @@
       <category>Turkish elections</category>
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2</guid>
-      <pubDate>Fri, 24 May 2019 00:00:00 +0000</pubDate>
+      <pubDate>2019-05-24</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey2/images/image.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>
@@ -233,7 +278,7 @@
       <category>item preknowledge</category>
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/xgboost</guid>
-      <pubDate>Thu, 18 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>2019-04-18</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/xgboost/images/image.png" medium="image" type="image/png" width="706" height="546"/>
     </item>
     <item>
@@ -247,7 +292,7 @@
       <category>Turkish elections</category>
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey</guid>
-      <pubDate>Fri, 05 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>2019-04-05</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/local-elections-2019-turkey/images/image.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>
@@ -259,7 +304,7 @@
       <category>R</category>
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/epm-keywords</guid>
-      <pubDate>Mon, 01 Apr 2019 00:00:00 +0000</pubDate>
+      <pubDate>2019-04-01</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/epm-keywords/images/EPM2.png" medium="image" type="image/png" width="1221" height="920"/>
     </item>
     <item>
@@ -271,7 +316,7 @@
       <category>R</category>
       <category>2019</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting</guid>
-      <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
+      <pubDate>2019-01-15</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/extreme-gradient-boosting/images/tree.png" medium="image" type="image/png" width="737" height="786"/>
     </item>
     <item>
@@ -284,7 +329,7 @@
       <category>R</category>
       <category>2018</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data</guid>
-      <pubDate>Fri, 16 Nov 2018 00:00:00 +0000</pubDate>
+      <pubDate>2018-11-16</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/creating-maps-with-2018-election-data/images/image.png" medium="image" type="image/png" width="973" height="599"/>
     </item>
     <item>
@@ -297,7 +342,7 @@
       <category>R</category>
       <category>2018</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/a-quick-look-at-the-elections-2018</guid>
-      <pubDate>Mon, 12 Nov 2018 00:00:00 +0000</pubDate>
+      <pubDate>2018-11-12</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/a-quick-look-at-the-elections-2018/images/image.png" medium="image" type="image/png" width="692" height="500"/>
     </item>
     <item>
@@ -311,7 +356,7 @@
       <category>US elections</category>
       <category>2018</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-2018-election-data</guid>
-      <pubDate>Wed, 07 Nov 2018 00:00:00 +0000</pubDate>
+      <pubDate>2018-11-07</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-2018-election-data/images/vote2.jpg" medium="image" type="image/jpeg"/>
     </item>
     <item>
@@ -325,7 +370,7 @@
       <category>US elections</category>
       <category>2018</category>
       <guid>https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-data-for-2014-gubernatorial-elections</guid>
-      <pubDate>Tue, 06 Nov 2018 00:00:00 +0000</pubDate>
+      <pubDate>2018-11-06</pubDate>
       <media:content url="https://github.com/czopluoglu/website/tree/master/docs/posts/scraping-data-for-2014-gubernatorial-elections/images/image.jpg" medium="image" type="image/jpeg"/>
     </item>
   </channel>
